@@ -1,8 +1,8 @@
 export default class RouteConstants {
 
-    public static Dashboard = '/dashboard';
-    public static FleetDetail = '/fleet/detail';
-    public static FleetList = '/fleet/list';
-    public static Login = '/login';
+    public static Dashboard : string = '/dashboard';
+    public static FleetDetail : string = '/fleet/detail';
+    public static FleetList : string = '/fleet/list';
+    public static Login : string = '/login';
 
 }

@@ -7,7 +7,6 @@ export default class RepositoryAuthentication extends BaseItemRepository<UserMod
 
     public authenticate(username: String, password: String ) : ApiResponse<UserModel>{
         var model = new UserModel(username, password);
-        console.log("About to call post")
-        return this.post(model, new FactoryUserModel());        
+        return this.post('/api/authentication',model, new FactoryUserModel());        
     }
 }

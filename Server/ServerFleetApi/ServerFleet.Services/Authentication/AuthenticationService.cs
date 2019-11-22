@@ -8,15 +8,15 @@ namespace ServerFleet.Services.Authentication
     {
         public UserModel Authenticate(string username, string password)
         {
-            if (username.Equals("gford", StringComparison.InvariantCultureIgnoreCase) &
-                password.Equals("river100", StringComparison.InvariantCultureIgnoreCase))
+            if (username.Equals("david", StringComparison.InvariantCultureIgnoreCase) &
+                password.Equals("password", StringComparison.InvariantCultureIgnoreCase))
             {
                 return new UserModel()
                 {
                     Id = 1,
-                    Forename = "Gavin",
-                    Surname = "Ford",
-                    UserName = "GFord"
+                    Forename = "David",
+                    Surname = "Hockney",
+                    UserName = "David"
                 };
             }
 

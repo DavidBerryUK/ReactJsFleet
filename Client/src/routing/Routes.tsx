@@ -1,5 +1,5 @@
 import { BrowserRouter as Router }              from 'react-router-dom';
-import { Redirect }                             from 'react-router-dom';
+// import { Redirect }                             from 'react-router-dom';
 import { Route }                                from 'react-router-dom';
 import DashboardPage                            from "../pages/dashboard/dashboard-page"
 import FleetDetailPage                          from "../pages/fleetDetail/fleet-detail-page"
@@ -17,9 +17,9 @@ const Routes: React.SFC = () => {
                 <Route path={RouteConstants.Dashboard} component={DashboardPage} />
                 <Route path={RouteConstants.FleetList} component={FleetListPage} />
                 <Route path={RouteConstants.FleetDetail} component={FleetDetailPage} />
-                <Route path="">
+                {/* <Route path="">
                     <Redirect to={RouteConstants.Login}/>
-                </Route>
+                </Route> */}
             </div>
         </Router>
     )

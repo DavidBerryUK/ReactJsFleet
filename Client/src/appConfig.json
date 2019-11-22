@@ -1,6 +1,6 @@
 {
     "endPoints": {
-      "baseUrl": "http://localhost:5000/"
+      "baseUrl": "http://localhost:49807"
     },
     "environment" : {
   

@@ -10,14 +10,14 @@ import ValidationMessage                        from '../../models/validation/Va
 export default class RepositoryBasePostService<T extends IApiModel> {
 
     public post(
-        baseUrl: string,
+        endpointUrl: string,
         modelFactory: IModelFactory<T>, 
         entityModel: T) : ApiResponse<T> {
 
         let contract = new ApiResponseContract<T>();
 
         axios
-        .post(baseUrl, entityModel, BaseApiConfig.baseConfig)
+        .post(endpointUrl, entityModel, BaseApiConfig.baseConfig)
         .then((response) => {
 
             if (response.data == null) {
