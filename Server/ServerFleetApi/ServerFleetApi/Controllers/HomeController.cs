@@ -8,7 +8,7 @@ namespace ServerFleet.Api.Controllers
         [HttpGet("index")]
         public IActionResult Index()
         {
-            return View();
+            return Ok("Test");
         }
     }
 }

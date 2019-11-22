@@ -1,8 +1,11 @@
+using System;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ServerFleet.Api.StartupServices;
 
 namespace ServerFleet.Api
 {
@@ -18,24 +21,37 @@ namespace ServerFleet.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            if (services == null)
+            {
+                throw new ArgumentNullException(nameof(services));
+            }
+
+            //services.AddAutoMapper(Assembly.GetExecutingAssembly().GetType());
+            services.AddAutoMapper(typeof(Startup));
+            services.RegisterSwagger();
+            services.RegisterInjection();
+            services.RegisterMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
+            if (app == null)
             {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+                throw new ArgumentNullException(nameof(app));
             }
 
-            app.UseHttpsRedirection();
-            app.UseMvc();
+            if (env == null)
+            {
+                throw new ArgumentNullException(nameof(env));
+            }
+
+            app.RegisterSwagger();
+            app.RegisterDevelopmentMode(env);
+            app.RegisterStrictTransportSecurity(env);
+
+            app.RegisterHttpRedirection(env);
+            app.RegisterMvc();
         }
     }
 }

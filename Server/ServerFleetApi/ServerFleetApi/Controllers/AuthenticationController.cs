@@ -4,6 +4,8 @@ using ServerFleet.Services.Authentication.Interfaces;
 
 namespace ServerFleet.Api.Controllers
 {
+    [ApiController]
+    [Route("api/authentication")]
     public class AuthenticationController : Controller
     {
         private readonly IAuthenticationService _authenticationService;
@@ -13,7 +15,8 @@ namespace ServerFleet.Api.Controllers
             _authenticationService = authenticationService;
         }
 
-        public ActionResult<AuthenticationResponse> Logon(AuthenticationRequest request)
+        [HttpPost]
+        public ActionResult<AuthenticationResponse> Logon([FromBody] AuthenticationRequest request)
         {
             if (request == null)
             {
