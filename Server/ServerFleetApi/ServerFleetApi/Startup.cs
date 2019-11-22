@@ -47,7 +47,7 @@ namespace ServerFleet.Api
             }
 
             app.RegisterSwagger();
-            app.RegisterDevelopmentMode(env);
+            
             app.RegisterStrictTransportSecurity(env);
 
             app.RegisterHttpRedirection(env);
