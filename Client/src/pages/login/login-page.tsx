@@ -1,5 +1,5 @@
-import React                          from 'react';
-import LoginComponent                 from '../../components/login/login-component'
+import LoginComponent                           from '../../components/login/login-component'
+import React                                    from 'react';
 
 const LoginPage: React.FC = () => {
   return (
@@ -7,7 +7,7 @@ const LoginPage: React.FC = () => {
       <h1>Client Portal Login</h1>
       <LoginComponent></LoginComponent>
       </div>
-  );
+  );  
 }
 
 export default LoginPage;

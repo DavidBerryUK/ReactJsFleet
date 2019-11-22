@@ -3,7 +3,7 @@ import { IRoot }                                from './interfaces/IConfiguratio
 //
 // load the configuration file
 //
-const jsonConfigData = require('../../../appConfig.json');
+const jsonConfigData = require('../../appConfig.json');
 
 export default class ConfigurationService {
 
