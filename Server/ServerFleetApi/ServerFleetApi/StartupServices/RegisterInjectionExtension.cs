@@ -2,6 +2,8 @@
 using ServerFleet.Services.Authentication;
 using ServerFleet.Services.Authentication.Interfaces;
 using System;
+using ServerFleet.Services.Vehicle;
+using ServerFleet.Services.Vehicle.Interfaces;
 
 namespace ServerFleet.Api.StartupServices
 {
@@ -16,6 +18,7 @@ namespace ServerFleet.Api.StartupServices
 
             //  Services
             services.AddTransient<IAuthenticationService, AuthenticationService>();
+            services.AddTransient<IVehicleFactory,VehicleFactory>();
             
         }
     }
