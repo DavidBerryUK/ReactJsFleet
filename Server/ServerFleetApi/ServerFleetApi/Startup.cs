@@ -27,7 +27,7 @@ namespace ServerFleet.Api
             }
 
             //services.AddAutoMapper(Assembly.GetExecutingAssembly().GetType());
-            services.AddAutoMapper(typeof(Startup));
+           
             services.RegisterSwagger();
             services.RegisterInjection();
             services.RegisterMvc();
@@ -47,10 +47,9 @@ namespace ServerFleet.Api
                 throw new ArgumentNullException(nameof(env));
             }
 
+            app.RegisterAutoMapper(GetType().Assembly);
             app.RegisterSwagger();
-            
             app.RegisterStrictTransportSecurity(env);
-
             app.RegisterHttpRedirection(env);
             app.RegisterMvc();
         }

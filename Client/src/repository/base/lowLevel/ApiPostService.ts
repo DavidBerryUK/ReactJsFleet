@@ -1,13 +1,13 @@
-import { IApiModel }                            from './../../models/interfaces/IApiModel';
-import { ApiResponse }                          from './../apiContracts/ApiResponseContract';
-import { ApiResponseContract }                  from './../apiContracts/ApiResponseContract';
-import { IModelFactory }                        from './../../modelFactories/interfaces/IModelFactory';
-import ApiBaseError                             from './ApiBaseError';
+import { IApiModel }                            from '../../../models/interfaces/IApiModel';
+import { ApiResponse }                          from '../../apiContracts/ApiResponseContract';
+import { ApiResponseContract }                  from '../../apiContracts/ApiResponseContract';
+import { IModelFactory }                        from '../../../modelFactories/interfaces/IModelFactory';
+import ApiBaseError                             from '../ApiBaseError';
 import axios                                    from 'axios';
-import BaseApiConfig                            from './ApiBaseConfig';
-import ValidationMessage                        from '../../models/validation/ValidationMessage';
+import BaseApiConfig                            from '../ApiBaseConfig';
+import ValidationMessage                        from '../../../models/validation/ValidationMessage';
 
-export default class RepositoryBasePostService<T extends IApiModel> {
+export default class ApiPostService<T extends IApiModel> {
 
     public post(
         endpointUrl: string,
@@ -18,7 +18,7 @@ export default class RepositoryBasePostService<T extends IApiModel> {
 
         axios
         .post(endpointUrl, entityModel, BaseApiConfig.baseConfig)
-        .then((response) => {
+        .then((response : any) => {
 
             if (response.data == null) {
                 contract.publishFailure('No data returned');
@@ -46,7 +46,7 @@ export default class RepositoryBasePostService<T extends IApiModel> {
 
             }
         })
-        .catch((error) => {
+        .catch((error: string) => {
             ApiBaseError.handleErrorResponse(error);
             contract.publishFailure(error);
         });

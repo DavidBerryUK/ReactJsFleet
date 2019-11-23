@@ -1,8 +1,7 @@
 import ValidationMessage                        from "../validation/ValidationMessage";
+export default class ApiBaseCollectionResponseModel<T> {
 
-export default class ApiBaseItemResponseModel<T> {
-
-    public entity?: T;
+    public entity?: Array<T>;
     public validationMessages : Array<ValidationMessage>;
     public success: Boolean;
     public errorMessage: String;

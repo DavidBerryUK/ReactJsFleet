@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerFleet.Models", "Serve
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerFleet.Services", "ServerFleet.Services\ServerFleet.Services.csproj", "{4EC45822-DD52-4A12-B9F4-34903FF9C336}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerFleet.Utilities", "ServerFleet.Utilities\ServerFleet.Utilities.csproj", "{09B820A1-F68B-496E-AEC8-5EBD12CA789E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{4EC45822-DD52-4A12-B9F4-34903FF9C336}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4EC45822-DD52-4A12-B9F4-34903FF9C336}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4EC45822-DD52-4A12-B9F4-34903FF9C336}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09B820A1-F68B-496E-AEC8-5EBD12CA789E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09B820A1-F68B-496E-AEC8-5EBD12CA789E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09B820A1-F68B-496E-AEC8-5EBD12CA789E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09B820A1-F68B-496E-AEC8-5EBD12CA789E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

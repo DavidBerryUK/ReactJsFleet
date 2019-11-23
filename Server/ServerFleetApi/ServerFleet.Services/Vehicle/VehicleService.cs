@@ -1,4 +1,4 @@
-﻿using ServerFleet.Models.Entities.Vehicle;
+﻿using AutoMapper;
 using ServerFleet.Models.Rest.Vehicle;
 using ServerFleet.Services.Vehicle.Interfaces;
 using ServerFleet.Services.Vehicle.PipesAndFilters;
@@ -16,35 +16,35 @@ namespace ServerFleet.Services.Vehicle
             _vehicleFactory = vehicleFactory;
         }
 
-        public VehicleModel GetByRegistration(string registration)
+        public VehicleJson GetByRegistration(string registration)
         {
             var data = _vehicleFactory.GetAll().FirstOrDefault(o => o.Registration == registration);
-            return data;
+            var response = Mapper.Map<VehicleJson>(data);
+            return response;
         }
 
-        public IEnumerable<VehicleModel> GetWithFilter(VehicleListRequest request)
+        public IEnumerable<VehicleJson> GetWithFilter(VehicleListRequest request)
         {
             var data = _vehicleFactory.GetAll();
 
-            if (request == null)
+            if (request != null)
             {
-                return data;
+                data = data
+                    .FilterBodyType(request.FilterBodyType)
+                    .FilterColour(request.FilterColour)
+                    .FilterFuel(request.FilterFuel)
+                    .FilterMake(request.FilterMake)
+                    .FilterModel(request.FilterModel)
+                    .FilterRegistration(request.FilterRegistration)
+                    .FilterTransmission(request.FilterTransmission)
+                    .FilterDoors(request.FilterDoors)
+                    .FilterMpg(request.FilterMpg)
+                    .FilterMileage(request.FilterMileage)
+                    .SortByField(request.sortField, request.sortDirection);
             }
 
-            data = data
-                .FilterBodyType(request.FilterBodyType)
-                .FilterColour(request.FilterColour)
-                .FilterFuel(request.FilterFuel)
-                .FilterMake(request.FilterMake)
-                .FilterModel(request.FilterModel)
-                .FilterRegistration(request.FilterRegistration)
-                .FilterTransmission(request.FilterTransmission)
-                .FilterDoors(request.FilterDoors)
-                .FilterMpg(request.FilterMpg)
-                .FilterMileage(request.FilterMileage)
-                .SortByField(request.sortField, request.sortDirection);
-
-            return data;
+            var response = Mapper.Map<List<VehicleJson>>(data);
+            return response;
         }
     }
 }

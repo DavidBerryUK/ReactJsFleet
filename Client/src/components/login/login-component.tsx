@@ -53,7 +53,7 @@ function LoginComponent() {
       .onSuccess((userModel: UserModel) => {
         console.log("Login Success - Model Returned from Authentication Service");
         console.log(userModel);
-        NavigateDashboard.goTo(router);
+        NavigateDashboard.go(router);
       })
       .onValidationErrorsRaised((validationMessages: Array<ValidationMessage>) => {
         console.log("Validation Errors Returned from Authentication Service");

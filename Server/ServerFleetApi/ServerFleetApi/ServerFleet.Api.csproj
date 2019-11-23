@@ -10,8 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="9.0.0" />
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="8.5.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Json" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
@@ -22,11 +20,18 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-rc4" />
+    <PackageReference Include="AutoMapper" Version="8.1.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ServerFleet.Models\ServerFleet.Models.csproj" />
     <ProjectReference Include="..\ServerFleet.Services\ServerFleet.Services.csproj" />
+    <ProjectReference Include="..\ServerFleet.Utilities\ServerFleet.Utilities.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="StartupServices\AutoMapperConfiguration\" />
+  </ItemGroup>
 </Project>

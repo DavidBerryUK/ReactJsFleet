@@ -2,14 +2,14 @@ import { ApiResponse }                          from './../apiContracts/ApiRespo
 import { IApiModel }                            from './../../models/interfaces/IApiModel';
 import { IModelFactory }                        from './../../modelFactories/interfaces/IModelFactory';
 import BaseApiConfig                            from './ApiBaseConfig';
-import RepositoryBasePostService                from './RepositoryBasePostService';
+import ApiPostService from './lowLevel/ApiPostService';
 
 export default class BaseItemRepository<T  extends IApiModel> {
 
     public post(apiEndpoint: String, model : T, modelFactory: IModelFactory<T>) : ApiResponse<T> {
 
-        const repositoryBasePostService = new RepositoryBasePostService<T>();
+        const apiPostService = new ApiPostService<T>();
         const endpoint = `${BaseApiConfig.baseEndpoint}${apiEndpoint}`;
-        return repositoryBasePostService.post(endpoint, modelFactory , model);  
+        return apiPostService.post(endpoint, modelFactory , model);  
     }
 }

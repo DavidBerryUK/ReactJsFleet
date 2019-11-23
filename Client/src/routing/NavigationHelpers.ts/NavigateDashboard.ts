@@ -7,7 +7,7 @@ export default class NavigateDashboard extends NavigationBase {
         //this.routeTo(RouteConstants.Dashboard)
     }
 
-    public static goTo(history: any ) {
+    public static go(history: any ) {
         history.push(RouteConstants.Dashboard);
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace ServerFleet.Models.Rest.Vehicle
 {
-    public class VehicleResponse
+    public class VehicleJson
     {
         public int Doors { get; set; }
         public string Registration { get; set; }

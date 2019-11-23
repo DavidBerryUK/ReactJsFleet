@@ -6,7 +6,7 @@ namespace ServerFleet.Services.Vehicle.Interfaces
 {
     public interface IVehicleService
     {
-        IEnumerable<VehicleModel> GetWithFilter(VehicleListRequest request);
-        VehicleModel GetByRegistration(string registration);
+        IEnumerable<VehicleJson> GetWithFilter(VehicleListRequest request);
+        VehicleJson GetByRegistration(string registration);
     }
 }
