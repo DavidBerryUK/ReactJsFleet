@@ -2,6 +2,9 @@
 {
     public class VehicleListRequest
     {
+        public string sortField { get; set; }
+        public string sortDirection { get; set; }
+
         public int? FilterDoors { get; set; }
         public string FilterRegistration { get; set; }
         public string FilterMake { get; set; }

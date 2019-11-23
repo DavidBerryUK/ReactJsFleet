@@ -10,26 +10,23 @@ namespace ServerFleet.Api.Controllers
     [Route("api/vehicle")]
     public class VehicleController : Controller
     {
+        private readonly IVehicleService _vehicleService;
 
-        private readonly IVehicleFactory _vehicleFactory;
-
-        public VehicleController(IVehicleFactory vehicleFactory)
+        public VehicleController(IVehicleService vehicleService)
         {
-            _vehicleFactory = vehicleFactory;
+            _vehicleService = vehicleService;
         }
 
         [HttpGet]
         public ActionResult<IEnumerable<VehicleModel>> GetAll([FromQuery] VehicleListRequest request)
         {
-            return Ok(_vehicleFactory.GetWithFilter(request));
+            return Ok(_vehicleService.GetWithFilter(request));
         }
 
         [HttpGet("{registration}")]
         public ActionResult<VehicleModel> GetByRegistration(string registration)
         {
-            return Ok(_vehicleFactory.GetByRegistration(registration));
+            return Ok(_vehicleService.GetByRegistration(registration));
         }
-
-
     }
 }

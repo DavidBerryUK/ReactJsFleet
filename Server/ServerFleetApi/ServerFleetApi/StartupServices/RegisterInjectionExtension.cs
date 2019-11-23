@@ -19,6 +19,7 @@ namespace ServerFleet.Api.StartupServices
             //  Services
             services.AddTransient<IAuthenticationService, AuthenticationService>();
             services.AddTransient<IVehicleFactory,VehicleFactory>();
+            services.AddTransient<IVehicleService,VehicleService>();
             
         }
     }
