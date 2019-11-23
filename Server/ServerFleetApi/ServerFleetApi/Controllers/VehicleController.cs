@@ -2,6 +2,7 @@
 using ServerFleet.Models.Entities.Vehicle;
 using ServerFleet.Services.Vehicle.Interfaces;
 using System.Collections.Generic;
+using ServerFleet.Models.Rest.Vehicle;
 
 namespace ServerFleet.Api.Controllers
 {
@@ -18,15 +19,15 @@ namespace ServerFleet.Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<VehicleModel>> GetAll()
+        public ActionResult<IEnumerable<VehicleModel>> GetAll([FromQuery] VehicleListRequest request)
         {
-            return _vehicleFactory.GetAll();
+            return Ok(_vehicleFactory.GetWithFilter(request));
         }
 
         [HttpGet("{registration}")]
         public ActionResult<VehicleModel> GetByRegistration(string registration)
         {
-            return _vehicleFactory.GetByRegistration(registration);
+            return Ok(_vehicleFactory.GetByRegistration(registration));
         }
 
 

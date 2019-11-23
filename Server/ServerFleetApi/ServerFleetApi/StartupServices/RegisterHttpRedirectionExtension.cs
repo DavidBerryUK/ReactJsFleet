@@ -6,6 +6,7 @@ namespace ServerFleet.Api.StartupServices
 {
     internal static class RegisterHttpRedirectionExtension
     {
+        [Obsolete]
         public static void RegisterHttpRedirection(this IApplicationBuilder app, IHostingEnvironment env)
         {
             if (app == null)

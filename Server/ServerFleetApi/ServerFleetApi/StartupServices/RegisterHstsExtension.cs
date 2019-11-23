@@ -6,6 +6,7 @@ namespace ServerFleet.Api.StartupServices
 {
     internal static class RegisterHstsExtension
     {
+        [Obsolete]
         public static void RegisterStrictTransportSecurity(this IApplicationBuilder app, IHostingEnvironment env)
         {
             if (app == null)

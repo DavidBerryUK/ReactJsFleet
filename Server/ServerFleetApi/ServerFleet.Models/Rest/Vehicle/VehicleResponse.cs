@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ServerFleet.Models.Entities.Vehicle
+﻿namespace ServerFleet.Models.Rest.Vehicle
 {
-    public class VehicleModel
+    public class VehicleResponse
     {
         public int Doors { get; set; }
         public string Registration { get; set; }

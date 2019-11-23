@@ -1,13 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using ServerFleet.Models.Entities.Vehicle;
+using ServerFleet.Models.Rest.Vehicle;
+using ServerFleet.Services.Vehicle.Filters;
 using ServerFleet.Services.Vehicle.Interfaces;
 
 namespace ServerFleet.Services.Vehicle
 {
     public class VehicleFactory : IVehicleFactory
     {
-        public List<VehicleModel> GetAll()
+        public IEnumerable<VehicleModel> GetAll()
         {
             var data = new List<VehicleModel>();
 
@@ -21,6 +24,30 @@ namespace ServerFleet.Services.Vehicle
         public VehicleModel GetByRegistration(string registration)
         {
             var data = GetAll().FirstOrDefault(o => o.Registration == registration);
+            return data;
+        }
+
+        public IEnumerable<VehicleModel> GetWithFilter(VehicleListRequest request)
+        {
+            var data = GetAll();
+
+            if (request == null)
+            {
+                return data;
+            }
+
+            data = data
+                .FilterBodyType(request.FilterBodyType)
+                .FilterColour(request.FilterColour)
+                .FilterFuel(request.FilterFuel)
+                .FilterMake(request.FilterMake)
+                .FilterModel(request.FilterModel)
+                .FilterRegistration(request.FilterRegistration)
+                .FilterTransmission(request.FilterTransmission)
+                .FilterDoors(request.FilterDoors)
+                .FilterMpg(request.FilterMpg)
+                .FilterMileage(request.FilterMileage);
+
             return data;
         }
 
