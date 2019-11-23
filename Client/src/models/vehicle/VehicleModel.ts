@@ -14,10 +14,6 @@ export default class VehicleModel  implements IApiModel {
     public mpg? : Number;
     public transmission? : String;
 
-    constructor() {
-        
-    }
-
     public get entityName(): string {
         return VehicleModel.className;
     }
