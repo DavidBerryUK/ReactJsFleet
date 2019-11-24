@@ -1,9 +1,10 @@
+import { MouseEvent }                           from 'react';
 import { useHistory }                           from 'react-router-dom';
 import AuthenticationService                    from '../../services/security/AuthenticationService';
 import Button                                   from '@material-ui/core/Button';
 import IconLock                                 from '@material-ui/icons/Lock'
 import NavigateDashboard                        from '../../routing/NavigationHelpers.ts/NavigateDashboard';
-import React, { MouseEvent }                    from 'react';
+import React                                    from 'react';
 import TextField                                from '@material-ui/core/TextField';
 import UserModel                                from '../../models/user/UserModel';
 import ValidationMessage                        from '../../models/validation/ValidationMessage';
