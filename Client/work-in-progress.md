@@ -1,5 +1,8 @@
 # using hooks for state management
 
+## React is a bit shite
+https://dev.to/iamdammak/react-hook-usestate-with-react-context-api-3pco
+
 ## working examples
 https://www.telerik.com/kendo-react-ui/react-hooks-guide/
 
