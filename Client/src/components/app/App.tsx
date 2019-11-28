@@ -5,8 +5,6 @@ import LoginComponent                           from '../login/login-component'
 import React                                    from 'react';
 
 
-
-
 const App: React.FC = () => {
   return (
     <ApplicationContextProvider value={ new ApplicationContextModel(0)}>
