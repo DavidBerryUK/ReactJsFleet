@@ -6,7 +6,8 @@ import Avatar                                   from '@material-ui/core/Avatar';
 import Button                                   from '@material-ui/core/Button';
 import Container                                from '@material-ui/core/Container';
 import CopyrightComponent                       from '../copyrightComponent/CopyrightComponent';
-import IconLock                                 from '@material-ui/icons/Lock'
+import Grid                                     from '@material-ui/core/Grid';
+import Link                                     from '@material-ui/core/Link';
 import LockOutlinedIcon                         from '@material-ui/icons/LockOutlined';
 import NavigateDashboard                        from '../../routing/NavigationHelpers.ts/NavigateDashboard';
 import React                                    from 'react';
@@ -14,6 +15,8 @@ import TextField                                from '@material-ui/core/TextFiel
 import Typography                               from '@material-ui/core/Typography';
 import UserModel                                from '../../models/user/UserModel';
 import ValidationMessage                        from '../../models/validation/ValidationMessage';
+import ProgressIndicatorLinear                  from '../progressIndicators/ProgressIndicatorLinear';
+
 
 function LoginComponent() {
 
@@ -21,13 +24,14 @@ function LoginComponent() {
   const router = useHistory();
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [loading, setLoading] = React.useState(false);
 
   //
   // Template
   //
   return (
     <Container component="main" maxWidth="xs">
-      
+
       <div className={classStyles.paper}>
         <Avatar className={classStyles.avatar}>
           <LockOutlinedIcon />
@@ -35,40 +39,55 @@ function LoginComponent() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        </div>
-      
-        <form className={classStyles.form} noValidate>
-        <TextField 
-         variant="outlined"
-            required 
-            fullWidth
-            margin="normal"
-            label="User Name" 
-            value={username} 
-            autoFocus
-            onChange={(event) => { setUsername(event.target.value);} }
-          />
-        
-          <TextField 
-            required 
-            fullWidth
-            margin="normal"
-            variant="outlined"
-            label="Password" 
-            value={password} 
-            onChange={(event) => { setPassword(event.target.value);} }
-          />
-        
+      </div>
 
-        <Button variant="contained" 
-        color="primary" 
-        fullWidth
-        className={classStyles.submit}
-        onClick={loginButtonClicked}>Login</Button>
-        
-        </form>
-        <CopyrightComponent></CopyrightComponent>
-      
+      <form className={classStyles.form} noValidate>
+
+        <TextField
+          variant="outlined"
+          required
+          fullWidth
+          margin="normal"
+          label="User Name"
+          value={username}
+          autoFocus
+          onChange={(event) => { setUsername(event.target.value); }}
+        />
+
+        <TextField
+          required
+          fullWidth
+          margin="normal"
+          variant="outlined"
+          label="Password"
+          value={password}
+          onChange={(event) => { setPassword(event.target.value); }}
+        />        
+
+        <Button variant="contained"
+          color="primary"
+          fullWidth
+          className={classStyles.submit}
+          onClick={loginButtonClicked}>Login</Button>
+
+        { loading && <ProgressIndicatorLinear/> }
+
+        <Grid container>
+            <Grid item xs>
+              <Link href="#" variant="body2">
+                Forgot password?
+              </Link>
+            </Grid>
+            <Grid item>
+              <Link href="#" variant="body2">
+                {"Don't have an account? Sign Up"}
+              </Link>
+            </Grid>
+          </Grid>
+      </form>
+
+      <CopyrightComponent></CopyrightComponent>
+
     </Container>
   );
 
@@ -78,6 +97,7 @@ function LoginComponent() {
   function loginButtonClicked(event: MouseEvent) {
 
     var authenticationService = new AuthenticationService();
+    setLoading(true);
 
     authenticationService.authenticate(username, password)
       .onSuccess((userModel: UserModel) => {
@@ -92,7 +112,10 @@ function LoginComponent() {
       .onFailed((error: String) => {
         console.log("Login failed (error) - Application Error from Authentication Service")
         console.log(error);
-      });
+      })
+      .then(() => {
+        setLoading(false);
+      })
   }
 }
 
