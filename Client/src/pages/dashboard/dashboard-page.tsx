@@ -31,7 +31,7 @@ const DashboardPage: React.FC = () => {
         Sample Counter {appContext.sampleCounter}
         <Button variant="contained" color="primary" onClick={(e)=>downButtonClicked(e, appContext)}>Down</Button>
         <Button variant="contained" color="primary" onClick={(e)=>upButtonClicked(e,appContext)}>Up</Button>
-        <Button variant="contained" color="primary" onClick={()=>{ setstate}}>test</Button>
+        <Button variant="contained" color="primary" onClick={()=>{ }}>test</Button>
       </div>
     </div>
 
@@ -53,7 +53,6 @@ const DashboardPage: React.FC = () => {
   //
   function upButtonClicked(event: MouseEvent, appContext: IApplicationContextState) {
     console.log(appContext);
-    appContext.s
    // const useApplicationContext = useContext<IApplicationContextState>(ApplicationContext);
    // console.log(useApplicationContext.isLoggedIn)
   }

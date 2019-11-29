@@ -13,13 +13,12 @@ const Routes: React.SFC = () => {
     return (
         <Router>
             <div>
+                <Route path="/" component={LoginPage} />
                 <Route path={RouteConstants.Login} component={LoginPage} />
                 <Route path={RouteConstants.Dashboard} component={DashboardPage} />
                 <Route path={RouteConstants.FleetList} component={FleetListPage} />
                 <Route path={RouteConstants.FleetDetail} component={FleetDetailPage} />
-                {/* <Route path="">
-                    <Redirect to={RouteConstants.Login}/>
-                </Route> */}
+                
             </div>
         </Router>
     )
