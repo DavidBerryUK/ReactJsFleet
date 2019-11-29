@@ -1,8 +1,12 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const classStyleDefinition = makeStyles(theme => ({
+    card: {
+      padding: theme.spacing(2),
+      paddingBottom:theme.spacing(4),
+    },
     paper: {
-      marginTop: theme.spacing(8),
+      marginTop: theme.spacing(4),
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
@@ -16,7 +20,7 @@ export const classStyleDefinition = makeStyles(theme => ({
       marginTop: theme.spacing(1),
     },
     submit: {
-      margin: theme.spacing(3, 0, 2),
+      margin: theme.spacing(3, 0, 3),
     },
   }));
 

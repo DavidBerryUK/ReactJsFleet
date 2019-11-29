@@ -4,18 +4,23 @@ import { useHistory }                           from 'react-router-dom';
 import AuthenticationService                    from '../../services/security/AuthenticationService';
 import Avatar                                   from '@material-ui/core/Avatar';
 import Button                                   from '@material-ui/core/Button';
+import Card                                     from '@material-ui/core/Card';
 import Container                                from '@material-ui/core/Container';
 import CopyrightComponent                       from '../copyrightComponent/CopyrightComponent';
 import Grid                                     from '@material-ui/core/Grid';
 import Link                                     from '@material-ui/core/Link';
 import LockOutlinedIcon                         from '@material-ui/icons/LockOutlined';
 import NavigateDashboard                        from '../../routing/NavigationHelpers.ts/NavigateDashboard';
+import ProgressIndicatorLinear                  from '../progressIndicators/ProgressIndicatorLinear';
 import React                                    from 'react';
+import RuleMandatory                            from '../../validation/rules/RuleMandatory';
+import RuleMaxLength                            from '../../validation/rules/RuleMaxLength';
 import TextField                                from '@material-ui/core/TextField';
 import Typography                               from '@material-ui/core/Typography';
 import UserModel                                from '../../models/user/UserModel';
+import ValidationField                          from '../../validation/ValidationField';
+import ValidationGroup                          from '../../validation/ValidationGroup';
 import ValidationMessage                        from '../../models/validation/ValidationMessage';
-import ProgressIndicatorLinear                  from '../progressIndicators/ProgressIndicatorLinear';
 
 
 function LoginComponent() {
@@ -30,62 +35,71 @@ function LoginComponent() {
   // Template
   //
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="sm">
 
-      <div className={classStyles.paper}>
-        <Avatar className={classStyles.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
+      <Card className={classStyles.card}>
+
+        <div className={classStyles.paper}>
+          <Avatar className={classStyles.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign in
         </Typography>
-      </div>
+        </div>
 
-      <form className={classStyles.form} noValidate>
+        <form className={classStyles.form}>
+          <ValidationGroup>
 
-        <TextField
-          variant="outlined"
-          required
-          fullWidth
-          margin="normal"
-          label="User Name"
-          value={username}
-          autoFocus
-          onChange={(event) => { setUsername(event.target.value); }}
-        />
+            <ValidationField rules={[new RuleMandatory(), new RuleMaxLength(40)]}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                margin="normal"
+                name="username"
+                label="User Name"
+                value={username}
+                autoFocus
+                onChange={(event) => { setUsername(event.target.value); }}
+              />
+            </ValidationField>
 
-        <TextField
-          required
-          fullWidth
-          margin="normal"
-          variant="outlined"
-          label="Password"
-          value={password}
-          onChange={(event) => { setPassword(event.target.value); }}
-        />        
+            <ValidationField rules={[new RuleMandatory(), new RuleMaxLength(40)]}>
+              <TextField
+                required
+                fullWidth
+                name="password"
+                margin="normal"
+                variant="outlined"
+                label="Password"
+                value={password}
+                onChange={(event) => { setPassword(event.target.value); }}
+              />
+            </ValidationField>
 
-        <Button variant="contained"
-          color="primary"
-          fullWidth
-          className={classStyles.submit}
-          onClick={loginButtonClicked}>Login</Button>
+          </ValidationGroup>
+          
+          <Button variant="contained"
+            color="primary"
+            fullWidth
+            className={classStyles.submit}
+            onClick={loginButtonClicked}>Login</Button>
 
-        { loading && <ProgressIndicatorLinear/> }
+          {loading && <ProgressIndicatorLinear />}
 
-        <Grid container>
+          <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
+              <Link href="#" variant="body2">Forgot password?</Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
+              <Link href="#" variant="body2">{"Don't have an account? Sign Up"}</Link>
             </Grid>
           </Grid>
-      </form>
 
+        </form>
+
+      </Card>
       <CopyrightComponent></CopyrightComponent>
 
     </Container>
