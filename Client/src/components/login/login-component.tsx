@@ -21,7 +21,7 @@ import UserModel                                from '../../models/user/UserMode
 import ValidationField                          from '../../validation/ValidationField';
 import ValidationGroup                          from '../../validation/ValidationGroup';
 import ValidationMessage                        from '../../models/validation/ValidationMessage';
-
+import ValidationState                          from '../../validation/context/state/ValidationState';
 
 function LoginComponent() {
 
@@ -49,37 +49,39 @@ function LoginComponent() {
         </div>
 
         <form className={classStyles.form}>
-          <ValidationGroup>
+          <ValidationState>
+            <ValidationGroup>
 
-            <ValidationField rules={[new RuleMandatory(), new RuleMaxLength(40)]}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                margin="normal"
-                name="username"
-                label="User Name"
-                value={username}
-                autoFocus
-                onChange={(event) => { setUsername(event.target.value); }}
-              />
-            </ValidationField>
+              <ValidationField rules={[new RuleMandatory(), new RuleMaxLength(40)]}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  margin="normal"
+                  name="username"
+                  label="User Name"
+                  value={username}
+                  autoFocus
+                  onChange={(event) => { setUsername(event.target.value); }}
+                />
+              </ValidationField>
 
-            <ValidationField rules={[new RuleMandatory(), new RuleMaxLength(40)]}>
-              <TextField
-                required
-                fullWidth
-                name="password"
-                margin="normal"
-                variant="outlined"
-                label="Password"
-                value={password}
-                onChange={(event) => { setPassword(event.target.value); }}
-              />
-            </ValidationField>
+              <ValidationField rules={[new RuleMandatory(), new RuleMaxLength(40)]}>
+                <TextField
+                  required
+                  fullWidth
+                  name="password"
+                  margin="normal"
+                  variant="outlined"
+                  label="Password"
+                  value={password}
+                  onChange={(event) => { setPassword(event.target.value); }}
+                />
+              </ValidationField>
 
-          </ValidationGroup>
-          
+            </ValidationGroup>
+          </ValidationState>
+
           <Button variant="contained"
             color="primary"
             fullWidth

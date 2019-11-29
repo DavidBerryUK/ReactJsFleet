@@ -1,12 +1,13 @@
-
-import { Component }                            from 'react';
+import { IValidationContextActions }            from './context/interfaces/IValidationContextActions';
+import { IValidationContextState }              from './context/interfaces/IValidationContextState';
+import { ValidationContext }                    from "./context/context/ValidationContext"
 import React                                    from 'react';
+import ValidationBase                           from "./ValidationBase"
 import ValidationField                          from './ValidationField';
 
+export default class ValidationGroup extends ValidationBase<any, IValidationContextState & IValidationContextActions> {
 
-export default class ValidationGroup extends Component {
-
-
+    static contextType = ValidationContext;
 
     componentDidMount() {
         console.log("ValidationGroup: Component Did Mount");
@@ -46,11 +47,11 @@ export default class ValidationGroup extends Component {
     }
 
     private addValidationFieldToGroup(validationField : ValidationField,  childElement: any) {
-        console.log("We have found a nice validation field");
-        console.log(validationField);
-        //(validationField.props as any).setGroup(this);
-        //console.log(validationField.props.rules);        
-        //console.log(validationField.setState(this));
+        // console.log("We have found a nice validation field");
+        // console.log(validationField);
+        // (validationField.props as any).setGroup(this);
+        // console.log(validationField.props.rules);        
+        // console.log(validationField.setState(this));
     }
 
     render() {
