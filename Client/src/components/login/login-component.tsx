@@ -13,15 +13,15 @@ import LockOutlinedIcon                         from '@material-ui/icons/LockOut
 import NavigateDashboard                        from '../../routing/NavigationHelpers.ts/NavigateDashboard';
 import ProgressIndicatorLinear                  from '../progressIndicators/ProgressIndicatorLinear';
 import React                                    from 'react';
-import RuleMandatory                            from '../../validation/rules/RuleMandatory';
-import RuleMaxLength                            from '../../validation/rules/RuleMaxLength';
+import RuleMandatory                            from '../../services/validation/rules/RuleMandatory';
+import RuleMaxLength                            from '../../services/validation/rules/RuleMaxLength';
 import TextField                                from '@material-ui/core/TextField';
 import Typography                               from '@material-ui/core/Typography';
 import UserModel                                from '../../models/user/UserModel';
-import ValidationField                          from '../../validation/ValidationField';
-import ValidationGroup                          from '../../validation/ValidationGroup';
+import ValidationField                          from '../../services/validation/ValidationField';
+import ValidationGroup                          from '../../services/validation/ValidationGroup';
 import ValidationMessage                        from '../../models/validation/ValidationMessage';
-import ValidationState                          from '../../validation/context/state/ValidationState';
+import ValidationState                          from '../../services/validation/context/state/ValidationState';
 
 function LoginComponent() {
 
