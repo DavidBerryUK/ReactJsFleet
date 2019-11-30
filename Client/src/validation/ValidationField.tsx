@@ -1,9 +1,9 @@
+import { IValidationContextActions }            from './context/interfaces/IValidationContextActions';
+import { IValidationContextState }              from './context/interfaces/IValidationContextState';
 import { IValidationRuleProperties }            from './interfaces/IValidationRuleProperties';
+import { ValidationContext }                    from "./context/context/ValidationContext"
 import IValidationRule                          from './interfaces/IValidationRule';
 import ValidationBase                           from "./ValidationBase"
-import { IValidationContextState }              from './context/interfaces/IValidationContextState';
-import { IValidationContextActions }            from './context/interfaces/IValidationContextActions';
-import { ValidationContext }                    from "./context/context/ValidationContext"
 
 export default class ValidationField extends ValidationBase<IValidationRuleProperties, IValidationContextState & IValidationContextActions> {
 
@@ -13,8 +13,7 @@ export default class ValidationField extends ValidationBase<IValidationRulePrope
   
     componentDidMount() {
         this.rules = this.props.rules;
-        // console.log("--------");
-        // console.log(this.rules);
+        this.context.addField(this);
     }
 
     render() {
