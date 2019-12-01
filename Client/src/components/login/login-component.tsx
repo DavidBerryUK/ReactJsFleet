@@ -6,7 +6,6 @@ import Avatar                                   from '@material-ui/core/Avatar';
 import Button                                   from '@material-ui/core/Button';
 import Card                                     from '@material-ui/core/Card';
 import Container                                from '@material-ui/core/Container';
-import CopyrightComponent                       from '../copyrightComponent/CopyrightComponent';
 import Grid                                     from '@material-ui/core/Grid';
 import Link                                     from '@material-ui/core/Link';
 import LockOutlinedIcon                         from '@material-ui/icons/LockOutlined';
@@ -15,13 +14,13 @@ import ProgressIndicatorLinear                  from '../progressIndicators/Prog
 import React                                    from 'react';
 import RuleMandatory                            from '../../services/validation/rules/RuleMandatory';
 import RuleMaxLength                            from '../../services/validation/rules/RuleMaxLength';
-import TextField                                from '@material-ui/core/TextField';
 import Typography                               from '@material-ui/core/Typography';
 import UserModel                                from '../../models/user/UserModel';
 import ValidationField                          from '../../services/validation/ValidationField';
 import ValidationGroup                          from '../../services/validation/ValidationGroup';
 import ValidationMessage                        from '../../models/validation/ValidationMessage';
 import ValidationState                          from '../../services/validation/context/state/ValidationState';
+import ValidatedTextField                       from '../../services/validation/controls/ValidatedTextField';
 
 function LoginComponent() {
 
@@ -53,7 +52,7 @@ function LoginComponent() {
             <ValidationGroup>
 
               <ValidationField rules={[new RuleMandatory(), new RuleMaxLength(40)]}>
-                <TextField
+                <ValidatedTextField
                   variant="outlined"
                   required
                   fullWidth
@@ -67,7 +66,7 @@ function LoginComponent() {
               </ValidationField>
 
               <ValidationField rules={[new RuleMandatory(), new RuleMaxLength(40)]}>
-                <TextField
+                <ValidatedTextField
                   required
                   fullWidth
                   name="password"
@@ -79,14 +78,15 @@ function LoginComponent() {
                 />
               </ValidationField>
 
-            </ValidationGroup>
-          </ValidationState>
+                
 
-          <Button variant="contained"
-            color="primary"
-            fullWidth
-            className={classStyles.submit}
-            onClick={loginButtonClicked}>Login</Button>
+            <Button variant="contained"
+              color="primary"
+              fullWidth
+              className={classStyles.submit}
+              onClick={loginButtonClicked}>Login</Button>
+            </ValidationGroup>    
+          </ValidationState>
 
           {loading && <ProgressIndicatorLinear />}
 
@@ -102,7 +102,7 @@ function LoginComponent() {
         </form>
 
       </Card>
-      <CopyrightComponent></CopyrightComponent>
+      
 
     </Container>
   );
