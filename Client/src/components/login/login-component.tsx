@@ -26,8 +26,8 @@ function LoginComponent() {
 
   const classStyles = classStyleDefinition();
   const router = useHistory();
-  const [username, setUsername] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  // const [username, setUsername] = React.useState('');
+  // const [password, setPassword] = React.useState('');
   const [loading, setLoading] = React.useState(false);
 
   //
@@ -54,33 +54,26 @@ function LoginComponent() {
               <ValidationField rules={[new RuleMandatory(), new RuleMaxLength(40)]}>
                 <ValidatedTextField
                   variant="outlined"
-                  required
                   fullWidth
                   margin="normal"
                   name="username"
                   label="User Name"
-                  value={username}
                   autoFocus
-                  onChange={(event) => { setUsername(event.target.value); }}
                 />
               </ValidationField>
 
               <ValidationField rules={[new RuleMandatory(), new RuleMaxLength(40)]}>
                 <ValidatedTextField
-                  required
                   fullWidth
                   name="password"
                   margin="normal"
                   variant="outlined"
                   label="Password"
-                  value={password}
-                  onChange={(event) => { setPassword(event.target.value); }}
                 />
-              </ValidationField>
+              </ValidationField>               
 
-                
-
-            <Button variant="contained"
+            <Button 
+              variant="contained"
               color="primary"
               fullWidth
               className={classStyles.submit}
@@ -115,7 +108,8 @@ function LoginComponent() {
     var authenticationService = new AuthenticationService();
     setLoading(true);
 
-    authenticationService.authenticate(username, password)
+    authenticationService.authenticate("", "")
+   // authenticationService.authenticate(username, password)
       .onSuccess((userModel: UserModel) => {
         console.log("Login Success - Model Returned from Authentication Service");
         console.log(userModel);
