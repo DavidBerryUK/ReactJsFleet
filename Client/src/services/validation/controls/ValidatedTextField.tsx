@@ -1,12 +1,15 @@
 import { Component }                            from 'react';
-import { IValidatedUIControlState }             from './ValidateUIControlState';
+import { IValidatedUIControlProperties }        from './interfaces/IValidatedUIControlProperties';
+import { IValidatedUIControlState }             from './interfaces/IValidateUIControlState';
 import { TextFieldProps }                       from '@material-ui/core/TextField';
-import { ValidatedUIControlProperties }         from './ValidatedUIControlProperties';
+import { ValidationContext }                    from "../context/context/ValidationContext"
 import React                                    from 'react';
 import RuleCollection                           from '../rules/RuleCollection';
 import TextField                                from '@material-ui/core/TextField';
 
-export default class ValidatedTextField extends Component<TextFieldProps & ValidatedUIControlProperties  ,IValidatedUIControlState>  {
+export default class ValidatedTextField extends Component<TextFieldProps & IValidatedUIControlProperties  ,IValidatedUIControlState>  {
+
+    static contextType = ValidationContext;
 
     state = {
         text:"",
@@ -20,7 +23,7 @@ export default class ValidatedTextField extends Component<TextFieldProps & Valid
     componentDidMount() {
         this.rules =  new RuleCollection(this.props.rules);
         this.name = this.props.name as string;
-        // this.context.addField(this);
+        this.context.addField(this);
     }
         
     render() {
@@ -67,6 +70,7 @@ export default class ValidatedTextField extends Component<TextFieldProps & Valid
                  () =>{
             if (this.props.onFieldUpdated) {
                 this.props.onFieldUpdated(this);
+                this.context.evaluateFormState();
             }
         });        
     }

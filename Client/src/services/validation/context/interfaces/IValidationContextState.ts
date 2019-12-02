@@ -1,5 +1,5 @@
-import ValidationFieldModel                     from "../models/ValidationFieldModel"
+import ValidatedTextField                       from "../../controls/ValidatedTextField";
 
 export interface IValidationContextState {    
-    fields : Array<ValidationFieldModel>;
+    fields : Array<ValidatedTextField>;
 }

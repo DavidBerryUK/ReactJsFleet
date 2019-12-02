@@ -3,21 +3,24 @@ import { IValidationContextActions }            from '../interfaces/IValidationC
 import { IValidationContextState }              from '../interfaces/IValidationContextState';
 import { ValidationContext }                    from '../context/ValidationContext';
 import ActionAddValidationField                 from '../actions/ActionAddValidationField';
+import ActionEvaluateFormState                  from '../actions/ActionEvaluateFormState';
 import React                                    from 'react';
-import ValidationField                          from '../../ValidationField';
-import ValidationFieldModel                     from '../models/ValidationFieldModel';
+import ValidatedTextField                       from '../../controls/ValidatedTextField';
 
-class ValidationState extends Component<any,IValidationContextState> implements IValidationContextActions {
+class ValidationState extends Component<any, IValidationContextState> implements IValidationContextActions {
 
+  addField(field: ValidatedTextField): void {
+    let action = new ActionAddValidationField(this, field);
+    action.execute();
+  }
 
-  addField(field: ValidationField): void {
-    let action = new ActionAddValidationField(field);
+  evaluateFormState(): void {
+    let action = new ActionEvaluateFormState(this);
     action.execute();
   }
   
   state = {
-    group : null,
-    fields : new Array<ValidationFieldModel>()
+    fields : new Array<ValidatedTextField>()
   };
 
   render() {
@@ -25,7 +28,8 @@ class ValidationState extends Component<any,IValidationContextState> implements 
       <ValidationContext.Provider
         value={{
           fields : this.state.fields,
-          addField : this.addField
+          addField : this.addField,
+          evaluateFormState: this.evaluateFormState,
         }}
       >
         {this.props.children}
