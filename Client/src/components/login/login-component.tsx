@@ -64,6 +64,7 @@ function LoginComponent() {
             
             <ValidatedTextField
               fullWidth
+              type="password"
               name="password"
               autoComplete = "off"
               margin="normal"

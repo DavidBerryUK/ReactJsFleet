@@ -14,12 +14,12 @@ export default class ActionAddValidationField implements IValidationAction {
 
     execute(): void {
         console.log("ActionAddValidationField:execute")
-        console.log(this.state.state);
-        //const fields = {...this.validationState.state.fields};
-        //fields.push(this.field)
+        console.log(this.state.state.fields);
+        const fields = {...this.state.state.fields};
+        fields.push(this.field)
 
-        //this.validationState.setState ({
-            //fields: fields
-        //});
+        this.state.setState ({
+            fields: fields
+        });
     }
 }
