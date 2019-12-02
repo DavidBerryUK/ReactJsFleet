@@ -4,21 +4,22 @@ import ValidationState                          from '../state/ValidationState';
 
 export default class ActionAddValidationField implements IValidationAction {
 
-    private validationState : ValidationState;
+    private state : ValidationState;
     private field : ValidatedTextField;
 
-    constructor(validationState : ValidationState, field : ValidatedTextField) {
+    constructor(state : ValidationState, field : ValidatedTextField) {
         this.field = field;
-        this.validationState = validationState;
+        this.state = state;
     }
 
     execute(): void {
         console.log("ActionAddValidationField:execute")
-        const fields = {...this.validationState.state.fields};
-        fields.push(this.field)
+        console.log(this.state.state);
+        //const fields = {...this.validationState.state.fields};
+        //fields.push(this.field)
 
-        this.validationState.setState ({
-            fields: fields
-        });
+        //this.validationState.setState ({
+            //fields: fields
+        //});
     }
 }

@@ -12,7 +12,7 @@ export default class ActionEvaluateFormState implements IValidationAction {
 
     execute(): void {
         console.log("ActionEvaluateFormState:execute")
-        console.log(this.validationState);
+        // sconsole.log(this.validationState);
         // this.validationState.state.fields.forEach((field :ValidatedTextField ) => {
         //     console.log(field);
         // });

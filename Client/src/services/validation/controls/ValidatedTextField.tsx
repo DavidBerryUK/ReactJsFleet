@@ -20,7 +20,8 @@ export default class ValidatedTextField extends Component<TextFieldProps & IVali
     public rules : RuleCollection = new RuleCollection();
     public name : string = "";
 
-    componentDidMount() {
+    UNSAFE_componentWillMount() {
+        console.log("ValidatedTextField:componentDidMount");
         this.rules =  new RuleCollection(this.props.rules);
         this.name = this.props.name as string;
         this.context.addField(this);
@@ -40,7 +41,6 @@ export default class ValidatedTextField extends Component<TextFieldProps & IVali
                 onChange={(event) => { this.handleOnChangeEvent(event) }}
                 value={this.state.text}
             />
-            
         );
     }
 
