@@ -1,7 +1,5 @@
 import ValidationFieldModel                     from "../models/ValidationFieldModel"
-import ValidationGroupModel                     from "../models/ValidationGroupModel"
 
-export interface IValidationContextState {
-    group : ValidationGroupModel | null;
+export interface IValidationContextState {    
     fields : Array<ValidationFieldModel>;
 }

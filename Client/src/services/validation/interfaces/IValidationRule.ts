@@ -1,4 +1,5 @@
 export default interface IValidationRule {
 
-    isValid(value: string) : Boolean;
+    errorMessage: string;
+    isValid(value: string) : boolean;
 }

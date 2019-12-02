@@ -5,7 +5,6 @@ import { ValidationContext }                    from "./context/context/Validati
 import IValidationRule                          from './interfaces/IValidationRule';
 import ValidationBase                           from "./ValidationBase"
 
-
 export default class ValidationField extends ValidationBase<IValidationRuleProperties, IValidationContextState & IValidationContextActions> {
 
     static contextType = ValidationContext;
