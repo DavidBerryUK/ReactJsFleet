@@ -7,12 +7,14 @@ import FleetListPage                            from "../pages/fleetList/fleet-l
 import LoginPage                                from "../pages/login/login-page";
 import React                                    from 'react';
 import RouteConstants                           from "../routing/RouteConstants"
+import App from '../components/app/App';
 
 const Routes: React.SFC = () => {
 
     return (
         <Router>
             <div>
+                <Route exact path="/" component={App} />
                 <Route path={RouteConstants.Dashboard} component={DashboardPage} />
                 <Route path={RouteConstants.DefectSheet} component={DefectSheetPage} />
                 <Route path={RouteConstants.FleetDetail} component={FleetDetailPage} />
