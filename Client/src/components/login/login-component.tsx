@@ -1,6 +1,8 @@
 import { classStyleDefinition }                 from './classStyleDefinition'
 import { MouseEvent }                           from 'react';
+import { Paper }                                from '@material-ui/core';
 import { useHistory }                           from 'react-router-dom';
+import { ValidationContext }                    from '../../services/validation/context/context/ValidationContext';
 import AuthenticationService                    from '../../services/security/AuthenticationService';
 import Avatar                                   from '@material-ui/core/Avatar';
 import Button                                   from '@material-ui/core/Button';
@@ -14,18 +16,21 @@ import ProgressIndicatorLinear                  from '../progressIndicators/Prog
 import React                                    from 'react';
 import RuleMandatory                            from '../../services/validation/rules/ruleProcessors/RuleMandatory';
 import RuleMaxLength                            from '../../services/validation/rules/ruleProcessors/RuleMaxLength';
+import Table                                    from '@material-ui/core/Table';
+import TableBody                                from '@material-ui/core/TableBody';
+import TableCell                                from '@material-ui/core/TableCell';
+import TableHead                                from '@material-ui/core/TableHead';
+import TableRow                                 from '@material-ui/core/TableRow';
 import Typography                               from '@material-ui/core/Typography';
 import UserModel                                from '../../models/user/UserModel';
+import ValidatedTextField                       from '../../services/validation/controls/ValidatedTextField';
 import ValidationMessage                        from '../../models/validation/ValidationMessage';
 import ValidationState                          from '../../services/validation/context/state/ValidationState';
-import ValidatedTextField                       from '../../services/validation/controls/ValidatedTextField';
 
 function LoginComponent() {
 
   const classStyles = classStyleDefinition();
   const router = useHistory();
-  // const [username, setUsername] = React.useState('');
-  // const [password, setPassword] = React.useState('');
   const [loading, setLoading] = React.useState(false);
 
   //
@@ -46,43 +51,76 @@ function LoginComponent() {
         </div>
 
         <form className={classStyles.form}>
-          <ValidationState>
-            
-            <ValidatedTextField
-              variant="outlined"
-              fullWidth
-              margin="normal"
-              name="username"
-              label="User Name"
-              autoComplete = "off"
-              autoFocus
-              rules={[new RuleMandatory(), new RuleMaxLength(40)]}
-              onFieldUpdated = {(field:ValidatedTextField) => {
-           //    console.log(`${field.name} updated to ${field.state.text}`)
-              }} 
-            />
-            
-            <ValidatedTextField
-              fullWidth
-              type="password"
-              name="password"
-              autoComplete = "off"
-              margin="normal"
-              variant="outlined"
-              label="Password"                  
-              rules={[new RuleMandatory(), new RuleMaxLength(40)]}
-              onFieldUpdated = {(field:ValidatedTextField) => {
-             //   console.log(`${field.name} updated to ${field.state.text}`)
-              } }
-            />
-              
-            <Button 
-              variant="contained"
-              color="primary"
-              fullWidth
-              className={classStyles.submit}
-              onClick={loginButtonClicked}>Login</Button>
-            
+          {/* <ValidationState validateOnLoad> */}
+          <ValidationState validateOnLoad>
+
+            <ValidationContext.Consumer>
+              {(validationContext) => (
+                <div>
+                  <ValidatedTextField
+                    name="username"
+                    label="User Name"
+                    variant="outlined"
+                    fullWidth
+                    margin="normal"
+                    autoComplete="off"
+                    autoFocus
+                    rules={[new RuleMandatory(), new RuleMaxLength(40)]}
+                    onFieldUpdated={(field: ValidatedTextField) => {
+                      //    console.log(`${field.name} updated to ${field.state.text}`)
+                    }} />
+
+                  <ValidatedTextField
+                    name="password"
+                    label="Password"
+                    fullWidth
+                    type="password"
+                    autoComplete="off"
+                    margin="normal"
+                    variant="outlined"
+                    rules={[new RuleMandatory(), new RuleMaxLength(40)]}
+                    onFieldUpdated={(field: ValidatedTextField) => {
+                      //   console.log(`${field.name} updated to ${field.state.text}`)
+                    }} />
+
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    fullWidth
+                    className={classStyles.submit}
+                    onClick={loginButtonClicked}>Login</Button>                    
+
+                {/* TEMP TABLE TO HELP WITH DEBUG */}
+                <Paper>
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>Field</TableCell>
+                        <TableCell>Value</TableCell>            
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>          
+                      <TableRow>
+                        <TableCell>field count</TableCell>
+                        <TableCell>{validationContext.fields.length}</TableCell>
+                      </TableRow>          
+                      <TableRow>
+                        <TableCell>IsFormValid</TableCell>
+                        <TableCell>{validationContext.isFormValid ? "yes" : "no"}</TableCell>
+                      </TableRow>          
+                      <TableRow>
+                        <TableCell>hasBeenFullyValidated</TableCell>
+                        <TableCell>{validationContext.hasBeenFullyValidated ? "yes" : "no" }</TableCell>
+                      </TableRow>          
+                    </TableBody>
+                  </Table>
+                </Paper>
+                {/* TEMP TABLE TO HELP WITH DEBUG */}
+
+                </div>
+              )}
+
+            </ValidationContext.Consumer>
           </ValidationState>
 
           {loading && <ProgressIndicatorLinear />}
@@ -99,7 +137,7 @@ function LoginComponent() {
         </form>
 
       </Card>
-      
+
 
     </Container>
   );
@@ -113,19 +151,13 @@ function LoginComponent() {
     setLoading(true);
 
     authenticationService.authenticate("", "")
-   // authenticationService.authenticate(username, password)
+      // authenticationService.authenticate(username, password)
       .onSuccess((userModel: UserModel) => {
-        console.log("Login Success - Model Returned from Authentication Service");
-        console.log(userModel);
         NavigateDashboard.go(router);
       })
       .onValidationErrorsRaised((validationMessages: Array<ValidationMessage>) => {
-        console.log("Validation Errors Returned from Authentication Service");
-        console.log(validationMessages)
       })
       .onFailed((error: String) => {
-        console.log("Login failed (error) - Application Error from Authentication Service")
-        console.log(error);
       })
       .then(() => {
         setLoading(false);

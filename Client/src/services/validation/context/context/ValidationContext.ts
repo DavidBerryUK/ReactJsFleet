@@ -5,6 +5,8 @@ import ValidatedTextField                       from '../../controls/ValidatedTe
 
 export const ValidationContext = React.createContext<IValidationContextState & IValidationContextActions>({
      fields : new Array<ValidatedTextField>(),
+     isFormValid: true,
+     hasBeenFullyValidated: false,
      addField: (field: ValidatedTextField) => {},
      evaluateFormState: () => {},
 });

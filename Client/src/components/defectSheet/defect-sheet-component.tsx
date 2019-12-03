@@ -163,16 +163,12 @@ function DefectSheetComponent() {
                     fullWidth
                     margin="normal"
                     variant="outlined"
-
                     rules={[]} />
                 </Grid>
-
               </Grid>
 
 
-
               <Grid container xs={12} spacing={1}>
-
 
                 <Grid item xs={2}>
                   <FormControlLabel

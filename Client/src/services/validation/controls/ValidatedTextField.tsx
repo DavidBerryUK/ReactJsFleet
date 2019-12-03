@@ -20,11 +20,35 @@ export default class ValidatedTextField extends Component<TextFieldProps & IVali
     public rules : RuleCollection = new RuleCollection();
     public name : string = "";
 
-    UNSAFE_componentWillMount() {
-        console.log("ValidatedTextField:componentDidMount");
+    UNSAFE_componentWillMount() {        
         this.rules =  new RuleCollection(this.props.rules);
         this.name = this.props.name as string;
         this.context.addField(this);
+    }
+
+    validate() : Boolean {
+        // console.log("validate field")
+        
+
+        const isValid = this.rules.evaluateRules(this.props.label as string, this.state.text);
+        let message = this.rules.validationMessage;
+
+         //
+        // feedback 
+        //
+        this.setState (
+            {
+                isValid : isValid,
+                validationError : message
+            },
+             () =>{
+        if (this.props.onFieldUpdated) {
+            this.props.onFieldUpdated(this);
+            this.context.evaluateFormState();
+        }
+        });       
+
+        return isValid;
     }
         
     render() {
@@ -54,10 +78,7 @@ export default class ValidatedTextField extends Component<TextFieldProps & IVali
         // run validation rules
         //
         const isValid = this.rules.evaluateRules(this.props.label as string, text);
-        let message = "";
-        if ( !isValid ) {            
-            message = this.rules.validationMessage;
-        }
+        let message = this.rules.validationMessage;        
         //
         // feedback 
         //
