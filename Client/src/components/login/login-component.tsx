@@ -60,6 +60,7 @@ function LoginComponent() {
                   <ValidatedTextField
                     name="username"
                     label="User Name"
+                    required
                     variant="outlined"
                     fullWidth
                     margin="normal"
@@ -73,7 +74,8 @@ function LoginComponent() {
                   <ValidatedTextField
                     name="password"
                     label="Password"
-                    fullWidth
+                    required
+                    fullWidth                    
                     type="password"
                     autoComplete="off"
                     margin="normal"
@@ -101,25 +103,25 @@ function LoginComponent() {
                     </TableHead>
                     <TableBody>          
                       <TableRow>
-                        <TableCell>field count</TableCell>
+                        <TableCell>Field Count</TableCell>
                         <TableCell>{validationContext.fields.length}</TableCell>
                       </TableRow>          
                       <TableRow>
-                        <TableCell>IsFormValid</TableCell>
-                        <TableCell>{validationContext.isFormValid ? "yes" : "no"}</TableCell>
-                      </TableRow>          
-                      <TableRow>
-                        <TableCell>hasBeenFullyValidated</TableCell>
-                        <TableCell>{validationContext.hasBeenFullyValidated ? "yes" : "no" }</TableCell>
-                      </TableRow>          
-                      <TableRow>
-                        <TableCell>Valid Fields</TableCell>
+                        <TableCell>Valid Field Count</TableCell>
                         <TableCell>{validationContext.fieldsValidCount }</TableCell>
                       </TableRow>    
                       <TableRow>
-                        <TableCell>Invalid Fields</TableCell>
+                        <TableCell>Invalid Field Count</TableCell>
                         <TableCell>{validationContext.fieldsInvalidCount }</TableCell>
                       </TableRow>    
+                      <TableRow>
+                        <TableCell>Is Form Valid</TableCell>
+                        <TableCell>{validationContext.isFormValid ? "yes" : "no"}</TableCell>
+                      </TableRow>          
+                      <TableRow>
+                        <TableCell>has Been Fully Validated</TableCell>
+                        <TableCell>{validationContext.hasBeenFullyValidated ? "yes" : "no" }</TableCell>
+                      </TableRow>                                
                     </TableBody>
                   </Table>
                 </Paper>

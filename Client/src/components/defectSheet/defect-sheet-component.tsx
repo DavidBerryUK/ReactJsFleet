@@ -17,6 +17,12 @@ import ValidationState                          from '../../services/validation/
 function DefectSheetComponent() {
 
   const classStyles = classStyleDefinition();
+  const inputLabel = React.useRef<HTMLLabelElement>(null);
+
+  const [labelWidth, setLabelWidth] = React.useState(0);
+  React.useEffect(() => {
+    setLabelWidth(inputLabel.current!.offsetWidth);
+  }, []);
 
   return (
 
@@ -47,16 +53,13 @@ function DefectSheetComponent() {
 
                 <Grid item xs={3}>
 
-                  <FormControl variant="outlined"  
-                    margin="normal"
-                    fullWidth
-                  >
-                    <InputLabel id="make-label">
-                      Make
-                    </InputLabel>
+                  <FormControl variant="outlined"  margin="normal" fullWidth>
+                    <InputLabel id="make-label" ref={inputLabel}>Make</InputLabel>
                     <Select
                       labelId="make-label"
-                      id="make-helper">
+                      id="make-outline"
+                      labelWidth={labelWidth}
+                      >
                       <MenuItem value=""><em>None</em></MenuItem>
                       <MenuItem value={10}>Alfa Remeo</MenuItem>
                       <MenuItem value={20}>Audi</MenuItem>
@@ -66,6 +69,7 @@ function DefectSheetComponent() {
                       <MenuItem value={60}>volkswagen</MenuItem>
                     </Select>
                   </FormControl>
+
                 </Grid>
 
                 <Grid item xs={3}>
