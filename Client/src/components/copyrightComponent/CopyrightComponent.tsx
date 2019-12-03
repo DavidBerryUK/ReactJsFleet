@@ -8,7 +8,7 @@ const CopyrightComponent: React.FC = () => {
     <Box mt={8}>
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://answerdigital.com">Answer Digital</Link>{' '}{new Date().getFullYear()}{'.'}
+      <Link color="inherit" href="https://www.answerdigital.com/">Answer Digital</Link>{' '}{new Date().getFullYear()}{'.'}
   </Typography>
   </Box>
   );
