@@ -4,7 +4,7 @@ import FleetDetailComponent           from '../../components/fleetDetail/fleet-d
 
 const FleetDetailPage: React.FC = () => {
   return (
-    <div >
+    <div>
         <ApplicationHeader></ApplicationHeader>
         <h1>Fleet Detail Page</h1>
         <FleetDetailComponent></FleetDetailComponent>
