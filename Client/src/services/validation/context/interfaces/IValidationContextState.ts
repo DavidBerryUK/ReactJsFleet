@@ -2,6 +2,8 @@ import ValidatedTextField                       from "../../controls/ValidatedTe
 
 export interface IValidationContextState {    
     fields : Array<ValidatedTextField>;
-    hasBeenFullyValidated: Boolean;
+    hasBeenFullyValidated: boolean;
     isFormValid: Boolean;
+    fieldsValidCount : number;
+    fieldsInvalidCount : number;
 }

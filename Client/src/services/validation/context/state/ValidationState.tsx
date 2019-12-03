@@ -14,6 +14,8 @@ class ValidationState extends Component<IValidationStateProperties, IValidationC
   //
   state = {
     fields : new Array<ValidatedTextField>(),
+    fieldsInvalidCount: 0,
+    fieldsValidCount : 0,
     hasBeenFullyValidated: false,
     isFormValid: false
   }
@@ -26,11 +28,13 @@ class ValidationState extends Component<IValidationStateProperties, IValidationC
     });    
   }  
 
-  private updateIsFormValid(value: boolean) {
-    this.setState((state) => {      
+  private updateIsFormValid(fieldsInvalidCount: number, fieldsValidCount : number) {
+    this.setState((state) => {
       return {
         hasBeenFullyValidated: true,
-        isFormValid : value
+        isFormValid : (fieldsInvalidCount === 0),
+        fieldsInvalidCount : fieldsInvalidCount,
+        fieldsValidCount: fieldsValidCount
       }
     });    
   }
@@ -59,14 +63,17 @@ class ValidationState extends Component<IValidationStateProperties, IValidationC
 
   validateAllFields() {    
     console.log("validateAllFields:BEGIN");
-    var isValid = true;
+    var validCount = 0;
+    var invalidCount = 0;
     this.state.fields.forEach((field: ValidatedTextField) => {                               
-      if (field.validate() === false ) {
-        isValid = false;
+      if (field.validate()) {
+        validCount++;
+      } else {
+        invalidCount++;
       }
     });
     console.log("validateAllFields:END");
-    this.updateIsFormValid(isValid);
+    this.updateIsFormValid(invalidCount, validCount);
   }
 
   // updates after form has been created and 
@@ -87,6 +94,8 @@ class ValidationState extends Component<IValidationStateProperties, IValidationC
           fields : this.state.fields,
           hasBeenFullyValidated: this.state.hasBeenFullyValidated,
           isFormValid: this.state.isFormValid,
+          fieldsValidCount: this.state.fieldsValidCount,
+          fieldsInvalidCount: this.state.fieldsInvalidCount,
           addField : (field: ValidatedTextField) => { this.addField(field ) },
           evaluateFormState: this.evaluateFormState,
         }}

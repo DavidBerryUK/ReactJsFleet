@@ -52,7 +52,7 @@ function LoginComponent() {
 
         <form className={classStyles.form}>
           {/* <ValidationState validateOnLoad> */}
-          <ValidationState validateOnLoad>
+          <ValidationState >
 
             <ValidationContext.Consumer>
               {(validationContext) => (
@@ -112,6 +112,14 @@ function LoginComponent() {
                         <TableCell>hasBeenFullyValidated</TableCell>
                         <TableCell>{validationContext.hasBeenFullyValidated ? "yes" : "no" }</TableCell>
                       </TableRow>          
+                      <TableRow>
+                        <TableCell>Valid Fields</TableCell>
+                        <TableCell>{validationContext.fieldsValidCount }</TableCell>
+                      </TableRow>    
+                      <TableRow>
+                        <TableCell>Invalid Fields</TableCell>
+                        <TableCell>{validationContext.fieldsInvalidCount }</TableCell>
+                      </TableRow>    
                     </TableBody>
                   </Table>
                 </Paper>
