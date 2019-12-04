@@ -39,7 +39,7 @@ function LoginComponent() {
       <ValidationState >
 
         <ValidationContext.Consumer>
-          {(validationContext : IValidationContextState & IValidationContextActions) => (
+          {(context : IValidationContextState & IValidationContextActions ) => (
             <div>
               <Card className={classStyles.card}>
 
@@ -83,6 +83,7 @@ function LoginComponent() {
                   <Button
                     variant="contained"
                     color="primary"
+                    disabled = {!context.isFormValid}
                     fullWidth
                     className={classStyles.submit}
                     onClick={loginButtonClicked}>Login</Button>                         
