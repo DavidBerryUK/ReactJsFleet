@@ -6,6 +6,7 @@ import { ValidationContext }                    from '../context/ValidationConte
 import ControlInfoCollectionModel               from '../../models/ControlInfoCollectionModel';
 import React                                    from 'react';
 import ValidatedTextField                       from '../../controls/TextField/ValidatedTextField';
+import ControlInfoModel from '../../models/ControlInfoModel';
 
 // The current state of the validation context.
 //
@@ -52,15 +53,17 @@ class ValidationState extends Component<IValidationStateProperties, IValidationC
 
     this.setState((state) => {
 
+      // note that all fields are assumed to be invalid, until they have been validated
       const controlCollection = state.controlInfoCollection;      
-      controlCollection.add(field.name, field.state.text, field.state.isValid, field.state.validationError);
+      controlCollection.add(field.name, field.state.text, false, field.state.validationError);
 
       const list = state.fields;      
       list.push(field);
 
       return {  
         fields : list, 
-        controlInfoCollection : controlCollection 
+        controlInfoCollection : controlCollection,
+        fieldsInvalidCount : state.fieldsInvalidCount + 1
       }
     });    
 
@@ -71,24 +74,23 @@ class ValidationState extends Component<IValidationStateProperties, IValidationC
   //
   public onFieldUpdated(field: ValidatedTextField): void {
 
-
       this.setState((state) => {
         state.controlInfoCollection.update(field.name, field.state.text, field.state.isValid, field.state.validationError);            
       return {         
         controlInfoCollection : state.controlInfoCollection
       }},() => {
 
-      // quickly tally up totals
+      // quickly tally up totals of valid / invald controls
       var validCount = 0;
       var invalidCount = 0;
-      this.state.fields.forEach((field: ValidatedTextField) => {                               
-        if (field.state.isValid) {
+      this.state.controlInfoCollection.items.forEach((field: ControlInfoModel) => {                               
+        if (field.isValid) {
           validCount++;
         } else {
           invalidCount++;
         }
       });    
-      this.updateIsFormValid(invalidCount, validCount);
+      this.updateIsFormValid(invalidCount, validCount, false);
       });
     
   }      
@@ -112,16 +114,16 @@ class ValidationState extends Component<IValidationStateProperties, IValidationC
         invalidCount++;
       }
     });    
-    this.updateIsFormValid(invalidCount, validCount);
+    this.updateIsFormValid(invalidCount, validCount, true);
   }
 
   
   // update the form state
   //
-  private updateIsFormValid(fieldsInvalidCount: number, fieldsValidCount : number) {
+  private updateIsFormValid(fieldsInvalidCount: number, fieldsValidCount : number, markAsFullyParsed: boolean) {
     this.setState((state) => {
       return {
-        hasBeenFullyValidated: true,
+        hasBeenFullyValidated: markAsFullyParsed ? true : state.hasBeenFullyValidated,
         isFormValid : (fieldsInvalidCount === 0),
         fieldsInvalidCount : fieldsInvalidCount,
         fieldsValidCount: fieldsValidCount

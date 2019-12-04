@@ -40,7 +40,7 @@ const ValidationDebugInfo: React.FC = () => {
                         </TableHead>
                         <TableBody>
                             <TableRow>
-                                <TableCell>{context.fields.length}</TableCell>
+                                <TableCell>{context.controlInfoCollection.items.length}</TableCell>
                                 <TableCell>{context.fieldsValidCount}</TableCell>
                                 <TableCell>{context.fieldsInvalidCount}</TableCell>
                                 <TableCell>{context.isFormValid ? "yes" : "no"}</TableCell>
