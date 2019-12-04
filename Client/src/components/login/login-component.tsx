@@ -39,7 +39,7 @@ function LoginComponent() {
       <ValidationState >
 
         <ValidationContext.Consumer>
-          {(context : IValidationContextState & IValidationContextActions ) => (
+          {(context: IValidationContextState & IValidationContextActions) => (
             <div>
               <Card className={classStyles.card}>
 
@@ -47,9 +47,7 @@ function LoginComponent() {
                   <Avatar className={classStyles.avatar}>
                     <LockOutlinedIcon />
                   </Avatar>
-                  <Typography component="h1" variant="h5">
-                    Sign in
-          </Typography>
+                  <Typography component="h1" variant="h5">Sign in</Typography>
                 </div>
 
                 <form className={classStyles.form}>
@@ -83,10 +81,10 @@ function LoginComponent() {
                   <Button
                     variant="contained"
                     color="primary"
-                    disabled = {!context.isFormValid}
+                    disabled={!context.isFormValid}
                     fullWidth
                     className={classStyles.submit}
-                    onClick={loginButtonClicked}>Login</Button>                         
+                    onClick={loginButtonClicked}>Login</Button>
 
                   {loading && <ProgressIndicatorLinear />}
 
