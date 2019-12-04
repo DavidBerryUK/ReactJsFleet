@@ -1,4 +1,6 @@
 import { classStyleDefinition }                 from './classStyleDefinition'
+import { IValidationContextActions }            from '../../services/validation/context/interfaces/IValidationContextActions';
+import { IValidationContextState }              from '../../services/validation/context/interfaces/IValidationContextState';
 import { MouseEvent }                           from 'react';
 import { useHistory }                           from 'react-router-dom';
 import { ValidationContext }                    from '../../services/validation/context/context/ValidationContext';
@@ -37,7 +39,7 @@ function LoginComponent() {
       <ValidationState >
 
         <ValidationContext.Consumer>
-          {(validationContext) => (
+          {(validationContext : IValidationContextState & IValidationContextActions) => (
             <div>
               <Card className={classStyles.card}>
 
@@ -83,9 +85,7 @@ function LoginComponent() {
                     color="primary"
                     fullWidth
                     className={classStyles.submit}
-                    onClick={loginButtonClicked}>Login</Button>
-
-                         
+                    onClick={loginButtonClicked}>Login</Button>                         
 
                   {loading && <ProgressIndicatorLinear />}
 
@@ -97,9 +97,7 @@ function LoginComponent() {
                       <Link href="#" variant="body2">{"Don't have an account? Sign Up"}</Link>
                     </Grid>
                   </Grid>
-
                 </form>
-
               </Card>
 
               <ValidationDebugInfo></ValidationDebugInfo>

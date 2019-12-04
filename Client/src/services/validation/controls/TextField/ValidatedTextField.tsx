@@ -53,13 +53,8 @@ export default class ValidatedTextField extends Component<TextFieldProps & IVali
         //
         const isValid = this.rules.evaluateRules( this.state.text);
         let message = this.rules.validationMessage;
+        
 
-        // If the state hasn't changed, don't do anything
-        //
-        if ( isValid === this.state.isValid &&
-             message === this.rules.validationMessage ) {
-            return isValid;
-        }
 
         // update the validation status has changed, 
         //  update the state
@@ -69,11 +64,16 @@ export default class ValidatedTextField extends Component<TextFieldProps & IVali
                 validationError : message
             },
              () =>{
-        if (this.props.onFieldUpdated) {
-            this.props.onFieldUpdated(this);
-            this.context.onFieldUpdated();
+                 
+        // state has been updated
+        
+        if (this.props.onFieldUpdated) {            
+            this.props.onFieldUpdated(this);            
         }
+            this.context.onFieldUpdated(this);
         });       
+
+        
 
         return isValid;
     }

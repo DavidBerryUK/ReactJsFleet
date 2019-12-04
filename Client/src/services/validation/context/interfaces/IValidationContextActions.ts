@@ -12,5 +12,5 @@ export interface IValidationContextActions {
     // called by the childs to tell the parent form context that its state
     // has been updated
     //
-    onFieldUpdated(): void,
+    onFieldUpdated(field: ValidatedTextField): void,
 }

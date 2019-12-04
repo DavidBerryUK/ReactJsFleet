@@ -1,5 +1,6 @@
 import { IValidationContextActions }            from '../interfaces/IValidationContextActions';
 import { IValidationContextState }              from '../interfaces/IValidationContextState';
+import ControlInfoCollectionModel               from '../../models/ControlInfoCollectionModel';
 import React                                    from 'react';
 import ValidatedTextField                       from '../../controls/TextField/ValidatedTextField';
 
@@ -11,6 +12,7 @@ import ValidatedTextField                       from '../../controls/TextField/V
 // 
 export const ValidationContext = React.createContext<IValidationContextState & IValidationContextActions>({
      fields : new Array<ValidatedTextField>(),
+     controlInfoCollection : new ControlInfoCollectionModel(),
      isFormValid: true,
      fieldsValidCount: 0,
      fieldsInvalidCount : 0,

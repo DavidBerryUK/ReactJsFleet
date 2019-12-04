@@ -3,6 +3,7 @@ import { IValidationContextActions }            from '../interfaces/IValidationC
 import { IValidationContextState }              from '../interfaces/IValidationContextState';
 import { IValidationStateProperties }           from '../interfaces/IValidationStateProperties';
 import { ValidationContext }                    from '../context/ValidationContext';
+import ControlInfoCollectionModel               from '../../models/ControlInfoCollectionModel';
 import React                                    from 'react';
 import ValidatedTextField                       from '../../controls/TextField/ValidatedTextField';
 
@@ -14,12 +15,14 @@ import ValidatedTextField                       from '../../controls/TextField/V
 class ValidationState extends Component<IValidationStateProperties, IValidationContextState> implements IValidationContextActions {
 
   private haveValidatedOnLoad: Boolean = false;
+  
   //
   // provide starting values for state, the state is defined by the 
   // IValidationContextState interface
   //
   state = {
     fields : new Array<ValidatedTextField>(),
+    controlInfoCollection : new ControlInfoCollectionModel(),
     fieldsInvalidCount: 0,
     fieldsValidCount : 0,
     hasBeenFullyValidated: false,
@@ -42,18 +45,52 @@ class ValidationState extends Component<IValidationStateProperties, IValidationC
   // Child controls must call this to register with the form
   //
   public addField(field: ValidatedTextField): void {
+  
+    console.log("Add Field - show validation state");
+    console.log(this);
+
+
     this.setState((state) => {
+
+      const controlCollection = state.controlInfoCollection;      
+      controlCollection.add(field.name, field.state.text, field.state.isValid, field.state.validationError);
+
       const list = state.fields;      
       list.push(field);
-      return {fields : list}
+
+      return {  
+        fields : list, 
+        controlInfoCollection : controlCollection 
+      }
     });    
+
   }  
 
   // implement interface
   // A child control has reported that it has been updated
   //
-  public onFieldUpdated(): void {
+  public onFieldUpdated(field: ValidatedTextField): void {
 
+
+      this.setState((state) => {
+        state.controlInfoCollection.update(field.name, field.state.text, field.state.isValid, field.state.validationError);            
+      return {         
+        controlInfoCollection : state.controlInfoCollection
+      }},() => {
+
+      // quickly tally up totals
+      var validCount = 0;
+      var invalidCount = 0;
+      this.state.fields.forEach((field: ValidatedTextField) => {                               
+        if (field.state.isValid) {
+          validCount++;
+        } else {
+          invalidCount++;
+        }
+      });    
+      this.updateIsFormValid(invalidCount, validCount);
+      });
+    
   }      
 
   // anything is allowed to request a full form validation
@@ -100,12 +137,13 @@ class ValidationState extends Component<IValidationStateProperties, IValidationC
       <ValidationContext.Provider
         value={{
           fields : this.state.fields,
+          controlInfoCollection: this.state.controlInfoCollection,
           hasBeenFullyValidated: this.state.hasBeenFullyValidated,
           isFormValid: this.state.isFormValid,
           fieldsValidCount: this.state.fieldsValidCount,
           fieldsInvalidCount: this.state.fieldsInvalidCount,
           addField : (field: ValidatedTextField) => { this.addField(field ) },
-          onFieldUpdated: this.onFieldUpdated,
+          onFieldUpdated: (field: ValidatedTextField) => { this.onFieldUpdated(field) },
         }}
       >
         {this.props.children}
