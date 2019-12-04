@@ -26,19 +26,35 @@ export default class RuleCollection {
     //
     evaluateRules( text: string) : boolean {        
 
+        // trim text before evaluating
+        //
         this.validationMessage = '';
         text = text.trim();
+
+        // assume is valid unless a rule fails
+        //
         this.isValid = true;
+
+        // loop though all rules
+        //
         this.rules.forEach(rule => {
             if ( rule.isValid(text) === false ) {
                 if ( this.validationMessage.length > 0 ) {
                     this.validationMessage = this.validationMessage + ", ";
                 }
+
+                // if rule fails, append error message, e.g. " is Mandatory", or 
+                // " Maximum length is 20"
+                //
                 this.validationMessage = this.validationMessage + rule.errorMessage;
                 this.isValid = false
             }
         });
 
+        // if there are any errors, prefix error message with the 
+        // controls label name, e.g. "User Name" 
+        // to result in "User Name is Mandatory"
+        //
         if ( !this.isValid ) {
             this.validationMessage = `${this.labelName} ${this.validationMessage}`;
         }

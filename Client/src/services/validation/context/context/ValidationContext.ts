@@ -1,7 +1,7 @@
 import { IValidationContextActions }            from '../interfaces/IValidationContextActions';
 import { IValidationContextState }              from '../interfaces/IValidationContextState';
 import React                                    from 'react';
-import ValidatedTextField                       from '../../controls/ValidatedTextField';
+import ValidatedTextField                       from '../../controls/TextField/ValidatedTextField';
 
 // Validation Context
 // 

@@ -1,6 +1,5 @@
 import { classStyleDefinition }                 from './classStyleDefinition'
 import { MouseEvent }                           from 'react';
-import { Paper }                                from '@material-ui/core';
 import { useHistory }                           from 'react-router-dom';
 import { ValidationContext }                    from '../../services/validation/context/context/ValidationContext';
 import AuthenticationService                    from '../../services/security/AuthenticationService';
@@ -16,14 +15,10 @@ import ProgressIndicatorLinear                  from '../progressIndicators/Prog
 import React                                    from 'react';
 import RuleMandatory                            from '../../services/validation/rules/ruleProcessors/RuleMandatory';
 import RuleMaxLength                            from '../../services/validation/rules/ruleProcessors/RuleMaxLength';
-import Table                                    from '@material-ui/core/Table';
-import TableBody                                from '@material-ui/core/TableBody';
-import TableCell                                from '@material-ui/core/TableCell';
-import TableHead                                from '@material-ui/core/TableHead';
-import TableRow                                 from '@material-ui/core/TableRow';
 import Typography                               from '@material-ui/core/Typography';
 import UserModel                                from '../../models/user/UserModel';
-import ValidatedTextField                       from '../../services/validation/controls/ValidatedTextField';
+import ValidatedTextField                       from '../../services/validation/controls/TextField/ValidatedTextField';
+import ValidationDebugInfo                      from '../../services/validation/controls/DebugInfo/ValidationDebugInfo';
 import ValidationMessage                        from '../../models/validation/ValidationMessage';
 import ValidationState                          from '../../services/validation/context/state/ValidationState';
 
@@ -39,24 +34,26 @@ function LoginComponent() {
   return (
     <Container component="main" maxWidth="sm">
 
-      <Card className={classStyles.card}>
+      <ValidationState >
 
-        <div className={classStyles.paper}>
-          <Avatar className={classStyles.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-        </Typography>
-        </div>
+        <ValidationContext.Consumer>
+          {(validationContext) => (
+            <div>
+              <Card className={classStyles.card}>
 
-        <form className={classStyles.form}>
-          {/* <ValidationState validateOnLoad> */}
-          <ValidationState >
+                <div className={classStyles.paper}>
+                  <Avatar className={classStyles.avatar}>
+                    <LockOutlinedIcon />
+                  </Avatar>
+                  <Typography component="h1" variant="h5">
+                    Sign in
+          </Typography>
+                </div>
 
-            <ValidationContext.Consumer>
-              {(validationContext) => (
-                <div>
+                <form className={classStyles.form}>
+                  {/* <ValidationState validateOnLoad> */}
+
+
                   <ValidatedTextField
                     name="username"
                     label="User Name"
@@ -67,83 +64,51 @@ function LoginComponent() {
                     autoComplete="off"
                     autoFocus
                     rules={[new RuleMandatory(), new RuleMaxLength(40)]}
-                    />
+                  />
 
                   <ValidatedTextField
                     name="password"
                     label="Password"
                     required
-                    fullWidth                    
+                    fullWidth
                     type="password"
                     autoComplete="off"
                     margin="normal"
                     variant="outlined"
                     rules={[new RuleMandatory(), new RuleMaxLength(40)]}
-                    />
+                  />
 
                   <Button
                     variant="contained"
                     color="primary"
                     fullWidth
                     className={classStyles.submit}
-                    onClick={loginButtonClicked}>Login</Button>                    
+                    onClick={loginButtonClicked}>Login</Button>
 
-                {/* TEMP TABLE TO HELP WITH DEBUG */}
-                <Paper>
-                  <Table>
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>Field</TableCell>
-                        <TableCell>Value</TableCell>            
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>          
-                      <TableRow>
-                        <TableCell>Field Count</TableCell>
-                        <TableCell>{validationContext.fields.length}</TableCell>
-                      </TableRow>          
-                      <TableRow>
-                        <TableCell>Valid Field Count</TableCell>
-                        <TableCell>{validationContext.fieldsValidCount }</TableCell>
-                      </TableRow>    
-                      <TableRow>
-                        <TableCell>Invalid Field Count</TableCell>
-                        <TableCell>{validationContext.fieldsInvalidCount }</TableCell>
-                      </TableRow>    
-                      <TableRow>
-                        <TableCell>Is Form Valid</TableCell>
-                        <TableCell>{validationContext.isFormValid ? "yes" : "no"}</TableCell>
-                      </TableRow>          
-                      <TableRow>
-                        <TableCell>has Been Fully Validated</TableCell>
-                        <TableCell>{validationContext.hasBeenFullyValidated ? "yes" : "no" }</TableCell>
-                      </TableRow>                                
-                    </TableBody>
-                  </Table>
-                </Paper>
-                {/* TEMP TABLE TO HELP WITH DEBUG */}
+                         
 
-                </div>
-              )}
+                  {loading && <ProgressIndicatorLinear />}
 
-            </ValidationContext.Consumer>
-          </ValidationState>
+                  <Grid container>
+                    <Grid item xs>
+                      <Link href="#" variant="body2">Forgot password?</Link>
+                    </Grid>
+                    <Grid item>
+                      <Link href="#" variant="body2">{"Don't have an account? Sign Up"}</Link>
+                    </Grid>
+                  </Grid>
 
-          {loading && <ProgressIndicatorLinear />}
+                </form>
 
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">Forgot password?</Link>
-            </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">{"Don't have an account? Sign Up"}</Link>
-            </Grid>
-          </Grid>
+              </Card>
 
-        </form>
+              <ValidationDebugInfo></ValidationDebugInfo>
+            </div>
 
-      </Card>
+          )}
 
+        </ValidationContext.Consumer>
+      </ValidationState>
 
     </Container>
   );

@@ -1,10 +1,10 @@
 import { Component }                            from 'react';
-import { IValidatedUIControlProperties }        from './interfaces/IValidatedUIControlProperties';
-import { IValidatedUIControlState }             from './interfaces/IValidateUIControlState';
+import { IValidatedUIControlProperties }        from '../interfaces/IValidatedUIControlProperties';
+import { IValidatedUIControlState }             from '../interfaces/IValidateUIControlState';
 import { TextFieldProps }                       from '@material-ui/core/TextField';
-import { ValidationContext }                    from "../context/context/ValidationContext"
+import { ValidationContext }                    from "../../context/context/ValidationContext"
 import React                                    from 'react';
-import RuleCollection                           from '../rules/RuleCollection';
+import RuleCollection                           from '../../rules/RuleCollection';
 import TextField                                from '@material-ui/core/TextField';
 
 // NOTE - MUCH OF THIS CAN BE MOVED TO A BASE CLASS - THIS IS 

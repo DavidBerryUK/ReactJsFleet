@@ -11,7 +11,7 @@ import RuleMandatory                            from '../../services/validation/
 import RuleMaxLength                            from '../../services/validation/rules/ruleProcessors/RuleMaxLength';
 import Select                                   from '@material-ui/core/Select';
 import Switch                                   from '@material-ui/core/Switch';
-import ValidatedTextField                       from '../../services/validation/controls/ValidatedTextField';
+import ValidatedTextField                       from '../../services/validation/controls/TextField/ValidatedTextField';
 import ValidationState                          from '../../services/validation/context/state/ValidationState';
 
 function DefectSheetComponent() {

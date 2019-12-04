@@ -1,4 +1,4 @@
-import ValidatedTextField                       from "../../controls/ValidatedTextField";
+import ValidatedTextField                       from "../../controls/TextField/ValidatedTextField";
 
 // State held by the Form Context, 
 //  All values are updated in realtime
