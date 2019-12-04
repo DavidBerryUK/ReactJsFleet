@@ -1,18 +1,30 @@
-import IValidationRule                          from "../interfaces/IValidationRule";
+import IValidationRule                          from "./interfaces/IValidationRule";
 
+// A wrapper for a collection of rules.
+//
+// This not only hides the Array<IValidationRule> from being passed around the application, 
+// but provides a class to process and hold the resulting state of 
+// a bundle of rules assigned to a control.
+//
 export default class RuleCollection {
     
     isValid : boolean = true;
     rules : Array<IValidationRule> = new Array<IValidationRule>();
     validationMessage : string = '';
+    labelName: string = '';
 
-    constructor(rules? : Array<IValidationRule>) {
+    // Initialise with a list of rules
+    //
+    constructor(labelName: string, rules? : Array<IValidationRule>) {
+        this.labelName = labelName;
         if ( rules ) {
             this.rules = rules;
         }
     }
 
-    evaluateRules(fieldName: string, text: string) : boolean {        
+    // Run all the rules
+    //
+    evaluateRules( text: string) : boolean {        
 
         this.validationMessage = '';
         text = text.trim();
@@ -28,7 +40,7 @@ export default class RuleCollection {
         });
 
         if ( !this.isValid ) {
-            this.validationMessage = `${fieldName} ${this.validationMessage}`;
+            this.validationMessage = `${this.labelName} ${this.validationMessage}`;
         }
 
         return this.isValid;

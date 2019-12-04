@@ -6,11 +6,17 @@ import { ValidationContext }                    from '../context/ValidationConte
 import React                                    from 'react';
 import ValidatedTextField                       from '../../controls/ValidatedTextField';
 
+// The current state of the validation context.
+//
+// The <ValidateState>....</ValidateState> element is used in the wrap form controls
+// 
+//
 class ValidationState extends Component<IValidationStateProperties, IValidationContextState> implements IValidationContextActions {
 
   private haveValidatedOnLoad: Boolean = false;
   //
-  // provide default value for state
+  // provide starting values for state, the state is defined by the 
+  // IValidationContextState interface
   //
   state = {
     fields : new Array<ValidatedTextField>(),
@@ -20,7 +26,22 @@ class ValidationState extends Component<IValidationStateProperties, IValidationC
     isFormValid: false
   }
 
-  addField(field: ValidatedTextField): void {
+
+  // updates after form has been created and 
+  // state has been set/
+  public componentDidUpdate() {    
+    if (this.props.validateOnLoad) {     
+      if ( this.haveValidatedOnLoad === false ) {  
+        this.haveValidatedOnLoad = true;
+        this.validateAllFields();
+      }
+    };
+  }
+
+  // implement interface IValidationContextActions
+  // Child controls must call this to register with the form
+  //
+  public addField(field: ValidatedTextField): void {
     this.setState((state) => {
       const list = state.fields;      
       list.push(field);
@@ -28,6 +49,38 @@ class ValidationState extends Component<IValidationStateProperties, IValidationC
     });    
   }  
 
+  // implement interface
+  // A child control has reported that it has been updated
+  //
+  public onFieldUpdated(): void {
+
+  }      
+
+  // anything is allowed to request a full form validation
+  //
+  public validateAllFields() {        
+    var validCount = 0;
+    var invalidCount = 0;
+    //
+    // Loop though all children, validate them (runs all validation rules)
+    // and tally results.
+    //
+    // NOTE: calling validate() will update the UI and display error
+    //       messages if the values on the control do not match rules
+    //
+    this.state.fields.forEach((field: ValidatedTextField) => {                               
+      if (field.validate()) {
+        validCount++;
+      } else {
+        invalidCount++;
+      }
+    });    
+    this.updateIsFormValid(invalidCount, validCount);
+  }
+
+  
+  // update the form state
+  //
   private updateIsFormValid(fieldsInvalidCount: number, fieldsValidCount : number) {
     this.setState((state) => {
       return {
@@ -39,54 +92,9 @@ class ValidationState extends Component<IValidationStateProperties, IValidationC
     });    
   }
 
-  evaluateFormState(): void {
-//    let action = new ActionEvaluateFormState(this);
-    // action.execute();
-  }    
-
+  
+  // UI
   //
-  // Called BEFORE the children render
-  //
-  UNSAFE_componentWillMount() {
-    // console.log("STATE - BEFORE CHILDREN");
-  }
-
-  //
-  // Called AFTER the children render
-  //
-  componentDidMount() {    
-    // console.log("STATE - AFTER CHILDREN");
-
-    // attempting to access the state here will not work as the state
-    // will not have processed all the updates    
-  }
-
-  validateAllFields() {    
-    console.log("validateAllFields:BEGIN");
-    var validCount = 0;
-    var invalidCount = 0;
-    this.state.fields.forEach((field: ValidatedTextField) => {                               
-      if (field.validate()) {
-        validCount++;
-      } else {
-        invalidCount++;
-      }
-    });
-    console.log("validateAllFields:END");
-    this.updateIsFormValid(invalidCount, validCount);
-  }
-
-  // updates after form has been created and 
-  // state has been set/
-  componentDidUpdate() {    
-    if (this.props.validateOnLoad) {     
-      if ( this.haveValidatedOnLoad === false ) {  
-        this.haveValidatedOnLoad = true;
-        this.validateAllFields();
-      }
-    };
-  }
-
   render() {    
     return (
       <ValidationContext.Provider
@@ -97,7 +105,7 @@ class ValidationState extends Component<IValidationStateProperties, IValidationC
           fieldsValidCount: this.state.fieldsValidCount,
           fieldsInvalidCount: this.state.fieldsInvalidCount,
           addField : (field: ValidatedTextField) => { this.addField(field ) },
-          evaluateFormState: this.evaluateFormState,
+          onFieldUpdated: this.onFieldUpdated,
         }}
       >
         {this.props.children}

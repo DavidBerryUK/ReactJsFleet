@@ -1,4 +1,4 @@
-import IValidationRule                          from "../../interfaces/IValidationRule";
+import IValidationRule                          from "../interfaces/IValidationRule";
 
 export default class RuleMinLength implements IValidationRule{
 

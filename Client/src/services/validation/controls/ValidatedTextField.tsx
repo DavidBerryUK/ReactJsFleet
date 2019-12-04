@@ -7,35 +7,62 @@ import React                                    from 'react';
 import RuleCollection                           from '../rules/RuleCollection';
 import TextField                                from '@material-ui/core/TextField';
 
+// NOTE - MUCH OF THIS CAN BE MOVED TO A BASE CLASS - THIS IS 
+//        CURRENTLY A PROOF OF CONCEPT, BUT WILL ADD ADDITIONAL CONTROLS SUCH AS
+//        DROP DOWNS AND SWITCHES WHICH WILL ALSO BE PART OF THE FORM
+//
+// A Wrapped TextField that handles validation and form 
+// model synchronization
+//
+// * Maintains own value state
+//
 export default class ValidatedTextField extends Component<TextFieldProps & IValidatedUIControlProperties  ,IValidatedUIControlState>  {
 
     static contextType = ValidationContext;
 
+    // State of the control, holds state of 
+    // * Value 
+    // * Is Control Valid
+    // * Current validation error message
     state = {
-        text:"",
+        text: "",
         isValid: true,
         validationError: ''
     }
 
-    public rules : RuleCollection = new RuleCollection();
+    // List of validation rules passed in as a property
+    public rules : RuleCollection = new RuleCollection('');
+
+    // Name of the property
     public name : string = "";
 
-    UNSAFE_componentWillMount() {        
-        this.rules =  new RuleCollection(this.props.rules);
+    // Callback when the control loads.
+    // This registers the control with the parent ValidationState / ValidationContext
+    //
+    public UNSAFE_componentWillMount() {        
         this.name = this.props.name as string;
+        this.rules =  new RuleCollection(this.props.label as string, this.props.rules);        
         this.context.addField(this);
     }
 
-    validate() : Boolean {
-        // console.log("validate field")
-        
+    // Validate method, this is called by the parent ValidationState
+    // when evaluating the entire form
+    public validate() : Boolean {                
 
-        const isValid = this.rules.evaluateRules(this.props.label as string, this.state.text);
+        // Determine if the control is valid
+        //
+        const isValid = this.rules.evaluateRules( this.state.text);
         let message = this.rules.validationMessage;
 
-         //
-        // feedback 
+        // If the state hasn't changed, don't do anything
         //
+        if ( isValid === this.state.isValid &&
+             message === this.rules.validationMessage ) {
+            return isValid;
+        }
+
+        // update the validation status has changed, 
+        //  update the state
         this.setState (
             {
                 isValid : isValid,
@@ -44,16 +71,42 @@ export default class ValidatedTextField extends Component<TextFieldProps & IVali
              () =>{
         if (this.props.onFieldUpdated) {
             this.props.onFieldUpdated(this);
-            this.context.evaluateFormState();
+            this.context.onFieldUpdated();
         }
         });       
 
         return isValid;
     }
-        
-    render() {
-        // remove properties not to be passed down to child
+
+    // Callback when the user changed the state of the UI control
+    //
+    handleOnChangeEvent(event : React.ChangeEvent) {
+        // 
+        // obtain new value
         //
+        const typedEvent = event as React.ChangeEvent<HTMLInputElement>    
+        const text = typedEvent.target.value;
+
+        // update text value
+        //
+        this.setState(() => {          
+            return {text : text}
+          },() => {
+            //
+            // run validation rules 
+            //  AFTER THE STATE HAS BEEN UPDATED
+            //  ================================
+            this.validate();
+        });         
+    }
+
+    // UI 
+    // Render the TextField component which is part of https://material-ui.com/
+    // wire up error and helperText which is used for displaying 
+    // validation messages
+    //
+    render() {
+        // remove properties not to be passed down to child      
         const childProps = {...this.props};
         delete childProps.onFieldUpdated;
         
@@ -66,33 +119,5 @@ export default class ValidatedTextField extends Component<TextFieldProps & IVali
                 value={this.state.text}
             />
         );
-    }
-
-    handleOnChangeEvent(event : React.ChangeEvent) {
-        // 
-        // obtain new value
-        //
-        const typedEvent = event as React.ChangeEvent<HTMLInputElement>    
-        const text = typedEvent.target.value;
-        //
-        // run validation rules
-        //
-        const isValid = this.rules.evaluateRules(this.props.label as string, text);
-        let message = this.rules.validationMessage;        
-        //
-        // feedback 
-        //
-        this.setState (
-                {
-                    text : text, 
-                    isValid : isValid,
-                    validationError : message
-                },
-                 () =>{
-            if (this.props.onFieldUpdated) {
-                this.props.onFieldUpdated(this);
-                this.context.evaluateFormState();
-            }
-        });        
     }
 }

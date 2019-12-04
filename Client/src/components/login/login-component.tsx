@@ -67,9 +67,7 @@ function LoginComponent() {
                     autoComplete="off"
                     autoFocus
                     rules={[new RuleMandatory(), new RuleMaxLength(40)]}
-                    onFieldUpdated={(field: ValidatedTextField) => {
-                      //    console.log(`${field.name} updated to ${field.state.text}`)
-                    }} />
+                    />
 
                   <ValidatedTextField
                     name="password"
@@ -81,9 +79,7 @@ function LoginComponent() {
                     margin="normal"
                     variant="outlined"
                     rules={[new RuleMandatory(), new RuleMaxLength(40)]}
-                    onFieldUpdated={(field: ValidatedTextField) => {
-                      //   console.log(`${field.name} updated to ${field.state.text}`)
-                    }} />
+                    />
 
                   <Button
                     variant="contained"
