@@ -22,6 +22,10 @@ export const classStyleDefinition = makeStyles(theme => ({
     submit: {
       margin: theme.spacing(3, 0, 3),
     },
+    loginMessage: {
+      textAlign:"center",
+      marginBottom: theme.spacing(3),
+    }
   }));
 
 

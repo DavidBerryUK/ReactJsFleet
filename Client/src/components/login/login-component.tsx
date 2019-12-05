@@ -1,3 +1,4 @@
+import { Box }                                  from '@material-ui/core';
 import { classStyleDefinition }                 from './classStyleDefinition'
 import { ILoginModel }                          from './ILoginModel';
 import { IValidationContextActions }            from '../../services/validation/context/interfaces/IValidationContextActions';
@@ -25,11 +26,13 @@ import ValidationDebugInfo                      from '../../services/validation/
 import ValidationMessage                        from '../../models/validation/ValidationMessage';
 import ValidationState                          from '../../services/validation/context/state/ValidationState';
 
+
 function LoginComponent() {
 
   const classStyles = classStyleDefinition();
   const router = useHistory();
   const [loading, setLoading] = React.useState(false);
+  const [message, setMessage] = React.useState("");
 
   //
   // Template
@@ -48,7 +51,7 @@ function LoginComponent() {
                   <Avatar className={classStyles.avatar}>
                     <LockOutlinedIcon />
                   </Avatar>
-                  <Typography component="h1" variant="h5">Sign in</Typography>
+                  <Typography component="h5">Sign in</Typography>
                 </div>
 
                 <form className={classStyles.form}>
@@ -80,7 +83,11 @@ function LoginComponent() {
                     fullWidth
                     className={classStyles.submit}
                     onClick={ () =>{ loginButtonClicked(context)} }>Login</Button>
-
+                  
+                  <Box hidden={message.length === 0} className={classStyles.loginMessage} color="error.main">
+                    <Typography  component="h4">{message}</Typography>                    
+                  </Box>
+                  
                   {loading && <ProgressIndicatorLinear />}
 
                   <Grid container>
@@ -110,6 +117,8 @@ function LoginComponent() {
   //
   function loginButtonClicked(context : IValidationContextActions<ILoginModel> ) {
 
+    setMessage("");
+
     if ( !context.validate() ) {
       console.log("this form is not valid - ABANDON ALL HOPE!!!")
       return;
@@ -127,9 +136,11 @@ function LoginComponent() {
       .onSuccess((userModel: UserModel) => {
         NavigateDashboard.go(router);
       })
-      .onValidationErrorsRaised((validationMessages: Array<ValidationMessage>) => {
+        .onValidationErrorsRaised((validationMessages: Array<ValidationMessage>) => {
+        setMessage("User or Password invalid");
       })
-      .onFailed((error: String) => {
+        .onFailed((error) => {
+          setMessage("Can not connect to server");
       })
       .then(() => {
         setLoading(false);

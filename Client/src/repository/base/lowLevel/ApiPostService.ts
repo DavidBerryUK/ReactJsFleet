@@ -15,29 +15,23 @@ export default class ApiPostService<T extends IApiModel> {
         entityModel: T) : ApiResponse<T> {
 
         let contract = new ApiResponseContract<T>();
-
         axios
         .post(endpointUrl, entityModel, BaseApiConfig.baseConfig)
         .then((response : any) => {
-
             if (response.data == null) {
                 contract.publishFailure('No data returned');
             } else {
-
                 if (response.data.hasValidationMessages) {
-                    console.log("[under-development:BasePostService] response hasValidation messages")
                     if (response.data.validationMessages) {     
-                        console.log("[under-development:BasePostService] response validationMessages")
                         contract.publishValidationErrorsRaised(response.data.validationMessages);
                     } else {
-                        console.log("[under-development:BasePostService] response BlankArray validationMessages")
                         contract.publishValidationErrorsRaised(new Array<ValidationMessage>());
                     }
                     return;
                 }
 
+
                 if (response.data.entity) {
-                    console.log("[under-development:BasePostService] response has entity")
                     const model = modelFactory.createFrom(response.data.entity);
                     contract.publishSuccess(model);
                 } else {

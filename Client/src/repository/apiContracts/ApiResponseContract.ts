@@ -75,7 +75,7 @@ export class ApiContractListenerContract {
  */
 export class ApiCallbackHandles<T> {
     public immediateSuccess: T | null;
-    public immediateValidationErrors: ValidationMessage[];
+    public immediateValidationErrors: ValidationMessage[] | null;
     public immediateLocked: T | null;
     public immediateFail: string;
 
@@ -90,7 +90,7 @@ export class ApiCallbackHandles<T> {
         this.immediateSuccess = null;
         this.immediateLocked = null;
         this.immediateFail = '';
-        this.immediateValidationErrors = new Array<ValidationMessage>();
+        this.immediateValidationErrors = null;
         this.callbackSuccess = new Array<ICallBackSuccess<T>>();
         this.callbackValidationErrors = new Array<ICallBackValidationErrors>();
         this.callbackOnFail = new Array<ICallBackOnFail>();
@@ -181,9 +181,9 @@ export class ApiResponse<T> {
 
         this.callbackHandles.callbackValidationErrors.push(callback);
 
-        if (this.callbackHandles.immediateValidationErrors) {
+        if (this.callbackHandles.immediateValidationErrors !== null) {
 
-            this.callbackHandles.callbackValidationErrors.forEach((handler) => { handler(this.callbackHandles.immediateValidationErrors); });
+            this.callbackHandles.callbackValidationErrors.forEach((handler) => { handler(this.callbackHandles.immediateValidationErrors!); });
 
             if (this.callbackHandles.listener) {
                 this.callbackHandles.listener.contractListener.notifyCompletion(true);

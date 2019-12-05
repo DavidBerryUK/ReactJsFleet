@@ -46,12 +46,7 @@ class ValidationState<T> extends Component<IValidationStateProperties, IValidati
   // implement interface IValidationContextActions
   // Child controls must call this to register with the form
   //
-  public addField(field: ValidatedTextField): void {
-  
-    console.log("Add Field - show validation state");
-    console.log(this);
-
-
+  public addField(field: ValidatedTextField): void {  
     this.setState((state) => {
 
       // note that all fields are assumed to be invalid, until they have been validated
@@ -67,7 +62,6 @@ class ValidationState<T> extends Component<IValidationStateProperties, IValidati
         fieldsInvalidCount : state.fieldsInvalidCount + 1
       }
     });    
-
   }  
 
   public getModel() : T {
