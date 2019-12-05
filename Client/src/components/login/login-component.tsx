@@ -70,7 +70,6 @@ function LoginComponent() {
                   <ValidatedPasswordField
                     name="password"
                     label="Password"
-                    required
                     type="password"
                     rules={[new RuleMandatory(), new RuleMaxLength(40)]}
                   />
