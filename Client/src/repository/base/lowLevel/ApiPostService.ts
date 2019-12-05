@@ -30,14 +30,12 @@ export default class ApiPostService<T extends IApiModel> {
                     return;
                 }
 
-
                 if (response.data.entity) {
                     const model = modelFactory.createFrom(response.data.entity);
                     contract.publishSuccess(model);
                 } else {
                     contract.publishFailure('No data entity returned');
                 }
-
             }
         })
         .catch((error: string) => {

@@ -3,10 +3,7 @@ import BaseValidationControl                    from '../baseValidationControl/B
 import React                                    from 'react';
 import TextField                                from '@material-ui/core/TextField';
 
-// NOTE - MUCH OF THIS CAN BE MOVED TO A BASE CLASS - THIS IS 
-//        CURRENTLY A PROOF OF CONCEPT, BUT WILL ADD ADDITIONAL CONTROLS SUCH AS
-//        DROP DOWNS AND SWITCHES WHICH WILL ALSO BE PART OF THE FORM
-//
+
 // A Wrapped TextField that handles validation and form 
 // model synchronization
 //
@@ -27,6 +24,10 @@ export default class ValidatedTextField extends BaseValidationControl<TextFieldP
         return (
             <TextField
                 {...childProps}
+                required
+                variant="outlined"
+                fullWidth
+                margin="normal"
                 error = {!this.state.isValid}
                 helperText = {this.state.validationError}
                 onChange={(event) => { this.handleOnChangeEvent(event) }}

@@ -13,6 +13,7 @@ import Select                                   from '@material-ui/core/Select';
 import Switch                                   from '@material-ui/core/Switch';
 import ValidatedTextField                       from '../../services/validation/controls/textField/ValidatedTextField';
 import ValidationState                          from '../../services/validation/context/state/ValidationState';
+import ValidationDebugInfo from '../../services/validation/controls/debugInfo/ValidationDebugInfo';
 
 function DefectSheetComponent() {
 
@@ -26,11 +27,7 @@ function DefectSheetComponent() {
 
   return (
 
-
     <div className={classStyles.root}>
-
-
-
       <form className={classStyles.form}>
 
         <ValidationState>
@@ -43,10 +40,8 @@ function DefectSheetComponent() {
                 <Grid item xs={3}>
                   <ValidatedTextField
                     name="registration"
-                    label="Registration"
-                    variant="outlined"
+                    label="Registration"                    
                     fullWidth
-                    margin="normal"
                     autoFocus
                     rules={[new RuleMandatory(), new RuleMaxLength(40)]} />
                 </Grid>
@@ -75,10 +70,7 @@ function DefectSheetComponent() {
                 <Grid item xs={3}>
                   <ValidatedTextField
                     name="model"
-                    label="Model"
-                    fullWidth
-                    margin="normal"
-                    variant="outlined"
+                    label="Model"                                        
                     rules={[new RuleMandatory(), new RuleMaxLength(40)]} />
                 </Grid>
               </Grid>
@@ -90,22 +82,14 @@ function DefectSheetComponent() {
                 <Grid item xs={3}>
                   <ValidatedTextField
                     name="drivername"
-                    label="Driver Name"
-                    variant="outlined"
-                    fullWidth
-                    margin="normal"
-                    autoFocus
+                    label="Driver Name"                    
                     rules={[new RuleMandatory(), new RuleMaxLength(40)]} />
                 </Grid>
 
                 <Grid item xs={3}>
                   <ValidatedTextField
                     name="location"
-                    label="Location"
-                    variant="outlined"
-                    fullWidth
-                    margin="normal"
-                    autoFocus
+                    label="Location"                    
                     rules={[new RuleMandatory(), new RuleMaxLength(40)]} />
                 </Grid>
 
@@ -118,10 +102,7 @@ function DefectSheetComponent() {
                 <Grid item xs={3}>
                   <ValidatedTextField
                     name="authorisedby"
-                    label="Authorised By"
-                    fullWidth
-                    margin="normal"
-                    variant="outlined"
+                    label="Authorised By"                    
                     rules={[new RuleMandatory(), new RuleMaxLength(40)]} />
                 </Grid>
               </Grid>
@@ -131,46 +112,31 @@ function DefectSheetComponent() {
                 <Grid item xs={3}>
                   <ValidatedTextField
                     name="homedepot"
-                    label="Home Depot"
-                    fullWidth
-                    margin="normal"
-                    variant="outlined"
-
+                    label="Home Depot"                    
                     rules={[new RuleMandatory(), new RuleMaxLength(40)]} />
                 </Grid>
 
                 <Grid item xs={3}>
                   <ValidatedTextField
                     name="reportingdepot"
-                    label="Reporting Depot"
-                    fullWidth
-                    margin="normal"
-                    variant="outlined"
-
+                    label="Reporting Depot"                    
                     rules={[]} />
                 </Grid>
 
                 <Grid item xs={3}>
                   <ValidatedTextField
                     name="defectdate"
-                    label="Defect Date"
-                    fullWidth
-                    margin="normal"
-                    variant="outlined"
+                    label="Defect Date"                    
                     rules={[]} />
                 </Grid>
 
                 <Grid item xs={3}>
                   <ValidatedTextField
                     name="defecttime"
-                    label="Defect Time"
-                    fullWidth
-                    margin="normal"
-                    variant="outlined"
+                    label="Defect Time"                    
                     rules={[]} />
                 </Grid>
               </Grid>
-
 
               <Grid container xs={12} spacing={1}>
 
@@ -192,8 +158,6 @@ function DefectSheetComponent() {
                     label="Accident Damage ?" />
                 </Grid>
 
-
-
                 <Grid item xs={2}>
                   <FormControlLabel
                     control={<Switch color="primary" />}
@@ -207,13 +171,7 @@ function DefectSheetComponent() {
                 </Grid>
 
               </Grid>
-
-
-
-
-
             </Grid>
-
           </Paper>
 
 
@@ -231,10 +189,7 @@ function DefectSheetComponent() {
               <Grid item xs={4}>
                 <ValidatedTextField
                   name="preferredAgent"
-                  label="Preferred Agent"
-                  fullWidth
-                  margin="normal"
-                  variant="outlined"
+                  label="Preferred Agent"                  
                   rules={[]} />
               </Grid>
 
@@ -258,21 +213,14 @@ function DefectSheetComponent() {
               <Grid item xs={4}>
                 <ValidatedTextField
                   name="defectdate"
-                  label="Defect Date"
-                  fullWidth
-                  margin="normal"
-                  variant="outlined"
-
+                  label="Defect Date"                  
                   rules={[]} />
               </Grid>
 
               <Grid item xs={4}>
                 <ValidatedTextField
                   name="defecttime"
-                  label="Defect Time"
-                  fullWidth
-                  margin="normal"
-                  variant="outlined"
+                  label="Defect Time"                  
                   rules={[]} />
               </Grid>
 
@@ -288,7 +236,7 @@ function DefectSheetComponent() {
             </Grid>
           </Paper>
 
-
+          <ValidationDebugInfo></ValidationDebugInfo>
 
         </ValidationState>
       </form>

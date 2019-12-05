@@ -1,8 +1,8 @@
 import { ApiResponse }                          from './../apiContracts/ApiResponseContract';
 import { IApiModel }                            from './../../models/interfaces/IApiModel';
 import { IModelFactory }                        from './../../modelFactories/interfaces/IModelFactory';
+import ApiPostService                           from './lowLevel/ApiPostService';
 import BaseApiConfig                            from './ApiBaseConfig';
-import ApiPostService from './lowLevel/ApiPostService';
 
 export default class BaseItemRepository<T  extends IApiModel> {
 

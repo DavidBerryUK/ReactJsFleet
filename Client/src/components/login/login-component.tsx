@@ -26,7 +26,6 @@ import ValidationDebugInfo                      from '../../services/validation/
 import ValidationMessage                        from '../../models/validation/ValidationMessage';
 import ValidationState                          from '../../services/validation/context/state/ValidationState';
 
-
 function LoginComponent() {
 
   const classStyles = classStyleDefinition();
@@ -61,9 +60,6 @@ function LoginComponent() {
                     name="username"
                     label="User Name"
                     required
-                    variant="outlined"
-                    fullWidth
-                    margin="normal"
                     autoComplete="off"
                     autoFocus
                     rules={[new RuleMandatory(), new RuleMaxLength(40)]}
@@ -72,7 +68,6 @@ function LoginComponent() {
                   <ValidatedPasswordField
                     name="password"
                     label="Password"
-                    type="password"
                     rules={[new RuleMandatory(), new RuleMaxLength(40)]}
                   />
 

@@ -10,12 +10,7 @@ import OutlinedInput                            from '@material-ui/core/Outlined
 import React                                    from 'react';
 import Visibility                               from '@material-ui/icons/Visibility';
 import VisibilityOff                            from '@material-ui/icons/VisibilityOff';
-// import PropTypes from 'prop-types'
 
-
-// NOTE - MUCH OF THIS CAN BE MOVED TO A BASE CLASS - THIS IS 
-//        CURRENTLY A PROOF OF CONCEPT, BUT WILL ADD ADDITIONAL CONTROLS SUCH AS
-//        DROP DOWNS AND SWITCHES WHICH WILL ALSO BE PART OF THE FORM
 //
 // A Input password control,
 // combines lots of low level controls to create a password input control
@@ -35,7 +30,6 @@ export default class ValidatedPasswordField extends BaseValidationControl<InputP
   }
 
   setShowPassword(show: boolean) {
-    
     this.setState(() => {
       return {
         isPasswordShown: show
