@@ -8,12 +8,13 @@ import ControlInfoModel                         from '../../models/ControlInfoMo
 import React                                    from 'react';
 import ValidatedTextField                       from '../../controls/textField/ValidatedTextField';
 
+
 // The current state of the validation context.
 //
 // The <ValidateState>....</ValidateState> element is used in the wrap form controls
 // 
 //
-class ValidationState extends Component<IValidationStateProperties, IValidationContextState> implements IValidationContextActions {
+class ValidationState<T> extends Component<IValidationStateProperties, IValidationContextState> implements IValidationContextActions<T> {
 
   private haveValidatedOnLoad: Boolean = false;
   
@@ -37,7 +38,7 @@ class ValidationState extends Component<IValidationStateProperties, IValidationC
     if (this.props.validateOnLoad) {     
       if ( this.haveValidatedOnLoad === false ) {  
         this.haveValidatedOnLoad = true;
-        this.validateAllFields();
+        this.validate();
       }
     };
   }
@@ -69,6 +70,15 @@ class ValidationState extends Component<IValidationStateProperties, IValidationC
 
   }  
 
+  public getModel() : T {
+    var data = {} as any;
+    this.state.controlInfoCollection.items.forEach((field: ControlInfoModel) => {                               
+      data[field.name as string] = field.value as string;
+    });    
+
+    return  data as T;
+  }
+
   // implement interface
   // A child control has reported that it has been updated
   //
@@ -97,7 +107,7 @@ class ValidationState extends Component<IValidationStateProperties, IValidationC
 
   // anything is allowed to request a full form validation
   //
-  public validateAllFields() {        
+  public validate() : boolean {        
     var validCount = 0;
     var invalidCount = 0;
     //
@@ -115,6 +125,8 @@ class ValidationState extends Component<IValidationStateProperties, IValidationC
       }
     });    
     this.updateIsFormValid(invalidCount, validCount, true);
+
+    return invalidCount === 0;
   }
 
   
@@ -146,6 +158,8 @@ class ValidationState extends Component<IValidationStateProperties, IValidationC
           fieldsInvalidCount: this.state.fieldsInvalidCount,
           addField : (field: ValidatedTextField) => { this.addField(field ) },
           onFieldUpdated: (field: ValidatedTextField) => { this.onFieldUpdated(field) },
+          validate: () => { return this.validate() },
+          getModel: () => { return this.getModel() }
         }}
       >
         {this.props.children}

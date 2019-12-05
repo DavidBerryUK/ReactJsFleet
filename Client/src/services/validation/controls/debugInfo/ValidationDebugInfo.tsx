@@ -22,7 +22,7 @@ const ValidationDebugInfo: React.FC = () => {
 
     return (
         <ValidationContext.Consumer>
-            {(context : IValidationContextState & IValidationContextActions ) => (
+            {(context : IValidationContextState & IValidationContextActions<any> ) => (
                 <Box mt={4} border={2} borderRadius={5} borderColor="primary.main">
                 <Paper className={classStyles.paper} >
                     <Box textAlign="center">

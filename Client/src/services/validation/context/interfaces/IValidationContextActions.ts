@@ -2,7 +2,7 @@ import ValidatedTextField                       from "../../controls/textField/V
 
 // methods available on the context that can be called by child UI Components
 //
-export interface IValidationContextActions {
+export interface IValidationContextActions<T> {
     //
     // called by the child to register itself with the parent form context
     //
@@ -13,4 +13,12 @@ export interface IValidationContextActions {
     // has been updated
     //
     onFieldUpdated(field: ValidatedTextField): void,
+
+    //
+    // fully validate the form
+    //
+    validate(): boolean;
+
+
+    getModel(): T;
 }

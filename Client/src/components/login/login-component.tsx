@@ -1,7 +1,7 @@
 import { classStyleDefinition }                 from './classStyleDefinition'
+import { ILoginModel }                          from './ILoginModel';
 import { IValidationContextActions }            from '../../services/validation/context/interfaces/IValidationContextActions';
 import { IValidationContextState }              from '../../services/validation/context/interfaces/IValidationContextState';
-import { MouseEvent }                           from 'react';
 import { useHistory }                           from 'react-router-dom';
 import { ValidationContext }                    from '../../services/validation/context/context/ValidationContext';
 import AuthenticationService                    from '../../services/security/AuthenticationService';
@@ -40,7 +40,7 @@ function LoginComponent() {
       <ValidationState >
 
         <ValidationContext.Consumer>
-          {(context: IValidationContextState & IValidationContextActions) => (
+          {(context: IValidationContextState & IValidationContextActions<ILoginModel>) => (
             <div>
               <Card className={classStyles.card}>
 
@@ -53,7 +53,6 @@ function LoginComponent() {
 
                 <form className={classStyles.form}>
                   {/* <ValidationState validateOnLoad> */}
-
 
                   <ValidatedTextField
                     name="username"
@@ -80,7 +79,7 @@ function LoginComponent() {
                     disabled={!context.isFormValid}
                     fullWidth
                     className={classStyles.submit}
-                    onClick={loginButtonClicked}>Login</Button>
+                    onClick={ () =>{ loginButtonClicked(context)} }>Login</Button>
 
                   {loading && <ProgressIndicatorLinear />}
 
@@ -109,13 +108,22 @@ function LoginComponent() {
   //
   // Event Handler for Login Button Pressed
   //
-  function loginButtonClicked(event: MouseEvent) {
+  function loginButtonClicked(context : IValidationContextActions<ILoginModel> ) {
+
+    if ( !context.validate() ) {
+      console.log("this form is not valid - ABANDON ALL HOPE!!!")
+      return;
+    }
+
+    // get form model
+    //
+    const form = context.getModel();
+    console.log(form)    ;
 
     var authenticationService = new AuthenticationService();
     setLoading(true);
-
-    authenticationService.authenticate("", "")
-      // authenticationService.authenticate(username, password)
+    
+    authenticationService.authenticate(form.username, form.password)
       .onSuccess((userModel: UserModel) => {
         NavigateDashboard.go(router);
       })

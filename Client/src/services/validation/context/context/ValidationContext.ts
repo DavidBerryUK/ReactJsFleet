@@ -4,13 +4,14 @@ import ControlInfoCollectionModel               from '../../models/ControlInfoCo
 import React                                    from 'react';
 import ValidatedTextField                       from '../../controls/textField/ValidatedTextField';
 
+
 // Validation Context
 // 
 // Define the contract that is used to wrap forms,
 //
 // Note that values provided here are DEFAULT VALUES only
 // 
-export const ValidationContext = React.createContext<IValidationContextState & IValidationContextActions>({
+export const ValidationContext = React.createContext<IValidationContextState & IValidationContextActions<any>>({
      fields : new Array<ValidatedTextField>(),
      controlInfoCollection : new ControlInfoCollectionModel(),
      isFormValid: true,
@@ -19,4 +20,6 @@ export const ValidationContext = React.createContext<IValidationContextState & I
      hasBeenFullyValidated: false,
      addField: (field: ValidatedTextField) => {},
      onFieldUpdated: () => {},
+     validate:() => { return true;},
+     getModel:() => {return null}
 });
