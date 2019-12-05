@@ -19,6 +19,7 @@ import RuleMandatory                            from '../../services/validation/
 import RuleMaxLength                            from '../../services/validation/rules/ruleProcessors/RuleMaxLength';
 import Typography                               from '@material-ui/core/Typography';
 import UserModel                                from '../../models/user/UserModel';
+import ValidatedPasswordField                   from '../../services/validation/controls/passwordField/ValidatedPasswordField';
 import ValidatedTextField                       from '../../services/validation/controls/textField/ValidatedTextField';
 import ValidationDebugInfo                      from '../../services/validation/controls/debugInfo/ValidationDebugInfo';
 import ValidationMessage                        from '../../models/validation/ValidationMessage';
@@ -66,15 +67,11 @@ function LoginComponent() {
                     rules={[new RuleMandatory(), new RuleMaxLength(40)]}
                   />
 
-                  <ValidatedTextField
+                  <ValidatedPasswordField
                     name="password"
                     label="Password"
                     required
-                    fullWidth
                     type="password"
-                    autoComplete="off"
-                    margin="normal"
-                    variant="outlined"
                     rules={[new RuleMandatory(), new RuleMaxLength(40)]}
                   />
 

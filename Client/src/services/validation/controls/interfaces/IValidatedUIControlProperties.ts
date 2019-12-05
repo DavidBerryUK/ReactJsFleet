@@ -5,6 +5,10 @@ import ValidatedTextField                       from "../textField/ValidatedText
 // control
 //
 export interface IValidatedUIControlProperties {
+
+    label? : string;
+    name? : string;
+    text? : string;
     //
     // a list of rules that defined a valid value, see
     // actions available in \services\validation\rules
