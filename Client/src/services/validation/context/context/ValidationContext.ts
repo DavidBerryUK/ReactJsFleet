@@ -2,7 +2,7 @@ import { IValidationContextActions }            from '../interfaces/IValidationC
 import { IValidationContextState }              from '../interfaces/IValidationContextState';
 import ControlInfoCollectionModel               from '../../models/ControlInfoCollectionModel';
 import React                                    from 'react';
-import ValidatedTextField                       from '../../controls/TextField/ValidatedTextField';
+import ValidatedTextField                       from '../../controls/textField/ValidatedTextField';
 
 // Validation Context
 // 

@@ -19,8 +19,8 @@ import RuleMandatory                            from '../../services/validation/
 import RuleMaxLength                            from '../../services/validation/rules/ruleProcessors/RuleMaxLength';
 import Typography                               from '@material-ui/core/Typography';
 import UserModel                                from '../../models/user/UserModel';
-import ValidatedTextField                       from '../../services/validation/controls/TextField/ValidatedTextField';
-import ValidationDebugInfo                      from '../../services/validation/controls/DebugInfo/ValidationDebugInfo';
+import ValidatedTextField                       from '../../services/validation/controls/textField/ValidatedTextField';
+import ValidationDebugInfo                      from '../../services/validation/controls/debugInfo/ValidationDebugInfo';
 import ValidationMessage                        from '../../models/validation/ValidationMessage';
 import ValidationState                          from '../../services/validation/context/state/ValidationState';
 

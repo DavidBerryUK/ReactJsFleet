@@ -1,5 +1,5 @@
 import IValidationRule                          from "../../rules/interfaces/IValidationRule";
-import ValidatedTextField                       from "../TextField/ValidatedTextField";
+import ValidatedTextField                       from "../textField/ValidatedTextField";
 
 // The attributes that may be supplied to a validation 
 // control

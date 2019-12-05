@@ -4,9 +4,9 @@ import { IValidationContextState }              from '../interfaces/IValidationC
 import { IValidationStateProperties }           from '../interfaces/IValidationStateProperties';
 import { ValidationContext }                    from '../context/ValidationContext';
 import ControlInfoCollectionModel               from '../../models/ControlInfoCollectionModel';
+import ControlInfoModel                         from '../../models/ControlInfoModel';
 import React                                    from 'react';
-import ValidatedTextField                       from '../../controls/TextField/ValidatedTextField';
-import ControlInfoModel from '../../models/ControlInfoModel';
+import ValidatedTextField                       from '../../controls/textField/ValidatedTextField';
 
 // The current state of the validation context.
 //

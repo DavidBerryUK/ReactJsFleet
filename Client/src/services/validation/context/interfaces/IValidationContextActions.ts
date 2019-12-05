@@ -1,4 +1,4 @@
-import ValidatedTextField                       from "../../controls/TextField/ValidatedTextField";
+import ValidatedTextField                       from "../../controls/textField/ValidatedTextField";
 
 // methods available on the context that can be called by child UI Components
 //

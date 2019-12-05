@@ -1,5 +1,5 @@
-import ValidatedTextField                       from "../../controls/TextField/ValidatedTextField";
 import ControlInfoCollectionModel               from "../../models/ControlInfoCollectionModel";
+import ValidatedTextField                       from "../../controls/textField/ValidatedTextField";
 
 // State held by the Form Context, 
 //  All values are updated in realtime
