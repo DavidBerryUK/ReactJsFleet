@@ -1,5 +1,5 @@
-import React                                    from 'react';
 import { ApplicationContextConsumer }           from '../../services/applicationContext/ApplicationContext'
+import React                                    from 'react';
 
 const ApplicationHeaderComponent: React.FC = () => {
   return (

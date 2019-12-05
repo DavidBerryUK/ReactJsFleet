@@ -12,6 +12,7 @@ import TableBody                                from '@material-ui/core/TableBod
 import TableCell                                from '@material-ui/core/TableCell';
 import TableHead                                from '@material-ui/core/TableHead';
 import TableRow                                 from '@material-ui/core/TableRow';
+import TickCrossComponent                       from '../../../../components/tickCross/tickCrossComponent';
 
 //
 // Shows debug formation for a form
@@ -44,8 +45,8 @@ const ValidationDebugInfo: React.FC = () => {
                                 <TableCell>{context.controlInfoCollection.items.length}</TableCell>
                                 <TableCell>{context.fieldsValidCount}</TableCell>
                                 <TableCell>{context.fieldsInvalidCount}</TableCell>
-                                <TableCell>{context.isFormValid ? "yes" : "no"}</TableCell>
-                                <TableCell>{context.hasBeenFullyValidated ? "yes" : "no"}</TableCell>
+                                <TableCell><TickCrossComponent value={context.isFormValid}></TickCrossComponent></TableCell>
+                                <TableCell><TickCrossComponent value={context.hasBeenFullyValidated}></TickCrossComponent></TableCell>
                             </TableRow>
                         </TableBody>
                     </Table>
@@ -66,10 +67,10 @@ const ValidationDebugInfo: React.FC = () => {
                         <TableBody>
                         {context.controlInfoCollection.items.map((row : ControlInfoModel) => (
                             <TableRow key={row.name}>
-                                <TableCell >{row.name}</TableCell>              
-                                <TableCell >{row.value}</TableCell>
-                                <TableCell >{row.isValid ? "yes" : "no"}</TableCell>
-                                <TableCell >{row.errorMessage}</TableCell>
+                                <TableCell>{row.name}</TableCell>              
+                                <TableCell>{row.value}</TableCell>
+                                <TableCell><TickCrossComponent value={row.isValid}></TickCrossComponent></TableCell>
+                                <TableCell>{row.errorMessage}</TableCell>
                             </TableRow>
                         ))}                
                         </TableBody>
