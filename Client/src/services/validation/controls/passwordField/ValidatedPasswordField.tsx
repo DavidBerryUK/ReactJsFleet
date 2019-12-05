@@ -1,4 +1,4 @@
-import { FormControl, Theme }                          from '@material-ui/core';
+import { FormControl }                          from '@material-ui/core';
 import { FormHelperText }                       from '@material-ui/core';
 import { IconButton}                            from '@material-ui/core';
 import { InputAdornment }                       from '@material-ui/core';
@@ -10,7 +10,6 @@ import OutlinedInput                            from '@material-ui/core/Outlined
 import React                                    from 'react';
 import Visibility                               from '@material-ui/icons/Visibility';
 import VisibilityOff                            from '@material-ui/icons/VisibilityOff';
-import { withStyles, createStyles }             from '@material-ui/core/styles';
 // import PropTypes from 'prop-types'
 
 
@@ -23,16 +22,8 @@ import { withStyles, createStyles }             from '@material-ui/core/styles';
 //
 // * Maintains own value state
 //
-const styles = ({ palette, spacing }: Theme) => createStyles({
-  root: {
-      backgroundColor:"pink"
-  },
-  disabled: {
-    backgroundColor:"grey"
-  }
-});
 
-class ValidatedPasswordField extends BaseValidationControl<InputProps, IValidationPasswordState>  {
+export default class ValidatedPasswordField extends BaseValidationControl<InputProps, IValidationPasswordState>  {
   
   componentDidMount() {
     this.setShowPassword(false)
@@ -61,21 +52,20 @@ class ValidatedPasswordField extends BaseValidationControl<InputProps, IValidati
     
     // remove properties not to be passed down to child      
     const childProps = { ...this.props };
-    delete childProps.onFieldUpdated;
-
+    delete childProps.onFieldUpdated;        
     return (
-      <FormControl margin="normal" fullWidth variant="outlined">
+      <FormControl margin="normal" fullWidth variant="outlined">        
         <InputLabel
+          error = {!this.state.isValid}
           htmlFor="standard-adornment-password">Password</InputLabel>
-        <OutlinedInput
-          
+        <OutlinedInput          
           {...childProps}
-          className="disabled"
-          id="standard-adornment-password"
+          id="standard-adornment-password"          
           type =  {(this.state as IValidationPasswordState).isPasswordShown ? 'text' : 'password'}
           labelWidth={80}          
           autoComplete="off"          
           onChange={(event) => { this.handleOnChangeEvent(event) }}
+          error = {!this.state.isValid}
           endAdornment={
             <InputAdornment position="end">
               <IconButton
@@ -87,10 +77,9 @@ class ValidatedPasswordField extends BaseValidationControl<InputProps, IValidati
             </InputAdornment>
           }
         />
-        <FormHelperText hidden={this.state.isValid}>{this.state.validationError}</FormHelperText>
+        <FormHelperText hidden={this.state.isValid} error={true}>{this.state.validationError}</FormHelperText>
       </FormControl>
     );
   }
 }
 
-export default withStyles(styles)(ValidatedPasswordField)
