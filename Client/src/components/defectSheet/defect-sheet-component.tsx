@@ -1,29 +1,21 @@
 import { classStyleDefinition }                 from './classStyleDefinition'
 import Button                                   from '@material-ui/core/Button';
-import FormControl                              from '@material-ui/core/FormControl';
 import FormControlLabel                         from '@material-ui/core/FormControlLabel';
 import Grid                                     from '@material-ui/core/Grid';
-import InputLabel                               from '@material-ui/core/InputLabel';
-import MenuItem                                 from '@material-ui/core/MenuItem';
 import Paper                                    from '@material-ui/core/Paper';
 import React                                    from 'react';
 import RuleMandatory                            from '../../services/validation/rules/ruleProcessors/RuleMandatory';
 import RuleMaxLength                            from '../../services/validation/rules/ruleProcessors/RuleMaxLength';
-import Select                                   from '@material-ui/core/Select';
 import Switch                                   from '@material-ui/core/Switch';
+import ValidatedSelectField                     from '../../services/validation/controls/selectField/ValidatedSelectField';
 import ValidatedTextField                       from '../../services/validation/controls/textField/ValidatedTextField';
+import ValidationDebugInfo                      from '../../services/validation/controls/debugInfo/ValidationDebugInfo';
 import ValidationState                          from '../../services/validation/context/state/ValidationState';
-import ValidationDebugInfo from '../../services/validation/controls/debugInfo/ValidationDebugInfo';
+import SelectItemModel                          from '../../services/validation/controls/selectField/SelectItemModel';
 
 function DefectSheetComponent() {
 
   const classStyles = classStyleDefinition();
-  const inputLabel = React.useRef<HTMLLabelElement>(null);
-
-  const [labelWidth, setLabelWidth] = React.useState(0);
-  React.useEffect(() => {
-    setLabelWidth(inputLabel.current!.offsetWidth);
-  }, []);
 
   return (
 
@@ -48,23 +40,19 @@ function DefectSheetComponent() {
 
                 <Grid item xs={3}>
 
-                  <FormControl variant="outlined"  margin="normal" fullWidth>
-                    <InputLabel id="make-label" ref={inputLabel}>Make</InputLabel>
-                    <Select
-                      labelId="make-label"
-                      id="make-outline"
-                      labelWidth={labelWidth}
-                      >
-                      <MenuItem value=""><em>None</em></MenuItem>
-                      <MenuItem value={10}>Alfa Remeo</MenuItem>
-                      <MenuItem value={20}>Audi</MenuItem>
-                      <MenuItem value={30}>BMW</MenuItem>
-                      <MenuItem value={40}>Jaguar</MenuItem>
-                      <MenuItem value={50}>Ford</MenuItem>
-                      <MenuItem value={60}>volkswagen</MenuItem>
-                    </Select>
-                  </FormControl>
-
+                  <ValidatedSelectField 
+                      name = "Manufacturer" 
+                      label = "Manufacturer" 
+                      rules = {[new RuleMandatory()]} 
+                      items = {[
+                        new SelectItemModel("10","Alfa Romeo"),
+                        new SelectItemModel("20","Audi"),
+                        new SelectItemModel("30","BMW"),
+                        new SelectItemModel("40","Jaguar"),
+                        new SelectItemModel("50","Ford"),
+                        new SelectItemModel("60","Volkswagen"),
+                          ]}
+                      />
                 </Grid>
 
                 <Grid item xs={3}>
