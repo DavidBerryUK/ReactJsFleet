@@ -1,12 +1,14 @@
 import { ApplicationContextProvider }           from '../../services/applicationContext/ApplicationContext'
-import { Button, Paper, Typography }                               from '@material-ui/core';
+import { Button }                               from '@material-ui/core';
 import { makeStyles }                           from '@material-ui/styles';
+import { Paper }                                from '@material-ui/core';
+import { Typography }                           from '@material-ui/core';
 import ApplicationContextModel                  from '../../services/applicationContext/models/ApplicationContextModel';
 import CssBaseline                              from '@material-ui/core/CssBaseline';
+import DashboardButton                          from '../dashboardButton/dashboard-button-component';
+import DemoPageTitle                            from '../demoPageTitle/demoPageTitle-component';
 import React                                    from 'react';
 import RouteConstants                           from '../../routing/RouteConstants';
-
-
 
 const App: React.FC = () => {
 
@@ -19,15 +21,17 @@ const App: React.FC = () => {
         margin: 20,
       },
     },
+    
     paper: {
-      margin:50,
+      margin: 50,
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
     },
     button: {
-      width:150
+      width: 150
     }
+    
   }));
 
   const classes = useStyles();
@@ -35,6 +39,8 @@ const App: React.FC = () => {
   return (
     <ApplicationContextProvider value={ new ApplicationContextModel(0)}>
       <CssBaseline/>
+      <DemoPageTitle title="Home Page"/>
+      <DashboardButton/>
       <div className={classes.app}>
         <Paper className={classes.paper}>
         

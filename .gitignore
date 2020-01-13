@@ -9,3 +9,5 @@ Server/ServerFleetApi/.vs/
 Server/ServerFleetApi/ServerFleet.Services/bin/
 Client/node_modules/
 Client/package-lock.json
+Server/ServerFleetApi/ServerFleet.Utilities/obj/
+Server/ServerFleetApi/ServerFleet.Utilities/bin/
