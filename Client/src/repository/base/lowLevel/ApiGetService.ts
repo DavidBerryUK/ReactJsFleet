@@ -15,41 +15,47 @@ export default class ApiGetService<T extends IApiModel> {
 
     let contract = new ApiResponseContract<Array<T>>();
 
+    // console.log("getting list");
+    // console.log(endpointUrl);
+
     axios
       .get(endpointUrl, BaseApiConfig.baseConfig)
       .then((response: any) => {
+        //  console.log("axios - then");
+        // console.log(response);
         if (response.data == null) {
           contract.publishFailure("No data returned");
         } else {
+          // console.log("axios - has response.data")
           if (response.data.hasValidationMessages) {
             console.log(
               "[under-development:BasePostService] response hasValidation messages"
             );
             if (response.data.validationMessages) {
-              console.log(
-                "[under-development:BasePostService] response validationMessages"
-              );
+              // console.log(
+              //   "[under-development:BasePostService] response validationMessages"
+              // );
               contract.publishValidationErrorsRaised(
                 response.data.validationMessages
               );
             } else {
-              console.log(
-                "[under-development:BasePostService] response BlankArray validationMessages"
-              );
+              // console.log(
+              //   "[under-development:BasePostService] response BlankArray validationMessages"
+              // );
               contract.publishValidationErrorsRaised(
                 new Array<ValidationMessage>()
               );
             }
+
             return;
           }
 
-          if (response.data.entity) {
-            console.log(
-              "[under-development:BasePostService] response has entity"
-            );
-            const model = modelFactory.createArrayFrom(response.data.entity);
+          if (response.data) {
+            // console.log("[under-development:BasePostService] response has data");
+            const model = modelFactory.createArrayFrom(response.data);
             contract.publishSuccess(model);
           } else {
+            // console.log("data has no entity")
             contract.publishFailure("No data entity returned");
           }
         }
