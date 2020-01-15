@@ -2,9 +2,10 @@
 {
     public class VehicleListRequest
     {
-        public string sortField { get; set; }
-        public string sortDirection { get; set; }
-
+        public int PageNumber { get; set; }
+        public int RowsPerPage { get; set; }
+        public string SortField { get; set; }
+        public string SortDirection { get; set; }
         public int? FilterDoors { get; set; }
         public string FilterRegistration { get; set; }
         public string FilterMake { get; set; }

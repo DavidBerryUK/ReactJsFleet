@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ServerFleet.Models.Entities.Vehicle;
-using ServerFleet.Services.Vehicle.Interfaces;
-using System.Collections.Generic;
+using ServerFleet.Models.Rest.Base;
 using ServerFleet.Models.Rest.Vehicle;
+using ServerFleet.Services.Vehicle.Interfaces;
 
 namespace ServerFleet.Api.Controllers
 {
@@ -18,7 +17,7 @@ namespace ServerFleet.Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<VehicleJson>> GetAll([FromQuery] VehicleListRequest request)
+        public ActionResult<BaseResponseCollection<VehicleJson>> GetAll([FromQuery] VehicleListRequest request)
         {
             return Ok(_vehicleService.GetWithFilter(request));
         }

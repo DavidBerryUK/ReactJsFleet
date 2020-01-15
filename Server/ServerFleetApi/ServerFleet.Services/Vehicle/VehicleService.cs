@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using ServerFleet.Models.Rest.Base;
 using ServerFleet.Models.Rest.Vehicle;
 using ServerFleet.Services.Vehicle.Interfaces;
 using ServerFleet.Services.Vehicle.PipesAndFilters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -23,9 +25,10 @@ namespace ServerFleet.Services.Vehicle
             return response;
         }
 
-        public IEnumerable<VehicleJson> GetWithFilter(VehicleListRequest request)
+        public BaseResponseCollection<VehicleJson> GetWithFilter(VehicleListRequest request)
         {
             var data = _vehicleFactory.GetAll();
+            var rowCount = data.Count();
 
             if (request != null)
             {
@@ -40,10 +43,37 @@ namespace ServerFleet.Services.Vehicle
                     .FilterDoors(request.FilterDoors)
                     .FilterMpg(request.FilterMpg)
                     .FilterMileage(request.FilterMileage)
-                    .SortByField(request.sortField, request.sortDirection);
+                    .SortByField(request.SortField, request.SortDirection)
+                    .ToList();
             }
 
-            var response = Mapper.Map<List<VehicleJson>>(data);
+            //
+            // This is a bit 'bodgy' as is hard coded list, when connecting to a real database we need to
+            //  1) construct a query tree
+            //  2) get a total count using the query tree, but don't bring back any rows
+            //  3) get only the rows required for the current page
+
+            if (request.RowsPerPage != 0)
+            {
+                data = data.Skip(request.PageNumber * request.RowsPerPage).Take(request.RowsPerPage)
+                    .ToList();
+            }
+
+            var entities = Mapper.Map<List<VehicleJson>>(data);
+            var response = new BaseResponseCollection<VehicleJson>();
+
+            response.TotalRows = rowCount;
+            if (request.RowsPerPage != 0)
+            {
+                response.TotalPages = (int) Math.Ceiling((decimal) rowCount / (decimal)request.RowsPerPage);
+            }
+            else
+            {
+                response.RowsPerPage = 1;
+            }
+
+            response.Entities = entities;
+            
             return response;
         }
     }

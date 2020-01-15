@@ -24,7 +24,6 @@ namespace ServerFleet.Models.Rest.Base
             ValidationMessages.Add(new ValidationMessage(field, message));
         }
 
-
         public string ErrorMessage
         {
             get => _errorMessage;
@@ -49,6 +48,5 @@ namespace ServerFleet.Models.Rest.Base
             Entity = new T();
             ValidationMessages = new List<ValidationMessage>();
         }
-
     }
 }
