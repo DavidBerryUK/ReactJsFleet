@@ -1,7 +1,7 @@
-﻿using System;
+﻿using ServerFleet.Models.Entities.Vehicle;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using ServerFleet.Models.Entities.Vehicle;
 
 namespace ServerFleet.Services.Vehicle.PipesAndFilters
 {

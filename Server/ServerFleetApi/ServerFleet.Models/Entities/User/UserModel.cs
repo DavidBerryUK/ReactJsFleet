@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ServerFleet.Models.Entities.User
+﻿namespace ServerFleet.Models.Entities.User
 {
     public class UserModel
     {

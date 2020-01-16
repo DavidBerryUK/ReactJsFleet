@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using ServerFleet.Models.Entities.Vehicle;
-using ServerFleet.Models.Rest.Vehicle;
+﻿using ServerFleet.Models.Entities.Vehicle;
 using ServerFleet.Services.Vehicle.Interfaces;
-using ServerFleet.Services.Vehicle.PipesAndFilters;
+using System.Collections.Generic;
 
 namespace ServerFleet.Services.Vehicle
 {

@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using ServerFleet.Models.Entities.Vehicle;
+﻿using ServerFleet.Models.Entities.Vehicle;
+using System.Collections.Generic;
 
 namespace ServerFleet.Services.Vehicle.Interfaces
 {

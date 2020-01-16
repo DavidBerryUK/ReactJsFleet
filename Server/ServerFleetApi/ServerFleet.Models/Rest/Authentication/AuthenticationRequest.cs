@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ServerFleet.Models.Rest.Authentication
+﻿namespace ServerFleet.Models.Rest.Authentication
 {
     public class AuthenticationRequest
     {

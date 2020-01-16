@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ServerFleet.Models.Entities.Vehicle
+﻿namespace ServerFleet.Models.Entities.Vehicle
 {
     public class VehicleModel
     {
