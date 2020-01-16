@@ -8,12 +8,12 @@ import { TableCell}                           from '@material-ui/core';
 import { TableHead }                          from '@material-ui/core';
 import { TableRow }                           from '@material-ui/core';
 import { TableSortLabel }                     from '@material-ui/core';
-import { useEffect }                          from 'react';
+import { useMemo }                            from 'react';
+import ApiBaseCollectionResponseModel         from '../../models/apiBase/ApiBaseCollectionResponseModel';
 import FleetListFilterModel                   from './fleetListFilterModel'
 import React                                  from 'react';
 import RepositoryVehicle                      from '../../repository/vehicle/RepositoryVehicle';
 import VehicleModel                           from '../../models/vehicle/VehicleModel';
-import ApiBaseCollectionResponseModel from '../../models/apiBase/ApiBaseCollectionResponseModel';
 
 function FleetListComponent() {
 
@@ -31,30 +31,18 @@ function FleetListComponent() {
   const [listFilter, setListFilter] = React.useState(new FleetListFilterModel());
   const [vehicleList, setVehicleList] = React.useState(new Array<VehicleModel>());
 
-  //
-  // The effect runs when the page is updated, however the array
-  // provides a 'filter list', to ensure that the routine will only be 
-  // run if the state changes for these filtered items
-  useEffect(() => {
-    getData();
+  useMemo(() => {
 
-    function getData() {
-      var repositoryVehicle = new RepositoryVehicle();
-      repositoryVehicle.getVehicleList(listFilter.pageNumber, 
-                                      listFilter.rowsPerPage,
-                                      listFilter.sortedColumn,
-                                      listFilter.sortDirection)
-        .onSuccess((vehicleListData: ApiBaseCollectionResponseModel<VehicleModel>) => {
-          console.log('got data');
-          setVehicleList(vehicleListData.entities!);
-        });
-    }
+    var repositoryVehicle = new RepositoryVehicle();
+    repositoryVehicle.getVehicleList(listFilter.pageNumber,
+      listFilter.rowsPerPage,
+      listFilter.sortedColumn,
+      listFilter.sortDirection)
+      .onSuccess((vehicleListData: ApiBaseCollectionResponseModel<VehicleModel>) => {
+        setVehicleList(vehicleListData.entities!);
+      });
 
   }, [listFilter]);
-
-  //
-  // Get the fleet list
-  //
 
 
   //
@@ -84,32 +72,32 @@ function FleetListComponent() {
         <TableHead>
           <TableRow>
             <TableCell>
-              <TableSortLabel 
+              <TableSortLabel
                 active={listFilter.sortedColumn === enumColumnNames.registration}
                 direction={listFilter.sortDirection}
                 onClick={() => { handleColumnHeaderSortClicked(enumColumnNames.registration) }} ></TableSortLabel>
               Registration
               </TableCell>
             <TableCell>
-              <TableSortLabel 
+              <TableSortLabel
                 active={listFilter.sortedColumn === enumColumnNames.make}
                 direction={listFilter.sortDirection}
                 onClick={() => { handleColumnHeaderSortClicked(enumColumnNames.make) }}></TableSortLabel>
               Make</TableCell>
             <TableCell>
-              <TableSortLabel 
+              <TableSortLabel
                 active={listFilter.sortedColumn === enumColumnNames.model}
                 direction={listFilter.sortDirection}
                 onClick={() => { handleColumnHeaderSortClicked(enumColumnNames.model) }}></TableSortLabel>
               Model</TableCell>
             <TableCell>
-              <TableSortLabel 
+              <TableSortLabel
                 active={listFilter.sortedColumn === enumColumnNames.Transmission}
                 direction={listFilter.sortDirection}
                 onClick={() => { handleColumnHeaderSortClicked(enumColumnNames.Transmission) }}></TableSortLabel>
               Transmission</TableCell>
             <TableCell align="right">
-              <TableSortLabel 
+              <TableSortLabel
                 active={listFilter.sortedColumn === enumColumnNames.doors}
                 direction={listFilter.sortDirection}
                 onClick={() => { handleColumnHeaderSortClicked(enumColumnNames.doors) }} ></TableSortLabel>

@@ -12,7 +12,7 @@ export default class ConfigurationService {
     public static getConfiguration(): IRoot {
 
         if (ConfigurationService.configuration == null) {
-            console.log(jsonConfigData);
+            // console.log(jsonConfigData);
             ConfigurationService.configuration = jsonConfigData as IRoot;
 
         }

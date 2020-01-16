@@ -20,7 +20,6 @@ export default class RepositoryVehicle extends BaseCollectionRepository<VehicleM
             }
         }
 
-        console.log(`getVehicleList:${endpoint}`)
         return this.getList(endpoint, new FactoryVehicleModel());        
     }
 }

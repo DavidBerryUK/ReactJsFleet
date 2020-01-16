@@ -7,6 +7,7 @@ import ApiBaseError                             from "../ApiBaseError";
 import axios                                    from 'axios';
 import BaseApiConfig                            from "../ApiBaseConfig";
 import ValidationMessage                        from "../../../models/validation/ValidationMessage";
+import FactoryApiBaseCollectionResponseModel from "../../../modelFactories/FactoryApiBaseCollectionResponseModel";
 
 export default class ApiGetService<T extends IApiModel> {
   public getList(
@@ -16,33 +17,27 @@ export default class ApiGetService<T extends IApiModel> {
 
     let contract = new ApiResponseContract<ApiBaseCollectionResponseModel<T>>();
 
-    // console.log("getting list");
-    // console.log(endpointUrl);
-
     axios
       .get(endpointUrl, BaseApiConfig.baseConfig)
-      .then((response: any) => {
-        console.log("axios - then");
-        console.log(response);
+      .then((response: any) => {        
         if (response.data == null) {
           contract.publishFailure("No data returned");
-        } else {
-          // console.log("axios - has response.data")
+        } else {          
           if (response.data.hasValidationMessages) {
-            console.log(
-              "[under-development:BasePostService] response hasValidation messages"
-            );
+            // console.log(
+            //   "[under-development:BasePostService] response hasValidation messages"
+            // );
             if (response.data.validationMessages) {
-              console.log(
-                "[under-development:BasePostService] response validationMessages"
-              );
+              // console.log(
+              //   "[under-development:BasePostService] response validationMessages"
+              // );
               contract.publishValidationErrorsRaised(
                 response.data.validationMessages
               );
             } else {
-              console.log(
-                "[under-development:BasePostService] response BlankArray validationMessages"
-              );
+              // console.log(
+              //   "[under-development:BasePostService] response BlankArray validationMessages"
+              // );
               contract.publishValidationErrorsRaised(
                 new Array<ValidationMessage>()
               );
@@ -51,22 +46,16 @@ export default class ApiGetService<T extends IApiModel> {
             return;
           }
 
-          console.log('response.data.entities')
-          console.log(response.data.entities);
+          // console.log('response.data.entities')
+          // console.log(response.data.entities);
 
           if (response.data.entities) {
-            console.log("[under-development:BasePostService] response has data");
-            const model = new ApiBaseCollectionResponseModel<T>();
+            // console.log("[under-development:BasePostService] response has data");
 
-            console.log("WORK (MAPPING) IS NEEDED");
-
-            console.log(model);
-
-            model.pageNumber = 0;
-            model.totalPages = 0;
-            model.rowsPerPage = 0;
-            model.totalRows = 0;
+            const wrapperFactory = new FactoryApiBaseCollectionResponseModel<T>()
+            const model = wrapperFactory.createFrom(response.data);            
             model.entities = modelFactory.createArrayFrom(response.data.entities);
+
             contract.publishSuccess(model);
           } else {
             // console.log("data has no entity")

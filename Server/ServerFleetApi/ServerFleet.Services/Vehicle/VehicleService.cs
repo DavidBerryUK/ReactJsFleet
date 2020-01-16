@@ -60,9 +60,12 @@ namespace ServerFleet.Services.Vehicle
             }
 
             var entities = Mapper.Map<List<VehicleJson>>(data);
-            var response = new BaseResponseCollection<VehicleJson>();
-
-            response.TotalRows = rowCount;
+            var response = new BaseResponseCollection<VehicleJson>
+            {
+                RowsPerPage = request.RowsPerPage,
+                PageNumber = request.PageNumber,
+                TotalRows = rowCount
+            };
             if (request.RowsPerPage != 0)
             {
                 response.TotalPages = (int) Math.Ceiling((decimal) rowCount / (decimal)request.RowsPerPage);

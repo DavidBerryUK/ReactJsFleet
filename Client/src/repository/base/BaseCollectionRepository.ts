@@ -10,7 +10,6 @@ export default class BaseCollectionRepository<T  extends IApiModel> {
     public getList(apiEndpoint: string, modelFactory: IModelFactory<T>) : ApiResponse<ApiBaseCollectionResponseModel<T>> {
         const apiGetService = new ApiGetService<T>();
         const endpoint = `${BaseApiConfig.baseEndpoint}${apiEndpoint}`;
-        console.log(`generic getList`);
         return apiGetService.getList(endpoint,modelFactory);        
     }
 }
