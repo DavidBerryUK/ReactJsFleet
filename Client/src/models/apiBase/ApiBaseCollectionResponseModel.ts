@@ -7,9 +7,9 @@ export default class ApiBaseCollectionResponseModel<T> {
     public success: Boolean;
     public errorMessage: String;
     public pageNumber : number = 0;
+    public rowsPerPage : number = 0;
     public totalPages : number =0;
     public totalRows : number = 0;
-    public rowsPerPage : number = 0;
     
     constructor() {
         this.validationMessages = new Array<ValidationMessage>();

@@ -11,6 +11,7 @@ import { TableSortLabel }                     from '@material-ui/core';
 import { useMemo }                            from 'react';
 import ApiBaseCollectionResponseModel         from '../../models/apiBase/ApiBaseCollectionResponseModel';
 import FleetListFilterModel                   from './fleetListFilterModel'
+import PaginationButtons                      from "../../components/pagination/pagination-buttons-component";
 import React                                  from 'react';
 import RepositoryVehicle                      from '../../repository/vehicle/RepositoryVehicle';
 import VehicleModel                           from '../../models/vehicle/VehicleModel';
@@ -118,6 +119,7 @@ function FleetListComponent() {
           ))}
         </TableBody>
       </Table>
+      <PaginationButtons/>
     </Paper>
   );
 }

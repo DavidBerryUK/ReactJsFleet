@@ -63,9 +63,7 @@ function DefectSheetComponent() {
                 </Grid>
               </Grid>
 
-
               <Grid container xs={12} spacing={1}>
-
 
                 <Grid item xs={3}>
                   <ValidatedTextField
