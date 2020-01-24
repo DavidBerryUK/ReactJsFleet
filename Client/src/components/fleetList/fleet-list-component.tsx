@@ -45,6 +45,13 @@ function FleetListComponent() {
 
   }, [listFilter]);
 
+  function onPageChanged(page: number) : void {
+    console.log("FLEET LIST COMPONENT - on page changed");
+    console.log(page);
+    var filter = listFilter.clone();
+    filter.pageNumber = page;
+    setListFilter(filter);
+  }
 
   //
   // Handle column header clicks
@@ -119,7 +126,7 @@ function FleetListComponent() {
           ))}
         </TableBody>
       </Table>
-      <PaginationButtons/>
+      <PaginationButtons page={listFilter.pageNumber} pageCount={20} onPageChanged={(page:number) => { onPageChanged(page) }}  />
     </Paper>
   );
 }
