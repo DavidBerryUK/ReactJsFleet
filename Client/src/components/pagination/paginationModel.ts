@@ -10,9 +10,19 @@ export default class paginationModel {
      showNextPageButton : boolean;
      showSkipNextPageButton : boolean;
 
+     private numbersToShowEachSideOfCurrentPage : number = 4;
+     private firstPage : number = 0;
+     private lastPage : number = 0;
+
      constructor(page: number, pageCount: number) {
+
+        console.log("paginationModel:Constructor");
+        
          this.page = page;
          this.pageCount = pageCount;
+         this.calculateFirstPage();
+         this.calculateLastPage();
+         this.adjustPageRange()
          this.pageNumbers = this.createPageNumbers()
          this.showFirstPageButton = this.page > 1;
          this.showSkipPreviousPageButton = this.page > 1;
@@ -20,27 +30,38 @@ export default class paginationModel {
          this.showLastPageButton = ( this.page < this.pageCount)
          this.showNextPageButton = ( this.page < this.pageCount)
          this.showSkipNextPageButton = ( this.page < this.pageCount)
+         
      }
 
-    private firstPage(): number {
-        var firstPage : number = this.page - 4;
-        if (firstPage < 1) {
-            firstPage = 1;
+    private calculateFirstPage() {
+        this.firstPage = this.page - this.numbersToShowEachSideOfCurrentPage;
+        if (this.firstPage < 1) {
+            this.firstPage = 1;
         }
-        return firstPage
+        
     }
 
-    private lastPage(): number {
-        var lastPage = this.firstPage() + 8;
-        if (lastPage > this.pageCount) {
-            lastPage = this.pageCount;
+    private calculateLastPage() {
+        this.lastPage = this.firstPage + ( this.numbersToShowEachSideOfCurrentPage * 2 );
+        if (this.lastPage > this.pageCount) {
+            this.lastPage = this.pageCount;
         }
-        return lastPage
+        return this.lastPage
+    }
+
+    private adjustPageRange() {
+        let range = this.lastPage - this.firstPage;
+        if ( range < (this.numbersToShowEachSideOfCurrentPage * 2)) {
+            this.firstPage = this.lastPage - (this.numbersToShowEachSideOfCurrentPage * 2)
+            if (this.firstPage < 1) {
+                this.firstPage = 1                
+            }
+        } 
     }
 
     private createPageNumbers(): Array<number> {
         let pageArray = Array<number>();
-        for (var i = this.firstPage(); i <= this.lastPage(); i++) {
+        for (var i = this.firstPage; i <= this.lastPage; i++) {
             pageArray.push(i)
         }
         return pageArray;

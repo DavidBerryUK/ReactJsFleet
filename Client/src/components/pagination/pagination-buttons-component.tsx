@@ -16,11 +16,14 @@ interface IPaginationProperties {
     onPageChanged : (page: number) => void
   }
 
-const PaginationButtons: React.FC<IPaginationProperties> = (props) => {    
+const PaginationButtons: React.FC<IPaginationProperties> = (props) => {        
+
+console.log(`create PaginationButtons component, page:${props.page}`)
 
     const [pageModel, setpageModel] = React.useState(new paginationModel(props.page, props.pageCount));
 
-    useMemo(() => {
+    useMemo(() => {        
+        console.log(`user Memo executed page:${props.page}  pageCount:${props.pageCount}`);        
         setpageModel(new paginationModel(props.page, props.pageCount))
     }, [props.page, props.pageCount]);
 
@@ -39,18 +42,17 @@ const PaginationButtons: React.FC<IPaginationProperties> = (props) => {
 
     return (
         <ButtonGroup color="primary" >
-            {pageModel.showFirstPageButton && <Button><SkipPreviousIcon fontSize="small" onClick={() => {changePage(1)}}/></Button>}
-            {pageModel.showSkipPreviousPageButton && <Button><FastRewindIcon fontSize="small" onClick={() => {changePage(pageModel.page - 10 )}} /></Button>}
-            {pageModel.showPreviousPageButton && <Button><NavigateBeforeIcon fontSize="small" onClick={() => {changePage(pageModel.page - 1 )}}/></Button>}     
-            {pageModel.pageNumbers.map((item: number, key) => (
+            <Button disabled={!pageModel.showFirstPageButton}><SkipPreviousIcon fontSize="small" onClick={() => {changePage(1)}}/></Button>
+            <Button disabled={!pageModel.showSkipPreviousPageButton}><FastRewindIcon fontSize="small" onClick={() => {changePage(pageModel.page - 10 )}} /></Button>
+            <Button disabled={!pageModel.showPreviousPageButton}><NavigateBeforeIcon fontSize="small" onClick={() => {changePage(pageModel.page - 1 )}}/></Button>    
+            {pageModel.pageNumbers.map((item: number) => (
                 (item === pageModel.page ?
                     <Button key={`${item}`} color="secondary" variant="contained"  onClick={() => {changePage(item )}}>{item}</Button> :
                     <Button key={`${item}`} onClick={() => {changePage(item)}} >{item}</Button>)
-
             ))}
-            {pageModel.showSkipNextPageButton && <Button><NavigateNextIcon fontSize="small" onClick={() => {changePage(pageModel.page + 1)}}/></Button>}
-            {pageModel.showNextPageButton && <Button><FastForwardIcon fontSize="small" onClick={() => {changePage(pageModel.page + 10)}}/></Button>}
-            {pageModel.showLastPageButton && <Button><SkipNextIcon fontSize="small" onClick={() => {changePage(pageModel.pageCount)}}/></Button>}
+            <Button disabled={!pageModel.showSkipNextPageButton}><NavigateNextIcon fontSize="small" onClick={() => {changePage(pageModel.page + 1)}}/></Button>
+            <Button disabled={!pageModel.showNextPageButton}><FastForwardIcon fontSize="small" onClick={() => {changePage(pageModel.page + 10)}}/></Button>
+            <Button disabled={!pageModel.showLastPageButton}><SkipNextIcon fontSize="small" onClick={() => {changePage(pageModel.pageCount)}}/></Button>
         </ButtonGroup>
     );
 }
