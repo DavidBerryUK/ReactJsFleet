@@ -4,13 +4,13 @@ import ListItemModel                            from '../../models/list/ListItem
 import React                                    from 'react';
 import RepositorySpecification                  from '../../repository/specification/RepositorySpecification';
 
-const UniqueModelSelectorComponent: React.FC = () => {
+const UniqueMakeSelectorComponent: React.FC = () => {
 
     const [list, setList] = React.useState(new Array<ListItemModel>());
 
     useMemo(() => {
         var repository = new RepositorySpecification();
-        repository.getUniqueModels()
+        repository.getUniqueMakes()
             .onSuccess((list: ApiBaseCollectionResponseModel<ListItemModel>) => {
                 setList(list.entities!);
             });
@@ -26,4 +26,4 @@ const UniqueModelSelectorComponent: React.FC = () => {
     );
 }
 
-export default UniqueModelSelectorComponent;
+export default UniqueMakeSelectorComponent;

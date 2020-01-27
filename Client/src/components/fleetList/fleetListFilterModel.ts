@@ -8,7 +8,8 @@ export enum enumColumnNames {
     make = "make",
     model = "model",
     Transmission = "transmission",
-    doors = "doors"
+    doors = "doors",
+    colour = "colour"
   }
 
 export default class FleetListFilterModel {

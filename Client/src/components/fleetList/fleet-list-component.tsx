@@ -14,8 +14,12 @@ import FleetListFilterModel                   from './fleetListFilterModel'
 import PaginationButtons                      from "../../components/pagination/pagination-buttons-component";
 import React                                  from 'react';
 import RepositoryVehicle                      from '../../repository/vehicle/RepositoryVehicle';
+import UniqueColourSelectorComponent          from '../uniqueColourSelectorSelector/UniqueColourSelectorComponent';
+import UniqueDoorsSelectorComponent           from '../uniqueDoorsSelectorSelector/UniqueDoorsSelectorComponent';
+import UniqueMakeSelectorComponent            from '../uniqueMakeSelector/UniqueMakeSelectorComponent';
+import UniqueModelSelectorComponent           from '../uniqueModelSelector/UniqueModelSelectorComponent';
+import UniqueTransmissionSelectorComponent    from '../uniqueTransmissionSelector/UniqueTransmissionSelectorComponent';
 import VehicleModel                           from '../../models/vehicle/VehicleModel';
-import UniqueModelSelectorComponent from '../uniqueModelSelector/uniqueModelSelectorComponent';
 
 function FleetListComponent() {
 
@@ -77,7 +81,17 @@ function FleetListComponent() {
   //
   return (
     <Paper className={classes.root}>
-      <UniqueModelSelectorComponent/>
+      <table>
+        <tbody>
+      <tr>
+        <td><UniqueMakeSelectorComponent/></td>
+        <td><UniqueModelSelectorComponent/></td>
+        <td><UniqueTransmissionSelectorComponent/></td>
+        <td><UniqueColourSelectorComponent/></td>
+        <td><UniqueDoorsSelectorComponent/></td>
+      </tr>    
+      </tbody>          
+      </table>
       <Table className={classes.table} stickyHeader size="small"  >
         <TableHead>
           <TableRow>
@@ -100,6 +114,12 @@ function FleetListComponent() {
                 direction={listFilter.sortDirection}
                 onClick={() => { handleColumnHeaderSortClicked(enumColumnNames.model) }}></TableSortLabel>
               Model</TableCell>
+              <TableCell>
+              <TableSortLabel
+                active={listFilter.sortedColumn === enumColumnNames.colour}
+                direction={listFilter.sortDirection}
+                onClick={() => { handleColumnHeaderSortClicked(enumColumnNames.colour) }}></TableSortLabel>
+              Colour</TableCell>
             <TableCell>
               <TableSortLabel
                 active={listFilter.sortedColumn === enumColumnNames.Transmission}
@@ -122,6 +142,7 @@ function FleetListComponent() {
               </TableCell>
               <TableCell>{row.make}</TableCell>
               <TableCell>{row.model}</TableCell>
+              <TableCell>{row.colour}</TableCell>
               <TableCell>{row.transmission}</TableCell>
               <TableCell align="right">{row.doors}</TableCell>
             </TableRow>
