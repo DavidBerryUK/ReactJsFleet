@@ -15,6 +15,7 @@ import PaginationButtons                      from "../../components/pagination/
 import React                                  from 'react';
 import RepositoryVehicle                      from '../../repository/vehicle/RepositoryVehicle';
 import VehicleModel                           from '../../models/vehicle/VehicleModel';
+import UniqueModelSelectorComponent from '../uniqueModelSelector/uniqueModelSelectorComponent';
 
 function FleetListComponent() {
 
@@ -76,6 +77,7 @@ function FleetListComponent() {
   //
   return (
     <Paper className={classes.root}>
+      <UniqueModelSelectorComponent/>
       <Table className={classes.table} stickyHeader size="small"  >
         <TableHead>
           <TableRow>

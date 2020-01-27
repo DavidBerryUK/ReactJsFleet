@@ -1,9 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using ServerFleet.Services.Authentication;
 using ServerFleet.Services.Authentication.Interfaces;
-using System;
+using ServerFleet.Services.Specification;
+using ServerFleet.Services.Specification.Interfaces;
 using ServerFleet.Services.Vehicle;
 using ServerFleet.Services.Vehicle.Interfaces;
+using System;
 
 namespace ServerFleet.Api.StartupServices
 {
@@ -20,7 +22,8 @@ namespace ServerFleet.Api.StartupServices
             services.AddTransient<IAuthenticationService, AuthenticationService>();
             services.AddTransient<IVehicleFactory,VehicleFactory>();
             services.AddTransient<IVehicleService,VehicleService>();
-            
+            services.AddTransient<ISpecificationService, SpecificationService>();
+
         }
     }
 }
