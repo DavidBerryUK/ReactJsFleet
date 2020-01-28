@@ -80,18 +80,7 @@ function FleetListComponent() {
   // Template
   //
   return (
-    <Paper className={classes.root}>
-      <table>
-        <tbody>
-      <tr>
-        <td><UniqueMakeSelectorComponent/></td>
-        <td><UniqueModelSelectorComponent/></td>
-        <td><UniqueTransmissionSelectorComponent/></td>
-        <td><UniqueColourSelectorComponent/></td>
-        <td><UniqueDoorsSelectorComponent/></td>
-      </tr>    
-      </tbody>          
-      </table>
+    <Paper className={classes.root}>      
       <Table className={classes.table} stickyHeader size="small"  >
         <TableHead>
           <TableRow>
@@ -107,31 +96,32 @@ function FleetListComponent() {
                 active={listFilter.sortedColumn === enumColumnNames.make}
                 direction={listFilter.sortDirection}
                 onClick={() => { handleColumnHeaderSortClicked(enumColumnNames.make) }}></TableSortLabel>
-              Make</TableCell>
+              Make<UniqueMakeSelectorComponent/></TableCell>
             <TableCell>
               <TableSortLabel
                 active={listFilter.sortedColumn === enumColumnNames.model}
                 direction={listFilter.sortDirection}
                 onClick={() => { handleColumnHeaderSortClicked(enumColumnNames.model) }}></TableSortLabel>
-              Model</TableCell>
+              Model<UniqueModelSelectorComponent/></TableCell>
               <TableCell>
               <TableSortLabel
                 active={listFilter.sortedColumn === enumColumnNames.colour}
                 direction={listFilter.sortDirection}
                 onClick={() => { handleColumnHeaderSortClicked(enumColumnNames.colour) }}></TableSortLabel>
-              Colour</TableCell>
+              Colour<UniqueColourSelectorComponent/>
+              </TableCell>
             <TableCell>
               <TableSortLabel
                 active={listFilter.sortedColumn === enumColumnNames.Transmission}
                 direction={listFilter.sortDirection}
                 onClick={() => { handleColumnHeaderSortClicked(enumColumnNames.Transmission) }}></TableSortLabel>
-              Transmission</TableCell>
+              Transmission<UniqueTransmissionSelectorComponent/></TableCell>
             <TableCell align="right">
               <TableSortLabel
                 active={listFilter.sortedColumn === enumColumnNames.doors}
                 direction={listFilter.sortDirection}
                 onClick={() => { handleColumnHeaderSortClicked(enumColumnNames.doors) }} ></TableSortLabel>
-              Doors</TableCell>
+              Doors<UniqueDoorsSelectorComponent/></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
