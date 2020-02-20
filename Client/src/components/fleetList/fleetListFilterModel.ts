@@ -21,11 +21,13 @@ export default class FleetListFilterModel {
     sortedColumn : enumColumnNames = enumColumnNames.registration;
     sortDirection : enumSortDirection = enumSortDirection.asc;
 
+    filterRegistration: String = "";
+
     filterColour : ListItemModel = new ListItemModel();
     filterDoors  : ListItemModel = new ListItemModel();
     filterMake  : ListItemModel = new ListItemModel();
     filterModel  : ListItemModel = new ListItemModel();
-    filterTransmission  : ListItemModel = new ListItemModel();
+    filterTransmission  : ListItemModel = new ListItemModel();        
 
     clone() : FleetListFilterModel {
         var model = new FleetListFilterModel();        
@@ -37,6 +39,7 @@ export default class FleetListFilterModel {
         model.filterDoors = this.filterDoors;
         model.filterMake = this.filterMake;
         model.filterModel = this.filterModel;
+        model.filterRegistration = this.filterRegistration;
         model.filterTransmission = this.filterTransmission;
         return model;
     }

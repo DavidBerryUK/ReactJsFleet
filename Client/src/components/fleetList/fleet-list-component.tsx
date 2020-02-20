@@ -15,6 +15,7 @@ import FleetListFilterModel                     from './fleetListFilterModel'
 import ListItemModel                            from '../../models/list/ListItemModel';
 import PaginationButtons                        from "../../components/pagination/pagination-buttons-component";
 import React                                    from 'react';
+import RegistrationSearchBoxComponent from '../registrationSearchBox/RegistrationSearchBoxComponent';
 import RepositoryVehicle                        from '../../repository/vehicle/RepositoryVehicle';
 import RowsPerPageComponent                     from '../rowsPerPage/RowsPerPageComponent';
 import UniqueColourSelectorComponent            from '../uniqueColourSelectorSelector/UniqueColourSelectorComponent';
@@ -80,6 +81,14 @@ function FleetListComponent() {
     setListFilter(filter);
   }
 
+  // Filter Handler - Registration
+  //
+  function filterRegistrationChangeHandler(searchText : string) {
+    var filter = listFilter.clone();
+    filter.filterRegistration = searchText;
+    setListFilter(filter);
+  }
+
   // Filter Handler - Colour
   //
   function filterColourChangeHandler(item : ListItemModel) {
@@ -128,6 +137,8 @@ function FleetListComponent() {
     setListFilter(filter);
   }
 
+  
+
   //
   // Template for table
   //
@@ -136,6 +147,7 @@ function FleetListComponent() {
       <Table className={classes.table} stickyHeader size="small"  >
         <TableHead>
           <TableRow>
+
             <TableCell>
               <TableSortLabel
                 active={listFilter.sortedColumn === enumColumnNames.registration}
@@ -143,7 +155,9 @@ function FleetListComponent() {
                 onClick={() => { columnHeaderSortClickHandler(enumColumnNames.registration) }}>
               </TableSortLabel>
               Registration
-              </TableCell>
+              <RegistrationSearchBoxComponent onSelectionChanged={(searchText: string)=>{ filterRegistrationChangeHandler(searchText)}} />
+            </TableCell>
+
             <TableCell>
               <TableSortLabel
                 active={listFilter.sortedColumn === enumColumnNames.make}
@@ -153,6 +167,7 @@ function FleetListComponent() {
               Make
               <UniqueMakeSelectorComponent onSelectionChanged={(item: ListItemModel)=>{ filterMakeChangeHandler(item)}} />
             </TableCell>
+
             <TableCell>
               <TableSortLabel
                 active={listFilter.sortedColumn === enumColumnNames.model}
@@ -162,6 +177,7 @@ function FleetListComponent() {
               Model
               <UniqueModelSelectorComponent onSelectionChanged={(item: ListItemModel)=>{ filterModelChangeHandler(item)}} />
             </TableCell>
+
             <TableCell>
               <TableSortLabel
                 active={listFilter.sortedColumn === enumColumnNames.colour}
@@ -171,6 +187,7 @@ function FleetListComponent() {
               Colour
               <UniqueColourSelectorComponent onSelectionChanged={(item: ListItemModel)=>{ filterColourChangeHandler(item)}} />
             </TableCell>
+            
             <TableCell>
               <TableSortLabel
                 active={listFilter.sortedColumn === enumColumnNames.Transmission}
@@ -180,6 +197,7 @@ function FleetListComponent() {
               Transmission
               <UniqueTransmissionSelectorComponent  onSelectionChanged={(item: ListItemModel)=>{ filterTransmissionChangeHandler(item)}} />
             </TableCell>
+                        
             <TableCell align="right">
               <TableSortLabel
                 active={listFilter.sortedColumn === enumColumnNames.doors}
@@ -189,7 +207,8 @@ function FleetListComponent() {
               Doors
               <UniqueDoorsSelectorComponent  onSelectionChanged={(item: ListItemModel)=>{ filterDoorsChangeHandler(item)}} />
             </TableCell>
-          </TableRow>
+
+          </TableRow>          
         </TableHead>
         <TableBody>
           {vehicleList.entities?.map(row => (
@@ -206,6 +225,7 @@ function FleetListComponent() {
           ))}
         </TableBody>
       </Table>
+
       <Box display="flex" justifyContent="left" >
         <Box p={2}>rows {vehicleList.totalRows}</Box>
             <Box display="flex" flexGrow={1} justifyContent="center">

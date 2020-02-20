@@ -25,8 +25,9 @@ const PaginationButtons: React.FC<IPaginationProperties> = (props) => {
     const classStyles = classStyleDefinition();
     const [pageModel, setpageModel] = React.useState(new paginationModel(props.page, props.pageCount));
 
-    useMemo(() => {        
-        console.log(`user Memo executed page:${props.page}  pageCount:${props.pageCount}`);        
+    // Ony create pagination model once,regardless of how many screen refreshes,
+    // unless the page and page count is updated
+    useMemo(() => {                
         setpageModel(new paginationModel(props.page, props.pageCount))
     }, [props.page, props.pageCount]);
 

@@ -13,8 +13,8 @@ interface IRowsPerPageProperties {
 //
 const RowsPerPageComponent: React.FC<IRowsPerPageProperties> = (props) => {
     
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);       
-    const rowPerPageOptions = [5,10,15,20,25];    
+    const [rowsPerPage, setRowsPerPage] = React.useState(20);       
+    const rowPerPageOptions = [5,10,15,20,25,30,35,40,45,50];    
     
     // the user selection has changed, raise an event to the host control
     // indicating the value has been updated
