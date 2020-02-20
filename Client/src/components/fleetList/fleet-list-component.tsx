@@ -44,11 +44,7 @@ function FleetListComponent() {
   //
   useMemo(() => {
     var repositoryVehicle = new RepositoryVehicle();
-    repositoryVehicle.getVehicleList(listFilter.pageNumber,
-      listFilter.rowsPerPage,
-      listFilter.sortedColumn,
-      listFilter.sortDirection,
-      listFilter.filterColour.entityValue)
+    repositoryVehicle.getVehicleList(listFilter)
       .onSuccess((vehicleListData: ApiBaseCollectionResponseModel<VehicleModel>) => {
         setVehicleList(vehicleListData.entities!);
       });
@@ -82,9 +78,43 @@ function FleetListComponent() {
     setListFilter(filter);
   }
 
+  // Filter Handler - Colour
+  //
   function filterColourChangeHandler(item : ListItemModel) {
     var filter = listFilter.clone();
     filter.filterColour = item;
+    setListFilter(filter);
+  }
+
+  // Filter Handler - Make
+  //
+  function filterMakeChangeHandler(item : ListItemModel) {
+    var filter = listFilter.clone();
+    filter.filterMake = item;
+    setListFilter(filter);
+  }
+
+  // Filter Handler - Model
+  //
+  function filterModelChangeHandler(item : ListItemModel) {
+    var filter = listFilter.clone();
+    filter.filterModel = item;
+    setListFilter(filter);
+  }
+
+  // Filter Handler - Transmission
+  //
+  function filterTransmissionChangeHandler(item : ListItemModel) {
+    var filter = listFilter.clone();
+    filter.filterTransmission = item;
+    setListFilter(filter);
+  }
+
+  // Filter Handler - Number of doors
+  //
+  function filterDoorsChangeHandler(item : ListItemModel) {
+    var filter = listFilter.clone();
+    filter.filterDoors = item;
     setListFilter(filter);
   }
 
@@ -111,7 +141,7 @@ function FleetListComponent() {
                 onClick={() => { columnHeaderSortClickHandler(enumColumnNames.make) }}>
               </TableSortLabel>
               Make
-              <UniqueMakeSelectorComponent />
+              <UniqueMakeSelectorComponent onSelectionChanged={(item: ListItemModel)=>{ filterMakeChangeHandler(item)}} />
             </TableCell>
             <TableCell>
               <TableSortLabel
@@ -120,7 +150,7 @@ function FleetListComponent() {
                 onClick={() => { columnHeaderSortClickHandler(enumColumnNames.model) }}>
               </TableSortLabel>
               Model
-              <UniqueModelSelectorComponent />
+              <UniqueModelSelectorComponent onSelectionChanged={(item: ListItemModel)=>{ filterModelChangeHandler(item)}} />
             </TableCell>
             <TableCell>
               <TableSortLabel
@@ -138,7 +168,7 @@ function FleetListComponent() {
                 onClick={() => { columnHeaderSortClickHandler(enumColumnNames.Transmission) }}>
               </TableSortLabel>
               Transmission
-              <UniqueTransmissionSelectorComponent />
+              <UniqueTransmissionSelectorComponent  onSelectionChanged={(item: ListItemModel)=>{ filterTransmissionChangeHandler(item)}} />
             </TableCell>
             <TableCell align="right">
               <TableSortLabel
@@ -147,7 +177,7 @@ function FleetListComponent() {
                 onClick={() => { columnHeaderSortClickHandler(enumColumnNames.doors) }}>
               </TableSortLabel>
               Doors
-              <UniqueDoorsSelectorComponent />
+              <UniqueDoorsSelectorComponent  onSelectionChanged={(item: ListItemModel)=>{ filterDoorsChangeHandler(item)}} />
             </TableCell>
           </TableRow>
         </TableHead>

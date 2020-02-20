@@ -3,27 +3,39 @@ import ApiBaseCollectionResponseModel           from "../../models/apiBase/ApiBa
 import BaseCollectionRepository                 from "../base/BaseCollectionRepository";
 import FactoryVehicleModel                      from "../../modelFactories/FactoryVehicleModel";
 import VehicleModel                             from "../../models/vehicle/VehicleModel";
+import FleetListFilterModel                     from "../../components/fleetList/fleetListFilterModel";
 
 export default class RepositoryVehicle extends BaseCollectionRepository<VehicleModel> {
 
-    public getVehicleList(
-        pageNumber: number,
-        rowsPerPage: number,        
-        sortField: string = '',         
-        sortDirection: string = '',
-        filterColour: string = '',) : ApiResponse<ApiBaseCollectionResponseModel<VehicleModel>>{
+    public getVehicleList(filter : FleetListFilterModel) : ApiResponse<ApiBaseCollectionResponseModel<VehicleModel>>{
 
-        var endpoint = `/api/vehicle?pageNumber=${pageNumber}&rowsPerPage=${rowsPerPage}`
+        var endpoint = `/api/vehicle?pageNumber=${filter.pageNumber}&rowsPerPage=${filter.rowsPerPage}`
         
-        if ( sortField ) {
-            endpoint =  `${endpoint}&sortBy=${sortField}`
-            if ( sortDirection.length > 0 ) {   
-                endpoint =  `${endpoint}&sortDir=${sortDirection}`
+        if ( filter.sortedColumn ) {
+            endpoint =  `${endpoint}&sortBy=${filter.sortedColumn}`
+            if ( filter.sortDirection.length > 0 ) {   
+                endpoint =  `${endpoint}&sortDir=${filter.sortDirection}`
             }
         }
 
-        if ( filterColour !== '') {
-            endpoint =  `${endpoint}&colour=${filterColour}`
+        if ( filter.filterColour.entityValue !== '') {
+            endpoint =  `${endpoint}&colour=${filter.filterColour.entityValue}`
+        }
+
+        if ( filter.filterDoors.entityValue !== '') {
+            endpoint =  `${endpoint}&doors=${filter.filterDoors.entityValue}`
+        }
+
+        if ( filter.filterMake.entityValue !== '') {
+            endpoint =  `${endpoint}&make=${filter.filterMake.entityValue}`
+        }
+
+        if ( filter.filterModel.entityValue !== '') {
+            endpoint =  `${endpoint}&model=${filter.filterModel.entityValue}`
+        }
+
+        if ( filter.filterTransmission.entityValue !== '') {
+            endpoint =  `${endpoint}&transmission=${filter.filterTransmission.entityValue}`
         }
 
         return this.getList(endpoint, new FactoryVehicleModel());        

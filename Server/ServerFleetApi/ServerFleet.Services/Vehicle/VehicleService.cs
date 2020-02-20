@@ -40,7 +40,7 @@ namespace ServerFleet.Services.Vehicle
                     .FilterModel(request.Model)
                     .FilterRegistration(request.Reg)
                     .FilterTransmission(request.Transmission)
-                    .FilterDoors(request.FilterDoors)
+                    .FilterDoors(request.Doors)
                     .FilterMpg(request.Mpg)
                     .FilterMileage(request.Mileage)
                     .SortByField(request.SortBy, request.SortDir)

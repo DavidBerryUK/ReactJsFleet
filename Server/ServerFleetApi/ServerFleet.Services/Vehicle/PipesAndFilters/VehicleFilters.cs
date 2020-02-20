@@ -49,7 +49,7 @@ namespace ServerFleet.Services.Vehicle.PipesAndFilters
             {
                 return list;
             }
-            return list.Where(o => o.Make.Contains(model, StringComparison.InvariantCultureIgnoreCase));
+            return list.Where(o => o.Model.Contains(model, StringComparison.InvariantCultureIgnoreCase));
         }
 
         public static IEnumerable<VehicleModel> FilterRegistration(this IEnumerable<VehicleModel> list, string registration)
@@ -67,7 +67,7 @@ namespace ServerFleet.Services.Vehicle.PipesAndFilters
             {
                 return list;
             }
-            return list.Where(o => o.Registration.Contains(transmission, StringComparison.InvariantCultureIgnoreCase));
+            return list.Where(o => o.Transmission.Contains(transmission, StringComparison.InvariantCultureIgnoreCase));
         }
 
         public static IEnumerable<VehicleModel> FilterDoors(this IEnumerable<VehicleModel> list, int? doors)

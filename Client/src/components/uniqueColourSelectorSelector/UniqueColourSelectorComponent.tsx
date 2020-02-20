@@ -1,5 +1,5 @@
-import { MenuItem }                             from '@material-ui/core';
 import { FormControl }                          from '@material-ui/core';
+import { MenuItem }                             from '@material-ui/core';
 import { Select }                               from '@material-ui/core';
 import { useMemo }                              from 'react';
 import ApiBaseCollectionResponseModel           from '../../models/apiBase/ApiBaseCollectionResponseModel';
@@ -7,11 +7,11 @@ import ListItemModel                            from '../../models/list/ListItem
 import React                                    from 'react';
 import RepositorySpecification                  from '../../repository/specification/RepositorySpecification';
 
-interface IUniqueMakeSelectorProperties {
+interface IUniqueSelectorProperties {
     onSelectionChanged : (item: ListItemModel) => void
 }
 
-const UniqueColourSelectorComponent: React.FC<IUniqueMakeSelectorProperties> = (props) => {
+const UniqueColourSelectorComponent: React.FC<IUniqueSelectorProperties> = (props) => {
 
     const unselectedItem = new ListItemModel();
     const [list, setList] = React.useState(new Array<ListItemModel>());
@@ -39,7 +39,7 @@ const UniqueColourSelectorComponent: React.FC<IUniqueMakeSelectorProperties> = (
                 value={selectedItem.entityValue}>          
                 <MenuItem  value=""><em>none</em></MenuItem>
                     {list.map((item: ListItemModel) => (
-                        <MenuItem key={item.entityKey} value={item.id}>{item.text}</MenuItem>
+                        <MenuItem key={item.entityValue} value={item.id}>{item.text}</MenuItem>
                     ))}
             </Select>
         </FormControl>

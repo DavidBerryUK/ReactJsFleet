@@ -7,10 +7,15 @@ import ListItemModel                            from '../../models/list/ListItem
 import React                                    from 'react';
 import RepositorySpecification                  from '../../repository/specification/RepositorySpecification';
 
-const UniqueModelSelectorComponent: React.FC = () => {
+interface IUniqueSelectorProperties {
+    onSelectionChanged : (item: ListItemModel) => void
+}
 
+const UniqueModelSelectorComponent: React.FC<IUniqueSelectorProperties> = (props) => {
+
+    const unselectedItem = new ListItemModel();
     const [list, setList] = React.useState(new Array<ListItemModel>());
-    const [selectedItem, setSelectedItem] = React.useState("");    
+    const [selectedItem, setSelectedItem] = React.useState(unselectedItem);    
 
     useMemo(() => {
         var repository = new RepositorySpecification();
@@ -21,18 +26,20 @@ const UniqueModelSelectorComponent: React.FC = () => {
     },[])
 
     function valueChangedEventHandler(event : React.ChangeEvent) {    
-        const typedEvent = event as React.ChangeEvent<HTMLInputElement>    
-        setSelectedItem(typedEvent.target.value as string);
+        const typedEvent = event as React.ChangeEvent<HTMLInputElement>                    
+        let item = list.find(item => item.entityValue === typedEvent.target.value) ?? unselectedItem;
+        setSelectedItem(item);                
+        props.onSelectionChanged(item);
     }
 
     return (
         <FormControl variant="outlined"  margin="dense" fullWidth>
             <Select displayEmpty    
                 onChange={(event: any) => { valueChangedEventHandler(event) }}
-                value={selectedItem}>          
+                value={selectedItem.entityValue}>          
                 <MenuItem  value=""><em>none</em></MenuItem>
                     {list.map((item: ListItemModel) => (
-                        <MenuItem key={item.entityKey} value={item.id}>{item.text}</MenuItem>
+                        <MenuItem key={item.entityValue} value={item.id}>{item.text}</MenuItem>
                     ))}
             </Select>
         </FormControl>

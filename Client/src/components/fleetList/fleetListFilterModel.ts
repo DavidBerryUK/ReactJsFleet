@@ -22,6 +22,10 @@ export default class FleetListFilterModel {
     sortDirection : enumSortDirection = enumSortDirection.asc;
 
     filterColour : ListItemModel = new ListItemModel();
+    filterDoors  : ListItemModel = new ListItemModel();
+    filterMake  : ListItemModel = new ListItemModel();
+    filterModel  : ListItemModel = new ListItemModel();
+    filterTransmission  : ListItemModel = new ListItemModel();
 
     clone() : FleetListFilterModel {
         var model = new FleetListFilterModel();        
@@ -30,6 +34,10 @@ export default class FleetListFilterModel {
         model.pageNumber = this.pageNumber;
         model.rowsPerPage = this.rowsPerPage;
         model.filterColour = this.filterColour;
+        model.filterDoors = this.filterDoors;
+        model.filterMake = this.filterMake;
+        model.filterModel = this.filterModel;
+        model.filterTransmission = this.filterTransmission;
         return model;
     }
 
