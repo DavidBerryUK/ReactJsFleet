@@ -16,6 +16,7 @@ import ListItemModel                            from '../../models/list/ListItem
 import PaginationButtons                        from "../../components/pagination/pagination-buttons-component";
 import React                                    from 'react';
 import RepositoryVehicle                        from '../../repository/vehicle/RepositoryVehicle';
+import RowsPerPageComponent                     from '../rowsPerPage/RowsPerPageComponent';
 import UniqueColourSelectorComponent            from '../uniqueColourSelectorSelector/UniqueColourSelectorComponent';
 import UniqueDoorsSelectorComponent             from '../uniqueDoorsSelectorSelector/UniqueDoorsSelectorComponent';
 import UniqueMakeSelectorComponent              from '../uniqueMakeSelector/UniqueMakeSelectorComponent';
@@ -119,6 +120,14 @@ function FleetListComponent() {
     setListFilter(filter);
   }
 
+  // Rows Per Page Changed
+  //
+  function rowsPerPageChangeHandler(rowsPerPage : number) {
+    var filter = listFilter.clone();
+    filter.rowsPerPage = rowsPerPage;
+    setListFilter(filter);
+  }
+
   //
   // Template for table
   //
@@ -200,11 +209,13 @@ function FleetListComponent() {
       <Box display="flex" justifyContent="left" >
         <Box p={2}>rows {vehicleList.totalRows}</Box>
             <Box display="flex" flexGrow={1} justifyContent="center">
-              <Box display="flex" p={1} >
+              <Box display="flex" pt={2} >
                   <PaginationButtons page={listFilter.pageNumber} pageCount={vehicleList.totalPages} onPageChanged={(page: number) => { onPageChangedHandler(page) }} />
               </Box>
             </Box>
-            <Box p={2}>row per page:{listFilter.rowsPerPage}</Box>
+            <Box p={2}>
+            <RowsPerPageComponent onRowsPerPageChanged={(rowsPerPage: number)=> {rowsPerPageChangeHandler(rowsPerPage)}}/>
+            </Box>
       </Box>      
       
     </Paper>
