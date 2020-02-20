@@ -11,12 +11,16 @@ interface IUniqueSelectorProperties {
     onSelectionChanged : (item: ListItemModel) => void
 }
 
+// Component
+// Displays a drop down list of car makes
+//
 const UniqueMakeSelectorComponent: React.FC<IUniqueSelectorProperties> = (props) => {
 
     const unselectedItem = new ListItemModel();
     const [list, setList] = React.useState(new Array<ListItemModel>());
     const [selectedItem, setSelectedItem] = React.useState(unselectedItem);       
 
+    // only get data once regardless of how many time the screen refreshed
     useMemo(() => {
         var repository = new RepositorySpecification();
         repository.getUniqueMakes()
@@ -25,6 +29,8 @@ const UniqueMakeSelectorComponent: React.FC<IUniqueSelectorProperties> = (props)
             });
     },[])
 
+    // the user selection has changed, raise an event to the host control
+    // indicating the value has been updated
     function valueChangedEventHandler(event : React.ChangeEvent) {    
         const typedEvent = event as React.ChangeEvent<HTMLInputElement>                    
         let item = list.find(item => item.entityValue === typedEvent.target.value) ?? unselectedItem;
@@ -32,6 +38,8 @@ const UniqueMakeSelectorComponent: React.FC<IUniqueSelectorProperties> = (props)
         props.onSelectionChanged(item);
     }
 
+    // Display Template
+    //
     return (
         <FormControl variant="outlined"  margin="dense" fullWidth>
             <Select displayEmpty    

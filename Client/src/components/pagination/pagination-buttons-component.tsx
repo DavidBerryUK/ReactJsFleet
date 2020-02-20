@@ -17,10 +17,12 @@ interface IPaginationProperties {
     onPageChanged : (page: number) => void
 }
 
+// Component
+// Displays a row of pagination buttons
+//
 const PaginationButtons: React.FC<IPaginationProperties> = (props) => {        
 
     const classStyles = classStyleDefinition();
-
     const [pageModel, setpageModel] = React.useState(new paginationModel(props.page, props.pageCount));
 
     useMemo(() => {        
@@ -28,6 +30,8 @@ const PaginationButtons: React.FC<IPaginationProperties> = (props) => {
         setpageModel(new paginationModel(props.page, props.pageCount))
     }, [props.page, props.pageCount]);
 
+    // The currently selected page has changed, inform the host container
+    //
     function changePageClickHandler(page : number ) {
         if ( page < 1) {            
             page = 1;
@@ -40,6 +44,8 @@ const PaginationButtons: React.FC<IPaginationProperties> = (props) => {
         }          
     }
 
+    // Display Template
+    //
     return (
         <ButtonGroup color="primary" className={classStyles.buttonGroup}>
             <Button disabled={!pageModel.showFirstPageButton}><SkipPreviousIcon fontSize="small" onClick={() => {changePageClickHandler(1)}}/></Button>
@@ -58,5 +64,3 @@ const PaginationButtons: React.FC<IPaginationProperties> = (props) => {
 }
 
 export default PaginationButtons;
-
-
