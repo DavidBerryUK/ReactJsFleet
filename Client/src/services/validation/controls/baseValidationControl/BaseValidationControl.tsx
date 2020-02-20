@@ -79,7 +79,7 @@ export default class BaseValidationControl<P,S> extends Component<P & IValidated
 
     // Callback when the user changed the state of the UI control
     //
-    handleOnChangeEvent(event : React.ChangeEvent) {
+    valueChangedEventHandler(event : React.ChangeEvent) {
         // 
         // obtain new value
         //

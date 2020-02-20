@@ -9,15 +9,21 @@ export default class RepositoryVehicle extends BaseCollectionRepository<VehicleM
     public getVehicleList(
         pageNumber: number,
         rowsPerPage: number,        
-        sortField: string = '', 
-    sortDirection: string = '') : ApiResponse<ApiBaseCollectionResponseModel<VehicleModel>>{
+        sortField: string = '',         
+        sortDirection: string = '',
+        filterColour: string = '',) : ApiResponse<ApiBaseCollectionResponseModel<VehicleModel>>{
 
         var endpoint = `/api/vehicle?pageNumber=${pageNumber}&rowsPerPage=${rowsPerPage}`
+        
         if ( sortField ) {
-            endpoint =  `${endpoint}&sortField=${sortField}`
+            endpoint =  `${endpoint}&sortBy=${sortField}`
             if ( sortDirection.length > 0 ) {   
-                endpoint =  `${endpoint}&sortDirection=${sortDirection}`
+                endpoint =  `${endpoint}&sortDir=${sortDirection}`
             }
+        }
+
+        if ( filterColour !== '') {
+            endpoint =  `${endpoint}&colour=${filterColour}`
         }
 
         return this.getList(endpoint, new FactoryVehicleModel());        

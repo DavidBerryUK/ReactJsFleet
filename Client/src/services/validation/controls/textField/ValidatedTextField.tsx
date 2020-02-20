@@ -30,7 +30,7 @@ export default class ValidatedTextField extends BaseValidationControl<TextFieldP
                 margin="normal"
                 error = {!this.state.isValid}
                 helperText = {this.state.validationError}
-                onChange={(event) => { this.handleOnChangeEvent(event) }}
+                onChange={(event) => { this.valueChangedEventHandler(event) }}
                 value={this.state.text}
             />
         );

@@ -20,7 +20,7 @@ const UniqueTransmissionSelectorComponent: React.FC = () => {
             });
     },[])
 
-    function handleOnChangeEvent(event : React.ChangeEvent) {    
+    function valueChangedEventHandler(event : React.ChangeEvent) {    
         const typedEvent = event as React.ChangeEvent<HTMLInputElement>    
         setSelectedItem(typedEvent.target.value as string);
     }
@@ -28,7 +28,7 @@ const UniqueTransmissionSelectorComponent: React.FC = () => {
     return (
         <FormControl variant="outlined"  margin="dense" fullWidth>
             <Select displayEmpty    
-                onChange={(event: any) => { handleOnChangeEvent(event) }}
+                onChange={(event: any) => { valueChangedEventHandler(event) }}
                 value={selectedItem}>          
                 <MenuItem  value=""><em>none</em></MenuItem>
                     {list.map((item: ListItemModel) => (

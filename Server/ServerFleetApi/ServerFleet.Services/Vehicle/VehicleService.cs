@@ -33,17 +33,17 @@ namespace ServerFleet.Services.Vehicle
             if (request != null)
             {
                 data = data
-                    .FilterBodyType(request.FilterBodyType)
-                    .FilterColour(request.FilterColour)
-                    .FilterFuel(request.FilterFuel)
-                    .FilterMake(request.FilterMake)
-                    .FilterModel(request.FilterModel)
-                    .FilterRegistration(request.FilterRegistration)
-                    .FilterTransmission(request.FilterTransmission)
+                    .FilterBodyType(request.BodyType)
+                    .FilterColour(request.Colour)
+                    .FilterFuel(request.Fuel)
+                    .FilterMake(request.Make)
+                    .FilterModel(request.Model)
+                    .FilterRegistration(request.Reg)
+                    .FilterTransmission(request.Transmission)
                     .FilterDoors(request.FilterDoors)
-                    .FilterMpg(request.FilterMpg)
-                    .FilterMileage(request.FilterMileage)
-                    .SortByField(request.SortField, request.SortDirection)
+                    .FilterMpg(request.Mpg)
+                    .FilterMileage(request.Mileage)
+                    .SortByField(request.SortBy, request.SortDir)
                     .ToList();
             }
 
@@ -55,7 +55,7 @@ namespace ServerFleet.Services.Vehicle
 
             if (request.RowsPerPage != 0)
             {
-                data = data.Skip(request.PageNumber * request.RowsPerPage).Take(request.RowsPerPage)
+                data = data.Skip((request.PageNumber -1 )* request.RowsPerPage).Take(request.RowsPerPage)
                     .ToList();
             }
 

@@ -1,25 +1,26 @@
-import { enumColumnNames }                    from './fleetListFilterModel'
-import { enumSortDirection }                  from './fleetListFilterModel'
-import { makeStyles }                         from '@material-ui/core';
-import { Paper }                              from '@material-ui/core';
-import { Table }                              from '@material-ui/core';
-import { TableBody }                          from '@material-ui/core';
-import { TableCell}                           from '@material-ui/core';
-import { TableHead }                          from '@material-ui/core';
-import { TableRow }                           from '@material-ui/core';
-import { TableSortLabel }                     from '@material-ui/core';
-import { useMemo }                            from 'react';
-import ApiBaseCollectionResponseModel         from '../../models/apiBase/ApiBaseCollectionResponseModel';
-import FleetListFilterModel                   from './fleetListFilterModel'
-import PaginationButtons                      from "../../components/pagination/pagination-buttons-component";
-import React                                  from 'react';
-import RepositoryVehicle                      from '../../repository/vehicle/RepositoryVehicle';
-import UniqueColourSelectorComponent          from '../uniqueColourSelectorSelector/UniqueColourSelectorComponent';
-import UniqueDoorsSelectorComponent           from '../uniqueDoorsSelectorSelector/UniqueDoorsSelectorComponent';
-import UniqueMakeSelectorComponent            from '../uniqueMakeSelector/UniqueMakeSelectorComponent';
-import UniqueModelSelectorComponent           from '../uniqueModelSelector/UniqueModelSelectorComponent';
-import UniqueTransmissionSelectorComponent    from '../uniqueTransmissionSelector/UniqueTransmissionSelectorComponent';
-import VehicleModel                           from '../../models/vehicle/VehicleModel';
+import { enumColumnNames }                      from './fleetListFilterModel'
+import { enumSortDirection }                    from './fleetListFilterModel'
+import { makeStyles }                           from '@material-ui/core';
+import { Paper }                                from '@material-ui/core';
+import { Table }                                from '@material-ui/core';
+import { TableBody }                            from '@material-ui/core';
+import { TableCell }                            from '@material-ui/core';
+import { TableHead }                            from '@material-ui/core';
+import { TableRow }                             from '@material-ui/core';
+import { TableSortLabel }                       from '@material-ui/core';
+import { useMemo }                              from 'react';
+import ApiBaseCollectionResponseModel           from '../../models/apiBase/ApiBaseCollectionResponseModel';
+import FleetListFilterModel                     from './fleetListFilterModel'
+import ListItemModel                            from '../../models/list/ListItemModel';
+import PaginationButtons                        from "../../components/pagination/pagination-buttons-component";
+import React                                    from 'react';
+import RepositoryVehicle                        from '../../repository/vehicle/RepositoryVehicle';
+import UniqueColourSelectorComponent            from '../uniqueColourSelectorSelector/UniqueColourSelectorComponent';
+import UniqueDoorsSelectorComponent             from '../uniqueDoorsSelectorSelector/UniqueDoorsSelectorComponent';
+import UniqueMakeSelectorComponent              from '../uniqueMakeSelector/UniqueMakeSelectorComponent';
+import UniqueModelSelectorComponent             from '../uniqueModelSelector/UniqueModelSelectorComponent';
+import UniqueTransmissionSelectorComponent      from '../uniqueTransmissionSelector/UniqueTransmissionSelectorComponent';
+import VehicleModel                             from '../../models/vehicle/VehicleModel';
 
 function FleetListComponent() {
 
@@ -37,31 +38,36 @@ function FleetListComponent() {
   const [listFilter, setListFilter] = React.useState(new FleetListFilterModel());
   const [vehicleList, setVehicleList] = React.useState(new Array<VehicleModel>());
 
+  //
+  // Handles page refreshing, this is only executed when the object 
+  // 'listFilter' is updated
+  //
   useMemo(() => {
-
     var repositoryVehicle = new RepositoryVehicle();
     repositoryVehicle.getVehicleList(listFilter.pageNumber,
       listFilter.rowsPerPage,
       listFilter.sortedColumn,
-      listFilter.sortDirection)
+      listFilter.sortDirection,
+      listFilter.filterColour.entityValue)
       .onSuccess((vehicleListData: ApiBaseCollectionResponseModel<VehicleModel>) => {
         setVehicleList(vehicleListData.entities!);
       });
 
   }, [listFilter]);
 
-  function onPageChanged(page: number) : void {
-    console.log("FLEET LIST COMPONENT - on page changed");
-    console.log(page);
+  //
+  // handler for the pagination control
+  //
+  function onPageChangedHandler(page: number): void {
     var filter = listFilter.clone();
     filter.pageNumber = page;
     setListFilter(filter);
   }
 
   //
-  // Handle column header clicks
+  // Handle column header clicks for sorting
   //
-  function handleColumnHeaderSortClicked(column: enumColumnNames) {
+  function columnHeaderSortClickHandler(column: enumColumnNames) {
     var filter = listFilter.clone();
     if (column === listFilter.sortedColumn) {
       if (listFilter.sortDirection === enumSortDirection.asc) {
@@ -76,11 +82,17 @@ function FleetListComponent() {
     setListFilter(filter);
   }
 
+  function filterColourChangeHandler(item : ListItemModel) {
+    var filter = listFilter.clone();
+    filter.filterColour = item;
+    setListFilter(filter);
+  }
+
   //
-  // Template
+  // Template for table
   //
   return (
-    <Paper className={classes.root}>      
+    <Paper className={classes.root}>
       <Table className={classes.table} stickyHeader size="small"  >
         <TableHead>
           <TableRow>
@@ -88,40 +100,55 @@ function FleetListComponent() {
               <TableSortLabel
                 active={listFilter.sortedColumn === enumColumnNames.registration}
                 direction={listFilter.sortDirection}
-                onClick={() => { handleColumnHeaderSortClicked(enumColumnNames.registration) }} ></TableSortLabel>
+                onClick={() => { columnHeaderSortClickHandler(enumColumnNames.registration) }}>
+              </TableSortLabel>
               Registration
               </TableCell>
             <TableCell>
               <TableSortLabel
                 active={listFilter.sortedColumn === enumColumnNames.make}
                 direction={listFilter.sortDirection}
-                onClick={() => { handleColumnHeaderSortClicked(enumColumnNames.make) }}></TableSortLabel>
-              Make<UniqueMakeSelectorComponent/></TableCell>
+                onClick={() => { columnHeaderSortClickHandler(enumColumnNames.make) }}>
+              </TableSortLabel>
+              Make
+              <UniqueMakeSelectorComponent />
+            </TableCell>
             <TableCell>
               <TableSortLabel
                 active={listFilter.sortedColumn === enumColumnNames.model}
                 direction={listFilter.sortDirection}
-                onClick={() => { handleColumnHeaderSortClicked(enumColumnNames.model) }}></TableSortLabel>
-              Model<UniqueModelSelectorComponent/></TableCell>
-              <TableCell>
+                onClick={() => { columnHeaderSortClickHandler(enumColumnNames.model) }}>
+              </TableSortLabel>
+              Model
+              <UniqueModelSelectorComponent />
+            </TableCell>
+            <TableCell>
               <TableSortLabel
                 active={listFilter.sortedColumn === enumColumnNames.colour}
                 direction={listFilter.sortDirection}
-                onClick={() => { handleColumnHeaderSortClicked(enumColumnNames.colour) }}></TableSortLabel>
-              Colour<UniqueColourSelectorComponent/>
-              </TableCell>
+                onClick={() => { columnHeaderSortClickHandler(enumColumnNames.colour) }}>
+              </TableSortLabel>
+              Colour
+              <UniqueColourSelectorComponent onSelectionChanged={(item: ListItemModel)=>{ filterColourChangeHandler(item)}} />
+            </TableCell>
             <TableCell>
               <TableSortLabel
                 active={listFilter.sortedColumn === enumColumnNames.Transmission}
                 direction={listFilter.sortDirection}
-                onClick={() => { handleColumnHeaderSortClicked(enumColumnNames.Transmission) }}></TableSortLabel>
-              Transmission<UniqueTransmissionSelectorComponent/></TableCell>
+                onClick={() => { columnHeaderSortClickHandler(enumColumnNames.Transmission) }}>
+              </TableSortLabel>
+              Transmission
+              <UniqueTransmissionSelectorComponent />
+            </TableCell>
             <TableCell align="right">
               <TableSortLabel
                 active={listFilter.sortedColumn === enumColumnNames.doors}
                 direction={listFilter.sortDirection}
-                onClick={() => { handleColumnHeaderSortClicked(enumColumnNames.doors) }} ></TableSortLabel>
-              Doors<UniqueDoorsSelectorComponent/></TableCell>
+                onClick={() => { columnHeaderSortClickHandler(enumColumnNames.doors) }}>
+              </TableSortLabel>
+              Doors
+              <UniqueDoorsSelectorComponent />
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -139,7 +166,7 @@ function FleetListComponent() {
           ))}
         </TableBody>
       </Table>
-      <PaginationButtons page={listFilter.pageNumber} pageCount={20} onPageChanged={(page:number) => { onPageChanged(page) }}  />
+      <PaginationButtons page={listFilter.pageNumber} pageCount={20} onPageChanged={(page: number) => { onPageChangedHandler(page) }} />
     </Paper>
   );
 }

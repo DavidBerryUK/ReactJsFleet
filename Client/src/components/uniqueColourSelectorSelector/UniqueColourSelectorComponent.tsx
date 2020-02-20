@@ -7,10 +7,15 @@ import ListItemModel                            from '../../models/list/ListItem
 import React                                    from 'react';
 import RepositorySpecification                  from '../../repository/specification/RepositorySpecification';
 
-const UniqueMakeSelectorComponent: React.FC = () => {
+interface IUniqueMakeSelectorProperties {
+    onSelectionChanged : (item: ListItemModel) => void
+}
 
+const UniqueColourSelectorComponent: React.FC<IUniqueMakeSelectorProperties> = (props) => {
+
+    const unselectedItem = new ListItemModel();
     const [list, setList] = React.useState(new Array<ListItemModel>());
-    const [selectedItem, setSelectedItem] = React.useState("");    
+    const [selectedItem, setSelectedItem] = React.useState(unselectedItem);    
 
     useMemo(() => {
         var repository = new RepositorySpecification();
@@ -20,16 +25,18 @@ const UniqueMakeSelectorComponent: React.FC = () => {
             });
     }, [])
 
-    function handleOnChangeEvent(event : React.ChangeEvent) {    
-        const typedEvent = event as React.ChangeEvent<HTMLInputElement>    
-        setSelectedItem(typedEvent.target.value as string);
+    function valueChangedEventHandler(event : React.ChangeEvent) {    
+        const typedEvent = event as React.ChangeEvent<HTMLInputElement>                    
+        let item = list.find(item => item.entityValue === typedEvent.target.value) ?? unselectedItem;
+        setSelectedItem(item);                
+        props.onSelectionChanged(item);
     }
 
     return (
         <FormControl variant="outlined"  margin="dense" fullWidth>
             <Select displayEmpty    
-                onChange={(event: any) => { handleOnChangeEvent(event) }}
-                value={selectedItem}>          
+                onChange={(event: any) => { valueChangedEventHandler(event) }}
+                value={selectedItem.entityValue}>          
                 <MenuItem  value=""><em>none</em></MenuItem>
                     {list.map((item: ListItemModel) => (
                         <MenuItem key={item.entityKey} value={item.id}>{item.text}</MenuItem>
@@ -39,4 +46,4 @@ const UniqueMakeSelectorComponent: React.FC = () => {
     )
 }
 
-export default UniqueMakeSelectorComponent;
+export default UniqueColourSelectorComponent;

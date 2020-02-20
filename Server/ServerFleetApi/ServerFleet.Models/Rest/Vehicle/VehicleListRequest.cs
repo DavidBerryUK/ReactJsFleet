@@ -4,17 +4,17 @@
     {
         public int PageNumber { get; set; }
         public int RowsPerPage { get; set; }
-        public string SortField { get; set; }
-        public string SortDirection { get; set; }
+        public string SortBy { get; set; }
+        public string SortDir { get; set; }
         public int? FilterDoors { get; set; }
-        public string FilterRegistration { get; set; }
-        public string FilterMake { get; set; }
-        public string FilterModel { get; set; }
-        public string FilterColour { get; set; }
-        public int? FilterMileage { get; set; }
-        public string FilterFuel { get; set; }
-        public string FilterBodyType { get; set; }
-        public double? FilterMpg { get; set; }
-        public string FilterTransmission { get; set; }
+        public string Reg { get; set; }
+        public string Make { get; set; }
+        public string Model { get; set; }
+        public string Colour { get; set; }
+        public int? Mileage { get; set; }
+        public string Fuel { get; set; }
+        public string BodyType { get; set; }
+        public double? Mpg { get; set; }
+        public string Transmission { get; set; }
     }
 }

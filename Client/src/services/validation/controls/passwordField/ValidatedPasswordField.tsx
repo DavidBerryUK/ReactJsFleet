@@ -58,7 +58,7 @@ export default class ValidatedPasswordField extends BaseValidationControl<InputP
           type =  {(this.state as IValidationPasswordState).isPasswordShown ? 'text' : 'password'}
           labelWidth={80}          
           autoComplete="off"          
-          onChange={(event) => { this.handleOnChangeEvent(event) }}
+          onChange={(event) => { this.valueChangedEventHandler(event) }}
           error = {!this.state.isValid}
           endAdornment={
             <InputAdornment position="end">

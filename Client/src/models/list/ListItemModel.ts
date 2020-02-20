@@ -3,9 +3,8 @@ import { IApiModel } from "../interfaces/IApiModel";
 export default class ListItemModel  implements IApiModel {
     public static className = "ListItemModel"
 
-    public id? : string;
-    public text? : string;
-    
+    public id : string = "";
+    public text : string = "";    
 
     public get entityName(): string {
         return ListItemModel.className;

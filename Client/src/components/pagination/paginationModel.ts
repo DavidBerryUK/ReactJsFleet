@@ -14,10 +14,7 @@ export default class paginationModel {
      private firstPage : number = 0;
      private lastPage : number = 0;
 
-     constructor(page: number, pageCount: number) {
-
-        console.log("paginationModel:Constructor");
-        
+     constructor(page: number, pageCount: number) {        
          this.page = page;
          this.pageCount = pageCount;
          this.calculateFirstPage();
@@ -29,16 +26,14 @@ export default class paginationModel {
          this.showPreviousPageButton = this.page > 1;
          this.showLastPageButton = ( this.page < this.pageCount)
          this.showNextPageButton = ( this.page < this.pageCount)
-         this.showSkipNextPageButton = ( this.page < this.pageCount)
-         
+         this.showSkipNextPageButton = ( this.page < this.pageCount)         
      }
 
     private calculateFirstPage() {
         this.firstPage = this.page - this.numbersToShowEachSideOfCurrentPage;
         if (this.firstPage < 1) {
             this.firstPage = 1;
-        }
-        
+        }        
     }
 
     private calculateLastPage() {
