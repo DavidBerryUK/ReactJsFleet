@@ -28,7 +28,7 @@ namespace ServerFleet.Services.Vehicle
         public BaseResponseCollection<VehicleJson> GetWithFilter(VehicleListRequest request)
         {
             var data = _vehicleFactory.GetAll();
-            var rowCount = data.Count();
+            
 
             if (request != null)
             {
@@ -46,6 +46,8 @@ namespace ServerFleet.Services.Vehicle
                     .SortByField(request.SortBy, request.SortDir)
                     .ToList();
             }
+
+            var rowCount = data.Count();
 
             //
             // This is a bit 'bodgy' as is hard coded list, when connecting to a real database we need to

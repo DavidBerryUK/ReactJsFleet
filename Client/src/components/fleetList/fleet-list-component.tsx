@@ -1,3 +1,4 @@
+import { Box }                                  from '@material-ui/core';
 import { enumColumnNames }                      from './fleetListFilterModel'
 import { enumSortDirection }                    from './fleetListFilterModel'
 import { makeStyles }                           from '@material-ui/core';
@@ -36,7 +37,7 @@ function FleetListComponent() {
 
   const classes = useStyles();
   const [listFilter, setListFilter] = React.useState(new FleetListFilterModel());
-  const [vehicleList, setVehicleList] = React.useState(new Array<VehicleModel>());
+  const [vehicleList, setVehicleList] = React.useState(new ApiBaseCollectionResponseModel<VehicleModel>());
 
   //
   // Handles page refreshing, this is only executed when the object 
@@ -46,7 +47,7 @@ function FleetListComponent() {
     var repositoryVehicle = new RepositoryVehicle();
     repositoryVehicle.getVehicleList(listFilter)
       .onSuccess((vehicleListData: ApiBaseCollectionResponseModel<VehicleModel>) => {
-        setVehicleList(vehicleListData.entities!);
+        setVehicleList(vehicleListData);
       });
 
   }, [listFilter]);
@@ -182,7 +183,7 @@ function FleetListComponent() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {vehicleList.map(row => (
+          {vehicleList.entities?.map(row => (
             <TableRow key={row.entityKey} hover>
               <TableCell component="th" scope="row">
                 {row.registration}
@@ -196,7 +197,16 @@ function FleetListComponent() {
           ))}
         </TableBody>
       </Table>
-      <PaginationButtons page={listFilter.pageNumber} pageCount={20} onPageChanged={(page: number) => { onPageChangedHandler(page) }} />
+      <Box display="flex" justifyContent="left" >
+        <Box p={2}>rows {vehicleList.totalRows}</Box>
+            <Box display="flex" flexGrow={1} justifyContent="center">
+              <Box display="flex" p={1} >
+                  <PaginationButtons page={listFilter.pageNumber} pageCount={vehicleList.totalPages} onPageChanged={(page: number) => { onPageChangedHandler(page) }} />
+              </Box>
+            </Box>
+            <Box p={2}>row per page:{listFilter.rowsPerPage}</Box>
+      </Box>      
+      
     </Paper>
   );
 }
