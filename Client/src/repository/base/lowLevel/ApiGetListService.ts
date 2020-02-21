@@ -7,9 +7,9 @@ import ApiBaseError                             from "../ApiBaseError";
 import axios                                    from 'axios';
 import BaseApiConfig                            from "../ApiBaseConfig";
 import ValidationMessage                        from "../../../models/validation/ValidationMessage";
-import FactoryApiBaseCollectionResponseModel from "../../../modelFactories/FactoryApiBaseCollectionResponseModel";
+import FactoryApiBaseCollectionResponseModel    from "../../../modelFactories/FactoryApiBaseCollectionResponseModel";
 
-export default class ApiGetService<T extends IApiModel> {
+export default class ApiGetListService<T extends IApiModel> {
   public getList(
     endpointUrl: string,
     modelFactory: IModelFactory<T>

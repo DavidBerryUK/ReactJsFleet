@@ -19,17 +19,23 @@ namespace ServerFleet.Services.Vehicle
             _vehicleFactory = vehicleFactory;
         }
 
-        public VehicleJson GetByRegistration(string registration)
+        public BaseItemResponse<VehicleJson> GetByRegistration(string registration)
         {
             var data = _vehicleFactory.GetAll().FirstOrDefault(o => o.Registration == registration);
-            var response = Mapper.Map<VehicleJson>(data);
+            var response = new BaseItemResponse<VehicleJson>
+            {
+                Entity = Mapper.Map<VehicleJson>(data)
+            };
             return response;
         }
 
-        public VehicleJson GetByVehicleId(int vehicleId)
+        public BaseItemResponse<VehicleJson> GetByVehicleId(int vehicleId)
         {
             var data = _vehicleFactory.GetAll().FirstOrDefault(o => o.VehicleId== vehicleId);
-            var response = Mapper.Map<VehicleJson>(data);
+            var response = new BaseItemResponse<VehicleJson>
+            {
+                Entity = Mapper.Map<VehicleJson>(data)
+            };
             return response;
         }
 

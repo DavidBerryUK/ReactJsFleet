@@ -7,7 +7,7 @@ import axios                                    from 'axios';
 import BaseApiConfig                            from '../ApiBaseConfig';
 import ValidationMessage                        from '../../../models/validation/ValidationMessage';
 
-export default class ApiPostService<T extends IApiModel> {
+export default class ApiPostItemService<T extends IApiModel> {
 
     public post(
         endpointUrl: string,

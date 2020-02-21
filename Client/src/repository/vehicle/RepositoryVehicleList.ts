@@ -5,7 +5,7 @@ import FactoryVehicleModel                      from "../../modelFactories/Facto
 import VehicleModel                             from "../../models/vehicle/VehicleModel";
 import FleetListFilterModel                     from "../../components/fleetList/fleetListFilterModel";
 
-export default class RepositoryVehicle extends BaseCollectionRepository<VehicleModel> {
+export default class RepositoryVehicleList extends BaseCollectionRepository<VehicleModel> {
 
     public getVehicleList(filter : FleetListFilterModel) : ApiResponse<ApiBaseCollectionResponseModel<VehicleModel>>{
 
