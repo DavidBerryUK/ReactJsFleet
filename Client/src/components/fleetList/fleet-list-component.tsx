@@ -86,6 +86,7 @@ function FleetListComponent() {
   function filterRegistrationChangeHandler(searchText : string) {
     var filter = listFilter.clone();
     filter.filterRegistration = searchText;
+    console.log("Registration changed:" + searchText);
     setListFilter(filter);
   }
 
