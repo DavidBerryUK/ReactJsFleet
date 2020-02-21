@@ -2,6 +2,7 @@
 {
     public class VehicleJson
     {
+        public int VehicleId { get; set; }
         public int Doors { get; set; }
         public string Registration { get; set; }
         public string Make { get; set; }

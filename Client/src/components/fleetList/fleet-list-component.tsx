@@ -1,4 +1,5 @@
 import { Box }                                  from '@material-ui/core';
+import { Button }                               from '@material-ui/core';
 import { enumColumnNames }                      from './fleetListFilterModel'
 import { enumSortDirection }                    from './fleetListFilterModel'
 import { makeStyles }                           from '@material-ui/core';
@@ -18,6 +19,7 @@ import PaginationButtons                        from "../../components/paginatio
 import React                                    from 'react';
 import RegistrationSearchBoxComponent           from '../registrationSearchBox/RegistrationSearchBoxComponent';
 import RepositoryVehicle                        from '../../repository/vehicle/RepositoryVehicle';
+import RouteConstants                           from '../../routing/RouteConstants';
 import RowsPerPageComponent                     from '../rowsPerPage/RowsPerPageComponent';
 import UniqueColourSelectorComponent            from '../uniqueColourSelectorSelector/UniqueColourSelectorComponent';
 import UniqueDoorsSelectorComponent             from '../uniqueDoorsSelectorSelector/UniqueDoorsSelectorComponent';
@@ -87,7 +89,7 @@ function FleetListComponent() {
   function filterRegistrationChangeHandler(searchText : string) {
     debounceUtility.debounceStringCallback(searchText, 500, ( value:string ) => {   
       var filter = listFilter.clone();
-      filter.filterRegistration = searchText;
+      filter.filterRegistration = value;
       setListFilter(filter);
     });    
   }
@@ -209,6 +211,8 @@ function FleetListComponent() {
               <UniqueDoorsSelectorComponent  onSelectionChanged={(item: ListItemModel)=>{ filterDoorsChangeHandler(item)}} />
             </TableCell>
 
+            <TableCell></TableCell>
+
           </TableRow>          
         </TableHead>
         <TableBody>
@@ -222,6 +226,12 @@ function FleetListComponent() {
               <TableCell>{row.colour}</TableCell>
               <TableCell>{row.transmission}</TableCell>
               <TableCell align="right">{row.doors}</TableCell>
+              <TableCell>
+                <Button   color="primary" 
+                          variant="contained" 
+                          size="small" 
+                          href={`${RouteConstants.FleetDetail}/${row.entityKey}`}>view</Button>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

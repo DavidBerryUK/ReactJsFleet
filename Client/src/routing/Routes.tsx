@@ -17,7 +17,7 @@ const Routes: React.SFC = () => {
                 <Route exact path="/" component={App} />
                 <Route path={RouteConstants.Dashboard} component={DashboardPage} />
                 <Route path={RouteConstants.DefectSheet} component={DefectSheetPage} />
-                <Route path={RouteConstants.FleetDetail} component={FleetDetailPage} />
+                <Route path={`${RouteConstants.FleetDetail}/:id`} component={FleetDetailPage} />
                 <Route path={RouteConstants.FleetList} component={FleetListPage} />
                 <Route path={RouteConstants.Login} component={LoginPage} />                
             </div>

@@ -29,7 +29,6 @@ namespace ServerFleet.Services.Vehicle
         {
             var data = _vehicleFactory.GetAll();
             
-
             if (request != null)
             {
                 data = data

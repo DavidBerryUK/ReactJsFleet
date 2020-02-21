@@ -3,6 +3,7 @@ import { IApiModel } from "../interfaces/IApiModel";
 export default class VehicleModel  implements IApiModel {
     public static className = "VehicleModel"
 
+    public vehicleId? : Number;
     public doors? : Number;
     public registration? : String;
     public make? : String;
@@ -19,7 +20,7 @@ export default class VehicleModel  implements IApiModel {
     }
 
     public get entityKey(): string {
-        return `${this.registration}`;
+        return `${this.vehicleId}`;
     }
 
     public get entityValue(): string {
