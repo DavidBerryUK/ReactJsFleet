@@ -39,7 +39,7 @@ namespace ServerFleet.Services.Vehicle
                     .FilterMake(request.Make)
                     .FilterModel(request.Model)
                     .FilterRegistration(request.Reg)
-                    .FilterTransmission(request.Transmission)
+                    .FilterTransmission(request.Trans)
                     .FilterDoors(request.Doors)
                     .FilterMpg(request.Mpg)
                     .FilterMileage(request.Mileage)

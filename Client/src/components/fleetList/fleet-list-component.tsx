@@ -11,11 +11,12 @@ import { TableRow }                             from '@material-ui/core';
 import { TableSortLabel }                       from '@material-ui/core';
 import { useMemo }                              from 'react';
 import ApiBaseCollectionResponseModel           from '../../models/apiBase/ApiBaseCollectionResponseModel';
+import debounceUtility                          from '../../utilities/debounceUtility';
 import FleetListFilterModel                     from './fleetListFilterModel'
 import ListItemModel                            from '../../models/list/ListItemModel';
 import PaginationButtons                        from "../../components/pagination/pagination-buttons-component";
 import React                                    from 'react';
-import RegistrationSearchBoxComponent from '../registrationSearchBox/RegistrationSearchBoxComponent';
+import RegistrationSearchBoxComponent           from '../registrationSearchBox/RegistrationSearchBoxComponent';
 import RepositoryVehicle                        from '../../repository/vehicle/RepositoryVehicle';
 import RowsPerPageComponent                     from '../rowsPerPage/RowsPerPageComponent';
 import UniqueColourSelectorComponent            from '../uniqueColourSelectorSelector/UniqueColourSelectorComponent';
@@ -84,10 +85,11 @@ function FleetListComponent() {
   // Filter Handler - Registration
   //
   function filterRegistrationChangeHandler(searchText : string) {
-    var filter = listFilter.clone();
-    filter.filterRegistration = searchText;
-    console.log("Registration changed:" + searchText);
-    setListFilter(filter);
+    debounceUtility.debounceStringCallback(searchText, 500, ( value:string ) => {   
+      var filter = listFilter.clone();
+      filter.filterRegistration = searchText;
+      setListFilter(filter);
+    });    
   }
 
   // Filter Handler - Colour
@@ -137,8 +139,6 @@ function FleetListComponent() {
     filter.rowsPerPage = rowsPerPage;
     setListFilter(filter);
   }
-
-  
 
   //
   // Template for table

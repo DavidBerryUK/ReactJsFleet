@@ -35,7 +35,11 @@ export default class RepositoryVehicle extends BaseCollectionRepository<VehicleM
         }
 
         if ( filter.filterTransmission.entityValue !== '') {
-            endpoint =  `${endpoint}&transmission=${filter.filterTransmission.entityValue}`
+            endpoint =  `${endpoint}&trans=${filter.filterTransmission.entityValue}`
+        }
+
+        if ( filter.filterRegistration !== '') {
+            endpoint =  `${endpoint}&reg=${filter.filterRegistration}`
         }
 
         return this.getList(endpoint, new FactoryVehicleModel());        

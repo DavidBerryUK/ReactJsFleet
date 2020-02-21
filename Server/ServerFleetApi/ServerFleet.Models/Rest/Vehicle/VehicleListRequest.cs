@@ -15,6 +15,6 @@
         public string Fuel { get; set; }
         public string BodyType { get; set; }
         public double? Mpg { get; set; }
-        public string Transmission { get; set; }
+        public string Trans { get; set; }
     }
 }
