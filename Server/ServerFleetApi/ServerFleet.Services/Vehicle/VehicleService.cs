@@ -6,6 +6,7 @@ using ServerFleet.Services.Vehicle.PipesAndFilters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Versioning;
 
 namespace ServerFleet.Services.Vehicle
 {
@@ -21,6 +22,13 @@ namespace ServerFleet.Services.Vehicle
         public VehicleJson GetByRegistration(string registration)
         {
             var data = _vehicleFactory.GetAll().FirstOrDefault(o => o.Registration == registration);
+            var response = Mapper.Map<VehicleJson>(data);
+            return response;
+        }
+
+        public VehicleJson GetByVehicleId(int vehicleId)
+        {
+            var data = _vehicleFactory.GetAll().FirstOrDefault(o => o.VehicleId== vehicleId);
             var response = Mapper.Map<VehicleJson>(data);
             return response;
         }

@@ -22,10 +22,16 @@ namespace ServerFleet.Api.Controllers
             return Ok(_vehicleService.GetWithFilter(request));
         }
 
-        [HttpGet("{registration}")]
+        [HttpGet("reg/{registration}")]
         public ActionResult<VehicleJson> GetByRegistration(string registration)
         {
             return Ok(_vehicleService.GetByRegistration(registration));
+        }
+
+        [HttpGet("vehicleId")]
+        public ActionResult<VehicleJson> GetByVehicleId(int vehicleId)
+        {
+            return Ok(_vehicleService.GetByVehicleId(vehicleId));
         }
     }
 }
