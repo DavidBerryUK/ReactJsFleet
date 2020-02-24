@@ -29,18 +29,9 @@ export default class FleetListFilterModel {
     filterModel  : ListItemModel = new ListItemModel();
     filterTransmission  : ListItemModel = new ListItemModel();        
 
-    clone() : FleetListFilterModel {
-        var model = new FleetListFilterModel();        
-        model.sortDirection = this.sortDirection;
-        model.sortedColumn = this.sortedColumn;
-        model.pageNumber = this.pageNumber;
-        model.rowsPerPage = this.rowsPerPage;
-        model.filterColour = this.filterColour;
-        model.filterDoors = this.filterDoors;
-        model.filterMake = this.filterMake;
-        model.filterModel = this.filterModel;
-        model.filterRegistration = this.filterRegistration;
-        model.filterTransmission = this.filterTransmission;
+    
+    clone() : FleetListFilterModel {              
+        var model = Object.assign(new FleetListFilterModel(), this);
         return model;
     }
 

@@ -1,14 +1,16 @@
-import { ApplicationContextProvider }           from '../../services/applicationContext/ApplicationContext'
+import { ApplicationContext }                   from '../../services/applicationContext/ApplicationContext'
 import { Button }                               from '@material-ui/core';
 import { makeStyles }                           from '@material-ui/styles';
 import { Paper }                                from '@material-ui/core';
 import { Typography }                           from '@material-ui/core';
 import ApplicationContextModel                  from '../../services/applicationContext/models/ApplicationContextModel';
+import ApplicationContextStateModel             from '../../services/applicationContext/models/ApplicationContextStateModel';
 import CssBaseline                              from '@material-ui/core/CssBaseline';
 import DashboardButton                          from '../dashboardButton/dashboard-button-component';
 import DemoPageTitle                            from '../demoPageTitle/demoPageTitle-component';
 import React                                    from 'react';
 import RouteConstants                           from '../../routing/RouteConstants';
+import SampleCounterComponent                   from '../sampleCounterComponent/SampleCounterComponent';
 
 const App: React.FC = () => {
 
@@ -37,7 +39,7 @@ const App: React.FC = () => {
   const classes = useStyles();
 
   return (
-    <ApplicationContextProvider value={ new ApplicationContextModel(0)}>
+    <ApplicationContext.Provider value={ new ApplicationContextModel( new ApplicationContextStateModel())}>
       <CssBaseline/>
       <DemoPageTitle title="Home Page"/>
       <DashboardButton/>
@@ -52,8 +54,9 @@ const App: React.FC = () => {
           <Button variant="contained" color="primary" className={classes.button} href={RouteConstants.FleetDetail}>Fleet Detail</Button>
         </div>
         </Paper>
+        <SampleCounterComponent/>
       </div>
-    </ApplicationContextProvider>
+    </ApplicationContext.Provider>
   );
 }
 

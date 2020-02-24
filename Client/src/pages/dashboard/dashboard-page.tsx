@@ -5,6 +5,7 @@ import DashboardButton                          from '../../components/dashboard
 import DemoPageTitle                            from '../../components/demoPageTitle/demoPageTitle-component';
 import React                                    from 'react';
 import RouteConstants                           from '../../routing/RouteConstants';
+import SampleCounterComponent                   from '../../components/sampleCounterComponent/SampleCounterComponent';
 
 const DashboardPage: React.FC = () => {
 
@@ -40,6 +41,7 @@ const DashboardPage: React.FC = () => {
           <Button variant="contained" color="primary" className={classes.button} href={RouteConstants.FleetDetail}>Fleet Detail</Button>
         </div>
       </Paper>
+      <SampleCounterComponent/>
     </div>
   );
 };

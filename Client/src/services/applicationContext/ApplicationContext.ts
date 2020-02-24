@@ -1,10 +1,9 @@
-import React                                    from 'react';
+import { IApplicationContextAction }            from './interfaces/IApplicationContextAction';
+import { IApplicationContextState }             from './interfaces/IApplicationContextState';
 import ApplicationContextModel                  from './models/ApplicationContextModel';
-import { IApplicationContextState } from './interfaces/IApplicationContextState';
-import { IApplicationContextAction } from './interfaces/IApplicationContextAction';
+import ApplicationContextStateModel             from './models/ApplicationContextStateModel';
+import React                                    from 'react';
 
 
+export const ApplicationContext = React.createContext<IApplicationContextState & IApplicationContextAction>( new ApplicationContextModel( new ApplicationContextStateModel()) );
 
-export const ApplicationContext = React.createContext<IApplicationContextState & IApplicationContextAction>( new ApplicationContextModel(0) );
-export const ApplicationContextProvider = ApplicationContext.Provider;
-export const ApplicationContextConsumer = ApplicationContext.Consumer;

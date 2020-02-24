@@ -18,7 +18,7 @@ import ListItemModel                            from '../../models/list/ListItem
 import PaginationButtons                        from "../../components/pagination/pagination-buttons-component";
 import React                                    from 'react';
 import RegistrationSearchBoxComponent           from '../registrationSearchBox/RegistrationSearchBoxComponent';
-import RepositoryVehicleList                        from '../../repository/vehicle/RepositoryVehicleList';
+import RepositoryVehicleList                    from '../../repository/vehicle/RepositoryVehicleList';
 import RouteConstants                           from '../../routing/RouteConstants';
 import RowsPerPageComponent                     from '../rowsPerPage/RowsPerPageComponent';
 import UniqueColourSelectorComponent            from '../uniqueColourSelectorSelector/UniqueColourSelectorComponent';
