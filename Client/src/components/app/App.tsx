@@ -1,4 +1,5 @@
 import { ApplicationContext }                   from '../../services/applicationContext/ApplicationContext'
+import { BrowserRouter }                        from 'react-router-dom';
 import { Button }                               from '@material-ui/core';
 import { makeStyles }                           from '@material-ui/styles';
 import { Paper }                                from '@material-ui/core';
@@ -10,6 +11,7 @@ import DashboardButton                          from '../dashboardButton/dashboa
 import DemoPageTitle                            from '../demoPageTitle/demoPageTitle-component';
 import React                                    from 'react';
 import RouteConstants                           from '../../routing/RouteConstants';
+import Routes                                   from '../../routing/Routes';
 import SampleCounterComponent                   from '../sampleCounterComponent/SampleCounterComponent';
 
 const App: React.FC = () => {
@@ -39,13 +41,14 @@ const App: React.FC = () => {
   const classes = useStyles();
 
   return (
-    <ApplicationContext.Provider value={ new ApplicationContextModel( new ApplicationContextStateModel())}>
+    <ApplicationContext.Provider value={ new ApplicationContextModel( new ApplicationContextStateModel())}>      
       <CssBaseline/>
+      THIS IS THE APPLICATION
+      <BrowserRouter>
       <DemoPageTitle title="Home Page"/>
       <DashboardButton/>
       <div className={classes.app}>
-        <Paper className={classes.paper}>
-        
+        <Paper className={classes.paper}>        
           <Typography variant="h1">Demo React Project</Typography>
         <div className={classes.root}>
           <Button variant="contained" color="primary" className={classes.button} href={RouteConstants.Login}>Login</Button>
@@ -54,8 +57,10 @@ const App: React.FC = () => {
           <Button variant="contained" color="primary" className={classes.button} href={RouteConstants.FleetDetail}>Fleet Detail</Button>
         </div>
         </Paper>
+        <Routes/>
         <SampleCounterComponent/>
       </div>
+      </BrowserRouter>
     </ApplicationContext.Provider>
   );
 }
