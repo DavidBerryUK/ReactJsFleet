@@ -1,51 +1,47 @@
-import { ApplicationContext }           from '../../services/applicationContext/ApplicationContext';
 import { Button, Box }                          from '@material-ui/core';
 import { createStyles }                         from '@material-ui/core';
-import { IApplicationContextAction }            from '../../services/applicationContext/interfaces/IApplicationContextAction';
-import { IApplicationContextState }             from '../../services/applicationContext/interfaces/IApplicationContextState';
 import { makeStyles }                           from '@material-ui/core';
 import { Paper }                                from '@material-ui/core';
 import { Theme }                                from '@material-ui/core';
+import { useContext }                           from 'react';
+import ContextOne                               from '../../services/applicationContext/OneContext';
 import React                                    from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-        paper : {
-            width:180,
-            margin:10,
-            padding:10
+    createStyles({
+        paper: {
+            width: 180,
+            margin: 10,
+            padding: 10
         }
-  })
+    })
 );
 
 const SampleCounterComponent: React.FC = () => {
 
     const classes = useStyles();
+    const { state, dispatch } = useContext(ContextOne);
 
-    function subtractEventHandler(appContext: IApplicationContextState & IApplicationContextAction, event : React.MouseEvent) {    
+    function subtractEventHandler() {
         console.log("click - subtract");
-        appContext.setSampleCounterDelta(-1);
+        dispatch({ type: "subtract" });
     }
-  
-    function addEventHandler(appContext: IApplicationContextState & IApplicationContextAction, event : React.MouseEvent) {    
+
+    function addEventHandler() {
         console.log("click - Add");
-        appContext.setSampleCounterDelta(1);
+        dispatch({ type: "add" });
     }
 
     return (
-        <ApplicationContext.Consumer>
-            {appContext => (
-                <Paper elevation={3} className={classes.paper}>
-                    <div>
-                    Sample Count: {appContext.sampleCounter}
-                    </div>
-                    <Box   display="flex" >
-                        <Box p={1}><Button variant="contained" onClick={ (event: React.MouseEvent ) => {subtractEventHandler(appContext, event)}}>-</Button></Box>
-                        <Box p={1}><Button variant="contained" onClick={ (event: React.MouseEvent ) => {addEventHandler(appContext, event)}}>+</Button></Box>
-                    </Box>
-                </Paper>
-            )}
-        </ApplicationContext.Consumer>
+        <Paper elevation={3} className={classes.paper}>
+            <div>
+                Sample Count: {state.sampleCounter}
+            </div>
+            <Box display="flex" >
+                <Box p={1}><Button variant="contained" onClick={subtractEventHandler}>-</Button></Box>
+                <Box p={1}><Button variant="contained" onClick={addEventHandler}>+</Button></Box>
+            </Box>
+        </Paper>
     )
 }
 

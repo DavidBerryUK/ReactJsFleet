@@ -1,16 +1,16 @@
-import { ApplicationContext }                   from '../../services/applicationContext/ApplicationContext'
+import { ContextOneConsumer }                   from '../../services/applicationContext/OneContext';
 import React                                    from 'react';
 
 const ApplicationHeaderComponent: React.FC = () => {
   return (
-    <ApplicationContext.Consumer>
-    { appContext => (
+    <ContextOneConsumer>
+      {appContext => (
         <div >
           <h1>Application Header</h1>
-          logged in: {appContext.isLoggedIn}
+          logged in:
         </div>
-    )}
-    </ApplicationContext.Consumer>
+      )}
+    </ContextOneConsumer>
   );
 }
 
