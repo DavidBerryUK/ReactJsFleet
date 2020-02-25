@@ -1,9 +1,9 @@
 import { Dispatch }                             from 'react';
 import { Reducer }                              from 'react';
 import AuthenticationApplicationState           from '../../modelStates/AuthenticationApplicationState';
+import FleetListFilterModel                     from '../../components/fleetList/fleetListFilterModel';
 import React                                    from 'react';
 import UserModel                                from '../../models/user/UserModel';
-import FleetListFilterModel from '../../components/fleetList/fleetListFilterModel';
 
 export enum EnumAction {
     SampleCounterAdd,
@@ -77,7 +77,6 @@ const reducer: Reducer<ApplicationContexgtProps, Actions> = (state, action) => {
 
 let ApplicationContext = React.createContext({} as InitContextProps);
 
-
 export function ApplicationContextProvider(props: any) {
 
     let [state, dispatch] = React.useReducer(reducer, initialState);
@@ -87,8 +86,6 @@ export function ApplicationContextProvider(props: any) {
         <ApplicationContext.Provider value={value}>{props.children}</ApplicationContext.Provider>
     );
 }
-
-
 
 export const ApplicationContextConsumer = ApplicationContext.Consumer;
 export default ApplicationContext

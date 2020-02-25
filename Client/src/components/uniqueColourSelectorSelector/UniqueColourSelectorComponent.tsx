@@ -8,6 +8,7 @@ import React                                    from 'react';
 import RepositorySpecification                  from '../../repository/specification/RepositorySpecification';
 
 interface IUniqueSelectorProperties {
+    value: string,
     onSelectionChanged : (item: ListItemModel) => void
 }
 
@@ -26,15 +27,19 @@ const UniqueColourSelectorComponent: React.FC<IUniqueSelectorProperties> = (prop
         repository.getUniqueColours()
             .onSuccess((list: ApiBaseCollectionResponseModel<ListItemModel>) => {
                 setList(list.entities!);
+                let item = list.entities?.find(item => item.entityValue === props.value);
+                if ( item != null) {
+                    setSelectedItem(item);
+                }
             });
-    }, [])
+    }, [props.value])
 
     // the user selection has changed, raise an event to the host control
     // indicating the value has been updated
     function valueChangedEventHandler(event : React.ChangeEvent) {    
         const typedEvent = event as React.ChangeEvent<HTMLInputElement>                    
         let item = list.find(item => item.entityValue === typedEvent.target.value) ?? unselectedItem;
-        setSelectedItem(item);                
+        setSelectedItem(item);                        
         props.onSelectionChanged(item);
     }
 

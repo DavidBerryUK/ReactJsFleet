@@ -8,6 +8,7 @@ import React                                    from 'react';
 import RepositorySpecification                  from '../../repository/specification/RepositorySpecification';
 
 interface IUniqueSelectorProperties {
+    value: string,
     onSelectionChanged : (item: ListItemModel) => void
 }
 
@@ -26,8 +27,12 @@ const UniqueDoorsSelectorComponent: React.FC<IUniqueSelectorProperties> = (props
         repository.getUniqueDoors()
             .onSuccess((list: ApiBaseCollectionResponseModel<ListItemModel>) => {
                 setList(list.entities!);
+                let item = list.entities?.find(item => item.entityValue === props.value);
+                if ( item != null) {
+                    setSelectedItem(item);
+                }
             });
-    },[])
+        },[props.value])
 
     // the user selection has changed, raise an event to the host control
     // indicating the value has been updated

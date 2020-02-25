@@ -174,7 +174,9 @@ const FleetListComponent: React.FC = () => {
                 onClick={() => { columnHeaderSortClickHandler(enumColumnNames.make) }}>
               </TableSortLabel>
               Make
-              <UniqueMakeSelectorComponent onSelectionChanged={(item: ListItemModel)=>{ filterMakeChangeHandler(item)}} />
+              <UniqueMakeSelectorComponent 
+              value={state.fleetListFilter.filterMake.entityValue}
+              onSelectionChanged={(item: ListItemModel)=>{ filterMakeChangeHandler(item)}} />
             </TableCell>
 
             <TableCell>
@@ -184,7 +186,9 @@ const FleetListComponent: React.FC = () => {
                 onClick={() => { columnHeaderSortClickHandler(enumColumnNames.model) }}>
               </TableSortLabel>
               Model
-              <UniqueModelSelectorComponent onSelectionChanged={(item: ListItemModel)=>{ filterModelChangeHandler(item)}} />
+              <UniqueModelSelectorComponent 
+              value={state.fleetListFilter.filterModel.entityValue}
+              onSelectionChanged={(item: ListItemModel)=>{ filterModelChangeHandler(item)}} />
             </TableCell>
 
             <TableCell>
@@ -194,7 +198,9 @@ const FleetListComponent: React.FC = () => {
                 onClick={() => { columnHeaderSortClickHandler(enumColumnNames.colour) }}>
               </TableSortLabel>
               Colour
-              <UniqueColourSelectorComponent onSelectionChanged={(item: ListItemModel)=>{ filterColourChangeHandler(item)}} />
+              <UniqueColourSelectorComponent 
+                value={state.fleetListFilter.filterColour.entityValue} 
+                onSelectionChanged={(item: ListItemModel)=>{ filterColourChangeHandler(item)}} />
             </TableCell>
             
             <TableCell>
@@ -204,7 +210,9 @@ const FleetListComponent: React.FC = () => {
                 onClick={() => { columnHeaderSortClickHandler(enumColumnNames.Transmission) }}>
               </TableSortLabel>
               Transmission
-              <UniqueTransmissionSelectorComponent  onSelectionChanged={(item: ListItemModel)=>{ filterTransmissionChangeHandler(item)}} />
+              <UniqueTransmissionSelectorComponent 
+              value={state.fleetListFilter.filterTransmission.entityValue}
+               onSelectionChanged={(item: ListItemModel)=>{ filterTransmissionChangeHandler(item)}} />
             </TableCell>
                         
             <TableCell align="right">
@@ -214,7 +222,9 @@ const FleetListComponent: React.FC = () => {
                 onClick={() => { columnHeaderSortClickHandler(enumColumnNames.doors) }}>
               </TableSortLabel>
               Doors
-              <UniqueDoorsSelectorComponent  onSelectionChanged={(item: ListItemModel)=>{ filterDoorsChangeHandler(item)}} />
+              <UniqueDoorsSelectorComponent  
+              value={state.fleetListFilter.filterDoors.entityValue}
+              onSelectionChanged={(item: ListItemModel)=>{ filterDoorsChangeHandler(item)}} />
             </TableCell>
 
             <TableCell></TableCell>
