@@ -1,6 +1,6 @@
 import { BrowserRouter }                        from 'react-router-dom';
 import { Button }                               from '@material-ui/core';
-import { ContextOneProvider }                   from '../../services/applicationContext/OneContext';
+import { ApplicationContextProvider }                   from '../../services/applicationContext/ApplicationContext';
 import { Link }                                 from 'react-router-dom';
 import { makeStyles }                           from '@material-ui/styles';
 import { Paper }                                from '@material-ui/core';
@@ -47,7 +47,7 @@ const App: React.FC = () => {
   const classes = useStyles();
 
   return (
-    <ContextOneProvider>
+    <ApplicationContextProvider>
       <CssBaseline />
       <BrowserRouter>
       <ApplicationHeaderComponent/>
@@ -74,7 +74,7 @@ const App: React.FC = () => {
         <SampleCounterComponent />
       </div>
       </BrowserRouter>
-    </ContextOneProvider>
+    </ApplicationContextProvider>
   );
 }
 

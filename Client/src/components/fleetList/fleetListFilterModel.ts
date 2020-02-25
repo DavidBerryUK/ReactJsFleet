@@ -1,4 +1,5 @@
-import ListItemModel from "../../models/list/ListItemModel";
+import { IDispatchObject }                      from './../../services/applicationContext/ApplicationContext';
+import ListItemModel                            from "../../models/list/ListItemModel";
 
 export enum enumSortDirection {
     asc = "asc",
@@ -14,7 +15,9 @@ export enum enumColumnNames {
     colour = "colour"
   }
 
-export default class FleetListFilterModel {
+export default class FleetListFilterModel implements IDispatchObject {
+  
+    public static className = "FleetListFilterModel"
 
     pageNumber : number = 1;
     rowsPerPage : number = 6;
@@ -34,5 +37,10 @@ export default class FleetListFilterModel {
         var model = Object.assign(new FleetListFilterModel(), this);
         return model;
     }
+
+    // IDispatchObject Interface
+    public get entityName(): string {
+      return FleetListFilterModel.className;
+  }
 
 }

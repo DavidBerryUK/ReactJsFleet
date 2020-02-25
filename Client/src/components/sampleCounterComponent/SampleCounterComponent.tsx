@@ -1,12 +1,12 @@
 import { Box }                                  from '@material-ui/core';
 import { Button }                               from '@material-ui/core';
 import { createStyles }                         from '@material-ui/core';
-import { EnumAction }                           from '../../services/applicationContext/OneContext';
+import { EnumAction }                           from '../../services/applicationContext/ApplicationContext';
 import { makeStyles }                           from '@material-ui/core';
 import { Paper }                                from '@material-ui/core';
 import { Theme }                                from '@material-ui/core';
 import { useContext }                           from 'react';
-import ContextOne                               from '../../services/applicationContext/OneContext';
+import ApplicationContext                               from '../../services/applicationContext/ApplicationContext';
 import React                                    from 'react';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const SampleCounterComponent: React.FC = () => {
 
     const classes = useStyles();
-    const { state, dispatch } = useContext(ContextOne);
+    const { state, dispatch } = useContext(ApplicationContext);
 
     function subtractEventHandler() {        
         dispatch({ type: EnumAction.SampleCounterSubtract });

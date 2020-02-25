@@ -11,7 +11,7 @@ import Avatar                                   from '@material-ui/core/Avatar';
 import Button                                   from '@material-ui/core/Button';
 import Card                                     from '@material-ui/core/Card';
 import Container                                from '@material-ui/core/Container';
-import ContextOne, { EnumAction }                               from '../../services/applicationContext/OneContext';
+import ApplicationContext, { EnumAction }                               from '../../services/applicationContext/ApplicationContext';
 import Grid                                     from '@material-ui/core/Grid';
 import Link                                     from '@material-ui/core/Link';
 import LockOutlinedIcon                         from '@material-ui/icons/LockOutlined';
@@ -35,7 +35,7 @@ import ValidationState                          from '../../services/validation/
    const router = useHistory();
   const [loading, setLoading] = React.useState(false);
   const [message, setMessage] = React.useState("");
-  const  dispatch = useContext(ContextOne).dispatch;
+  const  dispatch = useContext(ApplicationContext).dispatch;
   
   //
   // Event Handler for Login Button Pressed

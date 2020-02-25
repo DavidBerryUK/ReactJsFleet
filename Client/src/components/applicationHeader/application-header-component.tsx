@@ -1,10 +1,10 @@
 import { useContext, useMemo }                                           from 'react';
-import ContextOne                                               from '../../services/applicationContext/OneContext';
+import ApplicationContext                                               from '../../services/applicationContext/ApplicationContext';
 import React                                                    from 'react';
 
 const ApplicationHeaderComponent: React.FC = () => {
 
-  const  state = useContext(ContextOne).state;
+  const  state = useContext(ApplicationContext).state;
   
   useMemo(() => {
     console.log("ApplicationHeaderComponent -- user state");

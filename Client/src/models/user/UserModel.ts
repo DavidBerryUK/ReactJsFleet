@@ -1,5 +1,5 @@
 import { IApiModel }                            from './../interfaces/IApiModel';
-import { IDispatchObject }                      from './../../services/applicationContext/OneContext';
+import { IDispatchObject }                      from '../../services/applicationContext/ApplicationContext';
 
 
 export default class UserModel implements IApiModel , IDispatchObject {

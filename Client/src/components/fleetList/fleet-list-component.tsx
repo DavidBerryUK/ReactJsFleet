@@ -1,7 +1,9 @@
 import { Box }                                  from '@material-ui/core';
 import { Button }                               from '@material-ui/core';
+import { EnumAction }                           from '../../services/applicationContext/ApplicationContext';
 import { enumColumnNames }                      from './fleetListFilterModel'
 import { enumSortDirection }                    from './fleetListFilterModel'
+import { Link }                                 from 'react-router-dom';
 import { makeStyles }                           from '@material-ui/core';
 import { Paper }                                from '@material-ui/core';
 import { Table }                                from '@material-ui/core';
@@ -10,10 +12,11 @@ import { TableCell }                            from '@material-ui/core';
 import { TableHead }                            from '@material-ui/core';
 import { TableRow }                             from '@material-ui/core';
 import { TableSortLabel }                       from '@material-ui/core';
+import { useContext }                           from 'react';
 import { useMemo }                              from 'react';
 import ApiBaseCollectionResponseModel           from '../../models/apiBase/ApiBaseCollectionResponseModel';
+import ApplicationContext                       from '../../services/applicationContext/ApplicationContext';
 import debounceUtility                          from '../../utilities/debounceUtility';
-import FleetListFilterModel                     from './fleetListFilterModel'
 import ListItemModel                            from '../../models/list/ListItemModel';
 import PaginationButtons                        from "../../components/pagination/pagination-buttons-component";
 import React                                    from 'react';
@@ -27,9 +30,9 @@ import UniqueMakeSelectorComponent              from '../uniqueMakeSelector/Uniq
 import UniqueModelSelectorComponent             from '../uniqueModelSelector/UniqueModelSelectorComponent';
 import UniqueTransmissionSelectorComponent      from '../uniqueTransmissionSelector/UniqueTransmissionSelectorComponent';
 import VehicleModel                             from '../../models/vehicle/VehicleModel';
-import { Link }                                 from 'react-router-dom';
 
-function FleetListComponent() {
+
+const FleetListComponent: React.FC = () => {
 
   const useStyles = makeStyles({
     root: {
@@ -41,8 +44,9 @@ function FleetListComponent() {
     },
   });
 
+  const {state, dispatch} = useContext(ApplicationContext);
+
   const classes = useStyles();
-  const [listFilter, setListFilter] = React.useState(new FleetListFilterModel());
   const [vehicleList, setVehicleList] = React.useState(new ApiBaseCollectionResponseModel<VehicleModel>());
 
   //
@@ -51,29 +55,30 @@ function FleetListComponent() {
   //
   useMemo(() => {
     var repositoryVehicle = new RepositoryVehicleList();
-    repositoryVehicle.getVehicleList(listFilter)
+    repositoryVehicle.getVehicleList(state.fleetListFilter)
       .onSuccess((vehicleListData: ApiBaseCollectionResponseModel<VehicleModel>) => {
         setVehicleList(vehicleListData);
       });
 
-  }, [listFilter]);
+  }, [state.fleetListFilter]);
 
   //
   // handler for the pagination control
   //
   function onPageChangedHandler(page: number): void {
-    var filter = listFilter.clone();
+    var filter =  state.fleetListFilter.clone();
     filter.pageNumber = page;
-    setListFilter(filter);
+    dispatch({type: EnumAction.UpdateFleetListFilter, value: filter});
+    
   }
 
   //
   // Handle column header clicks for sorting
   //
   function columnHeaderSortClickHandler(column: enumColumnNames) {
-    var filter = listFilter.clone();
-    if (column === listFilter.sortedColumn) {
-      if (listFilter.sortDirection === enumSortDirection.asc) {
+    var filter = state.fleetListFilter.clone();
+    if (column === state.fleetListFilter.sortedColumn) {
+      if (state.fleetListFilter.sortDirection === enumSortDirection.asc) {
         filter.sortDirection = enumSortDirection.desc;
       } else {
         filter.sortDirection = enumSortDirection.asc;
@@ -82,65 +87,65 @@ function FleetListComponent() {
       filter.sortedColumn = column;
       filter.sortDirection = enumSortDirection.asc;
     }
-    setListFilter(filter);
+    dispatch({type: EnumAction.UpdateFleetListFilter, value: filter});
   }
 
   // Filter Handler - Registration
   //
   function filterRegistrationChangeHandler(searchText : string) {
     debounceUtility.debounceStringCallback(searchText, 500, ( value:string ) => {   
-      var filter = listFilter.clone();
+      var filter = state.fleetListFilter.clone();
       filter.filterRegistration = value;
-      setListFilter(filter);
+      dispatch({type: EnumAction.UpdateFleetListFilter, value: filter});
     });    
   }
 
   // Filter Handler - Colour
   //
   function filterColourChangeHandler(item : ListItemModel) {
-    var filter = listFilter.clone();
+    var filter = state.fleetListFilter.clone();
     filter.filterColour = item;
-    setListFilter(filter);
+    dispatch({type: EnumAction.UpdateFleetListFilter, value: filter});
   }
 
   // Filter Handler - Make
   //
   function filterMakeChangeHandler(item : ListItemModel) {
-    var filter = listFilter.clone();
+    var filter = state.fleetListFilter.clone();
     filter.filterMake = item;
-    setListFilter(filter);
+    dispatch({type: EnumAction.UpdateFleetListFilter, value: filter});
   }
 
   // Filter Handler - Model
   //
   function filterModelChangeHandler(item : ListItemModel) {
-    var filter = listFilter.clone();
+    var filter = state.fleetListFilter.clone();
     filter.filterModel = item;
-    setListFilter(filter);
+    dispatch({type: EnumAction.UpdateFleetListFilter, value: filter});
   }
 
   // Filter Handler - Transmission
   //
   function filterTransmissionChangeHandler(item : ListItemModel) {
-    var filter = listFilter.clone();
+    var filter = state.fleetListFilter.clone();
     filter.filterTransmission = item;
-    setListFilter(filter);
+    dispatch({type: EnumAction.UpdateFleetListFilter, value: filter});
   }
 
   // Filter Handler - Number of doors
   //
   function filterDoorsChangeHandler(item : ListItemModel) {
-    var filter = listFilter.clone();
+    var filter = state.fleetListFilter.clone();
     filter.filterDoors = item;
-    setListFilter(filter);
+    dispatch({type: EnumAction.UpdateFleetListFilter, value: filter});
   }
 
   // Rows Per Page Changed
   //
   function rowsPerPageChangeHandler(rowsPerPage : number) {
-    var filter = listFilter.clone();
+    var filter = state.fleetListFilter.clone();
     filter.rowsPerPage = rowsPerPage;
-    setListFilter(filter);
+    dispatch({type: EnumAction.UpdateFleetListFilter, value: filter});
   }
 
   //
@@ -154,8 +159,8 @@ function FleetListComponent() {
 
             <TableCell>
               <TableSortLabel
-                active={listFilter.sortedColumn === enumColumnNames.registration}
-                direction={listFilter.sortDirection}
+                active={state.fleetListFilter.sortedColumn === enumColumnNames.registration}
+                direction={state.fleetListFilter.sortDirection}
                 onClick={() => { columnHeaderSortClickHandler(enumColumnNames.registration) }}>
               </TableSortLabel>
               Registration
@@ -164,8 +169,8 @@ function FleetListComponent() {
 
             <TableCell>
               <TableSortLabel
-                active={listFilter.sortedColumn === enumColumnNames.make}
-                direction={listFilter.sortDirection}
+                active={state.fleetListFilter.sortedColumn === enumColumnNames.make}
+                direction={state.fleetListFilter.sortDirection}
                 onClick={() => { columnHeaderSortClickHandler(enumColumnNames.make) }}>
               </TableSortLabel>
               Make
@@ -174,8 +179,8 @@ function FleetListComponent() {
 
             <TableCell>
               <TableSortLabel
-                active={listFilter.sortedColumn === enumColumnNames.model}
-                direction={listFilter.sortDirection}
+                active={state.fleetListFilter.sortedColumn === enumColumnNames.model}
+                direction={state.fleetListFilter.sortDirection}
                 onClick={() => { columnHeaderSortClickHandler(enumColumnNames.model) }}>
               </TableSortLabel>
               Model
@@ -184,8 +189,8 @@ function FleetListComponent() {
 
             <TableCell>
               <TableSortLabel
-                active={listFilter.sortedColumn === enumColumnNames.colour}
-                direction={listFilter.sortDirection}
+                active={state.fleetListFilter.sortedColumn === enumColumnNames.colour}
+                direction={state.fleetListFilter.sortDirection}
                 onClick={() => { columnHeaderSortClickHandler(enumColumnNames.colour) }}>
               </TableSortLabel>
               Colour
@@ -194,8 +199,8 @@ function FleetListComponent() {
             
             <TableCell>
               <TableSortLabel
-                active={listFilter.sortedColumn === enumColumnNames.Transmission}
-                direction={listFilter.sortDirection}
+                active={state.fleetListFilter.sortedColumn === enumColumnNames.Transmission}
+                direction={state.fleetListFilter.sortDirection}
                 onClick={() => { columnHeaderSortClickHandler(enumColumnNames.Transmission) }}>
               </TableSortLabel>
               Transmission
@@ -204,8 +209,8 @@ function FleetListComponent() {
                         
             <TableCell align="right">
               <TableSortLabel
-                active={listFilter.sortedColumn === enumColumnNames.doors}
-                direction={listFilter.sortDirection}
+                active={state.fleetListFilter.sortedColumn === enumColumnNames.doors}
+                direction={state.fleetListFilter.sortDirection}
                 onClick={() => { columnHeaderSortClickHandler(enumColumnNames.doors) }}>
               </TableSortLabel>
               Doors
@@ -243,7 +248,7 @@ function FleetListComponent() {
         <Box p={2}>rows {vehicleList.totalRows}</Box>
             <Box display="flex" flexGrow={1} justifyContent="center">
               <Box display="flex" pt={2} >
-                  <PaginationButtons page={listFilter.pageNumber} pageCount={vehicleList.totalPages} onPageChanged={(page: number) => { onPageChangedHandler(page) }} />
+                  <PaginationButtons page={state.fleetListFilter.pageNumber} pageCount={vehicleList.totalPages} onPageChanged={(page: number) => { onPageChangedHandler(page) }} />
               </Box>
             </Box>
             <Box p={2}>

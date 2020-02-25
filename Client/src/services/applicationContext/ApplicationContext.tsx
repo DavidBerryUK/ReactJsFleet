@@ -3,12 +3,14 @@ import { Reducer }                              from 'react';
 import AuthenticationApplicationState           from '../../modelStates/AuthenticationApplicationState';
 import React                                    from 'react';
 import UserModel                                from '../../models/user/UserModel';
+import FleetListFilterModel from '../../components/fleetList/fleetListFilterModel';
 
 export enum EnumAction {
     SampleCounterAdd,
     SampleCounterSubtract,
     Login,
-    Logout
+    Logout,
+    UpdateFleetListFilter
 }
 
 export interface IDispatchObject {
@@ -22,6 +24,7 @@ interface Actions {
 
 interface ApplicationContexgtProps {
     userState : AuthenticationApplicationState,
+    fleetListFilter : FleetListFilterModel,
     sampleCounter: number
 }
 
@@ -32,6 +35,7 @@ interface InitContextProps {
 
 const initialState: ApplicationContexgtProps = {
     userState : new AuthenticationApplicationState(),
+    fleetListFilter: new FleetListFilterModel(),
     sampleCounter: 5000
 
 };
@@ -40,6 +44,11 @@ const reducer: Reducer<ApplicationContexgtProps, Actions> = (state, action) => {
     
     switch (action.type) {
 
+        case EnumAction.UpdateFleetListFilter:
+            console.log("UpdateFleetListFilter");
+            var fleetListFilterObject =  action.value as FleetListFilterModel;                        
+            return { ...state, fleetListFilter: fleetListFilterObject };
+
         case EnumAction.Login:
             console.log("OneContext:Action:Login");
             var userObject =  action.value as UserModel;
@@ -47,8 +56,7 @@ const reducer: Reducer<ApplicationContexgtProps, Actions> = (state, action) => {
             userStateLogIn.loggedIn = true;
             userStateLogIn.user = userObject;
             console.log(userStateLogIn);
-            return { ...state, userState: userStateLogIn };
-            //return {...state,sampleCounter: state.sampleCounter + 1};
+            return { ...state, userState: userStateLogIn };            
 
         case EnumAction.Logout:
             console.log("OneContext:Action:Logout");
@@ -67,23 +75,22 @@ const reducer: Reducer<ApplicationContexgtProps, Actions> = (state, action) => {
     }
 };
 
-let ContextOne = React.createContext({} as InitContextProps);
+let ApplicationContext = React.createContext({} as InitContextProps);
 
 
-export function ContextOneProvider(props: any) {
+export function ApplicationContextProvider(props: any) {
 
     let [state, dispatch] = React.useReducer(reducer, initialState);
     let value = { state, dispatch };
 
-
     return (
-        <ContextOne.Provider value={value}>{props.children}</ContextOne.Provider>
+        <ApplicationContext.Provider value={value}>{props.children}</ApplicationContext.Provider>
     );
 }
 
 
 
-export const ContextOneConsumer = ContextOne.Consumer;
-export default ContextOne
+export const ApplicationContextConsumer = ApplicationContext.Consumer;
+export default ApplicationContext
 
 console.log("Executed OneContext");
