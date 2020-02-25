@@ -1,4 +1,4 @@
-import { BrowserRouter }                        from 'react-router-dom';
+import { BrowserRouter, Link }                        from 'react-router-dom';
 import { Button }                               from '@material-ui/core';
 import { ContextOneProvider }                   from '../../services/applicationContext/OneContext';
 import { makeStyles }                           from '@material-ui/styles';
@@ -47,20 +47,20 @@ const App: React.FC = () => {
   return (
     <ContextOneProvider>
       <CssBaseline />
-
+      <BrowserRouter>
       <DemoPageTitle title="App" />
       <DashboardButton />
       <div className={classes.app}>
         <Paper className={classes.paper}>
           <Typography variant="h5">APP Navigation</Typography>
           <div className={classes.root}>
-            <Button variant="contained" color="primary" className={classes.button} href={RouteConstants.Login}>Login</Button>
-            <Button variant="contained" color="primary" className={classes.button} href={RouteConstants.DefectSheet}>Defect</Button>
-            <Button variant="contained" color="primary" className={classes.button} href={RouteConstants.FleetList}>Fleet List</Button>
-            <Button variant="contained" color="primary" className={classes.button} href={RouteConstants.FleetDetail}>Fleet Detail</Button>
+            <Link to={RouteConstants.Login}><Button variant="contained" color="primary" className={classes.button}>Login(link)</Button></Link>
+            <Link to={RouteConstants.DefectSheet}><Button variant="contained" color="primary" className={classes.button}>Defect(link)</Button></Link>
+            <Link to={RouteConstants.FleetList}><Button variant="contained" color="primary" className={classes.button}>Fleet List(link)</Button></Link>
+            <Link to={RouteConstants.FleetDetail}><Button variant="contained" color="primary" className={classes.button}>Fleet Detail(link)</Button></Link>
           </div>
         </Paper>
-        <BrowserRouter>
+        
           <Switch>
             <Route exact path="/" component={DashboardPage} />
             <Route path={RouteConstants.Dashboard} component={DashboardPage} />
@@ -69,9 +69,10 @@ const App: React.FC = () => {
             <Route path={RouteConstants.FleetList} component={FleetListPage} />
             <Route path={RouteConstants.Login} component={LoginPage} />
           </Switch>
-        </BrowserRouter>
+        
         <SampleCounterComponent />
       </div>
+      </BrowserRouter>
     </ContextOneProvider>
   );
 }
