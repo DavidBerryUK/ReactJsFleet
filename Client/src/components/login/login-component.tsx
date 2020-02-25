@@ -4,7 +4,7 @@ import { ILoginModel }                          from './ILoginModel';
 import { IValidationContextActions }            from '../../services/validation/context/interfaces/IValidationContextActions';
 import { IValidationContextState }              from '../../services/validation/context/interfaces/IValidationContextState';
 import { useContext }                           from 'react';
-//import { useHistory }                           from 'react-router-dom';
+import { useHistory }                           from 'react-router-dom';
 import { ValidationContext }                    from '../../services/validation/context/context/ValidationContext';
 import AuthenticationService                    from '../../services/security/AuthenticationService';
 import Avatar                                   from '@material-ui/core/Avatar';
@@ -15,7 +15,7 @@ import ContextOne, { EnumAction }                               from '../../serv
 import Grid                                     from '@material-ui/core/Grid';
 import Link                                     from '@material-ui/core/Link';
 import LockOutlinedIcon                         from '@material-ui/icons/LockOutlined';
-//import NavigateDashboard                        from '../../routing/NavigationHelpers.ts/NavigateDashboard';
+import NavigateDashboard                        from '../../routing/NavigationHelpers.ts/NavigateDashboard';
 import ProgressIndicatorLinear                  from '../progressIndicators/ProgressIndicatorLinear';
 import React                                    from 'react';
 import RuleMandatory                            from '../../services/validation/rules/ruleProcessors/RuleMandatory';
@@ -32,12 +32,12 @@ import ValidationState                          from '../../services/validation/
   const LoginComponent: React.FC = () => {
 
   const classStyles = classStyleDefinition();
-  // const router = useHistory();
+   const router = useHistory();
   const [loading, setLoading] = React.useState(false);
   const [message, setMessage] = React.useState("");
   const  dispatch = useContext(ContextOne).dispatch;
   
-//
+  //
   // Event Handler for Login Button Pressed
   //
   function loginButtonClicked(context : IValidationContextActions<ILoginModel> ) {
@@ -63,7 +63,7 @@ import ValidationState                          from '../../services/validation/
       .onSuccess((userModel: UserModel) => {
         // update global context with login details
         dispatch({ type: EnumAction.Login,value: userModel })
-      //  NavigateDashboard.go(router);
+        NavigateDashboard.go(router);
       })
         .onValidationErrorsRaised((validationMessages: Array<ValidationMessage>) => {
         setMessage("User or Password invalid");

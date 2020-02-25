@@ -27,6 +27,7 @@ import UniqueMakeSelectorComponent              from '../uniqueMakeSelector/Uniq
 import UniqueModelSelectorComponent             from '../uniqueModelSelector/UniqueModelSelectorComponent';
 import UniqueTransmissionSelectorComponent      from '../uniqueTransmissionSelector/UniqueTransmissionSelectorComponent';
 import VehicleModel                             from '../../models/vehicle/VehicleModel';
+import { Link }                                 from 'react-router-dom';
 
 function FleetListComponent() {
 
@@ -227,10 +228,11 @@ function FleetListComponent() {
               <TableCell>{row.transmission}</TableCell>
               <TableCell align="right">{row.doors}</TableCell>
               <TableCell>
+                <Link to={`${RouteConstants.FleetDetail}/${row.entityKey}`}>
                 <Button   color="primary" 
                           variant="contained" 
-                          size="small" 
-                          href={`${RouteConstants.FleetDetail}/${row.entityKey}`}>view</Button>
+                          size="small">view</Button>
+                          </Link>
               </TableCell>
             </TableRow>
           ))}

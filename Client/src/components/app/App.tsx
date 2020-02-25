@@ -58,8 +58,7 @@ const App: React.FC = () => {
           <div className={classes.root}>
             <Link to={RouteConstants.Login}><Button variant="contained" color="primary" className={classes.button}>Login</Button></Link>
             <Link to={RouteConstants.DefectSheet}><Button variant="contained" color="primary" className={classes.button}>Defect</Button></Link>
-            <Link to={RouteConstants.FleetList}><Button variant="contained" color="primary" className={classes.button}>Fleet List</Button></Link>
-            <Link to={RouteConstants.FleetDetail}><Button variant="contained" color="primary" className={classes.button}>Fleet Detail</Button></Link>
+            <Link to={RouteConstants.FleetList}><Button variant="contained" color="primary" className={classes.button}>Fleet List</Button></Link>            
           </div>
         </Paper>
         
