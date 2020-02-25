@@ -1,11 +1,12 @@
-import { BrowserRouter, Link }                        from 'react-router-dom';
+import { BrowserRouter }                        from 'react-router-dom';
 import { Button }                               from '@material-ui/core';
 import { ContextOneProvider }                   from '../../services/applicationContext/OneContext';
+import { Link }                                 from 'react-router-dom';
 import { makeStyles }                           from '@material-ui/styles';
 import { Paper }                                from '@material-ui/core';
 import { Route }                                from 'react-router-dom';
 import { Switch }                               from 'react-router-dom';
-import { Typography }                           from '@material-ui/core';
+import ApplicationHeaderComponent               from '../applicationHeader/application-header-component';
 import CssBaseline                              from '@material-ui/core/CssBaseline';
 import DashboardButton                          from '../dashboardButton/dashboard-button-component';
 import DashboardPage                            from '../../pages/dashboard/dashboard-page';
@@ -32,6 +33,7 @@ const App: React.FC = () => {
 
     paper: {
       margin: 4,
+      padding: 4,
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
@@ -48,16 +50,16 @@ const App: React.FC = () => {
     <ContextOneProvider>
       <CssBaseline />
       <BrowserRouter>
+      <ApplicationHeaderComponent/>
       <DemoPageTitle title="App" />
       <DashboardButton />
       <div className={classes.app}>
-        <Paper className={classes.paper}>
-          <Typography variant="h5">APP Navigation</Typography>
+        <Paper className={classes.paper}>          
           <div className={classes.root}>
-            <Link to={RouteConstants.Login}><Button variant="contained" color="primary" className={classes.button}>Login(link)</Button></Link>
-            <Link to={RouteConstants.DefectSheet}><Button variant="contained" color="primary" className={classes.button}>Defect(link)</Button></Link>
-            <Link to={RouteConstants.FleetList}><Button variant="contained" color="primary" className={classes.button}>Fleet List(link)</Button></Link>
-            <Link to={RouteConstants.FleetDetail}><Button variant="contained" color="primary" className={classes.button}>Fleet Detail(link)</Button></Link>
+            <Link to={RouteConstants.Login}><Button variant="contained" color="primary" className={classes.button}>Login</Button></Link>
+            <Link to={RouteConstants.DefectSheet}><Button variant="contained" color="primary" className={classes.button}>Defect</Button></Link>
+            <Link to={RouteConstants.FleetList}><Button variant="contained" color="primary" className={classes.button}>Fleet List</Button></Link>
+            <Link to={RouteConstants.FleetDetail}><Button variant="contained" color="primary" className={classes.button}>Fleet Detail</Button></Link>
           </div>
         </Paper>
         

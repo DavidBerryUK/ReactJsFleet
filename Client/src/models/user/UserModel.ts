@@ -1,7 +1,8 @@
 import { IApiModel }                            from './../interfaces/IApiModel';
+import { IDispatchObject }                      from './../../services/applicationContext/OneContext';
 
 
-export default class UserModel implements IApiModel {
+export default class UserModel implements IApiModel , IDispatchObject {
 
     public static className = "UserModel"
 

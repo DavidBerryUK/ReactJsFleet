@@ -3,17 +3,19 @@ import { classStyleDefinition }                 from './classStyleDefinition'
 import { ILoginModel }                          from './ILoginModel';
 import { IValidationContextActions }            from '../../services/validation/context/interfaces/IValidationContextActions';
 import { IValidationContextState }              from '../../services/validation/context/interfaces/IValidationContextState';
-import { useHistory }                           from 'react-router-dom';
+import { useContext }                           from 'react';
+//import { useHistory }                           from 'react-router-dom';
 import { ValidationContext }                    from '../../services/validation/context/context/ValidationContext';
 import AuthenticationService                    from '../../services/security/AuthenticationService';
 import Avatar                                   from '@material-ui/core/Avatar';
 import Button                                   from '@material-ui/core/Button';
 import Card                                     from '@material-ui/core/Card';
 import Container                                from '@material-ui/core/Container';
+import ContextOne, { EnumAction }                               from '../../services/applicationContext/OneContext';
 import Grid                                     from '@material-ui/core/Grid';
 import Link                                     from '@material-ui/core/Link';
 import LockOutlinedIcon                         from '@material-ui/icons/LockOutlined';
-import NavigateDashboard                        from '../../routing/NavigationHelpers.ts/NavigateDashboard';
+//import NavigateDashboard                        from '../../routing/NavigationHelpers.ts/NavigateDashboard';
 import ProgressIndicatorLinear                  from '../progressIndicators/ProgressIndicatorLinear';
 import React                                    from 'react';
 import RuleMandatory                            from '../../services/validation/rules/ruleProcessors/RuleMandatory';
@@ -26,12 +28,53 @@ import ValidationDebugInfo                      from '../../services/validation/
 import ValidationMessage                        from '../../models/validation/ValidationMessage';
 import ValidationState                          from '../../services/validation/context/state/ValidationState';
 
-function LoginComponent() {
+
+  const LoginComponent: React.FC = () => {
 
   const classStyles = classStyleDefinition();
-  const router = useHistory();
+  // const router = useHistory();
   const [loading, setLoading] = React.useState(false);
   const [message, setMessage] = React.useState("");
+  const  dispatch = useContext(ContextOne).dispatch;
+  
+//
+  // Event Handler for Login Button Pressed
+  //
+  function loginButtonClicked(context : IValidationContextActions<ILoginModel> ) {
+
+    
+
+    setMessage("");
+
+    if ( !context.validate() ) {
+      console.log("this form is not valid - ABANDON ALL HOPE!!!")
+      return;
+    }
+
+    // get form model
+    //
+    const form = context.getModel();
+    console.log(form)    ;
+
+    var authenticationService = new AuthenticationService();
+    setLoading(true);
+    
+    authenticationService.authenticate(form.username, form.password)
+      .onSuccess((userModel: UserModel) => {
+        // update global context with login details
+        dispatch({ type: EnumAction.Login,value: userModel })
+      //  NavigateDashboard.go(router);
+      })
+        .onValidationErrorsRaised((validationMessages: Array<ValidationMessage>) => {
+        setMessage("User or Password invalid");
+      })
+        .onFailed((error) => {
+          setMessage("Can not connect to server");
+      })
+      .then(() => {
+        setLoading(false);
+      })
+  }
 
   //
   // Template
@@ -106,41 +149,6 @@ function LoginComponent() {
 
     </Container>
   );
-
-  //
-  // Event Handler for Login Button Pressed
-  //
-  function loginButtonClicked(context : IValidationContextActions<ILoginModel> ) {
-
-    setMessage("");
-
-    if ( !context.validate() ) {
-      console.log("this form is not valid - ABANDON ALL HOPE!!!")
-      return;
-    }
-
-    // get form model
-    //
-    const form = context.getModel();
-    console.log(form)    ;
-
-    var authenticationService = new AuthenticationService();
-    setLoading(true);
-    
-    authenticationService.authenticate(form.username, form.password)
-      .onSuccess((userModel: UserModel) => {
-        NavigateDashboard.go(router);
-      })
-        .onValidationErrorsRaised((validationMessages: Array<ValidationMessage>) => {
-        setMessage("User or Password invalid");
-      })
-        .onFailed((error) => {
-          setMessage("Can not connect to server");
-      })
-      .then(() => {
-        setLoading(false);
-      })
-  }
 }
 
 

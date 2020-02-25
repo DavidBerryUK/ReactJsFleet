@@ -1,5 +1,7 @@
-import { Button, Box }                          from '@material-ui/core';
+import { Box }                                  from '@material-ui/core';
+import { Button }                               from '@material-ui/core';
 import { createStyles }                         from '@material-ui/core';
+import { EnumAction }                           from '../../services/applicationContext/OneContext';
 import { makeStyles }                           from '@material-ui/core';
 import { Paper }                                from '@material-ui/core';
 import { Theme }                                from '@material-ui/core';
@@ -22,14 +24,12 @@ const SampleCounterComponent: React.FC = () => {
     const classes = useStyles();
     const { state, dispatch } = useContext(ContextOne);
 
-    function subtractEventHandler() {
-        console.log("click - subtract");
-        dispatch({ type: "subtract" });
+    function subtractEventHandler() {        
+        dispatch({ type: EnumAction.SampleCounterSubtract });
     }
 
     function addEventHandler() {
-        console.log("click - Add");
-        dispatch({ type: "add" });
+        dispatch({ type: EnumAction.SampleCounterAdd });
     }
 
     return (
