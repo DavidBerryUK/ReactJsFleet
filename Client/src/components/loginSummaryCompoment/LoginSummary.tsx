@@ -3,7 +3,6 @@ import { Button }                               from '@material-ui/core';
 import { EnumAction }                           from '../../services/applicationContext/ApplicationContext';
 import { useContext }                           from 'react';
 import { useHistory }                           from 'react-router';
-import { useMemo }                              from 'react';
 import ApplicationContext                       from '../../services/applicationContext/ApplicationContext';
 import LockIcon                                 from '@material-ui/icons/Lock';
 import LockOpenIcon                             from '@material-ui/icons/LockOpen';
@@ -14,10 +13,6 @@ const LoginSummary: React.FC = () => {
 
     const { state, dispatch } = useContext(ApplicationContext);
     var history = useHistory();
-    
-    // useMemo(() => {
-    //     console.log(state.userState);
-    // }, [state.userState])
 
     function loginClickHandler() {
         history.push(RouteConstants.Login);

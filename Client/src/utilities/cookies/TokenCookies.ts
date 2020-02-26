@@ -1,4 +1,4 @@
-import { CookieHelper }                         from "./CookieHelper";
+import CookieHelper                             from "./CookieHelper";
 
 
 //
@@ -10,7 +10,7 @@ import { CookieHelper }                         from "./CookieHelper";
 // get all the data it needs from the server
 //
 
-export class TokenCookies {
+export default class TokenCookies {
 
     private static keyTokenValue = 'TOKEN_VALUE';
     private static keyTokenIssueDate = 'TOKEN_ISSUE_DATE';
@@ -19,6 +19,12 @@ export class TokenCookies {
     private tokenValue?: string;
     private tokenExpiryDate?: Date;
     private tokenIssueDate?: Date;   
+
+    delete() {
+        CookieHelper.delete(TokenCookies.keyTokenValue);
+        CookieHelper.delete(TokenCookies.keyTokenIssueDate);
+        CookieHelper.delete(TokenCookies.keyTokenExpiryDate);
+    }
 
     //
     // token value

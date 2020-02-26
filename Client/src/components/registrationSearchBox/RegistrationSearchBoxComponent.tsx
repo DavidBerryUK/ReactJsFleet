@@ -10,9 +10,7 @@ interface IUniqueSelectorProperties {
 //
 const RegistrationSearchBoxComponent: React.FC<IUniqueSelectorProperties> = (props) => {
 
-
     const [searchText, setSearchText] = React.useState("");
-//    const debouncedSearchTerm = useDebounce.debounceString (searchText, 500);
 
     // the user selection has changed, raise an event to the host control
     // indicating the value has been updated
@@ -23,8 +21,6 @@ const RegistrationSearchBoxComponent: React.FC<IUniqueSelectorProperties> = (pro
         props.onSelectionChanged(searchTextValue);
     }            
     
-    // Display Template
-    //
     return (
         <TextField
             value={searchText}

@@ -24,5 +24,10 @@ namespace ServerFleet.Services.User
 
             return Users.FirstOrDefault(o => o.UserName.Equals(username, StringComparison.CurrentCultureIgnoreCase));
         }
+
+        public UserModel Get(int id)
+        {
+            return Users.FirstOrDefault(o => o.Id == id);
+        }
     }
 }

@@ -1,4 +1,4 @@
-export class CookieHelper {
+export default class CookieHelper {
 
     static create(name :string, value: string, daysBeforeExpire: number)
     {

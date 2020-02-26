@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using ServerFleet.Models.Rest.Authentication;
 using ServerFleet.Services.Authentication.Interfaces;
 
@@ -9,6 +10,7 @@ namespace ServerFleet.Api.Controllers
     public class AuthenticationController : Controller
     {
         private readonly IAuthenticationService _authenticationService;
+        
 
         public AuthenticationController(IAuthenticationService authenticationService)
         {
@@ -23,17 +25,28 @@ namespace ServerFleet.Api.Controllers
                 return BadRequest();
             }
 
-            var response = new AuthenticationResponse
+            if ( !string.IsNullOrEmpty(request.Token))
             {
-                Entity = _authenticationService.Authenticate(request.User.UserName, request.User.Password)
-            };
-
-            if (response.Entity == null)
-            {
-                return Unauthorized();
+                if (Guid.TryParse(request.Token, out var nativeToken))
+                {
+                    var authentication = _authenticationService.Authenticate(nativeToken);
+                    if (authentication != null)
+                    {
+                        return Ok(new AuthenticationResponse {Entity = authentication});
+                    }
+                }
             }
 
-            return Ok(response);
+            if (request.User != null)
+            {
+                var authentication = _authenticationService.Authenticate(request.User.UserName, request.User.Password);
+                if (authentication != null)
+                {
+                    return Ok(new AuthenticationResponse {Entity = authentication});
+                }
+            }
+
+            return Unauthorized();
         }
     }
 }

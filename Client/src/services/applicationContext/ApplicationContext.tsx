@@ -3,6 +3,7 @@ import { Reducer }                              from 'react';
 import AuthenticationApplicationState           from '../../modelStates/AuthenticationApplicationState';
 import FleetListFilterModel                     from '../../components/fleetList/fleetListFilterModel';
 import React                                    from 'react';
+import TokenCookies                             from '../../utilities/cookies/TokenCookies';
 import UserModel                                from '../../models/user/UserModel';
 
 export enum EnumAction {
@@ -62,6 +63,8 @@ const reducer: Reducer<ApplicationContexgtProps, Actions> = (state, action) => {
         case EnumAction.Logout:            
             var userStateLogout = new AuthenticationApplicationState();
             userStateLogout.loggedIn = false;
+            var tokenLogoutCookies = new TokenCookies();
+            tokenLogoutCookies.delete();
             return { ...state, 
                 userState: userStateLogout ,
                 token: undefined,
@@ -74,6 +77,9 @@ const reducer: Reducer<ApplicationContexgtProps, Actions> = (state, action) => {
             return {...state,sampleCounter: state.sampleCounter - 1};
 
         case EnumAction.SetToken:            
+            // store token in cookie incase user refreshes screen
+            var tokenLoginCookies = new TokenCookies();
+            tokenLoginCookies.token = action.value as string;          
             return {...state,token:action.value as string};
 
         default:

@@ -32,7 +32,7 @@ function DefectSheetComponent() {
                 <Grid item xs={3}>
                   <ValidatedTextField
                     name="registration"
-                    label="Registration"                    
+                    label="Registration"
                     fullWidth
                     autoFocus
                     rules={[new RuleMandatory(), new RuleMaxLength(40)]} />
@@ -40,25 +40,25 @@ function DefectSheetComponent() {
 
                 <Grid item xs={3}>
 
-                  <ValidatedSelectField 
-                      name = "Manufacturer" 
-                      label = "Manufacturer" 
-                      rules = {[new RuleMandatory()]} 
-                      items = {[
-                        new SelectItemModel("10","Alfa Romeo"),
-                        new SelectItemModel("20","Audi"),
-                        new SelectItemModel("30","BMW"),
-                        new SelectItemModel("40","Jaguar"),
-                        new SelectItemModel("50","Ford"),
-                        new SelectItemModel("60","Volkswagen"),
-                          ]}
-                      />
+                  <ValidatedSelectField
+                    name="Manufacturer"
+                    label="Manufacturer"
+                    rules={[new RuleMandatory()]}
+                    items={[
+                      new SelectItemModel("10", "Alfa Romeo"),
+                      new SelectItemModel("20", "Audi"),
+                      new SelectItemModel("30", "BMW"),
+                      new SelectItemModel("40", "Jaguar"),
+                      new SelectItemModel("50", "Ford"),
+                      new SelectItemModel("60", "Volkswagen"),
+                    ]}
+                  />
                 </Grid>
 
                 <Grid item xs={3}>
                   <ValidatedTextField
                     name="model"
-                    label="Model"                                        
+                    label="Model"
                     rules={[new RuleMandatory(), new RuleMaxLength(40)]} />
                 </Grid>
               </Grid>
@@ -68,14 +68,14 @@ function DefectSheetComponent() {
                 <Grid item xs={3}>
                   <ValidatedTextField
                     name="drivername"
-                    label="Driver Name"                    
+                    label="Driver Name"
                     rules={[new RuleMandatory(), new RuleMaxLength(40)]} />
                 </Grid>
 
                 <Grid item xs={3}>
                   <ValidatedTextField
                     name="location"
-                    label="Location"                    
+                    label="Location"
                     rules={[new RuleMandatory(), new RuleMaxLength(40)]} />
                 </Grid>
 
@@ -88,7 +88,7 @@ function DefectSheetComponent() {
                 <Grid item xs={3}>
                   <ValidatedTextField
                     name="authorisedby"
-                    label="Authorised By"                    
+                    label="Authorised By"
                     rules={[new RuleMandatory(), new RuleMaxLength(40)]} />
                 </Grid>
               </Grid>
@@ -98,28 +98,28 @@ function DefectSheetComponent() {
                 <Grid item xs={3}>
                   <ValidatedTextField
                     name="homedepot"
-                    label="Home Depot"                    
+                    label="Home Depot"
                     rules={[new RuleMandatory(), new RuleMaxLength(40)]} />
                 </Grid>
 
                 <Grid item xs={3}>
                   <ValidatedTextField
                     name="reportingdepot"
-                    label="Reporting Depot"                    
+                    label="Reporting Depot"
                     rules={[]} />
                 </Grid>
 
                 <Grid item xs={3}>
                   <ValidatedTextField
                     name="defectdate"
-                    label="Defect Date"                    
+                    label="Defect Date"
                     rules={[]} />
                 </Grid>
 
                 <Grid item xs={3}>
                   <ValidatedTextField
                     name="defecttime"
-                    label="Defect Time"                    
+                    label="Defect Time"
                     rules={[]} />
                 </Grid>
               </Grid>
@@ -175,7 +175,7 @@ function DefectSheetComponent() {
               <Grid item xs={4}>
                 <ValidatedTextField
                   name="preferredAgent"
-                  label="Preferred Agent"                  
+                  label="Preferred Agent"
                   rules={[]} />
               </Grid>
 
@@ -199,14 +199,14 @@ function DefectSheetComponent() {
               <Grid item xs={4}>
                 <ValidatedTextField
                   name="defectdate"
-                  label="Defect Date"                  
+                  label="Defect Date"
                   rules={[]} />
               </Grid>
 
               <Grid item xs={4}>
                 <ValidatedTextField
                   name="defecttime"
-                  label="Defect Time"                  
+                  label="Defect Time"
                   rules={[]} />
               </Grid>
 

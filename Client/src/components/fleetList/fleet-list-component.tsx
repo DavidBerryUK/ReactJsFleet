@@ -44,7 +44,7 @@ const FleetListComponent: React.FC = () => {
     },
   });
 
-  const {state, dispatch} = useContext(ApplicationContext);
+  const { state, dispatch } = useContext(ApplicationContext);
 
   const classes = useStyles();
   const [vehicleList, setVehicleList] = React.useState(new ApiBaseCollectionResponseModel<VehicleModel>());
@@ -66,10 +66,10 @@ const FleetListComponent: React.FC = () => {
   // handler for the pagination control
   //
   function onPageChangedHandler(page: number): void {
-    var filter =  state.fleetListFilter.clone();
+    var filter = state.fleetListFilter.clone();
     filter.pageNumber = page;
-    dispatch({type: EnumAction.UpdateFleetListFilter, value: filter});
-    
+    dispatch({ type: EnumAction.UpdateFleetListFilter, value: filter });
+
   }
 
   //
@@ -87,65 +87,65 @@ const FleetListComponent: React.FC = () => {
       filter.sortedColumn = column;
       filter.sortDirection = enumSortDirection.asc;
     }
-    dispatch({type: EnumAction.UpdateFleetListFilter, value: filter});
+    dispatch({ type: EnumAction.UpdateFleetListFilter, value: filter });
   }
 
   // Filter Handler - Registration
   //
-  function filterRegistrationChangeHandler(searchText : string) {
-    debounceUtility.debounceStringCallback(searchText, 500, ( value:string ) => {   
+  function filterRegistrationChangeHandler(searchText: string) {
+    debounceUtility.debounceStringCallback(searchText, 500, (value: string) => {
       var filter = state.fleetListFilter.clone();
       filter.filterRegistration = value;
-      dispatch({type: EnumAction.UpdateFleetListFilter, value: filter});
-    });    
+      dispatch({ type: EnumAction.UpdateFleetListFilter, value: filter });
+    });
   }
 
   // Filter Handler - Colour
   //
-  function filterColourChangeHandler(item : ListItemModel) {
+  function filterColourChangeHandler(item: ListItemModel) {
     var filter = state.fleetListFilter.clone();
     filter.filterColour = item;
-    dispatch({type: EnumAction.UpdateFleetListFilter, value: filter});
+    dispatch({ type: EnumAction.UpdateFleetListFilter, value: filter });
   }
 
   // Filter Handler - Make
   //
-  function filterMakeChangeHandler(item : ListItemModel) {
+  function filterMakeChangeHandler(item: ListItemModel) {
     var filter = state.fleetListFilter.clone();
     filter.filterMake = item;
-    dispatch({type: EnumAction.UpdateFleetListFilter, value: filter});
+    dispatch({ type: EnumAction.UpdateFleetListFilter, value: filter });
   }
 
   // Filter Handler - Model
   //
-  function filterModelChangeHandler(item : ListItemModel) {
+  function filterModelChangeHandler(item: ListItemModel) {
     var filter = state.fleetListFilter.clone();
     filter.filterModel = item;
-    dispatch({type: EnumAction.UpdateFleetListFilter, value: filter});
+    dispatch({ type: EnumAction.UpdateFleetListFilter, value: filter });
   }
 
   // Filter Handler - Transmission
   //
-  function filterTransmissionChangeHandler(item : ListItemModel) {
+  function filterTransmissionChangeHandler(item: ListItemModel) {
     var filter = state.fleetListFilter.clone();
     filter.filterTransmission = item;
-    dispatch({type: EnumAction.UpdateFleetListFilter, value: filter});
+    dispatch({ type: EnumAction.UpdateFleetListFilter, value: filter });
   }
 
   // Filter Handler - Number of doors
   //
-  function filterDoorsChangeHandler(item : ListItemModel) {
+  function filterDoorsChangeHandler(item: ListItemModel) {
     var filter = state.fleetListFilter.clone();
     filter.filterDoors = item;
-    dispatch({type: EnumAction.UpdateFleetListFilter, value: filter});
+    dispatch({ type: EnumAction.UpdateFleetListFilter, value: filter });
   }
 
   // Rows Per Page Changed
   //
-  function rowsPerPageChangeHandler(rowsPerPage : number) {
+  function rowsPerPageChangeHandler(rowsPerPage: number) {
     var filter = state.fleetListFilter.clone();
     filter.rowsPerPage = rowsPerPage;
-    dispatch({type: EnumAction.UpdateFleetListFilter, value: filter});
+    dispatch({ type: EnumAction.UpdateFleetListFilter, value: filter });
   }
 
   //
@@ -164,7 +164,7 @@ const FleetListComponent: React.FC = () => {
                 onClick={() => { columnHeaderSortClickHandler(enumColumnNames.registration) }}>
               </TableSortLabel>
               Registration
-              <RegistrationSearchBoxComponent onSelectionChanged={(searchText: string)=>{ filterRegistrationChangeHandler(searchText)}} />
+              <RegistrationSearchBoxComponent onSelectionChanged={(searchText: string) => { filterRegistrationChangeHandler(searchText) }} />
             </TableCell>
 
             <TableCell>
@@ -174,9 +174,9 @@ const FleetListComponent: React.FC = () => {
                 onClick={() => { columnHeaderSortClickHandler(enumColumnNames.make) }}>
               </TableSortLabel>
               Make
-              <UniqueMakeSelectorComponent 
-              value={state.fleetListFilter.filterMake.entityValue}
-              onSelectionChanged={(item: ListItemModel)=>{ filterMakeChangeHandler(item)}} />
+              <UniqueMakeSelectorComponent
+                value={state.fleetListFilter.filterMake.entityValue}
+                onSelectionChanged={(item: ListItemModel) => { filterMakeChangeHandler(item) }} />
             </TableCell>
 
             <TableCell>
@@ -186,9 +186,9 @@ const FleetListComponent: React.FC = () => {
                 onClick={() => { columnHeaderSortClickHandler(enumColumnNames.model) }}>
               </TableSortLabel>
               Model
-              <UniqueModelSelectorComponent 
-              value={state.fleetListFilter.filterModel.entityValue}
-              onSelectionChanged={(item: ListItemModel)=>{ filterModelChangeHandler(item)}} />
+              <UniqueModelSelectorComponent
+                value={state.fleetListFilter.filterModel.entityValue}
+                onSelectionChanged={(item: ListItemModel) => { filterModelChangeHandler(item) }} />
             </TableCell>
 
             <TableCell>
@@ -198,11 +198,11 @@ const FleetListComponent: React.FC = () => {
                 onClick={() => { columnHeaderSortClickHandler(enumColumnNames.colour) }}>
               </TableSortLabel>
               Colour
-              <UniqueColourSelectorComponent 
-                value={state.fleetListFilter.filterColour.entityValue} 
-                onSelectionChanged={(item: ListItemModel)=>{ filterColourChangeHandler(item)}} />
+              <UniqueColourSelectorComponent
+                value={state.fleetListFilter.filterColour.entityValue}
+                onSelectionChanged={(item: ListItemModel) => { filterColourChangeHandler(item) }} />
             </TableCell>
-            
+
             <TableCell>
               <TableSortLabel
                 active={state.fleetListFilter.sortedColumn === enumColumnNames.Transmission}
@@ -210,11 +210,11 @@ const FleetListComponent: React.FC = () => {
                 onClick={() => { columnHeaderSortClickHandler(enumColumnNames.Transmission) }}>
               </TableSortLabel>
               Transmission
-              <UniqueTransmissionSelectorComponent 
-              value={state.fleetListFilter.filterTransmission.entityValue}
-               onSelectionChanged={(item: ListItemModel)=>{ filterTransmissionChangeHandler(item)}} />
+              <UniqueTransmissionSelectorComponent
+                value={state.fleetListFilter.filterTransmission.entityValue}
+                onSelectionChanged={(item: ListItemModel) => { filterTransmissionChangeHandler(item) }} />
             </TableCell>
-                        
+
             <TableCell align="right">
               <TableSortLabel
                 active={state.fleetListFilter.sortedColumn === enumColumnNames.doors}
@@ -222,14 +222,14 @@ const FleetListComponent: React.FC = () => {
                 onClick={() => { columnHeaderSortClickHandler(enumColumnNames.doors) }}>
               </TableSortLabel>
               Doors
-              <UniqueDoorsSelectorComponent  
-              value={state.fleetListFilter.filterDoors.entityValue}
-              onSelectionChanged={(item: ListItemModel)=>{ filterDoorsChangeHandler(item)}} />
+              <UniqueDoorsSelectorComponent
+                value={state.fleetListFilter.filterDoors.entityValue}
+                onSelectionChanged={(item: ListItemModel) => { filterDoorsChangeHandler(item) }} />
             </TableCell>
 
             <TableCell></TableCell>
 
-          </TableRow>          
+          </TableRow>
         </TableHead>
         <TableBody>
           {vehicleList.entities?.map(row => (
@@ -244,10 +244,10 @@ const FleetListComponent: React.FC = () => {
               <TableCell align="right">{row.doors}</TableCell>
               <TableCell>
                 <Link to={`${RouteConstants.FleetDetail}/${row.entityKey}`}>
-                <Button   color="primary" 
-                          variant="contained" 
-                          size="small">view</Button>
-                          </Link>
+                  <Button color="primary"
+                    variant="contained"
+                    size="small">view</Button>
+                </Link>
               </TableCell>
             </TableRow>
           ))}
@@ -256,16 +256,16 @@ const FleetListComponent: React.FC = () => {
 
       <Box display="flex" justifyContent="left" >
         <Box p={2}>rows {vehicleList.totalRows}</Box>
-            <Box display="flex" flexGrow={1} justifyContent="center">
-              <Box display="flex" pt={2} >
-                  <PaginationButtons page={state.fleetListFilter.pageNumber} pageCount={vehicleList.totalPages} onPageChanged={(page: number) => { onPageChangedHandler(page) }} />
-              </Box>
-            </Box>
-            <Box p={2}>
-            <RowsPerPageComponent onRowsPerPageChanged={(rowsPerPage: number)=> {rowsPerPageChangeHandler(rowsPerPage)}}/>
-            </Box>
-      </Box>      
-      
+        <Box display="flex" flexGrow={1} justifyContent="center">
+          <Box display="flex" pt={2} >
+            <PaginationButtons page={state.fleetListFilter.pageNumber} pageCount={vehicleList.totalPages} onPageChanged={(page: number) => { onPageChangedHandler(page) }} />
+          </Box>
+        </Box>
+        <Box p={2}>
+          <RowsPerPageComponent onRowsPerPageChanged={(rowsPerPage: number) => { rowsPerPageChangeHandler(rowsPerPage) }} />
+        </Box>
+      </Box>
+
     </Paper>
   );
 }

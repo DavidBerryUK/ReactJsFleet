@@ -6,9 +6,7 @@ type PropsType = RouteComponentProps<{ id: string }>;
 
 const FleetDetailPage: React.FC<PropsType> = (props) => {
   return (
-    <>
-        <FleetDetailComponent vehicleId={Number(props.match.params.id)}></FleetDetailComponent>
-    </>
+      <FleetDetailComponent vehicleId={Number(props.match.params.id)}></FleetDetailComponent>
   );
 }
 

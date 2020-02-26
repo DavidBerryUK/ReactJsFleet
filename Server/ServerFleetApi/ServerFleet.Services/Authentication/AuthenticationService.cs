@@ -21,9 +21,10 @@ namespace ServerFleet.Services.Authentication
 
         public AuthorisationInfoModel Authenticate(string username, string password)
         {
-            var user = UserService.Get(username,password);
-            
-            if ( user != null) {
+            var user = UserService.Get(username, password);
+
+            if (user != null)
+            {
                 var token = CreateTokenForUser(user);
                 var response = new AuthorisationInfoModel
                 {
@@ -36,6 +37,30 @@ namespace ServerFleet.Services.Authentication
             return null;
         }
 
+        public AuthorisationInfoModel Authenticate(Guid token)
+        {
+            var tokenModel = GetTokenForValue(token);
+            if (tokenModel == null)
+            {
+                return null;
+            }
+
+            var user = UserService.Get(tokenModel.User.Id);
+
+            if (user == null)
+            {
+                return null;
+            }
+
+            var response = new AuthorisationInfoModel
+            {
+                User = user,
+                Token = tokenModel.Token,
+                Permissions = new List<string>(),
+            };
+            return response;
+
+        }
 
         public TokenEntity CreateTokenForUser(UserModel user)
         {
@@ -49,6 +74,12 @@ namespace ServerFleet.Services.Authentication
             Tokens.Add(token);
 
             return token;
+        }
+
+
+        public TokenEntity GetTokenForValue(Guid token)
+        {
+            return Tokens.FirstOrDefault(o => o.Token == token);
         }
 
         public TokenEntity GetTokenForUser(int userId)

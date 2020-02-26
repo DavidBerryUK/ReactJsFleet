@@ -25,8 +25,8 @@ const FleetDetailComponent: React.FC<IProperties> = (props) => {
   }, [props.vehicleId])
 
   return (
-    <div >
-      <h1>FleetDetail:{props.vehicleId}</h1>      
+    <>
+      <h1>FleetDetail:{props.vehicleId}</h1>
       {vehicleItem.entity?.vehicleId}
       {vehicleItem.entity?.registration}
       {vehicleItem.entity?.colour}
@@ -37,8 +37,8 @@ const FleetDetailComponent: React.FC<IProperties> = (props) => {
       {vehicleItem.entity?.mpg}
       {vehicleItem.entity?.mileage}
 
-      <Button variant="contained" color="primary"  href={RouteConstants.FleetList}>Fleet List</Button>
-    </div>
+      <Button variant="contained" color="primary" href={RouteConstants.FleetList}>Fleet List</Button>
+    </>
   );
 }
 

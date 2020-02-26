@@ -2,9 +2,7 @@ import React                          from 'react';
 
 const DashboardComponent: React.FC = () => {
   return (
-    <div >
-        <h1>Dashboard</h1>
-    </div>
+    <h1>Dashboard</h1>
   );
 }
 

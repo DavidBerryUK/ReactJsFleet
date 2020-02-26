@@ -6,9 +6,15 @@ export default class AuthenticationService {
     
     // Authenticate username and password
     //
-    public authenticate(username: String, password: String ) : ApiResponse<AuthenticationModel>{
+    public authenticate(username: string, password: string ) : ApiResponse<AuthenticationModel>{
         let repositoryAuthentication = new RepositoryAuthentication();
         let contract = repositoryAuthentication.authenticate(username, password)        
+        return contract;
+    }
+
+    public authenticatWithToken(token: string) : ApiResponse<AuthenticationModel>{
+        let repositoryAuthentication = new RepositoryAuthentication();
+        let contract = repositoryAuthentication.authenticateWithToken(token)        
         return contract;
     }
 }

@@ -11,16 +11,14 @@ import RouteConstants                           from "../routing/RouteConstants"
 const Routes: React.SFC = () => {
 
     return (
-        <section>
-            <Switch>                
-                <Route exact path="/" component={DashboardPage} />
-                <Route path={RouteConstants.Dashboard} component={DashboardPage} />
-                <Route path={RouteConstants.DefectSheet} component={DefectSheetPage} />
-                <Route path={`${RouteConstants.FleetDetail}/:id`} component={FleetDetailPage} />
-                <Route path={RouteConstants.FleetList} component={FleetListPage} />
-                <Route path={RouteConstants.Login} component={LoginPage} />                
-            </Switch>
-        </section>
+        <Switch>
+        <Route exact path="/" component={DashboardPage} />
+        <Route path={RouteConstants.Dashboard} component={DashboardPage} />
+        <Route path={RouteConstants.DefectSheet} component={DefectSheetPage} />
+        <Route path={`${RouteConstants.FleetDetail}/:id`} component={FleetDetailPage} />
+        <Route path={RouteConstants.FleetList} component={FleetListPage} />
+        <Route path={RouteConstants.Login} component={LoginPage} />
+      </Switch>
     )
 }
 
