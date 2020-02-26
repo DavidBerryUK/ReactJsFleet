@@ -1,17 +1,18 @@
 import { Box }                                  from '@material-ui/core';
 import { classStyleDefinition }                 from './classStyleDefinition'
+import { EnumAction }                           from '../../services/applicationContext/ApplicationContext';
 import { ILoginModel }                          from './ILoginModel';
 import { IValidationContextActions }            from '../../services/validation/context/interfaces/IValidationContextActions';
 import { IValidationContextState }              from '../../services/validation/context/interfaces/IValidationContextState';
 import { useContext }                           from 'react';
 import { useHistory }                           from 'react-router-dom';
 import { ValidationContext }                    from '../../services/validation/context/context/ValidationContext';
+import ApplicationContext                       from '../../services/applicationContext/ApplicationContext';
 import AuthenticationService                    from '../../services/security/AuthenticationService';
 import Avatar                                   from '@material-ui/core/Avatar';
 import Button                                   from '@material-ui/core/Button';
 import Card                                     from '@material-ui/core/Card';
 import Container                                from '@material-ui/core/Container';
-import ApplicationContext, { EnumAction }                               from '../../services/applicationContext/ApplicationContext';
 import Grid                                     from '@material-ui/core/Grid';
 import Link                                     from '@material-ui/core/Link';
 import LockOutlinedIcon                         from '@material-ui/icons/LockOutlined';
@@ -29,24 +30,22 @@ import ValidationMessage                        from '../../models/validation/Va
 import ValidationState                          from '../../services/validation/context/state/ValidationState';
 
 
-  const LoginComponent: React.FC = () => {
+const LoginComponent: React.FC = () => {
 
   const classStyles = classStyleDefinition();
-   const router = useHistory();
+  const router = useHistory();
   const [loading, setLoading] = React.useState(false);
-  const [message, setMessage] = React.useState("");
-  const  dispatch = useContext(ApplicationContext).dispatch;
-  
+  const [message, setValidationMessage] = React.useState("");
+  const { dispatch } = useContext(ApplicationContext);
+
   //
   // Event Handler for Login Button Pressed
   //
-  function loginButtonClicked(context : IValidationContextActions<ILoginModel> ) {
+  function loginButtonClicked(context: IValidationContextActions<ILoginModel>) {
 
-    
+    setValidationMessage("");
 
-    setMessage("");
-
-    if ( !context.validate() ) {
+    if (!context.validate()) {
       console.log("this form is not valid - ABANDON ALL HOPE!!!")
       return;
     }
@@ -54,26 +53,27 @@ import ValidationState                          from '../../services/validation/
     // get form model
     //
     const form = context.getModel();
-    console.log(form)    ;
+    console.log(form);
 
     var authenticationService = new AuthenticationService();
     setLoading(true);
-    
+
     authenticationService.authenticate(form.username, form.password)
       .onSuccess((userModel: UserModel) => {
         // update global context with login details
-        dispatch({ type: EnumAction.Login,value: userModel })
+        dispatch({ type: EnumAction.Login, value: userModel })
+        setLoading(false);
         NavigateDashboard.go(router);
       })
-        .onValidationErrorsRaised((validationMessages: Array<ValidationMessage>) => {
-        setMessage("User or Password invalid");
-      })
-        .onFailed((error) => {
-          setMessage("Can not connect to server");
-      })
-      .then(() => {
+      .onValidationErrorsRaised((validationMessages: Array<ValidationMessage>) => {
         setLoading(false);
+        setValidationMessage("User or Password invalid");
       })
+      .onFailed((error) => {
+        setLoading(false);
+        setValidationMessage("Can not connect to server");
+      });
+      
   }
 
   //
@@ -120,12 +120,12 @@ import ValidationState                          from '../../services/validation/
                     disabled={!context.isFormValid}
                     fullWidth
                     className={classStyles.submit}
-                    onClick={ () =>{ loginButtonClicked(context)} }>Login</Button>
-                  
+                    onClick={() => { loginButtonClicked(context) }}>Login</Button>
+
                   <Box hidden={message.length === 0} className={classStyles.loginMessage} color="error.main">
-                    <Typography  component="h4">{message}</Typography>                    
+                    <Typography component="h4">{message}</Typography>
                   </Box>
-                  
+
                   {loading && <ProgressIndicatorLinear />}
 
                   <Grid container>
