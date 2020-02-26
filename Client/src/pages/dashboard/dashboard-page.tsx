@@ -1,8 +1,6 @@
 import { Button }                               from '@material-ui/core';
 import { makeStyles }                           from '@material-ui/styles';
 import { Paper }                                from '@material-ui/core';
-import DashboardButton                          from '../../components/dashboardButton/dashboard-button-component';
-import DemoPageTitle                            from '../../components/demoPageTitle/demoPageTitle-component';
 import React                                    from 'react';
 import RouteConstants                           from '../../routing/RouteConstants';
 import SampleCounterComponent                   from '../../components/sampleCounterComponent/SampleCounterComponent';
@@ -31,8 +29,6 @@ const DashboardPage: React.FC = () => {
 
   return (
     <div>
-      <DashboardButton/>
-      <DemoPageTitle title='Dashboard' />
       <Paper className={classes.paper}>
         <div className={classes.root}>
           <Button variant="contained" color="primary" className={classes.button} href={RouteConstants.Login}>Login</Button>

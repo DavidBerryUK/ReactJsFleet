@@ -1,6 +1,6 @@
+import { ApplicationContextProvider }           from '../../services/applicationContext/ApplicationContext';
 import { BrowserRouter }                        from 'react-router-dom';
 import { Button }                               from '@material-ui/core';
-import { ApplicationContextProvider }                   from '../../services/applicationContext/ApplicationContext';
 import { Link }                                 from 'react-router-dom';
 import { makeStyles }                           from '@material-ui/styles';
 import { Paper }                                from '@material-ui/core';
@@ -8,10 +8,8 @@ import { Route }                                from 'react-router-dom';
 import { Switch }                               from 'react-router-dom';
 import ApplicationHeaderComponent               from '../applicationHeader/application-header-component';
 import CssBaseline                              from '@material-ui/core/CssBaseline';
-import DashboardButton                          from '../dashboardButton/dashboard-button-component';
 import DashboardPage                            from '../../pages/dashboard/dashboard-page';
 import DefectSheetPage                          from '../../pages/defectSheet/defect-sheet-page';
-import DemoPageTitle                            from '../demoPageTitle/demoPageTitle-component';
 import FleetDetailPage                          from '../../pages/fleetDetail/fleet-detail-page';
 import FleetListPage                            from '../../pages/fleetList/fleet-list-page';
 import LoginPage                                from '../../pages/login/login-page';
@@ -51,8 +49,6 @@ const App: React.FC = () => {
       <CssBaseline />
       <BrowserRouter>
       <ApplicationHeaderComponent/>
-      <DemoPageTitle title="App" />
-      <DashboardButton />
       <div className={classes.app}>
         <Paper className={classes.paper}>          
           <div className={classes.root}>

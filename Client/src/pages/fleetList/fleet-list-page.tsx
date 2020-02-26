@@ -1,10 +1,8 @@
-import { Box }                        from '@material-ui/core';
-import { makeStyles }                 from '@material-ui/styles';
-import ApplicationHeader              from '../../components/applicationHeader/application-header-component'
-import DashboardButton                from '../../components/dashboardButton/dashboard-button-component';
-import DemoPageTitle                  from '../../components/demoPageTitle/demoPageTitle-component';
-import FleetListComponent             from '../../components/fleetList/fleet-list-component'
-import React                          from 'react';
+import { Box }                                  from '@material-ui/core';
+import { makeStyles }                           from '@material-ui/styles';
+import ApplicationHeader                        from '../../components/applicationHeader/application-header-component'
+import FleetListComponent                       from '../../components/fleetList/fleet-list-component'
+import React                                    from 'react';
 
 const FleetListPage: React.FC = () => {
 
@@ -21,8 +19,6 @@ const classes = useStyles();
 
   return (
     <div >
-        <DashboardButton/>
-        <DemoPageTitle title="Fleet List"/>
         <ApplicationHeader></ApplicationHeader>        
         <Box className={classes.fleetTable} >
           <FleetListComponent></FleetListComponent>

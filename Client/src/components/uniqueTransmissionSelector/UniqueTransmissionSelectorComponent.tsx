@@ -9,7 +9,7 @@ import RepositorySpecification                  from '../../repository/specifica
 
 interface IUniqueSelectorProperties {
     value: string,
-    onSelectionChanged : (item: ListItemModel) => void
+    onSelectionChanged: (item: ListItemModel) => void
 }
 
 // Component
@@ -19,7 +19,7 @@ const UniqueTransmissionSelectorComponent: React.FC<IUniqueSelectorProperties> =
 
     const unselectedItem = new ListItemModel();
     const [list, setList] = React.useState(new Array<ListItemModel>());
-    const [selectedItem, setSelectedItem] = React.useState(unselectedItem);      
+    const [selectedItem, setSelectedItem] = React.useState(unselectedItem);
 
     // only get data once regardless of how many time the screen refreshed
     useMemo(() => {
@@ -28,32 +28,32 @@ const UniqueTransmissionSelectorComponent: React.FC<IUniqueSelectorProperties> =
             .onSuccess((list: ApiBaseCollectionResponseModel<ListItemModel>) => {
                 setList(list.entities!);
                 let item = list.entities?.find(item => item.entityValue === props.value);
-                if ( item != null) {
+                if (item != null) {
                     setSelectedItem(item);
                 }
             });
-    },[props.value])
+    }, [props.value])
 
     // the user selection has changed, raise an event to the host control
     // indicating the value has been updated
-    function valueChangedEventHandler(event : React.ChangeEvent) {    
-        const typedEvent = event as React.ChangeEvent<HTMLInputElement>                    
+    function valueChangedEventHandler(event: React.ChangeEvent) {
+        const typedEvent = event as React.ChangeEvent<HTMLInputElement>
         let item = list.find(item => item.entityValue === typedEvent.target.value) ?? unselectedItem;
-        setSelectedItem(item);                
+        setSelectedItem(item);
         props.onSelectionChanged(item);
     }
 
     // Display Template
     //
     return (
-        <FormControl variant="outlined"  margin="dense" fullWidth>
-            <Select displayEmpty    
+        <FormControl variant="outlined" margin="dense" fullWidth>
+            <Select displayEmpty
                 onChange={(event: any) => { valueChangedEventHandler(event) }}
-                value={selectedItem.entityValue}>          
-                <MenuItem  value=""><em>none</em></MenuItem>
-                    {list.map((item: ListItemModel) => (
-                        <MenuItem key={item.entityValue} value={item.id}>{item.text}</MenuItem>
-                    ))}
+                value={selectedItem.entityValue}>
+                <MenuItem value=""><em>none</em></MenuItem>
+                {list.map((item: ListItemModel) => (
+                    <MenuItem key={item.entityValue} value={item.id}>{item.text}</MenuItem>
+                ))}
             </Select>
         </FormControl>
     )
