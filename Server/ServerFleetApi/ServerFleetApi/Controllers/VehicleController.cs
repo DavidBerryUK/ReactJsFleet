@@ -17,19 +17,19 @@ namespace ServerFleet.Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<BaseResponseCollection<VehicleJson>> GetAll([FromQuery] VehicleListRequest request)
+        public ActionResult<BaseResponseCollection<VehicleResponse>> GetAll([FromQuery] VehicleListRequest request)
         {
             return Ok(_vehicleService.GetWithFilter(request));
         }
 
         [HttpGet("reg/{registration}")]
-        public ActionResult<VehicleJson> GetByRegistration(string registration)
+        public ActionResult<VehicleResponse> GetByRegistration(string registration)
         {
             return Ok(_vehicleService.GetByRegistration(registration));
         }
 
         [HttpGet("{vehicleId}")]
-        public ActionResult<BaseItemResponse<VehicleJson>> GetByVehicleId(int vehicleId)
+        public ActionResult<BaseItemResponse<VehicleResponse>> GetByVehicleId(int vehicleId)
         {
             return Ok(_vehicleService.GetByVehicleId(vehicleId));
         }

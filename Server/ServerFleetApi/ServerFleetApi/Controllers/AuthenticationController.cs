@@ -25,7 +25,7 @@ namespace ServerFleet.Api.Controllers
 
             var response = new AuthenticationResponse
             {
-                Entity = _authenticationService.Authenticate(request.UserName, request.Password)
+                Entity = _authenticationService.Authenticate(request.User.UserName, request.User.Password)
             };
 
             if (response.Entity == null)

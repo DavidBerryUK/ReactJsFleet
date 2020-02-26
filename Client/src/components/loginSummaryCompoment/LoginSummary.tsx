@@ -14,10 +14,10 @@ const LoginSummary: React.FC = () => {
 
     const { state, dispatch } = useContext(ApplicationContext);
     var history = useHistory();
-
-    useMemo(() => {
-        console.log(state.userState);
-    }, [state.userState])
+    
+    // useMemo(() => {
+    //     console.log(state.userState);
+    // }, [state.userState])
 
     function loginClickHandler() {
         history.push(RouteConstants.Login);

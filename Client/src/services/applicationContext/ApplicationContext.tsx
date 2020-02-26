@@ -6,10 +6,11 @@ import React                                    from 'react';
 import UserModel                                from '../../models/user/UserModel';
 
 export enum EnumAction {
-    SampleCounterAdd,
-    SampleCounterSubtract,
     Login,
     Logout,
+    SampleCounterAdd,
+    SampleCounterSubtract,
+    SetToken,
     UpdateFleetListFilter
 }
 
@@ -19,13 +20,14 @@ export interface IDispatchObject {
 
 interface Actions {
     type: EnumAction;
-    value?: IDispatchObject;
+    value?: IDispatchObject | string;
 }
 
 interface ApplicationContexgtProps {
     userState : AuthenticationApplicationState,
     fleetListFilter : FleetListFilterModel,
-    sampleCounter: number
+    sampleCounter: number,
+    token?: string | undefined
 }
 
 interface InitContextProps {
@@ -36,7 +38,8 @@ interface InitContextProps {
 const initialState: ApplicationContexgtProps = {
     userState : new AuthenticationApplicationState(),
     fleetListFilter: new FleetListFilterModel(),
-    sampleCounter: 5000
+    sampleCounter: 5000,
+    token: undefined
 
 };
 
@@ -44,13 +47,11 @@ const reducer: Reducer<ApplicationContexgtProps, Actions> = (state, action) => {
     
     switch (action.type) {
 
-        case EnumAction.UpdateFleetListFilter:
-            console.log("UpdateFleetListFilter");
+        case EnumAction.UpdateFleetListFilter:            
             var fleetListFilterObject =  action.value as FleetListFilterModel;                        
             return { ...state, fleetListFilter: fleetListFilterObject };
 
-        case EnumAction.Login:
-            console.log("OneContext:Action:Login");
+        case EnumAction.Login:            
             var userObject =  action.value as UserModel;
             var userStateLogIn = new AuthenticationApplicationState();
             userStateLogIn.loggedIn = true;
@@ -58,17 +59,22 @@ const reducer: Reducer<ApplicationContexgtProps, Actions> = (state, action) => {
             console.log(userStateLogIn);
             return { ...state, userState: userStateLogIn };            
 
-        case EnumAction.Logout:
-            console.log("OneContext:Action:Logout");
+        case EnumAction.Logout:            
             var userStateLogout = new AuthenticationApplicationState();
             userStateLogout.loggedIn = false;
-            return { ...state, userState: userStateLogout };
+            return { ...state, 
+                userState: userStateLogout ,
+                token: undefined,
+            };
 
         case EnumAction.SampleCounterAdd:
             return {...state,sampleCounter: state.sampleCounter + 1};
 
         case EnumAction.SampleCounterSubtract:
             return {...state,sampleCounter: state.sampleCounter - 1};
+
+        case EnumAction.SetToken:            
+            return {...state,token:action.value as string};
 
         default:
             return state;

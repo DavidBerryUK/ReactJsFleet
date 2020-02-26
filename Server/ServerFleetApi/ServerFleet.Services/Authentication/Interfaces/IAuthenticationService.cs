@@ -1,9 +1,9 @@
-﻿using ServerFleet.Models.Entities.User;
+﻿using ServerFleet.Models.Rest.Authentication;
 
 namespace ServerFleet.Services.Authentication.Interfaces
 {
     public interface IAuthenticationService
     {
-        UserModel Authenticate(string username, string password);
+        AuthorisationInfoModel Authenticate(string username, string password);
     }
 }

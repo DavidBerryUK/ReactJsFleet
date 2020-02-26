@@ -6,6 +6,8 @@ using ServerFleet.Services.Specification.Interfaces;
 using ServerFleet.Services.Vehicle;
 using ServerFleet.Services.Vehicle.Interfaces;
 using System;
+using ServerFleet.Services.User;
+using ServerFleet.Services.User.Interfaces;
 
 namespace ServerFleet.Api.StartupServices
 {
@@ -23,6 +25,8 @@ namespace ServerFleet.Api.StartupServices
             services.AddTransient<IVehicleFactory,VehicleFactory>();
             services.AddTransient<IVehicleService,VehicleService>();
             services.AddTransient<ISpecificationService, SpecificationService>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IUserFactory, UserFactory>();
 
         }
     }

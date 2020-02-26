@@ -6,7 +6,6 @@ using ServerFleet.Services.Vehicle.PipesAndFilters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Versioning;
 
 namespace ServerFleet.Services.Vehicle
 {
@@ -19,27 +18,27 @@ namespace ServerFleet.Services.Vehicle
             _vehicleFactory = vehicleFactory;
         }
 
-        public BaseItemResponse<VehicleJson> GetByRegistration(string registration)
+        public BaseItemResponse<VehicleResponse> GetByRegistration(string registration)
         {
             var data = _vehicleFactory.GetAll().FirstOrDefault(o => o.Registration == registration);
-            var response = new BaseItemResponse<VehicleJson>
+            var response = new BaseItemResponse<VehicleResponse>
             {
-                Entity = Mapper.Map<VehicleJson>(data)
+                Entity = Mapper.Map<VehicleResponse>(data)
             };
             return response;
         }
 
-        public BaseItemResponse<VehicleJson> GetByVehicleId(int vehicleId)
+        public BaseItemResponse<VehicleResponse> GetByVehicleId(int vehicleId)
         {
             var data = _vehicleFactory.GetAll().FirstOrDefault(o => o.VehicleId== vehicleId);
-            var response = new BaseItemResponse<VehicleJson>
+            var response = new BaseItemResponse<VehicleResponse>
             {
-                Entity = Mapper.Map<VehicleJson>(data)
+                Entity = Mapper.Map<VehicleResponse>(data)
             };
             return response;
         }
 
-        public BaseResponseCollection<VehicleJson> GetWithFilter(VehicleListRequest request)
+        public BaseResponseCollection<VehicleResponse> GetWithFilter(VehicleListRequest request)
         {
             var data = _vehicleFactory.GetAll();
             
@@ -74,8 +73,8 @@ namespace ServerFleet.Services.Vehicle
                     .ToList();
             }
 
-            var entities = Mapper.Map<List<VehicleJson>>(data);
-            var response = new BaseResponseCollection<VehicleJson>
+            var entities = Mapper.Map<List<VehicleResponse>>(data);
+            var response = new BaseResponseCollection<VehicleResponse>
             {
                 RowsPerPage = request.RowsPerPage,
                 PageNumber = request.PageNumber,

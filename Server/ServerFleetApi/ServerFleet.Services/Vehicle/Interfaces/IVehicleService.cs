@@ -5,8 +5,8 @@ namespace ServerFleet.Services.Vehicle.Interfaces
 {
     public interface IVehicleService
     {
-        BaseResponseCollection<VehicleJson> GetWithFilter(VehicleListRequest request);
-        BaseItemResponse<VehicleJson> GetByRegistration(string registration);
-        BaseItemResponse<VehicleJson> GetByVehicleId(int vehicleId);
+        BaseResponseCollection<VehicleResponse> GetWithFilter(VehicleListRequest request);
+        BaseItemResponse<VehicleResponse> GetByRegistration(string registration);
+        BaseItemResponse<VehicleResponse> GetByVehicleId(int vehicleId);
     }
 }

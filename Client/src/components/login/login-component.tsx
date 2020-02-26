@@ -8,6 +8,7 @@ import { useContext }                           from 'react';
 import { useHistory }                           from 'react-router-dom';
 import { ValidationContext }                    from '../../services/validation/context/context/ValidationContext';
 import ApplicationContext                       from '../../services/applicationContext/ApplicationContext';
+import AuthenticationModel                      from '../../models/authentication/AuthenticationModel';
 import AuthenticationService                    from '../../services/security/AuthenticationService';
 import Avatar                                   from '@material-ui/core/Avatar';
 import Button                                   from '@material-ui/core/Button';
@@ -22,13 +23,11 @@ import React                                    from 'react';
 import RuleMandatory                            from '../../services/validation/rules/ruleProcessors/RuleMandatory';
 import RuleMaxLength                            from '../../services/validation/rules/ruleProcessors/RuleMaxLength';
 import Typography                               from '@material-ui/core/Typography';
-import UserModel                                from '../../models/user/UserModel';
 import ValidatedPasswordField                   from '../../services/validation/controls/passwordField/ValidatedPasswordField';
 import ValidatedTextField                       from '../../services/validation/controls/textField/ValidatedTextField';
 import ValidationDebugInfo                      from '../../services/validation/controls/debugInfo/ValidationDebugInfo';
 import ValidationMessage                        from '../../models/validation/ValidationMessage';
 import ValidationState                          from '../../services/validation/context/state/ValidationState';
-
 
 const LoginComponent: React.FC = () => {
 
@@ -53,16 +52,22 @@ const LoginComponent: React.FC = () => {
     // get form model
     //
     const form = context.getModel();
-    console.log(form);
+    
 
     var authenticationService = new AuthenticationService();
     setLoading(true);
 
     authenticationService.authenticate(form.username, form.password)
-      .onSuccess((userModel: UserModel) => {
-        // update global context with login details
-        dispatch({ type: EnumAction.Login, value: userModel })
+      .onSuccess((authenticationModel: AuthenticationModel) => {
+        //
+        // update state
+        //    
+        dispatch({ type: EnumAction.Login, value: authenticationModel.user })
+        dispatch({ type: EnumAction.SetToken, value: authenticationModel.token })
         setLoading(false);
+
+        // navigate to dashboard
+        //
         NavigateDashboard.go(router);
       })
       .onValidationErrorsRaised((validationMessages: Array<ValidationMessage>) => {

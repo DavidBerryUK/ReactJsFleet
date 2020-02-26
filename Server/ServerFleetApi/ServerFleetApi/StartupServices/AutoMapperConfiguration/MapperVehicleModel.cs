@@ -9,7 +9,7 @@ namespace ServerFleet.Api.StartupServices.AutoMapperConfiguration
     {
         public void Map(IMapperConfigurationExpression cfg)
         {
-            cfg.CreateMap<VehicleModel, VehicleJson>();
+            cfg.CreateMap<VehicleModel, VehicleResponse>();
         }
     }
 }
