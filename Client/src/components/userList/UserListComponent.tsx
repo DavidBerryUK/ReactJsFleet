@@ -4,6 +4,7 @@ import { CardActionArea }                       from '@material-ui/core';
 import { CardContent }                          from '@material-ui/core';
 import { CardHeader }                           from '@material-ui/core';
 import { classStyleDefinition }                 from './classStyleDefinition';
+import { useHistory }                           from 'react-router';
 import { useMemo }                              from 'react';
 import { useState }                             from 'react';
 import ApiBaseCollectionResponseModel           from '../../models/apiBase/ApiBaseCollectionResponseModel';
@@ -13,9 +14,9 @@ import UserModel                                from '../../models/user/UserMode
 
 const UserListComponent: React.FC = () => {
 
-    const classStyles = classStyleDefinition();
-    const [currentUser, setCurrentUser] = useState<UserModel | null>(null);
+    const classStyles = classStyleDefinition();    
     const [userList, setUserList] = useState(new ApiBaseCollectionResponseModel<UserModel>());
+    var history = useHistory();
 
     useMemo(() => {
         var userRepository = new RepositoryUserList();
@@ -25,8 +26,8 @@ const UserListComponent: React.FC = () => {
             });
     }, []);
 
-    function selectUserOnClickEventHandler(user : UserModel) {    
-        setCurrentUser(user);
+    function selectUserOnClickEventHandler(user : UserModel) {            
+        history.push(`/maintain-users/${user.entityKey}/view`);
     }
 
     return (
