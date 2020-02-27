@@ -18,10 +18,9 @@ const MaintainUsersPage: React.FC = () => {
                 <UserListComponent />
             </div>
             <div className={classStyles.regionDetail}>
-                <Switch>
-                      
-                    <Route path={"/*/:id/view"} component={UserViewComponent} />                                  
-                    <Route path={"/*/:id/edit"}  component={UserEditComponent}/>     
+                <Switch>                      
+                    <Route path={"/*/:userId/view"} component={UserViewComponent} />                                  
+                    <Route path={"/*/:userId/edit"}  component={UserEditComponent}/>     
                     <Route component={UserNoMatchComponent}/>
                 </Switch>
             </div>          

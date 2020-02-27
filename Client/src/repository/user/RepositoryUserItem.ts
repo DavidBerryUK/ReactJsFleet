@@ -6,9 +6,9 @@ import FactoryUserModel                         from "../../modelFactories/Facto
 
 export default class RepositoryUserItem extends BaseItemRepository<UserModel> {
 
-    public getVehicleById(id : number) : ApiResponse<ApiBaseItemResponseModel<UserModel>>{
+    public getUserById(id : number) : ApiResponse<ApiBaseItemResponseModel<UserModel>>{
 
-        var endpoint = `/api/user/${id}`;                
+        var endpoint = `/api/users/${id}`;                
 
         return this.get(endpoint, new FactoryUserModel());        
     }
