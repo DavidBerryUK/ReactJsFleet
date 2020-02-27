@@ -29,5 +29,10 @@ namespace ServerFleet.Services.User
         {
             return Users.FirstOrDefault(o => o.Id == id);
         }
+
+        public List<UserModel> GetAll()
+        {
+            return Users;
+        }
     }
 }

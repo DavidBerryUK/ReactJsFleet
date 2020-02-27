@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using ServerFleet.Models.Entities.User;
 
 namespace ServerFleet.Models.Rest.Authentication

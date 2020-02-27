@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using ServerFleet.Models.Entities.List;
+﻿using ServerFleet.Models.Entities.List;
 using ServerFleet.Models.Rest.Base;
 
 namespace ServerFleet.Services.Specification.Interfaces
