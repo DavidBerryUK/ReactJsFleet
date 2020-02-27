@@ -25,7 +25,7 @@ const LoginPage: React.FC = () => {
           </Box>
         </> : null}
 
-      <CopyrightComponent></CopyrightComponent>
+      <CopyrightComponent/>
     </>
   );
 }

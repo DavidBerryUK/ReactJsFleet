@@ -32,7 +32,10 @@ namespace ServerFleet.Services.User
 
         public List<UserModel> GetAll()
         {
-            return Users;
+            return Users
+                .OrderBy(o => o.Forename)
+                .ThenBy(o => o.Surname)
+                .ToList();
         }
     }
 }

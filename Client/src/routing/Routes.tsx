@@ -5,6 +5,7 @@ import DefectSheetPage                          from '../pages/defectSheet/defec
 import FleetDetailPage                          from "../pages/fleetDetail/fleet-detail-page"
 import FleetListPage                            from "../pages/fleetList/fleet-list-page"
 import LoginPage                                from "../pages/login/login-page";
+import MaintainUsersPage                        from '../pages/maintainUsers/maintain-users-page';
 import React                                    from 'react';
 import RouteConstants                           from "../routing/RouteConstants"
 
@@ -18,6 +19,7 @@ const Routes: React.SFC = () => {
         <Route path={`${RouteConstants.FleetDetail}/:id`} component={FleetDetailPage} />
         <Route path={RouteConstants.FleetList} component={FleetListPage} />
         <Route path={RouteConstants.Login} component={LoginPage} />
+        <Route path={RouteConstants.MaintainUsers} component={MaintainUsersPage} />
       </Switch>
     )
 }
