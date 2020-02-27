@@ -20,6 +20,12 @@ export default class UserModel implements IApiModel , IDispatchObject {
         this.id = 0;
     }
 
+    public get initals(): string {
+        return (this.forename.substr(0,1) +
+               this.surname.substr(0,1)).toUpperCase();
+    }
+
+
     public get entityName(): string {
         return UserModel.className;
     }

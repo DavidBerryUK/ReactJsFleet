@@ -9,7 +9,7 @@ import React                                    from 'react';
 const ApplicationHeaderComponent: React.FC = () => {
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" >
       <Toolbar >
 
         <Box display="flex" width={1}>
