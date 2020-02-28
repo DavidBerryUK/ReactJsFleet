@@ -31,7 +31,7 @@ namespace ServerFleet.Api.StartupServices
             app.UseSwagger();
             app.UseSwaggerUI(options =>
             {
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "ReactJS Prototype Data Server API");
+                options.SwaggerEndpoint("/ServerFleet.Api/swagger/v1/swagger.json", "ReactJS Prototype Data Server API");
                 options.DocExpansion(docExpansion: DocExpansion.None);
 
             });
