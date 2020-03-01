@@ -2,10 +2,10 @@ import { MenuItem }                             from '@material-ui/core';
 import { FormControl }                          from '@material-ui/core';
 import { Select }                               from '@material-ui/core';
 import { useMemo }                              from 'react';
-import ApiBaseCollectionResponseModel           from '../../models/apiBase/ApiBaseCollectionResponseModel';
-import ListItemModel                            from '../../models/list/ListItemModel';
+import ApiBaseCollectionResponseModel           from '../../../models/apiBase/ApiBaseCollectionResponseModel';
+import ListItemModel                            from '../../../models/list/ListItemModel';
 import React                                    from 'react';
-import RepositorySpecification                  from '../../repository/specification/RepositorySpecification';
+import RepositorySpecification                  from '../../../repository/specification/RepositorySpecification';
 
 interface IUniqueSelectorProperties {
     value: string,
@@ -13,9 +13,9 @@ interface IUniqueSelectorProperties {
 }
 
 // Component
-// Displays a drop down list of transmission types,
-// e.g. manual and automatic
-const UniqueTransmissionSelectorComponent: React.FC<IUniqueSelectorProperties> = (props) => {
+// Displays a drop down list of unique number of doors per car
+//
+const UniqueDoorsSelectorComponent: React.FC<IUniqueSelectorProperties> = (props) => {
 
     const unselectedItem = new ListItemModel();
     const [list, setList] = React.useState(new Array<ListItemModel>());
@@ -24,7 +24,7 @@ const UniqueTransmissionSelectorComponent: React.FC<IUniqueSelectorProperties> =
     // only get data once regardless of how many time the screen refreshed
     useMemo(() => {
         var repository = new RepositorySpecification();
-        repository.getUniqueTransmission()
+        repository.getUniqueDoors()
             .onSuccess((list: ApiBaseCollectionResponseModel<ListItemModel>) => {
                 setList(list.entities!);
                 let item = list.entities?.find(item => item.entityValue === props.value);
@@ -59,4 +59,4 @@ const UniqueTransmissionSelectorComponent: React.FC<IUniqueSelectorProperties> =
     )
 }
 
-export default UniqueTransmissionSelectorComponent;
+export default UniqueDoorsSelectorComponent;

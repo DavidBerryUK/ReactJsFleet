@@ -4,14 +4,14 @@ import FormControlLabel                         from '@material-ui/core/FormCont
 import Grid                                     from '@material-ui/core/Grid';
 import Paper                                    from '@material-ui/core/Paper';
 import React                                    from 'react';
-import RuleMandatory                            from '../../services/validation/rules/ruleProcessors/RuleMandatory';
-import RuleMaxLength                            from '../../services/validation/rules/ruleProcessors/RuleMaxLength';
+import RuleMandatory                            from '../../../services/validation/rules/ruleProcessors/RuleMandatory';
+import RuleMaxLength                            from '../../../services/validation/rules/ruleProcessors/RuleMaxLength';
 import Switch                                   from '@material-ui/core/Switch';
-import ValidatedSelectField                     from '../../services/validation/controls/selectField/ValidatedSelectField';
-import ValidatedTextField                       from '../../services/validation/controls/textField/ValidatedTextField';
-import ValidationDebugInfo                      from '../../services/validation/controls/debugInfo/ValidationDebugInfo';
-import ValidationState                          from '../../services/validation/context/state/ValidationState';
-import SelectItemModel                          from '../../services/validation/controls/selectField/SelectItemModel';
+import ValidatedSelectField                     from '../../../services/validation/controls/selectField/ValidatedSelectField';
+import ValidatedTextField                       from '../../../services/validation/controls/textField/ValidatedTextField';
+import ValidationDebugInfo                      from '../../../services/validation/controls/debugInfo/ValidationDebugInfo';
+import ValidationState                          from '../../../services/validation/context/state/ValidationState';
+import SelectItemModel                          from '../../../services/validation/controls/selectField/SelectItemModel';
 
 function DefectSheetComponent() {
 

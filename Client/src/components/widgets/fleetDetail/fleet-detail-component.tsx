@@ -2,10 +2,10 @@ import { Box }                                  from '@material-ui/core';
 import { Grid }                                 from '@material-ui/core';
 import { TextField }                            from '@material-ui/core';
 import { useMemo }                              from 'react';
-import ApiBaseItemResponseModel                 from '../../models/apiBase/ApiBaseItemResponseModel';
+import ApiBaseItemResponseModel                 from '../../../models/apiBase/ApiBaseItemResponseModel';
 import React                                    from 'react';
-import RepositoryVehicleItem                    from '../../repository/vehicle/RepositoryVehicleItem';
-import VehicleModel                             from '../../models/vehicle/VehicleModel';
+import RepositoryVehicleItem                    from '../../../repository/vehicle/RepositoryVehicleItem';
+import VehicleModel                             from '../../../models/vehicle/VehicleModel';
 
 interface IProperties {
   vehicleId: number;

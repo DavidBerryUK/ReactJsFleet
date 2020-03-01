@@ -12,7 +12,7 @@ import TableBody                                from '@material-ui/core/TableBod
 import TableCell                                from '@material-ui/core/TableCell';
 import TableHead                                from '@material-ui/core/TableHead';
 import TableRow                                 from '@material-ui/core/TableRow';
-import TickCrossComponent                       from '../../../../components/tickCross/tickCrossComponent';
+import TickCrossComponent                       from '../../../../components/controls/tickCross/tickCrossComponent';
 
 //
 // Shows debug formation for a form

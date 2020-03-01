@@ -1,11 +1,11 @@
-import { EnumAction }                           from '../../services/applicationContext/ApplicationContext';
+import { EnumAction }                           from '../../../services/applicationContext/ApplicationContext';
 import { useContext }                           from 'react';
 import { useMemo }                              from 'react';
-import ApplicationContext                       from '../../services/applicationContext/ApplicationContext';
-import AuthenticationModel                      from '../../models/authentication/AuthenticationModel';
-import AuthenticationService                    from '../../services/security/AuthenticationService';
+import ApplicationContext                       from '../../../services/applicationContext/ApplicationContext';
+import AuthenticationModel                      from '../../../models/authentication/AuthenticationModel';
+import AuthenticationService                    from '../../../services/security/AuthenticationService';
 import React                                    from 'react';
-import TokenCookies                             from '../../utilities/cookies/TokenCookies';
+import TokenCookies                             from '../../../utilities/cookies/TokenCookies';
 
 const AutoLogin : React.FC = () => {
 

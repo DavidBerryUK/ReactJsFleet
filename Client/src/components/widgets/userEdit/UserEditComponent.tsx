@@ -1,10 +1,10 @@
 import { RouteComponentProps }                  from 'react-router';
 import { useMemo }                              from 'react';
 import { useState }                             from 'react';
-import ApiBaseItemResponseModel                 from '../../models/apiBase/ApiBaseItemResponseModel';
+import ApiBaseItemResponseModel                 from '../../../models/apiBase/ApiBaseItemResponseModel';
 import React                                    from 'react';
-import RepositoryUserItem                       from '../../repository/user/RepositoryUserItem';
-import UserModel                                from '../../models/user/UserModel';
+import RepositoryUserItem                       from '../../../repository/user/RepositoryUserItem';
+import UserModel                                from '../../../models/user/UserModel';
 
 type PropsType = RouteComponentProps<{ userId: string }>;
 

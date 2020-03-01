@@ -3,7 +3,7 @@ import ApiBaseCollectionResponseModel           from "../../models/apiBase/ApiBa
 import BaseCollectionRepository                 from "../base/BaseCollectionRepository";
 import FactoryVehicleModel                      from "../../modelFactories/FactoryVehicleModel";
 import VehicleModel                             from "../../models/vehicle/VehicleModel";
-import FleetListFilterModel                     from "../../components/fleetList/fleetListFilterModel";
+import FleetListFilterModel                     from "../../components/widgets/fleetList/fleetListFilterModel";
 
 export default class RepositoryVehicleList extends BaseCollectionRepository<VehicleModel> {
 

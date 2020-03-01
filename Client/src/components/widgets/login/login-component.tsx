@@ -1,15 +1,15 @@
 import { Box }                                  from '@material-ui/core';
 import { classStyleDefinition }                 from './classStyleDefinition'
-import { EnumAction }                           from '../../services/applicationContext/ApplicationContext';
+import { EnumAction }                           from '../../../services/applicationContext/ApplicationContext';
 import { ILoginModel }                          from './ILoginModel';
-import { IValidationContextActions }            from '../../services/validation/context/interfaces/IValidationContextActions';
-import { IValidationContextState }              from '../../services/validation/context/interfaces/IValidationContextState';
+import { IValidationContextActions }            from '../../../services/validation/context/interfaces/IValidationContextActions';
+import { IValidationContextState }              from '../../../services/validation/context/interfaces/IValidationContextState';
 import { useContext }                           from 'react';
 import { useHistory }                           from 'react-router-dom';
-import { ValidationContext }                    from '../../services/validation/context/context/ValidationContext';
-import ApplicationContext                       from '../../services/applicationContext/ApplicationContext';
-import AuthenticationModel                      from '../../models/authentication/AuthenticationModel';
-import AuthenticationService                    from '../../services/security/AuthenticationService';
+import { ValidationContext }                    from '../../../services/validation/context/context/ValidationContext';
+import ApplicationContext                       from '../../../services/applicationContext/ApplicationContext';
+import AuthenticationModel                      from '../../../models/authentication/AuthenticationModel';
+import AuthenticationService                    from '../../../services/security/AuthenticationService';
 import Avatar                                   from '@material-ui/core/Avatar';
 import Button                                   from '@material-ui/core/Button';
 import Card                                     from '@material-ui/core/Card';
@@ -17,17 +17,17 @@ import Container                                from '@material-ui/core/Containe
 import Grid                                     from '@material-ui/core/Grid';
 import Link                                     from '@material-ui/core/Link';
 import LockOutlinedIcon                         from '@material-ui/icons/LockOutlined';
-import NavigateDashboard                        from '../../routing/NavigationHelpers.ts/NavigateDashboard';
-import ProgressIndicatorLinear                  from '../progressIndicators/ProgressIndicatorLinear';
+import NavigateDashboard                        from '../../../routing/NavigationHelpers.ts/NavigateDashboard';
+import ProgressIndicatorLinear                  from '../../controls/elements/progressIndicators/ProgressIndicatorLinear';
 import React                                    from 'react';
-import RuleMandatory                            from '../../services/validation/rules/ruleProcessors/RuleMandatory';
-import RuleMaxLength                            from '../../services/validation/rules/ruleProcessors/RuleMaxLength';
+import RuleMandatory                            from '../../../services/validation/rules/ruleProcessors/RuleMandatory';
+import RuleMaxLength                            from '../../../services/validation/rules/ruleProcessors/RuleMaxLength';
 import Typography                               from '@material-ui/core/Typography';
-import ValidatedPasswordField                   from '../../services/validation/controls/passwordField/ValidatedPasswordField';
-import ValidatedTextField                       from '../../services/validation/controls/textField/ValidatedTextField';
-import ValidationDebugInfo                      from '../../services/validation/controls/debugInfo/ValidationDebugInfo';
-import ValidationMessage                        from '../../models/validation/ValidationMessage';
-import ValidationState                          from '../../services/validation/context/state/ValidationState';
+import ValidatedPasswordField                   from '../../../services/validation/controls/passwordField/ValidatedPasswordField';
+import ValidatedTextField                       from '../../../services/validation/controls/textField/ValidatedTextField';
+import ValidationDebugInfo                      from '../../../services/validation/controls/debugInfo/ValidationDebugInfo';
+import ValidationMessage                        from '../../../models/validation/ValidationMessage';
+import ValidationState                          from '../../../services/validation/context/state/ValidationState';
 
 const LoginComponent: React.FC = () => {
 

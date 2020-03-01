@@ -1,12 +1,12 @@
 import { classStyleDefinition }                 from './classStyleDefinition'
 import { Route }                                from 'react-router';
 import { Switch }                               from 'react-router';
-import CopyrightComponent                       from '../../components/copyrightComponent/CopyrightComponent';
+import CopyrightComponent                       from '../../components/controls/copyrightComponent/CopyrightComponent';
 import React                                    from 'react';
-import UserEditComponent                        from '../../components/userEdit/UserEditComponent';
-import UserListComponent                        from '../../components/userList/UserListComponent';
-import UserNoMatchComponent                     from '../../components/userNoMatch/UserNoMatchComponent';
-import UserViewComponent                        from '../../components/userView/UserViewComponent';
+import UserEditComponent                        from '../../components/widgets/userEdit/UserEditComponent';
+import UserListComponent                        from '../../components/widgets/userList/UserListComponent';
+import UserNoMatchComponent                     from '../../components/widgets/userNoMatch/UserNoMatchComponent';
+import UserViewComponent                        from '../../components/widgets/userView/UserViewComponent';
 
 const MaintainUsersPage: React.FC = () => {
 

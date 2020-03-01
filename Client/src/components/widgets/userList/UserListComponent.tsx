@@ -7,10 +7,10 @@ import { classStyleDefinition }                 from './classStyleDefinition';
 import { useHistory }                           from 'react-router';
 import { useMemo }                              from 'react';
 import { useState }                             from 'react';
-import ApiBaseCollectionResponseModel           from '../../models/apiBase/ApiBaseCollectionResponseModel';
+import ApiBaseCollectionResponseModel           from '../../../models/apiBase/ApiBaseCollectionResponseModel';
 import React                                    from 'react';
-import RepositoryUserList                       from '../../repository/user/RepositoryUserList';
-import UserModel                                from '../../models/user/UserModel';
+import RepositoryUserList                       from '../../../repository/user/RepositoryUserList';
+import UserModel                                from '../../../models/user/UserModel';
 
 const UserListComponent: React.FC = () => {
 
