@@ -2,7 +2,7 @@ import { Box }                                  from '@material-ui/core';
 import { useContext }                           from 'react';
 import ApplicationContext                       from '../../services/applicationContext/ApplicationContext';
 import CopyrightComponent                       from '../../components/controls/copyrightComponent/CopyrightComponent';
-import LoginComponent                           from '../../components/appWidget/login/login-component';
+import LoginComponent                           from '../../components/widgets/login/login-component';
 import React                                    from 'react';
 
 const LoginPage: React.FC = () => {

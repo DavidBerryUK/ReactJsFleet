@@ -1,7 +1,7 @@
 import { Dispatch }                             from 'react';
 import { Reducer }                              from 'react';
 import AuthenticationApplicationState           from '../../modelStates/AuthenticationApplicationState';
-import FleetListFilterModel                     from '../../components/appWidget/fleetList/fleetListFilterModel';
+import FleetListFilterModel                     from '../../components/widgets/fleetList/fleetListFilterModel';
 import React                                    from 'react';
 import TokenCookies                             from '../../utilities/cookies/TokenCookies';
 import UserModel                                from '../../models/user/UserModel';

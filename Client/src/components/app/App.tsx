@@ -4,7 +4,7 @@ import { Button }                               from '@material-ui/core';
 import { Link }                                 from 'react-router-dom';
 import { makeStyles }                           from '@material-ui/styles';
 import { Paper }                                from '@material-ui/core';
-import ApplicationHeaderComponent               from '../appWidget/applicationHeader/application-header-component';
+import ApplicationHeaderComponent               from '../widgets/applicationHeader/application-header-component';
 import AutoLogin                                from '../controls/autoLogin/AutoLogin';
 import CssBaseline                              from '@material-ui/core/CssBaseline';
 import React                                    from 'react';
