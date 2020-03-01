@@ -1,5 +1,5 @@
 import { RouteComponentProps }                  from 'react-router';
-import FleetDetailComponent                     from '../../components/fleetDetail/fleet-detail-component'
+import FleetDetailComponent                     from '../../components/appWidget/fleetDetail/fleet-detail-component'
 import React                                    from 'react';
 
 type PropsType = RouteComponentProps<{ id: string }>;

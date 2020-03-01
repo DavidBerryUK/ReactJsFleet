@@ -5,8 +5,8 @@ import CopyrightComponent                       from '../../components/controls/
 import React                                    from 'react';
 import UserEditComponent                        from '../../components/appWidget/userEdit/UserEditComponent';
 import UserListComponent                        from '../../components/appWidget/userList/UserListComponent';
-import UserNoMatchComponent                     from '../../components/userNoMatch/UserNoMatchComponent';
-import UserViewComponent                        from '../../components/userView/UserViewComponent';
+import UserNoMatchComponent                     from '../../components/appWidget/userNoMatch/UserNoMatchComponent';
+import UserViewComponent                        from '../../components/appWidget/userView/UserViewComponent';
 
 const MaintainUsersPage: React.FC = () => {
 
