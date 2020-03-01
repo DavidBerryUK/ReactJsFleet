@@ -5,7 +5,7 @@ import { Link }                                 from 'react-router-dom';
 import { makeStyles }                           from '@material-ui/styles';
 import { Paper }                                from '@material-ui/core';
 import ApplicationHeaderComponent               from '../applicationHeader/application-header-component';
-import AutoLogin                                from '../autoLogin/AutoLogin';
+import AutoLogin                                from '../controls/autoLogin/AutoLogin';
 import CssBaseline                              from '@material-ui/core/CssBaseline';
 import React                                    from 'react';
 import RouteConstants                           from '../../routing/RouteConstants';

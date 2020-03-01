@@ -2,10 +2,10 @@ import { FormControl }                          from '@material-ui/core';
 import { MenuItem }                             from '@material-ui/core';
 import { Select }                               from '@material-ui/core';
 import { useMemo }                              from 'react';
-import ApiBaseCollectionResponseModel           from '../../models/apiBase/ApiBaseCollectionResponseModel';
-import ListItemModel                            from '../../models/list/ListItemModel';
+import ApiBaseCollectionResponseModel           from '../../../models/apiBase/ApiBaseCollectionResponseModel';
+import ListItemModel                            from '../../../models/list/ListItemModel';
 import React                                    from 'react';
-import RepositorySpecification                  from '../../repository/specification/RepositorySpecification';
+import RepositorySpecification                  from '../../../repository/specification/RepositorySpecification';
 
 interface IUniqueSelectorProperties {
     value: string,

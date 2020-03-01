@@ -1,10 +1,10 @@
 import { classStyleDefinition }                 from './classStyleDefinition'
 import { Route }                                from 'react-router';
 import { Switch }                               from 'react-router';
-import CopyrightComponent                       from '../../components/copyrightComponent/CopyrightComponent';
+import CopyrightComponent                       from '../../components/controls/copyrightComponent/CopyrightComponent';
 import React                                    from 'react';
-import UserEditComponent                        from '../../components/userEdit/UserEditComponent';
-import UserListComponent                        from '../../components/userList/UserListComponent';
+import UserEditComponent                        from '../../components/appWidget/userEdit/UserEditComponent';
+import UserListComponent                        from '../../components/appWidget/userList/UserListComponent';
 import UserNoMatchComponent                     from '../../components/userNoMatch/UserNoMatchComponent';
 import UserViewComponent                        from '../../components/userView/UserViewComponent';
 

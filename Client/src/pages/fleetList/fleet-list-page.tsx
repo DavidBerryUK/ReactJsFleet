@@ -1,6 +1,6 @@
 import { Box }                                  from '@material-ui/core';
 import { makeStyles }                           from '@material-ui/styles';
-import FleetListComponent                       from '../../components/fleetList/fleet-list-component'
+import FleetListComponent                       from '../../components/appWidget/fleetList/fleet-list-component'
 import React                                    from 'react';
 
 const FleetListPage: React.FC = () => {

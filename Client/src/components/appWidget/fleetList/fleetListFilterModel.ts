@@ -1,5 +1,5 @@
-import { IDispatchObject }                      from './../../services/applicationContext/ApplicationContext';
-import ListItemModel                            from "../../models/list/ListItemModel";
+import { IDispatchObject }                      from '../../../services/applicationContext/ApplicationContext';
+import ListItemModel                            from "../../../models/list/ListItemModel";
 
 export enum enumSortDirection {
   asc = "asc",

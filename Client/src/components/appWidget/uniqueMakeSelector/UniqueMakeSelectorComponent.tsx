@@ -2,10 +2,10 @@ import { MenuItem }                             from '@material-ui/core';
 import { FormControl }                          from '@material-ui/core';
 import { Select }                               from '@material-ui/core';
 import { useMemo }                              from 'react';
-import ApiBaseCollectionResponseModel           from '../../models/apiBase/ApiBaseCollectionResponseModel';
-import ListItemModel                            from '../../models/list/ListItemModel';
+import ApiBaseCollectionResponseModel           from '../../../models/apiBase/ApiBaseCollectionResponseModel';
+import ListItemModel                            from '../../../models/list/ListItemModel';
 import React                                    from 'react';
-import RepositorySpecification                  from '../../repository/specification/RepositorySpecification';
+import RepositorySpecification                  from '../../../repository/specification/RepositorySpecification';
 
 interface IUniqueSelectorProperties {
     value: string,
@@ -13,9 +13,9 @@ interface IUniqueSelectorProperties {
 }
 
 // Component
-// Displays a drop down list of unique car models
+// Displays a drop down list of car makes
 //
-const UniqueModelSelectorComponent: React.FC<IUniqueSelectorProperties> = (props) => {
+const UniqueMakeSelectorComponent: React.FC<IUniqueSelectorProperties> = (props) => {
 
     const unselectedItem = new ListItemModel();
     const [list, setList] = React.useState(new Array<ListItemModel>());
@@ -24,7 +24,7 @@ const UniqueModelSelectorComponent: React.FC<IUniqueSelectorProperties> = (props
     // only get data once regardless of how many time the screen refreshed
     useMemo(() => {
         var repository = new RepositorySpecification();
-        repository.getUniqueModels()
+        repository.getUniqueMakes()
             .onSuccess((list: ApiBaseCollectionResponseModel<ListItemModel>) => {
                 setList(list.entities!);
                 let item = list.entities?.find(item => item.entityValue === props.value);
@@ -59,4 +59,4 @@ const UniqueModelSelectorComponent: React.FC<IUniqueSelectorProperties> = (props
     )
 }
 
-export default UniqueModelSelectorComponent;
+export default UniqueMakeSelectorComponent;

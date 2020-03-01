@@ -1,5 +1,5 @@
 import { classStyleDefinition }                 from './classStyleDefinition'
-import CopyrightComponent                       from '../../components/copyrightComponent/CopyrightComponent';
+import CopyrightComponent                       from '../../components/controls/copyrightComponent/CopyrightComponent';
 import DefectSheetComponent                     from '../../components/defectSheet/defect-sheet-component'
 import React                                    from 'react';
 
