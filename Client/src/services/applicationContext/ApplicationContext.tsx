@@ -49,8 +49,8 @@ const reducer: Reducer<ApplicationContexgtProps, Actions> = (state, action) => {
     switch (action.type) {
 
         case EnumAction.UpdateVehicleListFilter:            
-            var fleetListFilterObject =  action.value as VehicleListFilterModel;                        
-            return { ...state, vehicleListFilter: fleetListFilterObject };
+            var vehicleListFilterObject =  action.value as VehicleListFilterModel;                        
+            return { ...state, vehicleListFilter: vehicleListFilterObject };
 
         case EnumAction.Login:            
             var userObject =  action.value as UserModel;
