@@ -4,14 +4,13 @@ import BaseValidationControl                    from '../baseValidationControl/B
 import React                                    from 'react';
 import TextField                                from '@material-ui/core/TextField';
 
-
 // A Wrapped TextField that handles validation and form 
 // model synchronization
 //
 // * Maintains own value state
 //
 export default class ValidatedTextFieldControl extends BaseValidationControl<TextFieldProps  ,any>  {
-
+    
     // UI 
     // Render the TextField component which is part of https://material-ui.com/
     // wire up error and helperText which is used for displaying 
