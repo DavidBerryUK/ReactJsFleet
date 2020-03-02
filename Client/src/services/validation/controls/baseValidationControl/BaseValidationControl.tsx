@@ -47,7 +47,7 @@ export default class BaseValidationControl<P, S> extends Component<P & IValidate
 
                 this.setState(
                     {
-                        text: this.props.value
+                        text: `${this.props.value}`
                     },
                     () => {
                         if (this.props.onFieldUpdated) {

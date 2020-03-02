@@ -1,7 +1,7 @@
 import { RouteComponentProps }                  from 'react-router';
 import CopyrightControl                         from '../../controls/copyrightControl/CopyrightControl';
-import VehicleEditWidget                          from '../../widgets/vehicleEditWidget/vehicleEditWidget';
 import React                                    from 'react';
+import VehicleEditWidget                        from '../../widgets/vehicleEditWidget/vehicleEditWidget';
 
 type PropsType = RouteComponentProps<{ id: string }>;
 

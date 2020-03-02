@@ -9,7 +9,7 @@ export interface IValidatedUIControlProperties {
     label? : string;
     name? : string;
     text? : string;
-    value? : string;
+    value? : string | number | Number;
     //
     // a list of rules that defined a valid value, see
     // actions available in \services\validation\rules

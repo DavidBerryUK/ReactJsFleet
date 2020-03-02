@@ -30,7 +30,6 @@ const UserEditWidget: React.FC<PropsType> = (props) => {
     var history = useHistory();
 
     useMemo(() => {
-        console.log(props.match.params.userId);
         var userRepository = new RepositoryUserItem();
         userRepository.getUserById(Number(props.match.params.userId))
             .onSuccess((userData: ApiBaseItemResponseModel<UserModel>) => {
