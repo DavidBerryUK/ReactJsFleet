@@ -152,7 +152,9 @@ const FleetListWidget: React.FC = () => {
   // Template for table
   //
   return (
-    <Paper className={classes.root}>
+    <Box p={1}>
+    <Paper>
+      <Box p={2}>
       <Table className={classes.table} stickyHeader size="small"  >
         <TableHead>
           <TableRow>
@@ -265,8 +267,9 @@ const FleetListWidget: React.FC = () => {
           <RowsPerPageControl onRowsPerPageChanged={(rowsPerPage: number) => { rowsPerPageChangeHandler(rowsPerPage) }} />
         </Box>
       </Box>
-
+    </Box>
     </Paper>
+    </Box>
   );
 }
 
