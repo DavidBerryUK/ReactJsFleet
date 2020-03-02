@@ -144,7 +144,7 @@ const LoginWidget: React.FC = () => {
                 </form>
               </Card>
 
-              <ValidationDebugInfoControl></ValidationDebugInfoControl>
+              <ValidationDebugInfoControl/>
             </div>
 
           )}

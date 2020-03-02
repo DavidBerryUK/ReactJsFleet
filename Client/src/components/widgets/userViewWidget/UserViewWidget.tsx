@@ -1,5 +1,8 @@
+import { Box }                                  from '@material-ui/core';
+import { Button }                               from '@material-ui/core';
 import { Grid }                                 from '@material-ui/core';
 import { RouteComponentProps }                  from 'react-router';
+import { useHistory }                           from 'react-router';
 import { useMemo }                              from 'react';
 import { useState }                             from 'react';
 import ApiBaseItemResponseModel                 from '../../../models/apiBase/ApiBaseItemResponseModel';
@@ -9,12 +12,14 @@ import RepositoryUserItem                       from '../../../repository/user/R
 import TextSubHeaderControl                     from '../../controls/textSubHeaderControl/TextSubHeaderControl';
 import UserModel                                from '../../../models/user/UserModel';
 import WidgetContainerControl                   from '../../controls/widgetContainerControl/WidgetContainerControl';
+import WidgetFooterControl                      from '../../controls/widgetFooterControl/WidgetFooterControl';
 
 type PropsType = RouteComponentProps<{ userId: string }>;
 
 const UserViewWidget: React.FC<PropsType> = (props) => {
 
     const [currentUser, setCurrentUser] = useState<UserModel>(new UserModel());
+    var history = useHistory();
 
     useMemo(() => {
         console.log(props.match.params.userId);
@@ -24,6 +29,10 @@ const UserViewWidget: React.FC<PropsType> = (props) => {
                 setCurrentUser(userData.entity!);
             });
     }, [props]);
+
+    function editClickedEventHandler() {
+        history.push(`/maintain-users/${currentUser.entityKey}/edit`);
+    }
 
     return (
         <WidgetContainerControl title="View User">
@@ -43,8 +52,12 @@ const UserViewWidget: React.FC<PropsType> = (props) => {
                             maxWidth={150} />
                     </Grid>
                 </Grid>
-
             </Grid>
+            <WidgetFooterControl>
+                <Box display="flex" justifyContent="flex-end">
+                    <Button variant="text"  color="primary" onClick={editClickedEventHandler}>Edit</Button>
+                </Box>
+            </WidgetFooterControl>
         </WidgetContainerControl>
     );
 }

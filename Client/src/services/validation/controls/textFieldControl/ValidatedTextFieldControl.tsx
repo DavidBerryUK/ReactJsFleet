@@ -1,3 +1,4 @@
+import { Box }                                  from '@material-ui/core';
 import { TextFieldProps }                       from '@material-ui/core/TextField';
 import BaseValidationControl                    from '../baseValidationControl/BaseValidationControl';
 import React                                    from 'react';
@@ -15,13 +16,15 @@ export default class ValidatedTextFieldControl extends BaseValidationControl<Tex
     // Render the TextField component which is part of https://material-ui.com/
     // wire up error and helperText which is used for displaying 
     // validation messages
-    //
+    //        
+
     render() {
         // remove properties not to be passed down to child      
         const childProps = {...this.props};
         delete childProps.onFieldUpdated;
         
         return (
+            <Box pr={1}>
             <TextField
                 {...childProps}
                 required
@@ -32,7 +35,8 @@ export default class ValidatedTextFieldControl extends BaseValidationControl<Tex
                 helperText = {this.state.validationError}
                 onChange={(event) => { this.valueChangedEventHandler(event) }}
                 value={this.state.text}
-            />
+            />            
+            </Box>
         );
     }
 }

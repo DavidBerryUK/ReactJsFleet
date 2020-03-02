@@ -15,9 +15,10 @@ import RuleCollection                           from '../../rules/RuleCollection
 //
 // * Maintains own value state
 //
-export default class BaseValidationControl<P,S> extends Component<P & IValidatedUIControlProperties,  S | IValidatedUIControlState>  {
+export default class BaseValidationControl<P, S> extends Component<P & IValidatedUIControlProperties, S | IValidatedUIControlState>  {
 
     static contextType = ValidationContext;
+    private  initalValueSet : Boolean = false;
 
     // State of the control, holds state of 
     // * Value 
@@ -30,73 +31,96 @@ export default class BaseValidationControl<P,S> extends Component<P & IValidated
     }
 
     // List of validation rules passed in as a property
-    public rules : RuleCollection = new RuleCollection('');
+    public rules: RuleCollection = new RuleCollection('');
 
     // Name of the property
-    public name : string = "";
+    public name: string = "";
+
+    public componentDidUpdate() {
+
+        if ( this.initalValueSet ) {
+            return;
+        }
+        if (this.props.value) {
+            if (this.state.text === '') {
+                this.initalValueSet = true;
+
+                this.setState(
+                    {
+                        text: this.props.value
+                    },
+                    () => {
+                        if (this.props.onFieldUpdated) {
+                            this.props.onFieldUpdated(this);
+                        }
+                        this.context.onFieldUpdated(this);
+                    });
+
+            }
+        }
+
+    }
 
     // Callback when the control loads.
     // This registers the control with the parent ValidationState / ValidationContext
     //
-    public UNSAFE_componentWillMount() {        
+    public UNSAFE_componentWillMount() {
         this.name = this.props.name as string;
-        this.rules =  new RuleCollection(this.props.label as string, this.props.rules);        
+        this.rules = new RuleCollection(this.props.label as string, this.props.rules);
         this.context.addField(this);
     }
 
     // Validate method, this is called by the parent ValidationState
     // when evaluating the entire form
-    public validate() : Boolean {                
+    public validate(): Boolean {
 
         // Determine if the control is valid
         //
-        const isValid = this.rules.evaluateRules( this.state.text);
+        const isValid = this.rules.evaluateRules(this.state.text);
         let message = this.rules.validationMessage;
-        
+
 
 
         // update the validation status has changed, 
         //  update the state
-        this.setState (
+        this.setState(
             {
-                isValid : isValid,
-                validationError : message
+                isValid: isValid,
+                validationError: message
             },
-             () =>{
-                 
-        // state has been updated
-        
-        if (this.props.onFieldUpdated) {            
-            this.props.onFieldUpdated(this);            
-        }
-            this.context.onFieldUpdated(this);
-        });       
+            () => {
 
-        
+                // state has been updated
+
+                if (this.props.onFieldUpdated) {
+                    this.props.onFieldUpdated(this);
+                }
+                this.context.onFieldUpdated(this);
+            });
 
         return isValid;
     }
 
     // Callback when the user changed the state of the UI control
     //
-    valueChangedEventHandler(event : React.ChangeEvent) {
+    valueChangedEventHandler(event: React.ChangeEvent) {
         // 
         // obtain new value
         //
-        const typedEvent = event as React.ChangeEvent<HTMLInputElement>    
+        const typedEvent = event as React.ChangeEvent<HTMLInputElement>
         const textValue = typedEvent.target.value as string;
 
         // update text value
         //
         this.setState(() => {
-            return {text : textValue}
-          },() => {
+            return { text: textValue }
+        }, () => {
             //
             // run validation rules 
             //  AFTER THE STATE HAS BEEN UPDATED
             //  ================================
             this.validate();
-        });         
+        });
     }
 
     // UI 
@@ -106,9 +130,9 @@ export default class BaseValidationControl<P,S> extends Component<P & IValidated
     //
     render() {
         // remove properties not to be passed down to child      
-        const childProps = {...this.props} as any;
+        const childProps = { ...this.props } as any;
         delete childProps.onFieldUpdated;
-        
+
         return (
             <div></div>
         );

@@ -1,12 +1,17 @@
+import { Box }                                  from '@material-ui/core';
+import { Button }                               from '@material-ui/core';
 import { Grid }                                 from '@material-ui/core';
+import { useHistory }                           from 'react-router';
 import { useMemo }                              from 'react';
 import ApiBaseItemResponseModel                 from '../../../models/apiBase/ApiBaseItemResponseModel';
 import React                                    from 'react';
 import ReadOnlyTextControl                      from '../../controls/readOnlyTextControl/ReadOnlyTextControl';
 import RepositoryVehicleItem                    from '../../../repository/vehicle/RepositoryVehicleItem';
+import RouteConstants                           from '../../../routing/RouteConstants';
 import TextSubHeaderControl                     from '../../controls/textSubHeaderControl/TextSubHeaderControl';
 import VehicleModel                             from '../../../models/vehicle/VehicleModel';
 import WidgetContainerControl                   from '../../controls/widgetContainerControl/WidgetContainerControl';
+import WidgetFooterControl                      from '../../controls/widgetFooterControl/WidgetFooterControl';
 
 interface IProperties {
   vehicleId: number;
@@ -15,6 +20,7 @@ interface IProperties {
 const FleetViewWidget: React.FC<IProperties> = (props) => {
 
   const [vehicleItem, setVehicleItem] = React.useState(new VehicleModel());
+  var history = useHistory();
 
   useMemo(() => {
     var repositoryVehicle = new RepositoryVehicleItem();
@@ -25,11 +31,15 @@ const FleetViewWidget: React.FC<IProperties> = (props) => {
       })
   }, [props.vehicleId])
 
+  function viewFleetListClickedEventHandler() {
+    history.push(RouteConstants.FleetList);
+  }
+
   return (
 
     <WidgetContainerControl title="View Vehicle">
       <Grid container>
-        <TextSubHeaderControl label="Vehicle"/>
+        <TextSubHeaderControl label="Vehicle" />
         <Grid container>
           <Grid item xs={3} >
             <ReadOnlyTextControl
@@ -53,7 +63,7 @@ const FleetViewWidget: React.FC<IProperties> = (props) => {
               maxWidth={150} />
           </Grid>
         </Grid>
-        <TextSubHeaderControl label="Specifications"/>
+        <TextSubHeaderControl label="Specifications" />
         <Grid container>
           <Grid item xs={3} >
             <ReadOnlyTextControl
@@ -74,7 +84,7 @@ const FleetViewWidget: React.FC<IProperties> = (props) => {
               maxWidth={150} />
           </Grid>
         </Grid>
-        <TextSubHeaderControl label="Fuel"/>
+        <TextSubHeaderControl label="Fuel" />
         <Grid container>
           <Grid item xs={3} >
             <ReadOnlyTextControl
@@ -90,8 +100,19 @@ const FleetViewWidget: React.FC<IProperties> = (props) => {
           </Grid>
         </Grid>
       </Grid>
-      </WidgetContainerControl>
+
+      <WidgetFooterControl>
+
+        <Box display="flex" justifyContent="flex-end">
+          <Box>
+            <Button variant="text" onClick={viewFleetListClickedEventHandler} >Fleet List</Button>
+          </Box>
+        </Box>
+      </WidgetFooterControl>
+
+    </WidgetContainerControl>
   );
+
 }
 
 export default FleetViewWidget;
