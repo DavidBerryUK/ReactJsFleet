@@ -50,7 +50,7 @@ const UniqueTransmissionSelectorWidget: React.FC<IUniqueSelectorProperties> = (p
             <Select displayEmpty
                 onChange={(event: any) => { valueChangedEventHandler(event) }}
                 value={selectedItem.entityValue}>
-                <MenuItem value=""><em>none</em></MenuItem>
+                <MenuItem value=""><em>any</em></MenuItem>
                 {list.map((item: ListItemModel) => (
                     <MenuItem key={item.entityValue} value={item.id}>{item.text}</MenuItem>
                 ))}
