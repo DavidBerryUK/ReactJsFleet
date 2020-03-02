@@ -1,6 +1,4 @@
-import { Box }                                  from '@material-ui/core';
 import { Grid }                                 from '@material-ui/core';
-import { Paper }                                from '@material-ui/core';
 import { useMemo }                              from 'react';
 import ApiBaseItemResponseModel                 from '../../../models/apiBase/ApiBaseItemResponseModel';
 import React                                    from 'react';
@@ -8,6 +6,7 @@ import ReadOnlyTextControl                      from '../../controls/readOnlyTex
 import RepositoryVehicleItem                    from '../../../repository/vehicle/RepositoryVehicleItem';
 import TextSubHeaderControl                     from '../../controls/textSubHeaderControl/TextSubHeaderControl';
 import VehicleModel                             from '../../../models/vehicle/VehicleModel';
+import WidgetContainerControl                   from '../../controls/widgetContainerControl/WidgetContainerControl';
 
 interface IProperties {
   vehicleId: number;
@@ -28,9 +27,7 @@ const FleetViewWidget: React.FC<IProperties> = (props) => {
 
   return (
 
-    <Box p={1}>
-      <Paper>
-        <Box p={2}>
+    <WidgetContainerControl title="View Vehicle">
       <Grid container>
         <TextSubHeaderControl label="Vehicle"/>
         <Grid container>
@@ -93,9 +90,7 @@ const FleetViewWidget: React.FC<IProperties> = (props) => {
           </Grid>
         </Grid>
       </Grid>
-      </Box>
-      </Paper>
-    </Box>
+      </WidgetContainerControl>
   );
 }
 

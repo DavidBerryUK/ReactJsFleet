@@ -5,7 +5,6 @@ import { enumColumnNames }                      from './fleetListFilterModel'
 import { enumSortDirection }                    from './fleetListFilterModel'
 import { Link }                                 from 'react-router-dom';
 import { makeStyles }                           from '@material-ui/core';
-import { Paper }                                from '@material-ui/core';
 import { Table }                                from '@material-ui/core';
 import { TableBody }                            from '@material-ui/core';
 import { TableCell }                            from '@material-ui/core';
@@ -30,6 +29,7 @@ import UniqueMakeSelectorWidget                 from '../uniqueMakeSelectorWidge
 import UniqueModelSelectorWidget                from '../uniqueModelSelectorWidget/UniqueModelSelectorWidget';
 import UniqueTransmissionSelectorWidget         from '../uniqueTransmissionSelectorWidget/UniqueTransmissionSelectorWidget';
 import VehicleModel                             from '../../../models/vehicle/VehicleModel';
+import WidgetContainerControl                   from '../../controls/widgetContainerControl/WidgetContainerControl';
 
 
 const FleetListWidget: React.FC = () => {
@@ -152,9 +152,7 @@ const FleetListWidget: React.FC = () => {
   // Template for table
   //
   return (
-    <Box p={1}>
-    <Paper>
-      <Box p={2}>
+    <WidgetContainerControl title="Fleet List">
       <Table className={classes.table} stickyHeader size="small"  >
         <TableHead>
           <TableRow>
@@ -267,9 +265,7 @@ const FleetListWidget: React.FC = () => {
           <RowsPerPageControl onRowsPerPageChanged={(rowsPerPage: number) => { rowsPerPageChangeHandler(rowsPerPage) }} />
         </Box>
       </Box>
-    </Box>
-    </Paper>
-    </Box>
+      </WidgetContainerControl>
   );
 }
 

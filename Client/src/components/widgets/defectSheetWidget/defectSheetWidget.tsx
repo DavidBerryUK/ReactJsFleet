@@ -1,8 +1,7 @@
-import { classStyleDefinition }                 from './classStyleDefinition'
+
 import Button                                   from '@material-ui/core/Button';
 import FormControlLabel                         from '@material-ui/core/FormControlLabel';
 import Grid                                     from '@material-ui/core/Grid';
-import Paper                                    from '@material-ui/core/Paper';
 import React                                    from 'react';
 import RuleMandatory                            from '../../../services/validation/rules/ruleProcessors/RuleMandatory';
 import RuleMaxLength                            from '../../../services/validation/rules/ruleProcessors/RuleMaxLength';
@@ -12,22 +11,17 @@ import ValidatedSelectFieldControl              from '../../../services/validati
 import ValidatedTextFieldControl                from '../../../services/validation/controls/textFieldControl/ValidatedTextFieldControl';
 import ValidationDebugInfoControl               from '../../../services/validation/controls/debugInfoControl/ValidationDebugInfoControl';
 import ValidationState                          from '../../../services/validation/context/state/ValidationState';
+import WidgetContainerControl                   from '../../controls/widgetContainerControl/WidgetContainerControl';
 
 function DefectSheetWidget() {
 
-  const classStyles = classStyleDefinition();
-
   return (
 
-    <div className={classStyles.root}>
-      <form className={classStyles.form}>
-
-        <ValidationState>
-
-          <Paper className={classStyles.paper}>
-
+    <ValidationState>
+      <WidgetContainerControl title="New Defect">
+        
+          <form >
             <Grid container spacing={0}>
-
               <Grid container xs={12} spacing={1}>
                 <Grid item xs={3}>
                   <ValidatedTextFieldControl
@@ -37,9 +31,7 @@ function DefectSheetWidget() {
                     autoFocus
                     rules={[new RuleMandatory(), new RuleMaxLength(40)]} />
                 </Grid>
-
                 <Grid item xs={3}>
-
                   <ValidatedSelectFieldControl
                     name="Manufacturer"
                     label="Manufacturer"
@@ -158,10 +150,10 @@ function DefectSheetWidget() {
 
               </Grid>
             </Grid>
-          </Paper>
 
 
-          <Paper className={classStyles.paper}>
+
+
 
             <Grid container spacing={0}>
             </Grid>
@@ -182,10 +174,10 @@ function DefectSheetWidget() {
 
 
             </Grid>
-          </Paper>
 
 
-          <Paper className={classStyles.paper}>
+
+
 
             <Grid container spacing={0}>
             </Grid>
@@ -209,24 +201,18 @@ function DefectSheetWidget() {
                   label="Defect Time"
                   rules={[]} />
               </Grid>
-
             </Grid>
-          </Paper>
 
-
-          <Paper className={classStyles.paper}>
             <Grid container spacing={0}>
               <Grid item xs={12}>
                 <Button variant="contained" color="primary">Login</Button>
               </Grid>
             </Grid>
-          </Paper>
 
-          <ValidationDebugInfoControl></ValidationDebugInfoControl>
-
-        </ValidationState>
-      </form>
-    </div>
+          </form>        
+      </WidgetContainerControl>
+      <ValidationDebugInfoControl></ValidationDebugInfoControl>
+    </ValidationState>
 
   );
 }
