@@ -13,7 +13,7 @@ interface IProperties {
   vehicleId: number;
 }
 
-const FleetDetailWidget: React.FC<IProperties> = (props) => {
+const FleetViewWidget: React.FC<IProperties> = (props) => {
 
   const [vehicleItem, setVehicleItem] = React.useState(new VehicleModel());
 
@@ -99,4 +99,4 @@ const FleetDetailWidget: React.FC<IProperties> = (props) => {
   );
 }
 
-export default FleetDetailWidget;
+export default FleetViewWidget;

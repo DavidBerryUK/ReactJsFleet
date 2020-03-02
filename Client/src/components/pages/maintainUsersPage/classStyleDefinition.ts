@@ -22,11 +22,9 @@ export const classStyleDefinition = makeStyles(theme => ({
   },
   
   regionDetail: {
-    borderColor: 'blue',
-    borderWidth: 1,
-    borderStyle: 'solid',
     marginLeft: 220,
     marginTop: 8,
-    float: 'left'
+    float: 'left',
+    width:'calc(100% - 220px)'
   }
 }));

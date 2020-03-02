@@ -7,12 +7,12 @@ export default class UserModel implements IApiModel , IDispatchObject {
     public static className = "UserModel"
 
     public id: Number;
-    public userName: String;
-    public forename: String;
-    public surname: String;
-    public password: String;
+    public userName: string;
+    public forename: string;
+    public surname: string;
+    public password: string;
     
-    constructor(username?: String, password?: String ) {
+    constructor(username?: string, password?: string ) {
         this.userName = username || "";
         this.password = password || "";
         this.forename = "";
