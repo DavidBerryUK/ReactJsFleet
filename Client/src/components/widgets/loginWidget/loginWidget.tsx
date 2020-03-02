@@ -18,7 +18,7 @@ import Grid                                     from '@material-ui/core/Grid';
 import Link                                     from '@material-ui/core/Link';
 import LockOutlinedIcon                         from '@material-ui/icons/LockOutlined';
 import NavigateDashboard                        from '../../../routing/NavigationHelpers.ts/NavigateDashboard';
-import ProgressIndicatorLinear                  from '../../controls/progressIndicatorsControl/ProgressIndicatorLinear';
+import ProgressIndicatorLinearControl           from '../../controls/progressIndicatorsControl/ProgressIndicatorLinearControl';
 import React                                    from 'react';
 import RuleMandatory                            from '../../../services/validation/rules/ruleProcessors/RuleMandatory';
 import RuleMaxLength                            from '../../../services/validation/rules/ruleProcessors/RuleMaxLength';
@@ -131,7 +131,7 @@ const LoginWidget: React.FC = () => {
                     <Typography component="h4">{message}</Typography>
                   </Box>
 
-                  {loading && <ProgressIndicatorLinear />}
+                  {loading && <ProgressIndicatorLinearControl />}
 
                   <Grid container>
                     <Grid item xs>

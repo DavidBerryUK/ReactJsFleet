@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function ProgressIndicatorLinear() {
+export default function ProgressIndicatorLinearControl() {
   const classes = useStyles();
   return (
     <div className={classes.root}>

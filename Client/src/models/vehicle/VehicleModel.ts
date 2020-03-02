@@ -5,15 +5,15 @@ export default class VehicleModel  implements IApiModel {
 
     public vehicleId? : Number;
     public doors? : Number;
-    public registration? : String;
-    public make? : String;
-    public model? : String;
-    public colour? : String;
+    public registration? : string;
+    public make? : string;
+    public model? : string;
+    public colour? : string;
     public mileage? : Number;
-    public fuel? : String;
-    public bodyType? : String;
+    public fuel? : string;
+    public bodyType? : string;
     public mpg? : Number;
-    public transmission? : String;
+    public transmission? : string;
 
     public get entityName(): string {
         return VehicleModel.className;
