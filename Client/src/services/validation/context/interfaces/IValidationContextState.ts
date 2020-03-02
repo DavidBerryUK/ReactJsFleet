@@ -1,5 +1,5 @@
 import ControlInfoCollectionModel               from "../../models/ControlInfoCollectionModel";
-import ValidatedTextField                       from "../../controls/textField/ValidatedTextField";
+import ValidatedTextFieldControl                       from "../../controls/textFieldControl/ValidatedTextFieldControl";
 
 // State held by the Form Context, 
 //  All values are updated in realtime
@@ -8,7 +8,7 @@ export interface IValidationContextState {
     // list of child controls withing the form, each child registers itself
     // 'automatically'. these are kept in the state, but are never updated due
     // to their size, a summary of information is kept in the controlInfoCollection object
-    fields : Array<ValidatedTextField>;
+    fields : Array<ValidatedTextFieldControl>;
 
     // summary of the fields on the form
     //

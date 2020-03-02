@@ -6,7 +6,7 @@ import { ValidationContext }                    from '../context/ValidationConte
 import ControlInfoCollectionModel               from '../../models/ControlInfoCollectionModel';
 import ControlInfoModel                         from '../../models/ControlInfoModel';
 import React                                    from 'react';
-import ValidatedTextField                       from '../../controls/textField/ValidatedTextField';
+import ValidatedTextFieldControl                       from '../../controls/textFieldControl/ValidatedTextFieldControl';
 
 
 // The current state of the validation context.
@@ -23,7 +23,7 @@ class ValidationState<T> extends Component<IValidationStateProperties, IValidati
   // IValidationContextState interface
   //
   state = {
-    fields : new Array<ValidatedTextField>(),
+    fields : new Array<ValidatedTextFieldControl>(),
     controlInfoCollection : new ControlInfoCollectionModel(),
     fieldsInvalidCount: 0,
     fieldsValidCount : 0,
@@ -46,7 +46,7 @@ class ValidationState<T> extends Component<IValidationStateProperties, IValidati
   // implement interface IValidationContextActions
   // Child controls must call this to register with the form
   //
-  public addField(field: ValidatedTextField): void {  
+  public addField(field: ValidatedTextFieldControl): void {  
     this.setState((state) => {
 
       // note that all fields are assumed to be invalid, until they have been validated
@@ -76,7 +76,7 @@ class ValidationState<T> extends Component<IValidationStateProperties, IValidati
   // implement interface
   // A child control has reported that it has been updated
   //
-  public onFieldUpdated(field: ValidatedTextField): void {
+  public onFieldUpdated(field: ValidatedTextFieldControl): void {
 
       this.setState((state) => {
         state.controlInfoCollection.update(field.name, field.state.text, field.state.isValid, field.state.validationError);            
@@ -111,7 +111,7 @@ class ValidationState<T> extends Component<IValidationStateProperties, IValidati
     // NOTE: calling validate() will update the UI and display error
     //       messages if the values on the control do not match rules
     //
-    this.state.fields.forEach((field: ValidatedTextField) => {                               
+    this.state.fields.forEach((field: ValidatedTextFieldControl) => {                               
       if (field.validate()) {
         validCount++;
       } else {
@@ -150,8 +150,8 @@ class ValidationState<T> extends Component<IValidationStateProperties, IValidati
           isFormValid: this.state.isFormValid,
           fieldsValidCount: this.state.fieldsValidCount,
           fieldsInvalidCount: this.state.fieldsInvalidCount,
-          addField : (field: ValidatedTextField) => { this.addField(field ) },
-          onFieldUpdated: (field: ValidatedTextField) => { this.onFieldUpdated(field) },
+          addField : (field: ValidatedTextFieldControl) => { this.addField(field ) },
+          onFieldUpdated: (field: ValidatedTextFieldControl) => { this.onFieldUpdated(field) },
           validate: () => { return this.validate() },
           getModel: () => { return this.getModel() }
         }}

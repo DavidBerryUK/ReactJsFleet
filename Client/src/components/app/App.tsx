@@ -4,8 +4,8 @@ import { Button }                               from '@material-ui/core';
 import { Link }                                 from 'react-router-dom';
 import { makeStyles }                           from '@material-ui/styles';
 import { Paper }                                from '@material-ui/core';
-import ApplicationHeaderComponent               from '../widgets/applicationHeader/application-header-component';
-import AutoLogin                                from '../controls/autoLogin/AutoLogin';
+import ApplicationHeaderWidget               from '../widgets/applicationHeaderWidget/applicationHeaderWidget';
+import AutoLoginControl                                from '../controls/autoLoginControl/AutoLoginControl';
 import CssBaseline                              from '@material-ui/core/CssBaseline';
 import React                                    from 'react';
 import RouteConstants                           from '../../routing/RouteConstants';
@@ -42,8 +42,8 @@ const App: React.FC = () => {
     <ApplicationContextProvider>
       <CssBaseline />
       <BrowserRouter>
-        <ApplicationHeaderComponent />
-        <AutoLogin />
+        <ApplicationHeaderWidget />
+        <AutoLoginControl />
         <div className={classes.app}>
           <Paper className={classes.paper}>
             <div className={classes.root}>
