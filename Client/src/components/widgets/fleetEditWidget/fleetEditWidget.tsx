@@ -17,7 +17,7 @@ interface IProperties {
   vehicleId: number;
 }
 
-const FleetViewWidget: React.FC<IProperties> = (props) => {
+const FleetEditWidget: React.FC<IProperties> = (props) => {
 
   const [vehicleItem, setVehicleItem] = React.useState(new VehicleModel());
   var history = useHistory();
@@ -41,7 +41,7 @@ const FleetViewWidget: React.FC<IProperties> = (props) => {
 
   return (
 
-    <WidgetContainerControl title="View Vehicle">
+    <WidgetContainerControl title="Edit Vehicle">
       <Grid container>
         <TextSubHeaderControl label="Vehicle" />
         <Grid container>
@@ -107,11 +107,9 @@ const FleetViewWidget: React.FC<IProperties> = (props) => {
 
       <WidgetFooterControl>
 
-        <Box display="flex" width={1} >
-          <Box display="flex" justifyContent="left" flex={1}>
+        <Box display="flex" justifyContent="flex-end">
+          <Box>
             <Button variant="text" onClick={viewFleetListClickedEventHandler} >Fleet List</Button>
-          </Box>
-          <Box display="flex" justifyContent="right" >
             <Button variant="text" onClick={editClickedEventHandler} >Edit</Button>
           </Box>
         </Box>
