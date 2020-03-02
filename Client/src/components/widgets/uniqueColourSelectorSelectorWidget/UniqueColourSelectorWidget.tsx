@@ -13,7 +13,7 @@ interface IUniqueSelectorProperties {
 }
 
 // Component
-// Displays a drop down list of unique colours for the fleet cars
+// Displays a drop down list of unique colours for the vehicle cars
 //
 const UniqueColourSelectorWidget: React.FC<IUniqueSelectorProperties> = (props) => {
 

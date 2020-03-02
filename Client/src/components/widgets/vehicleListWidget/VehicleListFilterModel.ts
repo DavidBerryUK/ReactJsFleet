@@ -15,9 +15,9 @@ export enum enumColumnNames {
   colour = "colour"
 }
 
-export default class FleetListFilterModel implements IDispatchObject {
+export default class VehicleListFilterModel implements IDispatchObject {
 
-  public static className = "FleetListFilterModel"
+  public static className = "VehicleListFilterModel"
 
   pageNumber: number = 1;
   rowsPerPage: number = 6;
@@ -33,13 +33,13 @@ export default class FleetListFilterModel implements IDispatchObject {
   filterTransmission: ListItemModel = new ListItemModel();
 
 
-  clone(): FleetListFilterModel {
-    var model = Object.assign(new FleetListFilterModel(), this);
+  clone(): VehicleListFilterModel {
+    var model = Object.assign(new VehicleListFilterModel(), this);
     return model;
   }
 
   // IDispatchObject Interface
   public get entityName(): string {
-    return FleetListFilterModel.className;
+    return VehicleListFilterModel.className;
   }
 }

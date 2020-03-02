@@ -17,7 +17,7 @@ interface IProperties {
   vehicleId: number;
 }
 
-const FleetEditWidget: React.FC<IProperties> = (props) => {
+const VehicleViewWidget: React.FC<IProperties> = (props) => {
 
   const [vehicleItem, setVehicleItem] = React.useState(new VehicleModel());
   var history = useHistory();
@@ -31,17 +31,17 @@ const FleetEditWidget: React.FC<IProperties> = (props) => {
       })
   }, [props.vehicleId])
 
-  function viewFleetListClickedEventHandler() {
-    history.push(RouteConstants.FleetList);
+  function viewVehicleListClickedEventHandler() {
+    history.push(RouteConstants.VehicleList);
   }
 
   function editClickedEventHandler() {
-    history.push(`/fleet/detail/${vehicleItem.vehicleId}/edit`);
+    history.push(RouteConstants.VehicleDetailEdit.replace(':id',vehicleItem.entityKey));
   }
 
   return (
 
-    <WidgetContainerControl title="Edit Vehicle">
+    <WidgetContainerControl title="View Vehicle">
       <Grid container>
         <TextSubHeaderControl label="Vehicle" />
         <Grid container>
@@ -107,12 +107,15 @@ const FleetEditWidget: React.FC<IProperties> = (props) => {
 
       <WidgetFooterControl>
 
-        <Box display="flex" justifyContent="flex-end">
-          <Box>
-            <Button variant="text" onClick={viewFleetListClickedEventHandler} >Fleet List</Button>
-            <Button variant="text" onClick={editClickedEventHandler} >Edit</Button>
+        <Box display="flex" width={1} >
+          <Box display="flex" justifyContent="left" flex={1}>
+            <Button variant="text" onClick={viewVehicleListClickedEventHandler} >Vehicle List</Button>
+          </Box>
+          <Box display="flex" justifyContent="right" >
+            <Button variant="text" color="primary" onClick={editClickedEventHandler} >Edit</Button>
           </Box>
         </Box>
+
       </WidgetFooterControl>
 
     </WidgetContainerControl>
@@ -120,4 +123,4 @@ const FleetEditWidget: React.FC<IProperties> = (props) => {
 
 }
 
-export default FleetViewWidget;
+export default VehicleViewWidget;

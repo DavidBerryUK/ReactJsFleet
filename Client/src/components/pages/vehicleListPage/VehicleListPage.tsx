@@ -1,15 +1,15 @@
 import CopyrightControl                         from '../../controls/copyrightControl/CopyrightControl';
-import FleetListWidget                          from '../../widgets/fleetListWidget/fleetListWidget'
 import React                                    from 'react';
+import VehicleListWidget                        from '../../widgets/vehicleListWidget/VehicleListWidget'
 
-const FleetListPage: React.FC = () => {
+const VehicleListPage: React.FC = () => {
 
   return (    
      <>
-      <FleetListWidget></FleetListWidget>    
+      <VehicleListWidget></VehicleListWidget>    
       <CopyrightControl/>
       </>
   );
 }
 
-export default FleetListPage;
+export default VehicleListPage;

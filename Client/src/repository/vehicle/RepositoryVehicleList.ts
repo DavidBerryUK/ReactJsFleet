@@ -2,12 +2,12 @@ import { ApiResponse }                          from "../apiContracts/ApiRespons
 import ApiBaseCollectionResponseModel           from "../../models/apiBase/ApiBaseCollectionResponseModel";
 import BaseCollectionRepository                 from "../base/BaseCollectionRepository";
 import FactoryVehicleModel                      from "../../modelFactories/FactoryVehicleModel";
+import VehicleListFilterModel                   from "../../components/widgets/vehicleListWidget/VehicleListFilterModel";
 import VehicleModel                             from "../../models/vehicle/VehicleModel";
-import FleetListFilterModel                     from "../../components/widgets/fleetListWidget/fleetListFilterModel";
 
 export default class RepositoryVehicleList extends BaseCollectionRepository<VehicleModel> {
 
-    public getVehicleList(filter : FleetListFilterModel) : ApiResponse<ApiBaseCollectionResponseModel<VehicleModel>>{
+    public getVehicleList(filter : VehicleListFilterModel) : ApiResponse<ApiBaseCollectionResponseModel<VehicleModel>>{
 
         var endpoint = `/api/vehicle?pageNumber=${filter.pageNumber}&rowsPerPage=${filter.rowsPerPage}`
         

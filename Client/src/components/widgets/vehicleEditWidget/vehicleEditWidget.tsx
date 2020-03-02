@@ -17,7 +17,7 @@ interface IProperties {
   vehicleId: number;
 }
 
-const FleetViewWidget: React.FC<IProperties> = (props) => {
+const VehicleEditWidget: React.FC<IProperties> = (props) => {
 
   const [vehicleItem, setVehicleItem] = React.useState(new VehicleModel());
   var history = useHistory();
@@ -31,17 +31,21 @@ const FleetViewWidget: React.FC<IProperties> = (props) => {
       })
   }, [props.vehicleId])
 
-  function viewFleetListClickedEventHandler() {
-    history.push(RouteConstants.FleetList);
+  function viewVehicleListClickedEventHandler() {
+    history.push(RouteConstants.VehicleList);
   }
 
-  function editClickedEventHandler() {
-    history.push(`/fleet/detail/${vehicleItem.vehicleId}/edit`);
+  function cancelClickedEventHandler() {
+    history.push(RouteConstants.VehicleDetailView.replace(':id',vehicleItem.entityKey));
+  }
+
+  function saveClickedEventHandler() {
+    
   }
 
   return (
 
-    <WidgetContainerControl title="View Vehicle">
+    <WidgetContainerControl title="Edit Vehicle">
       <Grid container>
         <TextSubHeaderControl label="Vehicle" />
         <Grid container>
@@ -107,14 +111,16 @@ const FleetViewWidget: React.FC<IProperties> = (props) => {
 
       <WidgetFooterControl>
 
-        <Box display="flex" width={1} >
+      <Box display="flex" width={1} >
           <Box display="flex" justifyContent="left" flex={1}>
-            <Button variant="text" onClick={viewFleetListClickedEventHandler} >Fleet List</Button>
+            <Button variant="text" onClick={viewVehicleListClickedEventHandler} >Vehicle List</Button>
           </Box>
           <Box display="flex" justifyContent="right" >
-            <Button variant="text" onClick={editClickedEventHandler} >Edit</Button>
+            <Button variant="text" color="secondary" onClick={cancelClickedEventHandler}>Cancel</Button>
+            <Button variant="text" color="primary" onClick={saveClickedEventHandler}>Save</Button>
           </Box>
         </Box>
+
       </WidgetFooterControl>
 
     </WidgetContainerControl>
@@ -122,4 +128,4 @@ const FleetViewWidget: React.FC<IProperties> = (props) => {
 
 }
 
-export default FleetViewWidget;
+export default VehicleEditWidget;

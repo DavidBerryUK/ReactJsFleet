@@ -1,10 +1,10 @@
 import { Dispatch }                             from 'react';
 import { Reducer }                              from 'react';
 import AuthenticationApplicationState           from '../../modelStates/AuthenticationApplicationState';
-import FleetListFilterModel                     from '../../components/widgets/fleetListWidget/fleetListFilterModel';
 import React                                    from 'react';
 import TokenCookies                             from '../../utilities/cookies/TokenCookies';
 import UserModel                                from '../../models/user/UserModel';
+import VehicleListFilterModel                     from '../../components/widgets/vehicleListWidget/VehicleListFilterModel';
 
 export enum EnumAction {
     Login,
@@ -12,7 +12,7 @@ export enum EnumAction {
     SampleCounterAdd,
     SampleCounterSubtract,
     SetToken,
-    UpdateFleetListFilter
+    UpdateVehicleListFilter
 }
 
 export interface IDispatchObject {
@@ -26,7 +26,7 @@ interface Actions {
 
 interface ApplicationContexgtProps {
     userState : AuthenticationApplicationState,
-    fleetListFilter : FleetListFilterModel,
+    vehicleListFilter : VehicleListFilterModel,
     sampleCounter: number,
     token?: string | undefined
 }
@@ -38,7 +38,7 @@ interface InitContextProps {
 
 const initialState: ApplicationContexgtProps = {
     userState : new AuthenticationApplicationState(),
-    fleetListFilter: new FleetListFilterModel(),
+    vehicleListFilter: new VehicleListFilterModel(),
     sampleCounter: 5000,
     token: undefined
 
@@ -48,9 +48,9 @@ const reducer: Reducer<ApplicationContexgtProps, Actions> = (state, action) => {
     
     switch (action.type) {
 
-        case EnumAction.UpdateFleetListFilter:            
-            var fleetListFilterObject =  action.value as FleetListFilterModel;                        
-            return { ...state, fleetListFilter: fleetListFilterObject };
+        case EnumAction.UpdateVehicleListFilter:            
+            var fleetListFilterObject =  action.value as VehicleListFilterModel;                        
+            return { ...state, vehicleListFilter: fleetListFilterObject };
 
         case EnumAction.Login:            
             var userObject =  action.value as UserModel;

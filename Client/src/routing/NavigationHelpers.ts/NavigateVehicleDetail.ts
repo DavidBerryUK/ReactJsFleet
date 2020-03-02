@@ -1,9 +1,9 @@
 import NavigationBase                           from "./NavigationBase";
 import RouteConstants                           from "../RouteConstants";
 
-export default class NavigateFleetList extends NavigationBase {
+export default class NavigateVehicleDetail extends NavigationBase {
 
     public go() {
-        this.routeTo(RouteConstants.FleetList)
+        this.routeTo(RouteConstants.VehicleDetailView)
     }
 }
