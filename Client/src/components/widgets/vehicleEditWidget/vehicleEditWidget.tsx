@@ -26,18 +26,17 @@ import VehicleModel                             from '../../../models/vehicle/Ve
 import WidgetContainerControl                   from '../../controls/widgetContainerControl/WidgetContainerControl';
 import WidgetFooterControl                      from '../../controls/widgetFooterControl/WidgetFooterControl';
 
-
 interface IProperties {
   vehicleId: number;
 }
 
 const VehicleEditWidget: React.FC<IProperties> = (props) => { 
 
-  const [vehicleItem, setVehicleItem] = React.useState(new VehicleModel());
+  const [colourList, setColourList] = React.useState<Array<ListItemModel>>(new Array<ListItemModel>());
   const [makesList, setMakesList] = React.useState<Array<ListItemModel>>(new Array<ListItemModel>());
   const [modelList, setModelList] = React.useState<Array<ListItemModel>>(new Array<ListItemModel>());
-  const [colourList, setColourList] = React.useState<Array<ListItemModel>>(new Array<ListItemModel>());
   const [transmissionList, setTransmissionList] = React.useState<Array<ListItemModel>>(new Array<ListItemModel>());
+  const [vehicleItem, setVehicleItem] = React.useState(new VehicleModel());
   var history = useHistory();
 
   useMemo(() => {
@@ -120,7 +119,7 @@ const VehicleEditWidget: React.FC<IProperties> = (props) => {
                         label="Make"
                         items={makesList}
                         value={vehicleItem.make}
-                        rules={[]} />
+                        rules={[new RuleMandatory()]} />
 
                     </Box>
                   </Grid>
@@ -131,7 +130,7 @@ const VehicleEditWidget: React.FC<IProperties> = (props) => {
                         label="Model"
                         items={modelList}
                         value={vehicleItem.model}
-                        rules={[]} />
+                        rules={[new RuleMandatory()]} />
                     </Box>
                   </Grid>
 
@@ -145,7 +144,7 @@ const VehicleEditWidget: React.FC<IProperties> = (props) => {
                         label="Colour"
                         items={colourList}
                         value={vehicleItem.colour}
-                        rules={[]} />
+                        rules={[new RuleMandatory()]} />
                     </Box>
                   </Grid>
                   <Grid item xs={3} >
@@ -167,7 +166,7 @@ const VehicleEditWidget: React.FC<IProperties> = (props) => {
                         label="Transmission"
                         items={transmissionList}
                         value={vehicleItem.transmission}
-                        rules={[]} />
+                        rules={[new RuleMandatory()]} />
                     </Box>
                   </Grid>
                 </Grid>
@@ -210,7 +209,6 @@ const VehicleEditWidget: React.FC<IProperties> = (props) => {
 
     </ValidationState>
   );
-
 }
 
 export default VehicleEditWidget;
