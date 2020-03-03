@@ -151,10 +151,6 @@ function DefectSheetWidget() {
               </Grid>
             </Grid>
 
-
-
-
-
             <Grid container spacing={0}>
             </Grid>
             <Grid container xs={12} spacing={1}>
@@ -170,14 +166,7 @@ function DefectSheetWidget() {
                   label="Preferred Agent"
                   rules={[]} />
               </Grid>
-
-
-
             </Grid>
-
-
-
-
 
             <Grid container spacing={0}>
             </Grid>
