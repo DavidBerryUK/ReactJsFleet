@@ -10,6 +10,6 @@ export default class RepositoryUserItem extends BaseItemRepository<UserModel> {
 
         var endpoint = `/api/users/${id}`;                
 
-        return this.get(endpoint, new FactoryUserModel());        
+        return this.baseGet(endpoint, new FactoryUserModel());        
     }
 }

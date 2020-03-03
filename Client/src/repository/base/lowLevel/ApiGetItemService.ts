@@ -22,21 +22,12 @@ export default class ApiGetItemService<T extends IApiModel> {
         if (response.data == null) {
           contract.publishFailure("No data returned");
         } else {          
-          if (response.data.hasValidationMessages) {
-            // console.log(
-            //   "[under-development:BasePostService] response hasValidation messages"
-            // );
-            if (response.data.validationMessages) {
-              // console.log(
-              //   "[under-development:BasePostService] response validationMessages"
-              // );
+          if (response.data.hasValidationMessages) {            
+            if (response.data.validationMessages) {              
               contract.publishValidationErrorsRaised(
                 response.data.validationMessages
               );
-            } else {
-              // console.log(
-              //   "[under-development:BasePostService] response BlankArray validationMessages"
-              // );
+            } else {              
               contract.publishValidationErrorsRaised(
                 new Array<ValidationMessage>()
               );
@@ -45,18 +36,12 @@ export default class ApiGetItemService<T extends IApiModel> {
             return;
           }
 
-          // console.log('response.data.entities')
-          // console.log(response.data.entities);
-
-          if (response.data.entity) {
-            // console.log("[under-development:BasePostService] response has data");
-        
+          if (response.data.entity) {        
             var model = new ApiBaseItemResponseModel<T>();
             model.entity = modelFactory.createFrom(response.data.entity);
 
             contract.publishSuccess(model);
-          } else {
-            // console.log("data has no entity")
+          } else {            
             contract.publishFailure("No data entity returned");
           }
         }

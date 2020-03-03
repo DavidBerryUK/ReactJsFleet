@@ -6,10 +6,13 @@ import VehicleModel                             from "../../models/vehicle/Vehic
 
 export default class RepositoryVehicleItem extends BaseItemRepository<VehicleModel> {
 
-    public getVehicleById(id : number) : ApiResponse<ApiBaseItemResponseModel<VehicleModel>>{
+    public getById(id: number): ApiResponse<ApiBaseItemResponseModel<VehicleModel>> {
+        var endpoint = `/api/vehicle/${id}`;
+        return this.baseGet(endpoint, new FactoryVehicleModel());
+    }
 
-        var endpoint = `/api/vehicle/${id}`;                
-
-        return this.get(endpoint, new FactoryVehicleModel());        
+    public save(model: VehicleModel): ApiResponse<ApiBaseItemResponseModel<VehicleModel>> {
+        var endpoint = `/api/vehicle`;
+        return this.baseSave(endpoint, model, new FactoryVehicleModel());
     }
 }

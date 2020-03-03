@@ -8,9 +8,9 @@ import axios                                    from 'axios';
 import BaseApiConfig                            from '../ApiBaseConfig';
 import ValidationMessage                        from '../../../models/validation/ValidationMessage';
 
-export default class ApiPostItemService<T extends IApiModel> {
+export default class ApiPutItemService<T extends IApiModel> {
 
-    public post(
+    public put(
         endpointUrl: string,
         modelFactory: IModelFactory<T>, 
         entityModel: T) : ApiResponse<ApiBaseItemResponseModel<T>> {
@@ -18,7 +18,7 @@ export default class ApiPostItemService<T extends IApiModel> {
         let contract = new ApiResponseContract<ApiBaseItemResponseModel<T>>();
 
         axios
-        .post(endpointUrl, entityModel, BaseApiConfig.baseConfig)
+        .put(endpointUrl, entityModel, BaseApiConfig.baseConfig)
         .then((response : any) => {
             if (response.data == null) {
                 contract.publishFailure('No data returned');

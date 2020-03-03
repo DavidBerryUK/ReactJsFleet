@@ -25,7 +25,7 @@ const VehicleViewWidget: React.FC<IProperties> = (props) => {
   useMemo(() => {
     var repositoryVehicle = new RepositoryVehicleItem();
 
-    repositoryVehicle.getVehicleById(props.vehicleId)
+    repositoryVehicle.getById(props.vehicleId)
       .onSuccess((vehicleData: ApiBaseItemResponseModel<VehicleModel>) => {
         setVehicleItem(vehicleData.entity!);
       })

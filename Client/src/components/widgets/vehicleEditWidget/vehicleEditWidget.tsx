@@ -9,12 +9,15 @@ import { useMemo }                              from 'react';
 import { ValidationContext }                    from '../../../services/validation/context/context/ValidationContext';
 import ApiBaseCollectionResponseModel           from '../../../models/apiBase/ApiBaseCollectionResponseModel';
 import ApiBaseItemResponseModel                 from '../../../models/apiBase/ApiBaseItemResponseModel';
+import FactoryVehicleModel                      from '../../../modelFactories/FactoryVehicleModel';
 import ListItemModel                            from '../../../models/list/ListItemModel';
 import React                                    from 'react';
-import ReadOnlyTextControl                      from '../../controls/readOnlyTextControl/ReadOnlyTextControl';
 import RepositorySpecification                  from '../../../repository/specification/RepositorySpecification';
 import RepositoryVehicleItem                    from '../../../repository/vehicle/RepositoryVehicleItem';
 import RouteConstants                           from '../../../routing/RouteConstants';
+import RuleDecimal                              from '../../../services/validation/rules/ruleProcessors/RuleDecimal';
+import RuleDecimalBetween                       from '../../../services/validation/rules/ruleProcessors/RuleDecimalBetween';
+import RuleInteger                              from '../../../services/validation/rules/ruleProcessors/RuleInteger';
 import RuleMandatory                            from '../../../services/validation/rules/ruleProcessors/RuleMandatory';
 import RuleMaxLength                            from '../../../services/validation/rules/ruleProcessors/RuleMaxLength';
 import TextSubHeaderControl                     from '../../controls/textSubHeaderControl/TextSubHeaderControl';
@@ -30,16 +33,16 @@ interface IProperties {
   vehicleId: number;
 }
 
-const VehicleEditWidget: React.FC<IProperties> = (props) => { 
+const VehicleEditWidget: React.FC<IProperties> = (props) => {
 
   var history = useHistory();
-  
+
   const [colourList, setColourList] = React.useState<Array<ListItemModel>>(new Array<ListItemModel>());
   const [makesList, setMakesList] = React.useState<Array<ListItemModel>>(new Array<ListItemModel>());
   const [modelList, setModelList] = React.useState<Array<ListItemModel>>(new Array<ListItemModel>());
   const [transmissionList, setTransmissionList] = React.useState<Array<ListItemModel>>(new Array<ListItemModel>());
   const [vehicleItem, setVehicleItem] = React.useState(new VehicleModel());
-  
+
 
   useMemo(() => {
     var repositorySpecification = new RepositorySpecification()
@@ -69,7 +72,7 @@ const VehicleEditWidget: React.FC<IProperties> = (props) => {
   useMemo(() => {
     var repositoryVehicle = new RepositoryVehicleItem();
 
-    repositoryVehicle.getVehicleById(props.vehicleId)
+    repositoryVehicle.getById(props.vehicleId)
       .onSuccess((vehicleData: ApiBaseItemResponseModel<VehicleModel>) => {
         setVehicleItem(vehicleData.entity!);
       })
@@ -83,8 +86,24 @@ const VehicleEditWidget: React.FC<IProperties> = (props) => {
     history.push(RouteConstants.VehicleDetailView.replace(':id', vehicleItem.entityKey));
   }
 
-  function saveClickedEventHandler() {
+  function saveClickedEventHandler(context: IValidationContextActions<IVehicleModel>) {
+    // Validate
+    if (!context.validate()) {
+      console.log("this form is not valid - ABANDON ALL HOPE!!!")
+      return;
+    }
 
+    // Get Form Data and update current Object Model
+    const formData = context.getModel();    
+    setVehicleItem( new FactoryVehicleModel().createFrom(formData));
+
+    // Save the vehicle to server
+    var repositoryVehicleItem = new RepositoryVehicleItem();
+    repositoryVehicleItem.save(vehicleItem)
+    .onSuccess((vehicleData: ApiBaseItemResponseModel<VehicleModel>) => {
+      setVehicleItem(vehicleData.entity!);
+    });
+    
   }
 
   return (
@@ -100,7 +119,7 @@ const VehicleEditWidget: React.FC<IProperties> = (props) => {
                 <Grid container>
                   <Grid item xs={3} >
                     <ValidatedTextFieldControl
-                      name="Registration"
+                      name="registration"
                       label="Registration"
                       required
                       autoComplete="off"
@@ -117,7 +136,7 @@ const VehicleEditWidget: React.FC<IProperties> = (props) => {
                     <Box pr={2}>
 
                       <ValidatedSelectFieldControl
-                        name="Make"
+                        name="make"
                         label="Make"
                         labelWidth={50}
                         items={makesList}
@@ -129,7 +148,7 @@ const VehicleEditWidget: React.FC<IProperties> = (props) => {
                   <Grid item xs={3} >
                     <Box pr={2}>
                       <ValidatedSelectFieldControl
-                        name="Model"
+                        name="model"
                         label="Model"
                         labelWidth={50}
                         items={modelList}
@@ -144,7 +163,7 @@ const VehicleEditWidget: React.FC<IProperties> = (props) => {
                   <Grid item xs={3} >
                     <Box pr={2}>
                       <ValidatedSelectFieldControl
-                        name="Colour"
+                        name="colour"
                         label="Colour"
                         labelWidth={60}
                         items={colourList}
@@ -155,19 +174,19 @@ const VehicleEditWidget: React.FC<IProperties> = (props) => {
                   <Grid item xs={3} >
 
                     <ValidatedTextFieldControl
-                      name="Doors"
+                      name="doors"
                       label="Doors"
                       required
                       autoComplete="off"
                       value={vehicleItem.doors}
-                      rules={[new RuleMandatory(), new RuleMaxLength(1)]}
+                      rules={[new RuleMandatory(), new RuleDecimalBetween(2, 5)]}
                     />
 
                   </Grid>
                   <Grid item xs={3} >
                     <Box pr={2}>
                       <ValidatedSelectFieldControl
-                        name="Transmission"
+                        name="transmission"
                         label="Transmission"
                         labelWidth={110}
                         items={transmissionList}
@@ -179,16 +198,28 @@ const VehicleEditWidget: React.FC<IProperties> = (props) => {
                 <TextSubHeaderControl label="Fuel" />
                 <Grid container>
                   <Grid item xs={3} >
-                    <ReadOnlyTextControl
+
+                    <ValidatedTextFieldControl
+                      name="mpg"
                       label="MPG"
+                      required
+                      autoComplete="off"
                       value={vehicleItem.mpg}
-                      maxWidth={150} />
+                      rules={[new RuleMandatory(), new RuleDecimal()]}
+                    />
+
                   </Grid>
                   <Grid item xs={3} >
-                    <ReadOnlyTextControl
+
+                    <ValidatedTextFieldControl
+                      name="mileage"
                       label="Mileage"
+                      required
+                      autoComplete="off"
                       value={vehicleItem.mileage}
-                      maxWidth={150} />
+                      rules={[new RuleMandatory(), new RuleInteger()]}
+                    />
+
                   </Grid>
                 </Grid>
               </Grid>
@@ -201,7 +232,7 @@ const VehicleEditWidget: React.FC<IProperties> = (props) => {
                   </Box>
                   <Box display="flex" justifyContent="right" >
                     <Button variant="text" color="secondary" onClick={cancelClickedEventHandler}>Cancel</Button>
-                    <Button variant="text" color="primary" onClick={saveClickedEventHandler} disabled={!context.isFormValid}>Save</Button>
+                    <Button variant="text" color="primary" onClick={()=> {saveClickedEventHandler(context)}} disabled={!context.isFormValid}>Save</Button>
                   </Box>
                 </Box>
 
