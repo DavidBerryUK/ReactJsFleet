@@ -31,7 +31,7 @@ interface IProperties {
   vehicleId: number;
 }
 
-const VehicleEditWidget: React.FC<IProperties> = (props) => {
+const VehicleEditWidget: React.FC<IProperties> = (props) => { 
 
   const [vehicleItem, setVehicleItem] = React.useState(new VehicleModel());
   const [makesList, setMakesList] = React.useState<Array<ListItemModel>>(new Array<ListItemModel>());

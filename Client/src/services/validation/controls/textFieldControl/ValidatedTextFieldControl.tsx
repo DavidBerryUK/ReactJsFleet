@@ -43,7 +43,7 @@ export default class ValidatedTextFieldControl extends BaseValidationControl<Tex
                     margin="normal"
                     error={!this.state.isValid}
                     helperText={this.state.validationError}
-                    onChange={(event) => { this.valueChangedEventHandler(event) }}
+                    onChange={(event: React.ChangeEvent<Element>) => { this.valueChangedEventHandler(event) }}
                     value={this.state.text}
                 />
             </Box>

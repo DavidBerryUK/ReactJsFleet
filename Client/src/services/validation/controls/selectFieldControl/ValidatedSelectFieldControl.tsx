@@ -28,22 +28,11 @@ export default class ValidatedSelectFieldControl extends BaseValidationControl<I
     }
 
     if (this.props.value) {
-      if (this.state.text === '') {
+      if (this.state.text === '' && this.props.items.length > 0) {
         this.initalValueSet = true;
         super.setTextValue(`${this.props.value}`)
       }
     }
-
-  }
-
-  private selectedValue(): string {
-    if (this.props.items.length === 0) {
-      return ''
-    }
-    if (this.props.value === undefined) {
-      return '';
-    }
-    return `${this.props.value}`;
   }
 
   render() {
@@ -58,9 +47,13 @@ export default class ValidatedSelectFieldControl extends BaseValidationControl<I
       <FormControl variant="outlined" margin="normal" fullWidth>
         <InputLabel id={labelId}>{this.props.label}</InputLabel>
         <Select
-          value={this.selectedValue()}
+          // value={this.selectedValue()}
+          value = {this.state.text}
           labelId={labelId}
-          labelWidth={50}>
+          labelWidth={50}
+          onChange={(event: any) => { this.valueChangedEventHandler(event) }}
+          >                    
+            
           <MenuItem value=""><em>None</em></MenuItem>
           {
             this.props.items.map((item: ListItemModel) => (
