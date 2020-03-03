@@ -4,6 +4,7 @@ export default class RuleMaxLength implements IValidationRule {
 
     private maxLength: number;
     errorMessage: string = "";
+    hasMandatoryIndicator = false;
 
     constructor(maxLength: number) {
         this.maxLength = maxLength;

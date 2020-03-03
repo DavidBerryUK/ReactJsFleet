@@ -3,6 +3,7 @@ import IValidationRule                          from "../interfaces/IValidationR
 export default class RuleMandatory implements IValidationRule {
     
     errorMessage: string = "";
+    hasMandatoryIndicator = true;
 
     isValid(value: string): boolean {
         this.errorMessage = "";

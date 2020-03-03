@@ -34,6 +34,7 @@ function DefectSheetWidget() {
                   <ValidatedSelectFieldControl
                     name="Manufacturer"
                     label="Manufacturer"
+                    labelWidth={50}
                     rules={[new RuleMandatory()]}
                     items={[
                       new ListItemModel("10", "Alfa Romeo"),

@@ -22,6 +22,10 @@ export default class RuleCollection {
         }
     }
 
+    isValueMandatory() : Boolean {        
+        return this.rules.filter((item: IValidationRule) => { return item.hasMandatoryIndicator }).length > 0;        
+    }
+
     // Run all the rules
     //
     evaluateRules( text: string) : boolean {        

@@ -32,12 +32,14 @@ interface IProperties {
 
 const VehicleEditWidget: React.FC<IProperties> = (props) => { 
 
+  var history = useHistory();
+  
   const [colourList, setColourList] = React.useState<Array<ListItemModel>>(new Array<ListItemModel>());
   const [makesList, setMakesList] = React.useState<Array<ListItemModel>>(new Array<ListItemModel>());
   const [modelList, setModelList] = React.useState<Array<ListItemModel>>(new Array<ListItemModel>());
   const [transmissionList, setTransmissionList] = React.useState<Array<ListItemModel>>(new Array<ListItemModel>());
   const [vehicleItem, setVehicleItem] = React.useState(new VehicleModel());
-  var history = useHistory();
+  
 
   useMemo(() => {
     var repositorySpecification = new RepositorySpecification()
@@ -117,6 +119,7 @@ const VehicleEditWidget: React.FC<IProperties> = (props) => {
                       <ValidatedSelectFieldControl
                         name="Make"
                         label="Make"
+                        labelWidth={50}
                         items={makesList}
                         value={vehicleItem.make}
                         rules={[new RuleMandatory()]} />
@@ -128,6 +131,7 @@ const VehicleEditWidget: React.FC<IProperties> = (props) => {
                       <ValidatedSelectFieldControl
                         name="Model"
                         label="Model"
+                        labelWidth={50}
                         items={modelList}
                         value={vehicleItem.model}
                         rules={[new RuleMandatory()]} />
@@ -142,6 +146,7 @@ const VehicleEditWidget: React.FC<IProperties> = (props) => {
                       <ValidatedSelectFieldControl
                         name="Colour"
                         label="Colour"
+                        labelWidth={60}
                         items={colourList}
                         value={vehicleItem.colour}
                         rules={[new RuleMandatory()]} />
@@ -164,6 +169,7 @@ const VehicleEditWidget: React.FC<IProperties> = (props) => {
                       <ValidatedSelectFieldControl
                         name="Transmission"
                         label="Transmission"
+                        labelWidth={110}
                         items={transmissionList}
                         value={vehicleItem.transmission}
                         rules={[new RuleMandatory()]} />

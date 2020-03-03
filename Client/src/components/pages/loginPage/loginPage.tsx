@@ -21,7 +21,7 @@ const LoginPage: React.FC = () => {
       {!state.userState.loggedIn ?
         <>
           <Box mt={8}>
-            <LoginWidget></LoginWidget>
+            <LoginWidget/>
           </Box>
         </> : null}
 

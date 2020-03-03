@@ -8,7 +8,7 @@ type PropsType = RouteComponentProps<{ id: string }>;
 const VehicleDetailViewPage: React.FC<PropsType> = (props) => {
   return (
     <>
-      <VehicleViewWidget vehicleId={Number(props.match.params.id)}></VehicleViewWidget>
+      <VehicleViewWidget vehicleId={Number(props.match.params.id)}/>
       <CopyrightControl />
     </>
   );

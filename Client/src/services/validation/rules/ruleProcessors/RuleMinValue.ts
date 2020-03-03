@@ -4,6 +4,7 @@ export default class RuleMinValue implements IValidationRule{
 
     private minValue: number;
     errorMessage: string = "";
+    hasMandatoryIndicator = false;
 
     constructor(minValue: number) {
         this.minValue = minValue;

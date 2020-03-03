@@ -1,4 +1,5 @@
-import { FormControl, FormHelperText }                          from '@material-ui/core';
+import { FormControl }                          from '@material-ui/core';
+import { FormHelperText }                       from '@material-ui/core';
 import { InputLabel }                           from '@material-ui/core';
 import { MenuItem }                             from '@material-ui/core';
 import { Select }                               from '@material-ui/core';
@@ -9,6 +10,7 @@ import React                                    from 'react';
 export interface IProperties {
   label: string
   name: string,
+  labelWidth: number,
   items: Array<ListItemModel>
 }
 
@@ -22,7 +24,7 @@ export default class ValidatedSelectFieldControl extends BaseValidationControl<I
   private initalValueSet: Boolean = false;
 
   public componentDidUpdate() {
-
+    
     if (this.initalValueSet) {
       return;
     }
@@ -35,6 +37,13 @@ export default class ValidatedSelectFieldControl extends BaseValidationControl<I
     }
   }
 
+  public labelSuffix() : string {
+    if (this.rules.isValueMandatory()) {
+      return "*";
+    }
+    return "";
+  }
+
   render() {
     const labelId = `${this.props.name}-label`;
 
@@ -45,12 +54,12 @@ export default class ValidatedSelectFieldControl extends BaseValidationControl<I
     return (
 
       <FormControl variant="outlined" margin="normal" fullWidth   error = {!this.state.isValid}>
-        <InputLabel id={labelId}>{this.props.label}</InputLabel>
+        <InputLabel id={labelId}>{this.props.label + this.labelSuffix()}</InputLabel>
         <Select
           // value={this.selectedValue()}
           value={this.state.text}
           labelId={labelId}
-          labelWidth={50}
+          labelWidth={this.props.labelWidth}
           onChange={(event: any) => { this.valueChangedEventHandler(event) }}          
         >
           <MenuItem value=""><em>None</em></MenuItem>

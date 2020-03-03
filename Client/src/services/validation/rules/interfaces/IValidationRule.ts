@@ -7,8 +7,11 @@ export default interface IValidationRule {
     // UI Suitable error message should the rule not pass
     //
     errorMessage: string;
+    hasMandatoryIndicator: boolean;
 
     // Method that runs the rule, where value is the text value being evaluated 
     //
     isValid(value: string) : boolean;
+
+    
 }

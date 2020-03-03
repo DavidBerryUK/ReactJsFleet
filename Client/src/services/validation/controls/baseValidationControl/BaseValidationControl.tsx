@@ -27,7 +27,7 @@ export default class BaseValidationControl<P, S> extends Component<P & IValidate
     state = {
         text: "",
         isValid: true,
-        validationError: ''
+        validationError: '',        
     }
 
     // List of validation rules passed in as a property
@@ -46,7 +46,6 @@ export default class BaseValidationControl<P, S> extends Component<P & IValidate
     }
 
     public setTextValue(value: string) {
-
 
         this.setState(
             {
@@ -71,8 +70,6 @@ export default class BaseValidationControl<P, S> extends Component<P & IValidate
         //
         const isValid = this.rules.evaluateRules(this.state.text);
         let message = this.rules.validationMessage;
-
-
 
         // update the validation status has changed, 
         //  update the state

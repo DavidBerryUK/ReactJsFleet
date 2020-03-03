@@ -4,6 +4,7 @@ export default class RuleMaxValue implements IValidationRule {
 
     private maxValue: number;
     errorMessage: string = "";
+    hasMandatoryIndicator = false;
 
     constructor(maxValue: number) {
         this.maxValue = maxValue;

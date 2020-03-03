@@ -6,7 +6,7 @@ const VehicleListPage: React.FC = () => {
 
   return (    
      <>
-      <VehicleListWidget></VehicleListWidget>    
+      <VehicleListWidget/>
       <CopyrightControl/>
       </>
   );
