@@ -7,25 +7,25 @@ import { IVehicleModel }                        from './IVehicleModel';
 import { useHistory }                           from 'react-router';
 import { useMemo }                              from 'react';
 import { ValidationContext }                    from '../../../services/validation/context/context/ValidationContext';
+import ApiBaseCollectionResponseModel           from '../../../models/apiBase/ApiBaseCollectionResponseModel';
 import ApiBaseItemResponseModel                 from '../../../models/apiBase/ApiBaseItemResponseModel';
 import ListItemModel                            from '../../../models/list/ListItemModel';
 import React                                    from 'react';
 import ReadOnlyTextControl                      from '../../controls/readOnlyTextControl/ReadOnlyTextControl';
+import RepositorySpecification                  from '../../../repository/specification/RepositorySpecification';
 import RepositoryVehicleItem                    from '../../../repository/vehicle/RepositoryVehicleItem';
 import RouteConstants                           from '../../../routing/RouteConstants';
 import RuleMandatory                            from '../../../services/validation/rules/ruleProcessors/RuleMandatory';
 import RuleMaxLength                            from '../../../services/validation/rules/ruleProcessors/RuleMaxLength';
 import TextSubHeaderControl                     from '../../controls/textSubHeaderControl/TextSubHeaderControl';
-import UniqueColourSelectorWidget               from '../uniqueColourSelectorSelectorWidget/UniqueColourSelectorWidget';
-import UniqueMakeSelectorWidget                 from '../uniqueMakeSelectorWidget/UniqueMakeSelectorWidget';
-import UniqueModelSelectorWidget                from '../uniqueModelSelectorWidget/UniqueModelSelectorWidget';
-import UniqueTransmissionSelectorWidget         from '../uniqueTransmissionSelectorWidget/UniqueTransmissionSelectorWidget';
+import ValidatedSelectFieldControl              from '../../../services/validation/controls/selectFieldControl/ValidatedSelectFieldControl';
 import ValidatedTextFieldControl                from '../../../services/validation/controls/textFieldControl/ValidatedTextFieldControl';
 import ValidationDebugInfoControl               from '../../../services/validation/controls/debugInfoControl/ValidationDebugInfoControl';
 import ValidationState                          from '../../../services/validation/context/state/ValidationState';
 import VehicleModel                             from '../../../models/vehicle/VehicleModel';
 import WidgetContainerControl                   from '../../controls/widgetContainerControl/WidgetContainerControl';
 import WidgetFooterControl                      from '../../controls/widgetFooterControl/WidgetFooterControl';
+
 
 interface IProperties {
   vehicleId: number;
@@ -34,7 +34,36 @@ interface IProperties {
 const VehicleEditWidget: React.FC<IProperties> = (props) => {
 
   const [vehicleItem, setVehicleItem] = React.useState(new VehicleModel());
+  const [makesList, setMakesList] = React.useState<Array<ListItemModel>>(new Array<ListItemModel>());
+  const [modelList, setModelList] = React.useState<Array<ListItemModel>>(new Array<ListItemModel>());
+  const [colourList, setColourList] = React.useState<Array<ListItemModel>>(new Array<ListItemModel>());
+  const [transmissionList, setTransmissionList] = React.useState<Array<ListItemModel>>(new Array<ListItemModel>());
   var history = useHistory();
+
+  useMemo(() => {
+    var repositorySpecification = new RepositorySpecification()
+
+    repositorySpecification.getUniqueMakes()
+      .onSuccess((data: ApiBaseCollectionResponseModel<ListItemModel>) => {
+        setMakesList(data.entities || new Array<ListItemModel>());
+      });
+
+    repositorySpecification.getUniqueModels()
+      .onSuccess((data: ApiBaseCollectionResponseModel<ListItemModel>) => {
+        setModelList(data.entities || new Array<ListItemModel>());
+      });
+
+    repositorySpecification.getUniqueColours()
+      .onSuccess((data: ApiBaseCollectionResponseModel<ListItemModel>) => {
+        setColourList(data.entities || new Array<ListItemModel>());
+      });
+
+    repositorySpecification.getUniqueTransmission()
+      .onSuccess((data: ApiBaseCollectionResponseModel<ListItemModel>) => {
+        setTransmissionList(data.entities || new Array<ListItemModel>());
+      });
+
+  }, [])
 
   useMemo(() => {
     var repositoryVehicle = new RepositoryVehicleItem();
@@ -54,22 +83,6 @@ const VehicleEditWidget: React.FC<IProperties> = (props) => {
   }
 
   function saveClickedEventHandler() {
-
-  }
-
-  function onColourChangedHandler(item: ListItemModel) {
-
-  }
-
-  function onModelChangedHandler(item: ListItemModel) {
-
-  }
-
-  function onMakeChangedHandler(item: ListItemModel) {
-
-  }
-
-  function onTransmissionChangedHandler(item: ListItemModel) {
 
   }
 
@@ -101,18 +114,24 @@ const VehicleEditWidget: React.FC<IProperties> = (props) => {
                 <Grid container>
                   <Grid item xs={3}>
                     <Box pr={2}>
-                      [Make]
-            <UniqueMakeSelectorWidget
-                        value={vehicleItem.make || ''}
-                        onSelectionChanged={(item: ListItemModel) => { onMakeChangedHandler(item) }} />
+
+                      <ValidatedSelectFieldControl
+                        name="Make"
+                        label="Make"
+                        items={makesList}
+                        value={vehicleItem.make}
+                        rules={[]} />
+
                     </Box>
                   </Grid>
                   <Grid item xs={3} >
                     <Box pr={2}>
-                      [model]
-            <UniqueModelSelectorWidget
-                        value={vehicleItem.model || ''}
-                        onSelectionChanged={(item: ListItemModel) => { onModelChangedHandler(item) }} />
+                      <ValidatedSelectFieldControl
+                        name="Model"
+                        label="Model"
+                        items={modelList}
+                        value={vehicleItem.model}
+                        rules={[]} />
                     </Box>
                   </Grid>
 
@@ -121,10 +140,12 @@ const VehicleEditWidget: React.FC<IProperties> = (props) => {
                 <Grid container>
                   <Grid item xs={3} >
                     <Box pr={2}>
-                      [colour]
-            <UniqueColourSelectorWidget
-                        value={vehicleItem.colour || ''}
-                        onSelectionChanged={(item: ListItemModel) => { onColourChangedHandler(item) }} />
+                      <ValidatedSelectFieldControl
+                        name="Colour"
+                        label="Colour"
+                        items={colourList}
+                        value={vehicleItem.colour}
+                        rules={[]} />
                     </Box>
                   </Grid>
                   <Grid item xs={3} >
@@ -141,10 +162,12 @@ const VehicleEditWidget: React.FC<IProperties> = (props) => {
                   </Grid>
                   <Grid item xs={3} >
                     <Box pr={2}>
-                      [Transmission]
-            <UniqueTransmissionSelectorWidget
-                        value={vehicleItem.transmission || ''}
-                        onSelectionChanged={(item: ListItemModel) => { onTransmissionChangedHandler(item) }} />
+                      <ValidatedSelectFieldControl
+                        name="Transmission"
+                        label="Transmission"
+                        items={transmissionList}
+                        value={vehicleItem.transmission}
+                        rules={[]} />
                     </Box>
                   </Grid>
                 </Grid>

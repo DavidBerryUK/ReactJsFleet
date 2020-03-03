@@ -1,11 +1,10 @@
-
 import Button                                   from '@material-ui/core/Button';
 import FormControlLabel                         from '@material-ui/core/FormControlLabel';
 import Grid                                     from '@material-ui/core/Grid';
+import ListItemModel                            from '../../../models/list/ListItemModel';
 import React                                    from 'react';
 import RuleMandatory                            from '../../../services/validation/rules/ruleProcessors/RuleMandatory';
 import RuleMaxLength                            from '../../../services/validation/rules/ruleProcessors/RuleMaxLength';
-import SelectItemModel                          from '../../../services/validation/controls/selectFieldControl/SelectItemModel';
 import Switch                                   from '@material-ui/core/Switch';
 import ValidatedSelectFieldControl              from '../../../services/validation/controls/selectFieldControl/ValidatedSelectFieldControl';
 import ValidatedTextFieldControl                from '../../../services/validation/controls/textFieldControl/ValidatedTextFieldControl';
@@ -37,12 +36,12 @@ function DefectSheetWidget() {
                     label="Manufacturer"
                     rules={[new RuleMandatory()]}
                     items={[
-                      new SelectItemModel("10", "Alfa Romeo"),
-                      new SelectItemModel("20", "Audi"),
-                      new SelectItemModel("30", "BMW"),
-                      new SelectItemModel("40", "Jaguar"),
-                      new SelectItemModel("50", "Ford"),
-                      new SelectItemModel("60", "Volkswagen"),
+                      new ListItemModel("10", "Alfa Romeo"),
+                      new ListItemModel("20", "Audi"),
+                      new ListItemModel("30", "BMW"),
+                      new ListItemModel("40", "Jaguar"),
+                      new ListItemModel("50", "Ford"),
+                      new ListItemModel("60", "Volkswagen"),
                     ]}
                   />
                 </Grid>

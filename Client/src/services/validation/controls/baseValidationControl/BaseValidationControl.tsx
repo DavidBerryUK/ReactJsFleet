@@ -18,7 +18,7 @@ import RuleCollection                           from '../../rules/RuleCollection
 export default class BaseValidationControl<P, S> extends Component<P & IValidatedUIControlProperties, S | IValidatedUIControlState>  {
 
     static contextType = ValidationContext;
-    private  initalValueSet : Boolean = false;
+    //private  initalValueSet : Boolean = false;
 
     // State of the control, holds state of 
     // * Value 
@@ -36,31 +36,6 @@ export default class BaseValidationControl<P, S> extends Component<P & IValidate
     // Name of the property
     public name: string = "";
 
-    public componentDidUpdate() {
-
-        if ( this.initalValueSet ) {
-            return;
-        }
-        if (this.props.value) {
-            if (this.state.text === '') {
-                this.initalValueSet = true;
-
-                this.setState(
-                    {
-                        text: `${this.props.value}`
-                    },
-                    () => {
-                        if (this.props.onFieldUpdated) {
-                            this.props.onFieldUpdated(this);
-                        }
-                        this.context.onFieldUpdated(this);
-                    });
-
-            }
-        }
-
-    }
-
     // Callback when the control loads.
     // This registers the control with the parent ValidationState / ValidationContext
     //
@@ -69,6 +44,24 @@ export default class BaseValidationControl<P, S> extends Component<P & IValidate
         this.rules = new RuleCollection(this.props.label as string, this.props.rules);
         this.context.addField(this);
     }
+
+    public setTextValue(value: string) {
+
+
+        this.setState(
+            {
+                text: value
+            },
+            () => {
+                if (this.props.onFieldUpdated) {
+                    this.props.onFieldUpdated(this);
+                }
+                this.context.onFieldUpdated(this);
+            });
+
+    }
+
+
 
     // Validate method, this is called by the parent ValidationState
     // when evaluating the entire form

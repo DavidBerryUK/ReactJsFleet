@@ -1,5 +1,4 @@
 import IValidationRule                          from "../../rules/interfaces/IValidationRule";
-import ValidatedTextFieldControl                       from "../textFieldControl/ValidatedTextFieldControl";
 
 // The attributes that may be supplied to a validation 
 // control
@@ -25,5 +24,5 @@ export interface IValidatedUIControlProperties {
     // onFieldUpdated={(field: ValidatedTextField) => {
     //    console.log(`${field.name} updated to ${field.state.text}`)
     // }} />
-    onFieldUpdated?:  (field: ValidatedTextFieldControl) => void ;
+    onFieldUpdated?:  (field: any) => void ;
 }
